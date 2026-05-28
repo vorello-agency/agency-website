@@ -42,6 +42,112 @@ export default function Navbar() {
   const [shouldAnimate, setShouldAnimate] = useState(false);
   const pillRef = useRef<HTMLDivElement>(null);
   const navContainerRef = useRef<HTMLDivElement>(null);
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
+  const mobileLinksRef = useRef<HTMLDivElement>(null);
+  const mobileBackdropRef = useRef<HTMLDivElement>(null);
+  const isFirstRender = useRef(true);
+
+  useEffect(() => {
+    if (!mobileMenuRef.current || !mobileBackdropRef.current) return;
+
+    const links = mobileLinksRef.current?.querySelectorAll(".mobile-nav-link");
+    const button = mobileMenuRef.current?.querySelector(".mobile-nav-button");
+    const backdrop = mobileBackdropRef.current;
+
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      // Initialize starting state silently without animating on mount
+      gsap.set(mobileMenuRef.current, { autoAlpha: 0, y: -12 });
+      gsap.set(backdrop, { autoAlpha: 0 });
+      if (links) gsap.set(links, { autoAlpha: 0, y: 8 });
+      if (button) gsap.set(button, { autoAlpha: 0, y: 8 });
+      return;
+    }
+
+    if (mobileMenuOpen) {
+      // Open animation
+      gsap.killTweensOf([mobileMenuRef.current, backdrop, links, button]);
+
+      // Explicitly reset initial states to guarantee the animation runs every time
+      gsap.set(mobileMenuRef.current, { autoAlpha: 0, y: -12 });
+      gsap.set(backdrop, { autoAlpha: 0 });
+      if (links) gsap.set(links, { autoAlpha: 0, y: 8 });
+      if (button) gsap.set(button, { autoAlpha: 0, y: 8 });
+
+      // Fade in the blurred backdrop overlay
+      gsap.to(backdrop, {
+        autoAlpha: 1,
+        duration: 0.35,
+        ease: "power2.out",
+      });
+
+      // Animate background drawer (snappy and precise)
+      gsap.to(mobileMenuRef.current, {
+        autoAlpha: 1,
+        y: 0,
+        duration: 0.3,
+        ease: "power2.out",
+      });
+
+      // Stagger links vertically (sliding up and fading in elegantly)
+      if (links && links.length > 0) {
+        gsap.to(links, {
+          autoAlpha: 1,
+          y: 0,
+          duration: 0.25,
+          stagger: 0.04,
+          ease: "power2.out",
+          delay: 0.05,
+        });
+      }
+
+      // Animate button
+      if (button) {
+        gsap.to(button, {
+          autoAlpha: 1,
+          y: 0,
+          duration: 0.25,
+          ease: "power2.out",
+          delay: 0.1 + (links ? links.length * 0.04 : 0),
+        });
+      }
+    } else {
+      // Close animation
+      gsap.killTweensOf([mobileMenuRef.current, backdrop, links, button]);
+
+      // Smoothly fade out everything together snappily
+      gsap.to(mobileMenuRef.current, {
+        autoAlpha: 0,
+        y: -12,
+        duration: 0.2,
+        ease: "power2.inOut",
+      });
+
+      gsap.to(backdrop, {
+        autoAlpha: 0,
+        duration: 0.2,
+        ease: "power2.inOut",
+      });
+
+      // Also fade out links quickly so they don't linger
+      if (links) {
+        gsap.to(links, {
+          autoAlpha: 0,
+          y: -4,
+          duration: 0.15,
+          ease: "power2.in",
+        });
+      }
+      if (button) {
+        gsap.to(button, {
+          autoAlpha: 0,
+          y: -4,
+          duration: 0.15,
+          ease: "power2.in",
+        });
+      }
+    }
+  }, [mobileMenuOpen]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -145,14 +251,16 @@ export default function Navbar() {
       className={cn(
         "fixed top-0 left-0 right-0 z-200 w-full",
         shouldAnimate && "transition-all duration-300",
-        isScrolled
-          ? "border-b border-steel-grey/30 bg-carbon-black/80 backdrop-blur-md"
-          : "border-b border-transparent bg-transparent"
+        mobileMenuOpen
+          ? "border-b border-steel-grey/30 bg-carbon-black"
+          : (isScrolled
+              ? "border-b border-steel-grey/30 bg-carbon-black/80 backdrop-blur-md"
+              : "border-b border-transparent bg-transparent")
       )}
     >
       <Container
         className={cn(
-          "flex items-center justify-between",
+          "relative z-50 flex items-center justify-between",
           shouldAnimate && "transition-all duration-300",
           isScrolled ? "h-20" : "h-24"
         )}
@@ -166,11 +274,22 @@ export default function Navbar() {
             isScrolled && "md:ml-8"
           )}
         >
-          <Logo
-            variant="logotipo"
-            size="xl"
-            className="opacity-95 transition-opacity group-hover:opacity-100"
-          />
+          {/* Mobile logo: both isotype and logotipo */}
+          <span className="inline-flex md:hidden">
+            <Logo
+              variant="both"
+              size="xl"
+              className="opacity-95 transition-opacity group-hover:opacity-100"
+            />
+          </span>
+          {/* Desktop logo: logotipo only */}
+          <span className="hidden md:inline-flex">
+            <Logo
+              variant="logotipo"
+              size="xl"
+              className="opacity-95 transition-opacity group-hover:opacity-100"
+            />
+          </span>
         </Link>
 
         {/* Desktop sliding highlight navigation */}
@@ -236,43 +355,59 @@ export default function Navbar() {
         </button>
       </Container>
 
+      {/* Mobile menu backdrop overlay */}
+      <div
+        ref={mobileBackdropRef}
+        className={cn(
+          "md:hidden fixed inset-0 bg-carbon-black/60 backdrop-blur-[4px] z-30 transition-[opacity] duration-300",
+          mobileMenuOpen ? "pointer-events-auto" : "pointer-events-none"
+        )}
+        onClick={() => setMobileMenuOpen(false)}
+      />
+
       {/* Mobile menu navigation drawer */}
-      {mobileMenuOpen && (
-        <div
-          className={cn(
-            "md:hidden absolute left-0 w-full bg-carbon-black border-b border-steel-grey/30 px-6 py-8 flex flex-col gap-6 shadow-2xl z-40 transition-all duration-300",
-            isScrolled ? "top-20" : "top-28"
-          )}
-        >
-          <div className="flex flex-col gap-4">
-            {NAV_ITEMS.map((item) => {
-              const Icon = item.icon;
-              return (
-                <Link
-                  key={item.label}
-                  href={item.href}
-                  className="text-base font-medium text-chrome-deep hover:text-chrome-highlight transition-colors py-2 border-b border-steel-grey/10 flex items-center gap-2"
-                  onClick={(e) => {
-                    setMobileMenuOpen(false);
-                    handleNavLinkClick(e, item.href);
-                  }}
-                >
-                  <Icon className="h-4 w-4 text-chrome-deep/60" />
-                  <span>{item.label}</span>
-                </Link>
-              );
-            })}
-          </div>
-          <Button
-            variant="primary-blue"
-            size="md"
-            className="w-full justify-center"
-            onClick={() => setMobileMenuOpen(false)}
-          >
-            Iniciar Proyecto
-          </Button>
+      <div
+        ref={mobileMenuRef}
+        className={cn(
+          "md:hidden absolute left-0 w-full bg-carbon-black border-b border-steel-grey/30 px-6 py-8 flex flex-col gap-6 shadow-2xl z-40 transition-[top] duration-300",
+          mobileMenuOpen ? "pointer-events-auto" : "pointer-events-none",
+          isScrolled ? "top-20" : "top-28"
+        )}
+      >
+        <div ref={mobileLinksRef} className="flex flex-col gap-4">
+          {NAV_ITEMS.map((item) => {
+            const Icon = item.icon;
+            return (
+              <Link
+                key={item.label}
+                href={item.href}
+                className="mobile-nav-link text-base font-medium text-chrome-deep hover:text-chrome-highlight active:text-chrome-highlight active:scale-[0.98] active:translate-x-1 transition-all py-2 border-b border-steel-grey/10 flex items-center gap-2"
+                onClick={(e) => {
+                  setMobileMenuOpen(false);
+                  handleNavLinkClick(e, item.href);
+                }}
+              >
+                <Icon className="h-4 w-4 text-chrome-deep/60" />
+                <span>{item.label}</span>
+              </Link>
+            );
+          })}
         </div>
-      )}
+        <div className="mobile-nav-button flex flex-col">
+          <div className="h-px bg-electric-violet/25 w-full mb-3" />
+          <Link
+            href="#contacto"
+            className="mobile-nav-link text-base font-medium text-neon-blue hover:text-neon-blue/80 active:text-neon-blue active:scale-[0.98] active:translate-x-1 transition-all py-2 flex items-center gap-2"
+            onClick={(e) => {
+              setMobileMenuOpen(false);
+              handleNavLinkClick(e, "#contacto");
+            }}
+          >
+            <ArrowRight className="h-4 w-4 text-neon-blue/80" />
+            <span>Iniciar Proyecto</span>
+          </Link>
+        </div>
+      </div>
     </header>
   );
 }

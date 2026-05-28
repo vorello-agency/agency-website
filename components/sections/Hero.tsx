@@ -156,7 +156,7 @@ export default function Hero() {
         </div>
 
         {/* Right Column: Visual Element with Isotipo */}
-        <div className="lg:col-span-5 flex items-center justify-center w-full mt-10 lg:mt-0">
+        <div className="lg:col-span-5 hidden lg:flex items-center justify-center w-full mt-10 lg:mt-0">
           <div
             ref={visualRef}
             className="relative w-full max-w-sm sm:max-w-md mx-auto flex items-center justify-center"
