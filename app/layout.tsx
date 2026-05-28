@@ -4,7 +4,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import SmoothScroll from "@/components/layout/SmoothScroll";
 
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
+const geist = Geist({ subsets: ['latin'], variable: '--font-sans' });
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Vorello Agency | Diseño, Tecnología y Producto Digital Premium",
+  title: "Vorello Agency | Diseño, Tecnología y Producto",
   description:
     "Diseñamos y desarrollamos productos digitales bien pensados, visualmente cuidados y técnicamente sólidos. Sitios web corporativos, web apps y ecommerce de alto nivel.",
   keywords: [
