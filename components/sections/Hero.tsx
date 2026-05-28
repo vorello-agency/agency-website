@@ -117,7 +117,8 @@ export default function Hero() {
           {/* Decorative Badge */}
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-steel-grey/30 bg-graphite-metal/50 text-xs font-mono text-chrome-deep mb-8 backdrop-blur-sm transition-all duration-500 ease-out hover:border-neon-blue/30 hover:bg-neon-blue/[0.03] hover:text-chrome-highlight cursor-default select-none group animate-pulse hover:animate-none">
             <span className="w-1.5 h-1.5 rounded-full bg-neon-blue transition-transform duration-500 ease-out group-hover:scale-125" />
-            VORELLO AGENCY — Agencia Digital Especializada
+            <span className="hidden sm:inline-flex">VORELLO AGENCY — Agencia digital especializada</span>
+            <span className="inline-flex sm:hidden">Agencia digital especializada</span>
           </div>
 
           {/* Primary Headline in vertical column */}
