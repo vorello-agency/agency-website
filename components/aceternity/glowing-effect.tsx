@@ -101,6 +101,12 @@ const GlowingEffect = memo(
     useEffect(() => {
       if (disabled) return;
 
+      // Disable scroll and pointer listeners on touch-only mobile devices (no hover capability)
+      // to completely eliminate forced reflows and maximize mobile scrolling performance.
+      if (typeof window !== "undefined" && window.matchMedia("(hover: none)").matches) {
+        return;
+      }
+
       const handleScroll = () => handleMove();
       const handlePointerMove = (e: PointerEvent) => handleMove(e);
 
