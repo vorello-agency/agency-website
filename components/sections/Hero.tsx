@@ -184,7 +184,7 @@ export default function Hero() {
               ref={isotipoRef}
               width={350}
               height={350}
-              loading="eager"
+              priority
               sizes="(max-width: 768px) 176px, (max-width: 1024px) 224px, 304px"
               src="/assets/isotipo.webp"
               alt="Vorello Isotipo"

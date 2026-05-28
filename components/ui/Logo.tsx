@@ -45,6 +45,7 @@ export default function Logo({
           aria-hidden={variant !== "isotipo"}
           width={1024}
           height={910}
+          priority
           className={cn("w-auto", isotipoClassName)}
           style={{ height: `${sizes.isotipoPx}px` }}
         />
@@ -53,7 +54,7 @@ export default function Logo({
       {showLogotipo && (
         <Image
           src="/assets/logotipo.svg"
-          loading="eager"
+          priority
           alt={showIsotipo ? "" : alt}
           aria-hidden={showIsotipo}
           width={776}
