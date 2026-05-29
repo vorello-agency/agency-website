@@ -39,11 +39,11 @@ export default function MidCTA() {
             return;
           }
 
-          // Unified Cinematic Timeline (Trigger calibrated to top 65% for balanced scroll focus)
+          // Unified Cinematic Timeline (Trigger calibrated to top 50% for balanced scroll focus)
           const tl = gsap.timeline({
             scrollTrigger: {
               trigger: sectionRef.current,
-              start: "top 65%",
+              start: "top 75%",
               toggleActions: "play none none none",
             },
           });
@@ -147,7 +147,7 @@ export default function MidCTA() {
       <div className="midcta-right-glow absolute right-0 md:right-[15%] top-1/2 -translate-y-1/2 w-48 h-28 rounded-full bg-electric-violet/20 blur-[28px] pointer-events-none z-0" />
 
       {/* Subtle Dot Pattern overlay on the left side with fade-out mask */}
-      <div 
+      <div
         className="midcta-left-dots absolute left-0 top-0 bottom-0 w-1/3 opacity-20 z-0 pointer-events-none"
         style={{
           backgroundImage: "radial-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1px)",
@@ -159,7 +159,7 @@ export default function MidCTA() {
       />
 
       {/* Subtle Dot Pattern overlay on the right side with fade-out mask */}
-      <div 
+      <div
         className="midcta-right-dots absolute right-0 top-0 bottom-0 w-1/3 opacity-20 z-0 pointer-events-none"
         style={{
           backgroundImage: "radial-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1px)",
