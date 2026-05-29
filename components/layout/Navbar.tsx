@@ -154,7 +154,7 @@ export default function Navbar() {
       setIsScrolled(window.scrollY > 20);
     };
     handleScroll(); // Apply initial scroll state on mount (catches reload/refresh scrolled state)
-    
+
     // Enable transitions only after initial scroll layout has settled
     const timer = setTimeout(() => {
       setShouldAnimate(true);
@@ -254,8 +254,8 @@ export default function Navbar() {
         mobileMenuOpen
           ? "border-b border-steel-grey/30 bg-carbon-black"
           : (isScrolled
-              ? "border-b border-steel-grey/30 bg-carbon-black/80 backdrop-blur-md"
-              : "border-b border-transparent bg-transparent")
+            ? "border-b border-steel-grey/30 bg-carbon-black/80 backdrop-blur-md"
+            : "border-b border-transparent bg-transparent")
       )}
     >
       <Container
@@ -269,13 +269,29 @@ export default function Navbar() {
         <Link
           href="/"
           className={cn(
-            "flex items-center gap-2 group focus-visible:outline-none",
+            "relative flex items-center gap-2 group focus-visible:outline-none",
             shouldAnimate && "transition-all duration-300",
             isScrolled && "md:ml-8"
           )}
         >
+          {/* Animated large, soft atmospheric white glow behind the logo when menu is open */}
+          <div
+            className={cn(
+              "absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none -z-10 transition-all duration-1000 ease-out overflow-visible flex items-center justify-center",
+              mobileMenuOpen ? "opacity-100 scale-100" : "opacity-0 scale-75"
+            )}
+            style={{ width: "350px", height: "350px" }}
+          >
+            {/* Outer ambient aura: wide, extremely soft, premium low-opacity dispersion */}
+            <div className="absolute w-80 h-80 rounded-full bg-white/[0.03] blur-[64px]" />
+            {/* Mid ambient aura: smooth transition blur */}
+            <div className="absolute w-56 h-56 rounded-full bg-white/[0.06] blur-[40px]" />
+            {/* Core glow: soft white center to gently outline the logo area */}
+            <div className="absolute w-36 h-20 rounded-full bg-white/[0.09] blur-[24px] animate-[pulse_6s_ease-in-out_infinite]" />
+          </div>
+
           {/* Mobile logo: both isotype and logotipo */}
-          <span className="inline-flex md:hidden">
+          <span className="relative z-10 inline-flex md:hidden">
             <Logo
               variant="both"
               size="xl"
@@ -283,7 +299,7 @@ export default function Navbar() {
             />
           </span>
           {/* Desktop logo: logotipo only */}
-          <span className="hidden md:inline-flex">
+          <span className="relative z-10 hidden md:inline-flex">
             <Logo
               variant="logotipo"
               size="xl"
@@ -374,14 +390,14 @@ export default function Navbar() {
           isScrolled ? "top-20" : "top-28"
         )}
       >
-        <div ref={mobileLinksRef} className="flex flex-col gap-4">
+        <div ref={mobileLinksRef} className="flex flex-col divide-y divide-steel-grey/10">
           {NAV_ITEMS.map((item) => {
             const Icon = item.icon;
             return (
               <Link
                 key={item.label}
                 href={item.href}
-                className="mobile-nav-link text-base font-medium text-chrome-deep hover:text-chrome-highlight active:text-chrome-highlight active:scale-[0.98] active:translate-x-1 transition-all py-2 border-b border-steel-grey/10 flex items-center gap-2"
+                className="mobile-nav-link text-base font-medium text-chrome-deep hover:text-chrome-highlight active:text-chrome-highlight active:scale-[0.98] active:translate-x-1 transition-all py-4 flex items-center gap-2"
                 onClick={(e) => {
                   setMobileMenuOpen(false);
                   handleNavLinkClick(e, item.href);
