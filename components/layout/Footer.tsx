@@ -10,6 +10,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
   const signatureRef = useRef<HTMLDivElement>(null);
   const [isAtBottom, setIsAtBottom] = useState(false);
+  const [isMobileTouch, setIsMobileTouch] = useState(false);
   const hasTriggeredRef = useRef(false);
 
   // Timeout references for clean cancellation
@@ -18,6 +19,14 @@ export default function Footer() {
 
   useEffect(() => {
     if (typeof window === "undefined") return;
+
+    const handleResize = () => {
+      // Strictly on mobile viewports (< 768px)
+      setIsMobileTouch(window.innerWidth < 768);
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -55,6 +64,7 @@ export default function Footer() {
     }
 
     return () => {
+      window.removeEventListener("resize", handleResize);
       observer.disconnect();
       if (delayTimeoutRef.current) clearTimeout(delayTimeoutRef.current);
       if (durationTimeoutRef.current) clearTimeout(durationTimeoutRef.current);
@@ -174,7 +184,7 @@ export default function Footer() {
 
       {/* Signature visual anchor - Centered, responsive (max-w-screen-2xl), and shifted further upward proportionally using native Tailwind translations, heights, and max-width */}
       <div ref={signatureRef} className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-screen-2xl h-24 sm:h-40 md:h-56 z-0 translate-y-4 sm:translate-y-8 md:translate-y-16 lg:-translate-y-6 xl:-translate-y-8 select-none">
-        <TextHoverEffect text="VORELLO" forceActive={isAtBottom} />
+        <TextHoverEffect text="VORELLO" forceActive={isMobileTouch || isAtBottom} />
       </div>
     </footer>
   );

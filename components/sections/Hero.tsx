@@ -92,6 +92,41 @@ export default function Hero() {
     });
   };
 
+  const handleIsotipoTouchStart = (e: React.TouchEvent<HTMLImageElement>) => {
+    if (!isotipoRef.current) return;
+    const touch = e.touches[0];
+    const el = e.currentTarget;
+    const rect = el.getBoundingClientRect();
+
+    const x = (touch.clientX - rect.left) / rect.width - 0.5;
+    const y = (touch.clientY - rect.top) / rect.height - 0.5;
+
+    const maxTilt = 15;
+
+    gsap.to(isotipoRef.current, {
+      rotateX: -y * maxTilt,
+      rotateY: x * maxTilt,
+      transformPerspective: 800,
+      scale: 1.06,
+      duration: 0.3,
+      ease: "power2.out",
+      overwrite: "auto",
+    });
+  };
+
+  const handleIsotipoTouchEnd = () => {
+    if (!isotipoRef.current) return;
+    gsap.to(isotipoRef.current, {
+      rotateX: 0,
+      rotateY: 0,
+      transformPerspective: 800,
+      scale: 1,
+      duration: 0.6,
+      ease: "elastic.out(1.1, 0.4)",
+      overwrite: "auto",
+    });
+  };
+
   return (
     <section
       ref={containerRef}
@@ -157,10 +192,10 @@ export default function Hero() {
         </div>
 
         {/* Right Column: Visual Element with Isotipo */}
-        <div className="lg:col-span-5 hidden lg:flex items-center justify-center w-full mt-10 lg:mt-0">
+        <div className="lg:col-span-5 flex items-center justify-center w-full mt-10 lg:mt-0">
           <div
             ref={visualRef}
-            className="relative w-full max-w-sm sm:max-w-md mx-auto flex items-center justify-center"
+            className="relative w-full max-w-[220px] sm:max-w-sm md:max-w-md mx-auto flex items-center justify-center"
             style={{ opacity: 0 }}
           >
             {/* Energy Rings & Tech Blueprint (Minimal & Interactive) */}
@@ -180,19 +215,27 @@ export default function Hero() {
               <span className="absolute -top-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-neon-blue shadow-[0_0_6px_#2D8FFF]" />
             </div>
 
-            {/* Ultra-Minimal floating Isotipo - scaled up with GSAP 3D Tilt hover */}
-            <Image
-              ref={isotipoRef}
-              width={350}
-              height={350}
-              priority
-              sizes="(max-width: 768px) 176px, (max-width: 1024px) 224px, 304px"
-              src="/assets/isotipo.webp"
-              alt="Vorello Isotipo"
-              className="w-44 h-44 sm:w-56 sm:h-56 md:w-68 md:h-68 lg:w-76 lg:h-76 object-contain select-none cursor-pointer z-10"
+            {/* Interactive container that captures mouse and touch gestures, preventing iOS native image popup */}
+            <div
+              className="w-28 h-28 sm:w-44 sm:h-44 md:w-56 md:h-56 lg:w-76 lg:h-76 flex items-center justify-center cursor-pointer z-10 touch-none select-none select-drag-disabled"
               onMouseMove={handleIsotipoMouseMove}
               onMouseLeave={handleIsotipoMouseLeave}
-            />
+              onTouchStart={handleIsotipoTouchStart}
+              onTouchEnd={handleIsotipoTouchEnd}
+              onTouchCancel={handleIsotipoTouchEnd}
+              onContextMenu={(e) => e.preventDefault()}
+            >
+              <Image
+                ref={isotipoRef}
+                width={350}
+                height={350}
+                priority
+                sizes="(max-width: 768px) 120px, (max-width: 1024px) 176px, 304px"
+                src="/assets/isotipo.webp"
+                alt="Vorello Isotipo"
+                className="w-full h-full object-contain pointer-events-none select-none select-drag-disabled"
+              />
+            </div>
           </div>
         </div>
       </Container>

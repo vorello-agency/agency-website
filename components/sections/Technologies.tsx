@@ -38,6 +38,8 @@ type LayerItem = typeof LAYERS[0];
 function LayerCard({ layer }: { layer: LayerItem }) {
   const Icon = layer.icon;
   const cardRef = useRef<HTMLDivElement>(null);
+  const glowRef = useRef<HTMLDivElement>(null);
+  const borderGlowRef = useRef<HTMLDivElement>(null);
 
   const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
     const card = cardRef.current;
@@ -49,14 +51,71 @@ function LayerCard({ layer }: { layer: LayerItem }) {
     card.style.setProperty("--mouse-y", `${y}px`);
   };
 
+  const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
+    const card = cardRef.current;
+    if (!card) return;
+    const touch = e.touches[0];
+    const rect = card.getBoundingClientRect();
+    const x = touch.clientX - rect.left;
+    const y = touch.clientY - rect.top;
+    card.style.setProperty("--mouse-x", `${x}px`);
+    card.style.setProperty("--mouse-y", `${y}px`);
+
+    if (glowRef.current && borderGlowRef.current) {
+      gsap.to([glowRef.current, borderGlowRef.current], {
+        opacity: 1,
+        duration: 0.2,
+        ease: "power2.out",
+        overwrite: "auto"
+      });
+
+      const themeColor = layer.colorTheme === "violet"
+        ? "rgba(123, 76, 255, 0.25)"
+        : layer.colorTheme === "blue"
+        ? "rgba(45, 143, 255, 0.25)"
+        : "rgba(255, 255, 255, 0.2)";
+
+      gsap.to(card, {
+        borderColor: themeColor,
+        backgroundColor: "rgba(26, 29, 33, 0.55)",
+        scale: 1.006,
+        duration: 0.2,
+        ease: "power2.out",
+        overwrite: "auto"
+      });
+    }
+  };
+
+  const handleTouchEnd = () => {
+    const card = cardRef.current;
+    if (glowRef.current && borderGlowRef.current) {
+      gsap.to([glowRef.current, borderGlowRef.current], {
+        opacity: 0,
+        duration: 0.5,
+        ease: "power2.inOut",
+        overwrite: "auto"
+      });
+    }
+    if (card) {
+      gsap.to(card, {
+        borderColor: "rgba(42, 46, 51, 0.2)",
+        backgroundColor: "rgba(26, 29, 33, 0.2)",
+        scale: 1,
+        duration: 0.5,
+        ease: "power2.inOut",
+        overwrite: "auto"
+      });
+    }
+  };
+
   const getHoverClasses = () => {
     if (layer.colorTheme === "violet") {
-      return "hover:border-electric-violet/20 hover:shadow-[inset_0_0_0_1px_rgba(123,76,255,0.15),_inset_0_0_16px_rgba(123,76,255,0.10)]";
+      return "md:hover:border-electric-violet/20 md:hover:shadow-[inset_0_0_0_1px_rgba(123,76,255,0.15),_inset_0_0_16px_rgba(123,76,255,0.10)]";
     }
     if (layer.colorTheme === "blue") {
-      return "hover:border-neon-blue/20 hover:shadow-[inset_0_0_0_1px_rgba(45,143,255,0.15),_inset_0_0_16px_rgba(45,143,255,0.10)]";
+      return "md:hover:border-neon-blue/20 md:hover:shadow-[inset_0_0_0_1px_rgba(45,143,255,0.15),_inset_0_0_16px_rgba(45,143,255,0.10)]";
     }
-    return "hover:border-white/20 hover:shadow-[inset_0_0_0_1px_rgba(255,255,255,0.15),_inset_0_0_16px_rgba(255,255,255,0.08)]";
+    return "md:hover:border-white/20 md:hover:shadow-[inset_0_0_0_1px_rgba(255,255,255,0.15),_inset_0_0_16px_rgba(255,255,255,0.08)]";
   };
 
   return (
@@ -64,22 +123,26 @@ function LayerCard({ layer }: { layer: LayerItem }) {
       <div
         ref={cardRef}
         onPointerMove={handlePointerMove}
-        className={`group relative flex flex-col md:flex-row md:items-center justify-between gap-6 p-6 md:p-8 rounded-xl border border-steel-grey/25 bg-graphite-metal/20 shadow-[inset_0_0_0_0px_rgba(255,255,255,0),_inset_0_0_0px_rgba(255,255,255,0)] hover:bg-graphite-metal/35 hover:scale-[1.008] ${getHoverClasses()} transition-all duration-500 ease-out backdrop-blur-sm overflow-hidden`}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+        onTouchCancel={handleTouchEnd}
+        className={`group relative flex flex-col md:flex-row md:items-center justify-between gap-6 p-6 md:p-8 rounded-xl border border-steel-grey/25 bg-graphite-metal/20 shadow-[inset_0_0_0_0px_rgba(255,255,255,0),_inset_0_0_0px_rgba(255,255,255,0)] md:hover:bg-graphite-metal/35 md:hover:scale-[1.008] ${getHoverClasses()} transition-all duration-500 ease-out backdrop-blur-sm overflow-hidden select-none`}
       >
         {/* Subtle dynamic radial light on hover */}
         {layer.colorTheme === "violet" && (
-          <div className="absolute -top-12 -right-12 w-36 h-36 rounded-full bg-electric-violet/10 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0 animate-glow-drift" />
+          <div className="absolute -top-12 -right-12 w-36 h-36 rounded-full bg-electric-violet/10 blur-3xl opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0 animate-glow-drift" />
         )}
         {layer.colorTheme === "blue" && (
-          <div className="absolute -top-12 -right-12 w-36 h-36 rounded-full bg-neon-blue/10 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0 animate-glow-drift" />
+          <div className="absolute -top-12 -right-12 w-36 h-36 rounded-full bg-neon-blue/10 blur-3xl opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0 animate-glow-drift" />
         )}
         {layer.colorTheme === "chrome" && (
-          <div className="absolute -top-12 -right-12 w-36 h-36 rounded-full bg-white/5 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0 animate-glow-drift" />
+          <div className="absolute -top-12 -right-12 w-36 h-36 rounded-full bg-white/5 blur-3xl opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0 animate-glow-drift" />
         )}
 
         {/* Soft background highlight that follows mouse precisely inside card */}
         <div
-          className="absolute inset-0 rounded-[inherit] pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"
+          ref={glowRef}
+          className="tech-glow absolute inset-0 rounded-[inherit] pointer-events-none opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 z-10"
           style={{
             background: layer.colorTheme === "violet"
               ? "radial-gradient(circle 120px at var(--mouse-x, -999px) var(--mouse-y, -999px), rgba(123, 76, 255, 0.04), transparent 100%)"
@@ -91,7 +154,8 @@ function LayerCard({ layer }: { layer: LayerItem }) {
 
         {/* Hover Border Glow Following Mouse */}
         <div
-          className="absolute inset-0 rounded-[inherit] pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"
+          ref={borderGlowRef}
+          className="tech-border-glow absolute inset-0 rounded-[inherit] pointer-events-none opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 z-10"
           style={{
             maskImage: "radial-gradient(circle 100px at var(--mouse-x, -999px) var(--mouse-y, -999px), black 20%, transparent 100%)",
             WebkitMaskImage: "radial-gradient(circle 100px at var(--mouse-x, -999px) var(--mouse-y, -999px), black 20%, transparent 100%)"
@@ -120,17 +184,17 @@ function LayerCard({ layer }: { layer: LayerItem }) {
         {/* Left Column: Icon & Title */}
         <div className="relative z-20 flex items-center gap-4 min-w-[280px]">
           <div className={`w-10 h-10 rounded-lg bg-steel-grey/15 border border-steel-grey/20 flex items-center justify-center text-chrome-deep transition-all duration-500 ease-out
-            ${layer.colorTheme === "violet" ? "group-hover:text-electric-violet group-hover:border-electric-violet/20 group-hover:bg-electric-violet/5" : ""}
-            ${layer.colorTheme === "blue" ? "group-hover:text-neon-blue group-hover:border-neon-blue/20 group-hover:bg-neon-blue/5" : ""}
-            ${layer.colorTheme === "chrome" ? "group-hover:text-white group-hover:border-white/20 group-hover:bg-white/5" : ""}
+            ${layer.colorTheme === "violet" ? "md:group-hover:text-electric-violet md:group-hover:border-electric-violet/20 md:group-hover:bg-electric-violet/5" : ""}
+            ${layer.colorTheme === "blue" ? "md:group-hover:text-neon-blue md:group-hover:border-neon-blue/20 md:group-hover:bg-neon-blue/5" : ""}
+            ${layer.colorTheme === "chrome" ? "md:group-hover:text-white md:group-hover:border-white/20 md:group-hover:bg-white/5" : ""}
           `}>
-            <Icon className="w-5 h-5 transition-transform duration-500 ease-out group-hover:scale-105" />
+            <Icon className="w-5 h-5 transition-transform duration-500 ease-out md:group-hover:scale-105" />
           </div>
           <div className="space-y-0.5">
             <span className="block font-mono text-[9px] font-medium tracking-wider text-chrome-deep">
               CAPA 0{layer.num}
             </span>
-            <h3 className="text-lg font-bold text-chrome-highlight tracking-tight group-hover:text-white transition-colors duration-500 ease-out">
+            <h3 className="text-lg font-bold text-chrome-highlight tracking-tight md:group-hover:text-white transition-colors duration-500 ease-out">
               {layer.title}
             </h3>
           </div>
@@ -235,6 +299,51 @@ export default function Technologies() {
           },
           "-=0.4"
         );
+      });
+
+      // 5. Mobile touch-triggered sweep effect via ScrollTrigger for each Layer Card
+      cards.forEach((card) => {
+        const isTouch = window.matchMedia("(pointer: coarse)").matches;
+        if (isTouch) {
+          const cardInner = card.querySelector(".group");
+          const glow = card.querySelector(".tech-glow");
+          const borderGlow = card.querySelector(".tech-border-glow");
+
+          if (cardInner && glow && borderGlow) {
+            const cardTl = gsap.timeline({
+              scrollTrigger: {
+                trigger: card,
+                start: "top 72%",
+                toggleActions: "play none none none",
+              }
+            });
+
+            const obj = { x: -120, y: 50 };
+
+            cardTl.to([glow, borderGlow], {
+              opacity: 1,
+              duration: 0.35,
+              ease: "power2.out",
+            });
+
+            cardTl.to(obj, {
+              x: 500,
+              y: 50,
+              duration: 1.4,
+              ease: "power2.inOut",
+              onUpdate: () => {
+                (cardInner as HTMLElement).style.setProperty("--mouse-x", `${obj.x}px`);
+                (cardInner as HTMLElement).style.setProperty("--mouse-y", `${obj.y}px`);
+              }
+            }, "-=0.25");
+
+            cardTl.to([glow, borderGlow], {
+              opacity: 0,
+              duration: 0.5,
+              ease: "power2.inOut",
+            }, "-=0.3");
+          }
+        }
       });
 
     }, sectionRef);

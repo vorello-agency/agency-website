@@ -94,7 +94,7 @@ export const TextHoverEffect = ({
         dominantBaseline="middle"
         strokeWidth="0.3"
         className="fill-transparent stroke-steel-grey/15 font-sans font-black tracking-widest text-6xl uppercase"
-        style={{ opacity: isCurrentlyHovered ? 0.7 : 0 }}
+        style={{ opacity: isCurrentlyHovered ? 0.7 : 0.25 }}
       >
         {text}
       </text>
@@ -104,7 +104,7 @@ export const TextHoverEffect = ({
         textAnchor="middle"
         dominantBaseline="middle"
         strokeWidth="0.3"
-        className="fill-transparent stroke-steel-grey/15 font-sans font-black tracking-widest text-6xl uppercase"
+        className="fill-transparent stroke-electric-violet/20 sm:stroke-steel-grey/50 font-sans font-black tracking-widest text-6xl uppercase"
         initial={{ strokeDashoffset: 1000, strokeDasharray: 1000 }}
         animate={{
           strokeDashoffset: 0,
@@ -123,13 +123,13 @@ export const TextHoverEffect = ({
         textAnchor="middle"
         dominantBaseline="middle"
         stroke="url(#textGradient)"
-        strokeWidth={isCurrentlyHovered ? "0.55" : "0.3"}
+        strokeWidth={isCurrentlyHovered ? "0.3" : "0.5"}
         mask="url(#textMask)"
         className="fill-transparent font-sans font-black tracking-widest text-6xl uppercase transition-all duration-500 ease-out"
         style={{
-          opacity: isCurrentlyHovered ? 1 : 0,
+          opacity: isCurrentlyHovered ? 1 : 0.15,
           filter: isCurrentlyHovered
-            ? "drop-shadow(0 0 10px rgba(123, 76, 255, 0.55)) drop-shadow(0 0 2.5px rgba(45, 143, 255, 0.45))"
+            ? "drop-shadow(0 0 10px rgba(123, 76, 255, 0.75)) drop-shadow(0 0 3px rgba(45, 143, 255, 0.65))"
             : "none",
         }}
       >

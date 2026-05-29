@@ -78,6 +78,8 @@ type StepItem = {
 function GridItem({ step }: { step: StepItem }) {
   const Icon = step.icon;
   const cardRef = useRef<HTMLDivElement>(null);
+  const glowRef = useRef<HTMLDivElement>(null);
+  const borderGlowRef = useRef<HTMLDivElement>(null);
 
   const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
     const card = cardRef.current;
@@ -89,28 +91,83 @@ function GridItem({ step }: { step: StepItem }) {
     card.style.setProperty("--mouse-y", `${y}px`);
   };
 
+  const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
+    const card = cardRef.current;
+    if (!card) return;
+    const touch = e.touches[0];
+    const rect = card.getBoundingClientRect();
+    const x = touch.clientX - rect.left;
+    const y = touch.clientY - rect.top;
+    card.style.setProperty("--mouse-x", `${x}px`);
+    card.style.setProperty("--mouse-y", `${y}px`);
+
+    if (glowRef.current && borderGlowRef.current) {
+      gsap.to([glowRef.current, borderGlowRef.current], {
+        opacity: 1,
+        duration: 0.2,
+        ease: "power2.out",
+        overwrite: "auto"
+      });
+      gsap.to(card, {
+        borderColor: "rgba(45, 143, 255, 0.25)",
+        backgroundColor: "rgba(26, 29, 33, 0.55)",
+        scale: 1.008,
+        duration: 0.2,
+        ease: "power2.out",
+        overwrite: "auto"
+      });
+    }
+  };
+
+  const handleTouchEnd = () => {
+    const card = cardRef.current;
+    if (glowRef.current && borderGlowRef.current) {
+      gsap.to([glowRef.current, borderGlowRef.current], {
+        opacity: 0,
+        duration: 0.5,
+        ease: "power2.inOut",
+        overwrite: "auto"
+      });
+    }
+    if (card) {
+      gsap.to(card, {
+        borderColor: "rgba(42, 46, 51, 0.2)",
+        backgroundColor: "rgba(26, 29, 33, 0.4)",
+        scale: 1,
+        duration: 0.5,
+        ease: "power2.inOut",
+        overwrite: "auto"
+      });
+    }
+  };
+
   return (
     <li className={`min-h-[15rem] list-none ${step.area}`}>
       <div
         ref={cardRef}
         onPointerMove={handlePointerMove}
-        className="group relative h-full rounded-2xl p-6 md:p-7 xl:p-8 bg-graphite-metal/40 backdrop-blur-md border border-steel-grey/20 shadow-[inset_0_0_0_0px_rgba(45,143,255,0),_inset_0_0_0px_rgba(45,143,255,0)] hover:bg-graphite-metal/55 hover:border-neon-blue/20 hover:scale-[1.012] hover:shadow-[inset_0_0_0_1px_rgba(45,143,255,0.15),_inset_0_0_16px_rgba(45,143,255,0.10)] transition-all duration-500 ease-out overflow-hidden"
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+        onTouchCancel={handleTouchEnd}
+        className="group relative h-full rounded-2xl p-6 md:p-7 xl:p-8 bg-graphite-metal/40 backdrop-blur-md border border-steel-grey/20 shadow-[inset_0_0_0_0px_rgba(45,143,255,0),_inset_0_0_0px_rgba(45,143,255,0)] md:hover:bg-graphite-metal/55 md:hover:border-neon-blue/20 md:hover:scale-[1.012] md:hover:shadow-[inset_0_0_0_1px_rgba(45,143,255,0.15),_inset_0_0_16px_rgba(45,143,255,0.10)] transition-all duration-500 ease-out overflow-hidden select-none"
       >
 
         {/* Capa 1: Círculo blurred de luz azul en la esquina superior derecha (Hover) */}
-        <div className="absolute -top-12 -right-12 w-36 h-36 rounded-full bg-neon-blue/35 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0 animate-glow-drift" />
+        <div className="absolute -top-12 -right-12 w-36 h-36 rounded-full bg-neon-blue/35 blur-3xl opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0 animate-glow-drift" />
 
         {/* Soft background highlight that follows mouse across card boundaries */}
         <div
-          className="absolute inset-0 rounded-[inherit] pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"
+          ref={glowRef}
+          className="process-glow absolute inset-0 rounded-[inherit] pointer-events-none opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 z-10"
           style={{
             background: "radial-gradient(circle 120px at var(--mouse-x, -999px) var(--mouse-y, -999px), rgba(45, 143, 255, 0.05), transparent 100%)"
           }}
         />
 
-        {/* Subtle, ultra-thin border glow following mouse precisely across cards (transparent inside, no black circle) */}
+        {/* Subtle, ultra-thin border glow following mouse precisely across cards */}
         <div
-          className="absolute inset-0 rounded-[inherit] pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"
+          ref={borderGlowRef}
+          className="process-border-glow absolute inset-0 rounded-[inherit] pointer-events-none opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 z-10"
           style={{
             maskImage: "radial-gradient(circle 100px at var(--mouse-x, -999px) var(--mouse-y, -999px), black 20%, transparent 100%)",
             WebkitMaskImage: "radial-gradient(circle 100px at var(--mouse-x, -999px) var(--mouse-y, -999px), black 20%, transparent 100%)"
@@ -139,19 +196,19 @@ function GridItem({ step }: { step: StepItem }) {
         {/* Content */}
         <div className="relative z-30 flex h-full flex-col justify-between gap-4">
           <div className="flex flex-col gap-4">
-            <div className="w-fit rounded-lg border border-steel-grey/30 bg-graphite-metal/50 p-2 text-chrome-highlight group-hover:text-electric-violet group-hover:border-electric-violet/20 transition-all duration-500 ease-out">
+            <div className="w-fit rounded-lg border border-steel-grey/30 bg-graphite-metal/50 p-2 text-chrome-highlight md:group-hover:text-electric-violet md:group-hover:border-electric-violet/20 transition-all duration-500 ease-out">
               <Icon className="h-5 w-5" />
             </div>
             <div className="space-y-1.5">
               <span className="block font-mono text-[10px] font-semibold uppercase tracking-wider text-electric-violet">
                 {"// FASE "} {step.num}
               </span>
-              <h3 className="text-lg font-bold uppercase tracking-tight text-chrome-highlight group-hover:text-white transition-colors duration-500 ease-out">
+              <h3 className="text-lg font-bold uppercase tracking-tight text-chrome-highlight md:group-hover:text-white transition-colors duration-500 ease-out">
                 {step.name}
               </h3>
             </div>
           </div>
-          <p className="text-xs md:text-sm leading-relaxed text-chrome-highlight/65 group-hover:text-chrome-highlight/90 transition-colors duration-500 ease-out">
+          <p className="text-xs md:text-sm leading-relaxed text-chrome-highlight/65 md:group-hover:text-chrome-highlight/90 transition-colors duration-500 ease-out">
             {step.desc}
           </p>
         </div>
@@ -218,6 +275,51 @@ export default function Process() {
         },
         "-=0.4"
       );
+
+      // 3. Mobile touch-triggered sweep effect via ScrollTrigger for each card
+      steps.forEach((stepEl) => {
+        const isTouch = window.matchMedia("(pointer: coarse)").matches;
+        if (isTouch) {
+          const cardInner = stepEl.querySelector(".group");
+          const glow = stepEl.querySelector(".process-glow");
+          const borderGlow = stepEl.querySelector(".process-border-glow");
+
+          if (cardInner && glow && borderGlow) {
+            const stepTl = gsap.timeline({
+              scrollTrigger: {
+                trigger: stepEl,
+                start: "top 72%",
+                toggleActions: "play none none none",
+              }
+            });
+
+            const obj = { x: -120, y: 80 };
+
+            stepTl.to([glow, borderGlow], {
+              opacity: 1,
+              duration: 0.35,
+              ease: "power2.out",
+            });
+
+            stepTl.to(obj, {
+              x: 380,
+              y: 120,
+              duration: 1.4,
+              ease: "power2.inOut",
+              onUpdate: () => {
+                (cardInner as HTMLElement).style.setProperty("--mouse-x", `${obj.x}px`);
+                (cardInner as HTMLElement).style.setProperty("--mouse-y", `${obj.y}px`);
+              }
+            }, "-=0.25");
+
+            stepTl.to([glow, borderGlow], {
+              opacity: 0,
+              duration: 0.5,
+              ease: "power2.inOut",
+            }, "-=0.3");
+          }
+        }
+      });
     }, sectionRef);
 
     return () => ctx.revert();

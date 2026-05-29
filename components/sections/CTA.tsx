@@ -123,7 +123,7 @@ export default function CTA() {
       <Container>
         <div
           ref={cardRef}
-          className="relative max-w-5xl mx-auto rounded-2xl border border-steel-grey/30 bg-graphite-metal/30 p-8 md:p-16 text-center overflow-hidden backdrop-blur-sm"
+          className="relative max-w-5xl mx-auto rounded-2xl border border-steel-grey/30 bg-graphite-metal/30 pt-8 pb-12 px-5 sm:px-8 md:p-16 text-center overflow-hidden backdrop-blur-sm"
           style={{ opacity: 0 }}
         >
           {/* Internal ambient glowing bulb */}
@@ -164,8 +164,10 @@ export default function CTA() {
             </Button>
           </div>
 
-          <div className="cta-footer mt-12 text-xs font-mono text-chrome-deep/80 relative z-10">
-            Tiempo estimado de respuesta: &lt; 24 horas hábiles.
+          <div className="cta-footer mt-8 md:mt-12 text-xs font-mono text-chrome-deep/80 relative z-10">
+            Tiempo estimado de respuesta
+            <br />
+            &lt; 24 horas hábiles.
           </div>
         </div>
       </Container>

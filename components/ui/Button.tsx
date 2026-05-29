@@ -40,6 +40,7 @@ export default function Button({
         },
         className
       )}
+      onContextMenu={(e) => e.preventDefault()}
       {...props}
     >
       {children}

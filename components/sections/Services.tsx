@@ -51,6 +51,135 @@ const SERVICES = [
   },
 ];
 
+function ServiceCard({ service, idx }: { service: typeof SERVICES[0]; idx: number }) {
+  const Icon = service.icon;
+  const cardRef = useRef<HTMLDivElement>(null);
+  const accentLineRef = useRef<HTMLDivElement>(null);
+  const iconRef = useRef<HTMLDivElement>(null);
+
+  const handleTouchStart = () => {
+    if (cardRef.current && accentLineRef.current && iconRef.current) {
+      gsap.to(accentLineRef.current, {
+        scaleX: 1,
+        opacity: 1,
+        duration: 0.25,
+        ease: "power2.out",
+        overwrite: "auto"
+      });
+      gsap.to(iconRef.current, {
+        borderColor: "rgba(123, 76, 255, 0.4)",
+        color: "var(--electric-violet)",
+        backgroundColor: "rgba(123, 76, 255, 0.05)",
+        duration: 0.25,
+        ease: "power2.out",
+        overwrite: "auto"
+      });
+      gsap.to(cardRef.current, {
+        borderColor: "rgba(123, 76, 255, 0.35)",
+        backgroundColor: "rgba(26, 29, 33, 0.55)",
+        scale: 1.008,
+        duration: 0.25,
+        ease: "power2.out",
+        overwrite: "auto"
+      });
+    }
+  };
+
+  const handleTouchEnd = () => {
+    if (cardRef.current && accentLineRef.current && iconRef.current) {
+      gsap.to(accentLineRef.current, {
+        scaleX: 0,
+        opacity: 0,
+        duration: 0.5,
+        ease: "power2.inOut",
+        overwrite: "auto"
+      });
+      gsap.to(iconRef.current, {
+        borderColor: "rgba(42, 46, 51, 0.3)",
+        color: "var(--chrome-highlight)",
+        backgroundColor: "rgba(42, 46, 51, 0.25)",
+        duration: 0.5,
+        ease: "power2.inOut",
+        overwrite: "auto"
+      });
+      gsap.to(cardRef.current, {
+        borderColor: "rgba(42, 46, 51, 0.2)",
+        backgroundColor: "rgba(26, 29, 33, 0.2)",
+        scale: 1,
+        duration: 0.5,
+        ease: "power2.inOut",
+        overwrite: "auto"
+      });
+    }
+  };
+
+  return (
+    <div
+      ref={cardRef}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+      onTouchCancel={handleTouchEnd}
+      className="group relative flex flex-col p-6 md:p-8 rounded-xl border border-steel-grey/30 bg-graphite-metal/20 md:hover:bg-graphite-metal/40 md:hover:border-electric-violet/40 transition-all duration-300 backdrop-blur-sm h-full min-h-[480px] select-none"
+    >
+      {/* Accent line animation hover */}
+      <div
+        ref={accentLineRef}
+        className="services-accent-line absolute inset-x-0 -top-px h-[2px] bg-gradient-to-r from-transparent via-electric-violet/40 to-transparent scale-x-0 md:group-hover:scale-x-100 md:transition-transform md:duration-500 rounded-full"
+      />
+
+      {/* Main content wrapper (takes all available height) */}
+      <div className="flex-1 flex flex-col">
+        {/* Header: Icon & Num */}
+        <div className="flex items-center justify-between mb-8">
+          <div
+            ref={iconRef}
+            className="services-icon w-12 h-12 rounded-lg bg-steel-grey/25 border border-steel-grey/30 flex items-center justify-center text-chrome-highlight md:group-hover:text-electric-violet md:group-hover:border-electric-violet/20 transition-all duration-300"
+          >
+            <Icon className="w-6 h-6" />
+          </div>
+          <span className="services-num font-mono text-sm text-steel-grey md:group-hover:text-chrome-deep transition-colors">
+            {"// "} {service.num}
+          </span>
+        </div>
+
+        {/* Title */}
+        <h3 className="services-title text-xl font-bold text-chrome-highlight mb-3 tracking-tight leading-snug md:group-hover:text-white transition-colors">
+          {service.title}
+        </h3>
+
+        {/* Description */}
+        <p className="services-desc text-sm text-[#8F9BA8] leading-relaxed mb-6 md:group-hover:text-chrome-deep/90">
+          {service.description}
+        </p>
+
+        {/* Features / Bullets (Separated with border-top) */}
+        <ul className="flex flex-col gap-2.5 mb-8 border-t border-steel-grey/20 pt-6 mt-auto">
+          {service.features.map((feature, fIdx) => (
+            <li
+              key={fIdx}
+              className="services-list-item text-xs text-[#8F9BA8] flex items-center gap-2"
+            >
+              <span className="w-1 h-1 rounded-full bg-electric-violet/70" />
+              {feature}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* CTA - Pushed strictly to the bottom of the card */}
+      <div className="services-cta mt-auto">
+        <a
+          href="#contacto"
+          className="inline-flex items-center gap-2 text-xs font-mono text-chrome-highlight font-semibold md:group-hover:text-electric-violet transition-colors focus-visible:outline-none"
+        >
+          Explorar servicio{" "}
+          <ArrowUpRight className="w-3.5 h-3.5 md:group-hover:translate-x-0.5 md:group-hover:-translate-y-0.5 transition-transform" />
+        </a>
+      </div>
+    </div>
+  );
+}
+
 export default function Services() {
   const sectionRef = useRef<HTMLElement>(null);
   const cardsRef = useRef<HTMLDivElement>(null);
@@ -128,6 +257,7 @@ export default function Services() {
         const desc = card.querySelector(".services-desc");
         const listItems = card.querySelectorAll(".services-list-item");
         const cta = card.querySelector(".services-cta");
+        const accentLine = card.querySelector(".services-accent-line");
 
         const cardTl = gsap.timeline({
           scrollTrigger: {
@@ -189,6 +319,54 @@ export default function Services() {
           },
           "-=0.3"
         );
+
+        // Mobile touch-triggered sweep effect via ScrollTrigger
+        const isTouch = window.matchMedia("(pointer: coarse)").matches;
+        if (isTouch && accentLine && icon) {
+          cardTl.fromTo(
+            accentLine,
+            { scaleX: 0, opacity: 0 },
+            {
+              scaleX: 1,
+              opacity: 1,
+              duration: 0.8,
+              ease: "power2.inOut",
+            },
+            "-=0.4"
+          ).to(
+            accentLine,
+            {
+              scaleX: 0,
+              opacity: 0,
+              duration: 0.8,
+              ease: "power2.inOut",
+            },
+            "+=0.2"
+          );
+
+          cardTl.fromTo(
+            icon,
+            { borderColor: "rgba(42, 46, 51, 0.3)", color: "var(--chrome-highlight)" },
+            {
+              borderColor: "rgba(123, 76, 255, 0.4)",
+              color: "var(--electric-violet)",
+              backgroundColor: "rgba(123, 76, 255, 0.05)",
+              duration: 0.6,
+              ease: "power2.out",
+            },
+            "-=1.6"
+          ).to(
+            icon,
+            {
+              borderColor: "rgba(42, 46, 51, 0.3)",
+              color: "var(--chrome-highlight)",
+              backgroundColor: "rgba(42, 46, 51, 0.25)",
+              duration: 0.8,
+              ease: "power2.inOut",
+            },
+            "+=0.2"
+          );
+        }
       });
     }, sectionRef);
 
@@ -214,66 +392,9 @@ export default function Services() {
           className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mt-12"
           style={{ perspective: "1000px" }}
         >
-          {SERVICES.map((service, idx) => {
-            const Icon = service.icon;
-
-            return (
-              <div
-                key={idx}
-                className="group relative flex flex-col p-6 md:p-8 rounded-xl border border-steel-grey/30 bg-graphite-metal/20 hover:bg-graphite-metal/40 hover:border-electric-violet/40 transition-all duration-300 backdrop-blur-sm h-full min-h-[480px]"
-              >
-                {/* Accent line animation hover */}
-                <div className="absolute inset-x-0 -top-px h-[2px] bg-gradient-to-r from-transparent via-electric-violet/40 to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-500 rounded-full" />
-
-                {/* Main content wrapper (takes all available height) */}
-                <div className="flex-1 flex flex-col">
-                  {/* Header: Icon & Num */}
-                  <div className="flex items-center justify-between mb-8">
-                    <div className="services-icon w-12 h-12 rounded-lg bg-steel-grey/25 border border-steel-grey/30 flex items-center justify-center text-chrome-highlight group-hover:text-electric-violet group-hover:border-electric-violet/20 transition-all duration-300">
-                      <Icon className="w-6 h-6" />
-                    </div>
-                    <span className="services-num font-mono text-sm text-steel-grey group-hover:text-chrome-deep transition-colors">
-                      {"// "} {service.num}
-                    </span>
-                  </div>
-
-                  {/* Title */}
-                  <h3 className="services-title text-xl font-bold text-chrome-highlight mb-3 tracking-tight leading-snug group-hover:text-white transition-colors">
-                    {service.title}
-                  </h3>
-
-                  {/* Description */}
-                  <p className="services-desc text-sm text-[#8F9BA8] leading-relaxed mb-6 group-hover:text-chrome-deep/90">
-                    {service.description}
-                  </p>
-
-                  {/* Features / Bullets (Separated with border-top) */}
-                  <ul className="flex flex-col gap-2.5 mb-8 border-t border-steel-grey/20 pt-6 mt-auto">
-                    {service.features.map((feature, fIdx) => (
-                      <li
-                        key={fIdx}
-                        className="services-list-item text-xs text-[#8F9BA8] flex items-center gap-2"
-                      >
-                        <span className="w-1 h-1 rounded-full bg-electric-violet/70" />
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                {/* CTA - Pushed strictly to the bottom of the card */}
-                <div className="services-cta mt-auto">
-                  <a
-                    href="#contacto"
-                    className="inline-flex items-center gap-2 text-xs font-mono text-chrome-highlight font-semibold group-hover:text-electric-violet transition-colors focus-visible:outline-none"
-                  >
-                    Explorar servicio{" "}
-                    <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                  </a>
-                </div>
-              </div>
-            );
-          })}
+          {SERVICES.map((service, idx) => (
+            <ServiceCard service={service} idx={idx} key={idx} />
+          ))}
         </div>
       </Container>
     </section>
