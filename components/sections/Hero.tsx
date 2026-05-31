@@ -150,8 +150,8 @@ export default function Hero() {
         {/* Left Column: Text & CTA */}
         <div className="lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left">
           {/* Decorative Badge */}
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-steel-grey/30 bg-graphite-metal/50 text-xs font-mono text-chrome-deep mb-8 backdrop-blur-sm transition-all duration-500 ease-out hover:border-neon-blue/30 hover:bg-neon-blue/[0.03] hover:text-chrome-highlight cursor-default select-none group animate-pulse hover:animate-none">
-            <span className="w-1.5 h-1.5 rounded-full bg-neon-blue transition-transform duration-500 ease-out group-hover:scale-125" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-steel-grey/30 bg-graphite-metal/50 text-xs font-mono text-chrome-deep mb-8 backdrop-blur-sm transition-all duration-500 ease-out hover:border-chrome-deep/40 hover:bg-white/[0.02] hover:text-chrome-highlight cursor-default select-none group animate-pulse hover:animate-none md:-translate-x-[18px] lg:-translate-x-[50px]">
+            <span className="w-1.5 h-1.5 rounded-full bg-chrome-deep group-hover:bg-chrome-highlight transition-all duration-500 ease-out group-hover:scale-125" />
             <span className="hidden sm:inline-flex">VORELLO AGENCY — Agencia digital especializada</span>
             <span className="inline-flex sm:hidden">Agencia digital especializada</span>
           </div>
@@ -162,9 +162,9 @@ export default function Hero() {
             className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight text-chrome-highlight uppercase mb-6 max-w-5xl leading-[0.95] select-none font-sans flex flex-col gap-1 sm:gap-2"
             style={{ opacity: 0 }}
           >
-            <span>Diseño<span className="text-electric-violet">.</span></span>
-            <span>Tecnología<span className="text-neon-blue">.</span></span>
-            <span>Producto<span className="text-chrome-highlight">.</span></span>
+            <span>Diseño<span className="inline-block text-[0.78em] translate-y-[-0.07em] ml-[0.02em] select-none text-[#D95F29]">.</span></span>
+            <span>Tecnología<span className="inline-block text-[0.78em] translate-y-[-0.07em] ml-[0.02em] select-none text-electric-violet/75">.</span></span>
+            <span>Producto<span className="inline-block text-[0.78em] translate-y-[-0.07em] ml-[0.02em] select-none text-neon-blue/75">.</span></span>
           </h1>
 
           {/* Brand core positioning sentence - improved contrast */}
@@ -205,14 +205,22 @@ export default function Hero() {
             {/* Inner Orbit (Solid tech line) */}
             <div className="absolute rounded-full border border-steel-grey/10 w-[95%] h-[95%] pointer-events-none animate-[spin_50s_linear_infinite_reverse]" />
 
-            {/* Energy Particle tracking the outer orbit */}
+            {/* Innermost Orbit */}
+            <div className="absolute rounded-full border border-steel-grey/10 w-[78%] h-[78%] pointer-events-none animate-[spin_35s_linear_infinite]" />
+
+            {/* Energy Particle tracking the outer orbit (Producto - Blue) */}
             <div className="absolute w-[115%] h-[115%] pointer-events-none animate-[spin_10s_linear_infinite]">
-              <span className="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-electric-violet shadow-[0_0_8px_#7B4CFF] animate-pulse" />
+              <span className="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-neon-blue shadow-[0_0_8px_#2D8FFF] animate-pulse" />
             </div>
 
-            {/* Second Energy Particle on the inner orbit */}
+            {/* Second Energy Particle on the inner orbit (Tecnología - Violet) */}
             <div className="absolute w-[95%] h-[95%] pointer-events-none animate-[spin_6s_linear_infinite_reverse]">
-              <span className="absolute -top-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-neon-blue shadow-[0_0_6px_#2D8FFF]" />
+              <span className="absolute -top-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-electric-violet shadow-[0_0_6px_#7B4CFF]" />
+            </div>
+
+            {/* Third Energy Particle on the innermost orbit (Diseño - Orange) */}
+            <div className="absolute w-[78%] h-[78%] pointer-events-none animate-[spin_8s_linear_infinite]">
+              <span className="absolute -top-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-[#FF5C00] shadow-[0_0_6px_#FF5C00]" />
             </div>
 
             {/* Interactive container that captures mouse and touch gestures, preventing iOS native image popup */}
