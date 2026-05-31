@@ -10,6 +10,14 @@ import { animateTechIconEnter, animateTechIconLeave } from "@/lib/gsap/animation
 const LAYERS = [
   {
     num: "1",
+    title: "Sistema Visual",
+    icon: Palette,
+    chips: ["Figma", "Storybook", "Design Systems", "UX/UI", "Prototyping"],
+    colorTheme: "orange",
+    glowColors: { start: "#FF6B00", end: "#FF3D00" }
+  },
+  {
+    num: "2",
     title: "Capa de Interacción",
     icon: Layers,
     chips: ["Next.js", "React", "Angular", "TypeScript", "Tailwind CSS"],
@@ -17,20 +25,12 @@ const LAYERS = [
     glowColors: { start: "#7b4cff", end: "#2d8fff" }
   },
   {
-    num: "2",
-    title: "Capa de Infraestructura",
+    num: "3",
+    title: "Arquitectura de Producto",
     icon: Server,
     chips: ["Node.js", "Vercel", "Cloudflare", "Firebase", "Google Cloud"],
     colorTheme: "blue",
     glowColors: { start: "#2d8fff", end: "#00f2fe" }
-  },
-  {
-    num: "3",
-    title: "Sistema Visual",
-    icon: Palette,
-    chips: ["Figma", "Storybook", "Design Systems", "UX/UI", "Prototyping"],
-    colorTheme: "orange",
-    glowColors: { start: "#FF6B00", end: "#FF3D00" }
   }
 ];
 
@@ -73,10 +73,10 @@ function LayerCard({ layer }: { layer: LayerItem }) {
       const themeColor = layer.colorTheme === "violet"
         ? "rgba(123, 76, 255, 0.25)"
         : layer.colorTheme === "blue"
-        ? "rgba(45, 143, 255, 0.25)"
-        : layer.colorTheme === "orange"
-        ? "rgba(255, 107, 0, 0.25)"
-        : "rgba(255, 255, 255, 0.2)";
+          ? "rgba(45, 143, 255, 0.25)"
+          : layer.colorTheme === "orange"
+            ? "rgba(255, 107, 0, 0.25)"
+            : "rgba(255, 255, 255, 0.2)";
 
       gsap.to(card, {
         borderColor: themeColor,
@@ -184,10 +184,10 @@ function LayerCard({ layer }: { layer: LayerItem }) {
             background: layer.colorTheme === "violet"
               ? "radial-gradient(circle 120px at var(--mouse-x, -999px) var(--mouse-y, -999px), rgba(123, 76, 255, 0.04), transparent 100%)"
               : layer.colorTheme === "blue"
-              ? "radial-gradient(circle 120px at var(--mouse-x, -999px) var(--mouse-y, -999px), rgba(45, 143, 255, 0.04), transparent 100%)"
-              : layer.colorTheme === "orange"
-              ? "radial-gradient(circle 120px at var(--mouse-x, -999px) var(--mouse-y, -999px), rgba(255, 107, 0, 0.04), transparent 100%)"
-              : "radial-gradient(circle 120px at var(--mouse-x, -999px) var(--mouse-y, -999px), rgba(255, 255, 255, 0.02), transparent 100%)"
+                ? "radial-gradient(circle 120px at var(--mouse-x, -999px) var(--mouse-y, -999px), rgba(45, 143, 255, 0.04), transparent 100%)"
+                : layer.colorTheme === "orange"
+                  ? "radial-gradient(circle 120px at var(--mouse-x, -999px) var(--mouse-y, -999px), rgba(255, 107, 0, 0.04), transparent 100%)"
+                  : "radial-gradient(circle 120px at var(--mouse-x, -999px) var(--mouse-y, -999px), rgba(255, 255, 255, 0.02), transparent 100%)"
           }}
         />
 
@@ -232,7 +232,7 @@ function LayerCard({ layer }: { layer: LayerItem }) {
           </div>
           <div className="space-y-0.5">
             <span className="block font-mono text-[9px] font-medium tracking-wider text-chrome-deep">
-              CAPA 0{layer.num}
+              CAPA 0{layer.num} {"//"} {layer.colorTheme === "orange" ? "DISEÑO" : layer.colorTheme === "violet" ? "TECNOLOGÍA" : "PRODUCTO"}
             </span>
             <h3 className="text-lg font-bold text-chrome-highlight tracking-tight md:group-hover:text-white transition-colors duration-500 ease-out">
               {layer.title}
