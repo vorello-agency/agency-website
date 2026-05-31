@@ -182,7 +182,7 @@ export default function Hero() {
             className="flex flex-col sm:flex-row gap-4 items-center justify-center lg:justify-start w-full sm:w-auto"
             style={{ opacity: 0 }}
           >
-            <Button variant="primary" size="lg" className="w-full sm:w-auto">
+            <Button variant="primary" size="lg" className="w-full sm:w-auto" withArrow>
               Iniciar proyecto
             </Button>
             <Button variant="outline" size="lg" className="w-full sm:w-auto bg-carbon-black/50">

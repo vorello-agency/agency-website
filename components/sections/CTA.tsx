@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
-import { ArrowRight, Mail } from "lucide-react";
+import { Mail } from "lucide-react";
 import { gsap } from "@/lib/gsap/register";
 import Button from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
@@ -149,10 +149,10 @@ export default function CTA() {
             <Button
               variant="primary-blue"
               size="lg"
-              className="w-full sm:w-auto gap-2 group"
+              className="w-full sm:w-auto"
+              withArrow
             >
-              Iniciar proyecto{" "}
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+              Iniciar proyecto
             </Button>
             <Button
               variant="outline"

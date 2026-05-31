@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
-import { ArrowRight } from "lucide-react";
 import { gsap } from "@/lib/gsap/register";
 import Button from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
@@ -184,12 +183,12 @@ export default function MidCTA() {
             <Button
               variant="primary-blue"
               size="md"
-              className="gap-1.5 group cursor-pointer shadow-lg shadow-neon-blue/20 hover:scale-[1.02] active:scale-[0.98] transition-all"
+              className="cursor-pointer shadow-lg shadow-neon-blue/20 hover:scale-[1.02] active:scale-[0.98] transition-all"
               onClick={() => handleScrollTo("contacto")}
               aria-label="Iniciar proyecto y contactar con Vorello"
+              withArrow
             >
               Iniciar proyecto
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
             </Button>
           </div>
         </div>
