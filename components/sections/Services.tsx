@@ -507,7 +507,10 @@ export default function Services() {
     <section
       ref={sectionRef}
       id="servicios"
-      className="py-20 md:py-32 bg-carbon-black relative z-20 overflow-hidden"
+      className="py-20 md:py-32 relative z-20 overflow-hidden"
+      style={{
+        background: "radial-gradient(circle at 85% 30%, rgba(45, 143, 255, 0.12), transparent 28%), radial-gradient(circle at 15% 70%, rgba(123, 76, 255, 0.1), transparent 25%), #0D0F11"
+      }}
     >
       <Container>
         <SectionHeading
