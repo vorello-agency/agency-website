@@ -5,6 +5,7 @@ import { Layers, Server, Palette } from "lucide-react";
 import { gsap } from "@/lib/gsap/register";
 import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
+import { animateTechIconEnter, animateTechIconLeave } from "@/lib/gsap/animations";
 
 const LAYERS = [
   {
@@ -115,72 +116,9 @@ function LayerCard({ layer }: { layer: LayerItem }) {
     const card = cardRef.current;
     if (!card) return;
 
-    const svg = card.querySelector(`.tech-icon-svg-${layer.num}`);
-    if (!svg) return;
-
-    if (layer.num === "1") {
-      const paths = svg.querySelectorAll("path");
-      if (paths.length >= 3) {
-        const tl = gsap.timeline({ overwrite: "auto" });
-        tl.to(paths[0], { y: -3, duration: 0.35, ease: "back.out(2)" })
-          .to(paths[2], { y: 3, duration: 0.35, ease: "back.out(2)" }, 0);
-      }
-    } else if (layer.num === "2") {
-      const leds = svg.querySelectorAll("line");
-      const rects = svg.querySelectorAll("rect");
-      
-      const tl = gsap.timeline({ overwrite: "auto" });
-      tl.to(leds, {
-        opacity: 0.2,
-        duration: 0.15,
-        repeat: -1,
-        yoyo: true,
-        stagger: 0.1,
-      });
-      
-      gsap.to(rects, {
-        scale: 1.05,
-        transformOrigin: "center center",
-        duration: 0.4,
-        ease: "power2.out",
-        overwrite: "auto",
-      });
-    } else if (layer.num === "3") {
-      const path = svg.querySelector("path");
-      const circles = svg.querySelectorAll("circle");
-      
-      const tl = gsap.timeline({ overwrite: "auto" });
-      tl.to(path, {
-        rotation: 12,
-        transformOrigin: "center center",
-        duration: 0.3,
-        ease: "power2.out",
-      })
-      .to(path, {
-        rotation: -8,
-        duration: 0.25,
-        ease: "power2.inOut",
-      })
-      .to(path, {
-        rotation: 0,
-        duration: 0.3,
-        ease: "power2.out",
-      });
-
-      gsap.fromTo(circles,
-        { scale: 0.5, transformOrigin: "center center" },
-        {
-          scale: 1.4,
-          transformOrigin: "center center",
-          duration: 0.25,
-          stagger: 0.06,
-          ease: "back.out(2.5)",
-          overwrite: "auto",
-          onComplete: () => {
-            gsap.to(circles, { scale: 1, transformOrigin: "center center", duration: 0.2 });
-          }
-        }
-      );
+    const svg = card.querySelector(`.tech-icon-svg-${layer.num}`) as SVGElement | null;
+    if (svg) {
+      animateTechIconEnter(layer.num, svg);
     }
   };
 
@@ -191,24 +129,9 @@ function LayerCard({ layer }: { layer: LayerItem }) {
     const card = cardRef.current;
     if (!card) return;
 
-    const svg = card.querySelector(`.tech-icon-svg-${layer.num}`);
-    if (!svg) return;
-
-    if (layer.num === "1") {
-      const paths = svg.querySelectorAll("path");
-      gsap.to(paths, { y: 0, duration: 0.3, ease: "power2.out", overwrite: "auto" });
-    } else if (layer.num === "2") {
-      const leds = svg.querySelectorAll("line");
-      const rects = svg.querySelectorAll("rect");
-      gsap.killTweensOf(leds);
-      gsap.to(leds, { opacity: 1, duration: 0.3, overwrite: "auto" });
-      gsap.to(rects, { scale: 1, transformOrigin: "center center", duration: 0.3, overwrite: "auto" });
-    } else if (layer.num === "3") {
-      const path = svg.querySelector("path");
-      const circles = svg.querySelectorAll("circle");
-      gsap.killTweensOf([path, circles]);
-      gsap.to(path, { rotation: 0, transformOrigin: "center center", duration: 0.4, overwrite: "auto" });
-      gsap.to(circles, { scale: 1, transformOrigin: "center center", duration: 0.4, overwrite: "auto" });
+    const svg = card.querySelector(`.tech-icon-svg-${layer.num}`) as SVGElement | null;
+    if (svg) {
+      animateTechIconLeave(layer.num, svg);
     }
   };
 

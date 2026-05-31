@@ -8,6 +8,12 @@ import Button from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
 import Logo from "@/components/ui/Logo";
 import { cn } from "@/lib/utils";
+import {
+  animateNavbarIconEnter,
+  animateNavbarIconLeave,
+  animateNavbarCtaArrowEnter,
+  animateNavbarCtaArrowLeave,
+} from "@/lib/gsap/animations";
 
 const NAV_ITEMS = [
   {
@@ -250,89 +256,10 @@ export default function Navbar() {
     // 1. Disparar el fondo (pill)
     handleMouseEnter(e);
 
-    // 2. Disparar la animación del icono vector con GSAP
-    const link = e.currentTarget;
-    const svg = link.querySelector(".nav-icon-svg") as SVGElement | null;
-    if (!svg) return;
-
-    if (label === "Servicios") {
-      const paths = svg.querySelectorAll("path");
-      if (paths.length >= 12) {
-        const tl = gsap.timeline({ overwrite: "auto" });
-        tl.to(svg, { scale: 1.15, duration: 0.3, ease: "power2.out" })
-          // La caja superior (paths 8-11) flota suavemente hacia arriba
-          .to(Array.from(paths).slice(8, 12), { 
-            y: -2.2, 
-            duration: 0.45, 
-            ease: "power2.out" 
-          }, 0)
-          // Las dos cajas inferiores (paths 0-7) se comprimen sutilmente por el peso inicial
-          .to(Array.from(paths).slice(0, 8), { 
-            scaleY: 0.94, 
-            transformOrigin: "bottom center", 
-            duration: 0.18, 
-            ease: "power1.out" 
-          }, 0)
-          .to(Array.from(paths).slice(0, 8), { 
-            scaleY: 1, 
-            transformOrigin: "bottom center", 
-            duration: 0.25, 
-            ease: "power1.inOut" 
-          }, 0.18);
-      }
-    } else if (label === "Proceso") {
-      const circles = svg.querySelectorAll("circle");
-      const path = svg.querySelector("path");
-      if (circles.length >= 2 && path) {
-        gsap.set(path, { strokeDasharray: 30, strokeDashoffset: 30 });
-        gsap.set(circles, { scale: 0, transformOrigin: "center center" });
-
-        const tl = gsap.timeline({ overwrite: "auto" });
-        tl.to(svg, { rotation: 15, scale: 1.15, duration: 0.2, ease: "power1.out" })
-          .to(circles[1], { scale: 1.3, duration: 0.2, ease: "back.out(2)" })
-          .to(path, { strokeDashoffset: 0, duration: 0.35, ease: "power2.inOut" })
-          .to(circles[0], { scale: 1.3, duration: 0.2, ease: "back.out(2)" })
-          .to(circles, { scale: 1, duration: 0.15, ease: "power1.out" })
-          .to(svg, { rotation: 0, duration: 0.3, ease: "back.out(1.5)" }, "-=0.2");
-      }
-    } else if (label === "Manifiesto") {
-      const paths = svg.querySelectorAll("path");
-      if (paths.length > 0) {
-        const tl = gsap.timeline({ overwrite: "auto" });
-        tl.to(svg, { scale: 1.15, duration: 0.3, ease: "power2.out" })
-          .fromTo(paths,
-            { opacity: 0.3, strokeWidth: 1.5 },
-            {
-              opacity: 1,
-              strokeWidth: 2.5,
-              duration: 0.2,
-              stagger: 0.03,
-              ease: "power2.out",
-              yoyo: true,
-              repeat: 1,
-              onComplete: () => {
-                gsap.to(paths, { opacity: 0.7, strokeWidth: 2, duration: 0.2 });
-              }
-            },
-            0
-          );
-      }
-    } else if (label === "Contacto") {
-      const paths = svg.querySelectorAll("path");
-      if (paths.length >= 2) {
-        const plane = paths[0];
-        const line = paths[1];
-        const tl = gsap.timeline({ overwrite: "auto" });
-        
-        tl.to(svg, { scale: 1.15, duration: 0.2 })
-          .to(plane, { x: 12, y: -12, opacity: 0, duration: 0.3, ease: "power2.in" }, 0)
-          .to(line, { scale: 0, opacity: 0, duration: 0.2, ease: "power2.in" }, 0)
-          .set(plane, { x: -12, y: 12, opacity: 0 })
-          .set(line, { scale: 0, opacity: 0 })
-          .to(plane, { x: 0, y: 0, opacity: 1, duration: 0.5, ease: "power2.out" })
-          .to(line, { scale: 1, opacity: 1, duration: 0.4, ease: "power2.out" }, "-=0.3")
-          .to(svg, { scale: 1, duration: 0.3 });
-      }
+    // 2. Delegar la animación vectorial al módulo central de GSAP
+    const svg = e.currentTarget.querySelector(".nav-icon-svg") as SVGElement | null;
+    if (svg) {
+      animateNavbarIconEnter(label, svg);
     }
   };
 
@@ -343,41 +270,24 @@ export default function Navbar() {
     // 1. Limpiar el fondo
     handleMouseLeave();
 
-    // 2. Limpiar animaciones de los iconos
+    // 2. Delegar el restablecimiento vectorial al módulo central de GSAP
     const svg = e.currentTarget.querySelector(".nav-icon-svg") as SVGElement | null;
-    if (!svg) return;
-
-    gsap.killTweensOf(svg);
-    gsap.to(svg, { scale: 1, rotation: 0, duration: 0.3, ease: "power2.out", overwrite: "auto" });
-
-    const paths = svg.querySelectorAll("path");
-    const circles = svg.querySelectorAll("circle");
-
-    if (paths.length > 0) {
-      gsap.killTweensOf(paths);
-      gsap.to(paths, { x: 0, y: 0, opacity: 0.6, scale: 1, strokeWidth: 2, strokeDashoffset: 0, duration: 0.3, ease: "power2.out", overwrite: "auto" });
-    }
-    if (circles.length > 0) {
-      gsap.killTweensOf(circles);
-      gsap.to(circles, { scale: 1, opacity: 1, duration: 0.3, ease: "power2.out", overwrite: "auto" });
+    if (svg) {
+      animateNavbarIconLeave(label, svg);
     }
   };
 
   const handleCtaMouseEnter = (e: React.MouseEvent<HTMLButtonElement> | React.FocusEvent<HTMLButtonElement>) => {
-    const arrow = e.currentTarget.querySelector(".nav-cta-arrow");
+    const arrow = e.currentTarget.querySelector(".nav-cta-arrow") as HTMLElement | null;
     if (arrow) {
-      const tl = gsap.timeline({ overwrite: "auto" });
-      tl.to(arrow, { x: 8, opacity: 0, duration: 0.18, ease: "power2.in" })
-        .set(arrow, { x: -8, opacity: 0 })
-        .to(arrow, { x: 0, opacity: 1, duration: 0.4, ease: "back.out(2)" });
+      animateNavbarCtaArrowEnter(arrow);
     }
   };
 
   const handleCtaMouseLeave = (e: React.MouseEvent<HTMLButtonElement> | React.FocusEvent<HTMLButtonElement>) => {
-    const arrow = e.currentTarget.querySelector(".nav-cta-arrow");
+    const arrow = e.currentTarget.querySelector(".nav-cta-arrow") as HTMLElement | null;
     if (arrow) {
-      gsap.killTweensOf(arrow);
-      gsap.to(arrow, { x: 0, opacity: 0.6, duration: 0.3, ease: "power2.out", overwrite: "auto" });
+      animateNavbarCtaArrowLeave(arrow);
     }
   };
 
