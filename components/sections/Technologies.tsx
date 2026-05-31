@@ -108,6 +108,110 @@ function LayerCard({ layer }: { layer: LayerItem }) {
     }
   };
 
+  const handleMouseEnter = () => {
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion) return;
+
+    const card = cardRef.current;
+    if (!card) return;
+
+    const svg = card.querySelector(`.tech-icon-svg-${layer.num}`);
+    if (!svg) return;
+
+    if (layer.num === "1") {
+      const paths = svg.querySelectorAll("path");
+      if (paths.length >= 3) {
+        const tl = gsap.timeline({ overwrite: "auto" });
+        tl.to(paths[0], { y: -3, duration: 0.35, ease: "back.out(2)" })
+          .to(paths[2], { y: 3, duration: 0.35, ease: "back.out(2)" }, 0);
+      }
+    } else if (layer.num === "2") {
+      const leds = svg.querySelectorAll("line");
+      const rects = svg.querySelectorAll("rect");
+      
+      const tl = gsap.timeline({ overwrite: "auto" });
+      tl.to(leds, {
+        opacity: 0.2,
+        duration: 0.15,
+        repeat: -1,
+        yoyo: true,
+        stagger: 0.1,
+      });
+      
+      gsap.to(rects, {
+        scale: 1.05,
+        transformOrigin: "center center",
+        duration: 0.4,
+        ease: "power2.out",
+        overwrite: "auto",
+      });
+    } else if (layer.num === "3") {
+      const path = svg.querySelector("path");
+      const circles = svg.querySelectorAll("circle");
+      
+      const tl = gsap.timeline({ overwrite: "auto" });
+      tl.to(path, {
+        rotation: 12,
+        transformOrigin: "center center",
+        duration: 0.3,
+        ease: "power2.out",
+      })
+      .to(path, {
+        rotation: -8,
+        duration: 0.25,
+        ease: "power2.inOut",
+      })
+      .to(path, {
+        rotation: 0,
+        duration: 0.3,
+        ease: "power2.out",
+      });
+
+      gsap.fromTo(circles,
+        { scale: 0.5, transformOrigin: "center center" },
+        {
+          scale: 1.4,
+          transformOrigin: "center center",
+          duration: 0.25,
+          stagger: 0.06,
+          ease: "back.out(2.5)",
+          overwrite: "auto",
+          onComplete: () => {
+            gsap.to(circles, { scale: 1, transformOrigin: "center center", duration: 0.2 });
+          }
+        }
+      );
+    }
+  };
+
+  const handleMouseLeave = () => {
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion) return;
+
+    const card = cardRef.current;
+    if (!card) return;
+
+    const svg = card.querySelector(`.tech-icon-svg-${layer.num}`);
+    if (!svg) return;
+
+    if (layer.num === "1") {
+      const paths = svg.querySelectorAll("path");
+      gsap.to(paths, { y: 0, duration: 0.3, ease: "power2.out", overwrite: "auto" });
+    } else if (layer.num === "2") {
+      const leds = svg.querySelectorAll("line");
+      const rects = svg.querySelectorAll("rect");
+      gsap.killTweensOf(leds);
+      gsap.to(leds, { opacity: 1, duration: 0.3, overwrite: "auto" });
+      gsap.to(rects, { scale: 1, transformOrigin: "center center", duration: 0.3, overwrite: "auto" });
+    } else if (layer.num === "3") {
+      const path = svg.querySelector("path");
+      const circles = svg.querySelectorAll("circle");
+      gsap.killTweensOf([path, circles]);
+      gsap.to(path, { rotation: 0, transformOrigin: "center center", duration: 0.4, overwrite: "auto" });
+      gsap.to(circles, { scale: 1, transformOrigin: "center center", duration: 0.4, overwrite: "auto" });
+    }
+  };
+
   const getHoverClasses = () => {
     if (layer.colorTheme === "violet") {
       return "md:hover:border-electric-violet/20 md:hover:shadow-[inset_0_0_0_1px_rgba(123,76,255,0.15),_inset_0_0_16px_rgba(123,76,255,0.10)]";
@@ -126,6 +230,8 @@ function LayerCard({ layer }: { layer: LayerItem }) {
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
         onTouchCancel={handleTouchEnd}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
         className={`group relative flex flex-col md:flex-row md:items-center justify-between gap-6 p-6 md:p-8 rounded-xl border border-steel-grey/25 bg-graphite-metal/20 shadow-[inset_0_0_0_0px_rgba(255,255,255,0),_inset_0_0_0px_rgba(255,255,255,0)] md:hover:bg-graphite-metal/35 md:hover:scale-[1.008] ${getHoverClasses()} transition-all duration-500 ease-out backdrop-blur-sm overflow-hidden select-none`}
       >
         {/* Subtle dynamic radial light on hover */}
@@ -183,12 +289,12 @@ function LayerCard({ layer }: { layer: LayerItem }) {
 
         {/* Left Column: Icon & Title */}
         <div className="relative z-20 flex items-center gap-4 min-w-[280px]">
-          <div className={`w-10 h-10 rounded-lg bg-steel-grey/15 border border-steel-grey/20 flex items-center justify-center text-chrome-deep transition-all duration-500 ease-out
+          <div className={`w-10 h-10 rounded-lg bg-steel-grey/15 border border-steel-grey/20 flex items-center justify-center text-chrome-deep transition-all duration-500 ease-out overflow-visible
             ${layer.colorTheme === "violet" ? "md:group-hover:text-electric-violet md:group-hover:border-electric-violet/20 md:group-hover:bg-electric-violet/5" : ""}
             ${layer.colorTheme === "blue" ? "md:group-hover:text-neon-blue md:group-hover:border-neon-blue/20 md:group-hover:bg-neon-blue/5" : ""}
             ${layer.colorTheme === "chrome" ? "md:group-hover:text-white md:group-hover:border-white/20 md:group-hover:bg-white/5" : ""}
           `}>
-            <Icon className="w-5 h-5 transition-transform duration-500 ease-out md:group-hover:scale-105" />
+            <Icon className={`w-5 h-5 tech-icon-svg-${layer.num} overflow-visible transition-transform duration-500 ease-out md:group-hover:scale-105`} />
           </div>
           <div className="space-y-0.5">
             <span className="block font-mono text-[9px] font-medium tracking-wider text-chrome-deep">
