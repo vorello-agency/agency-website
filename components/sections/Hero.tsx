@@ -199,28 +199,28 @@ export default function Hero() {
             style={{ opacity: 0 }}
           >
             {/* Energy Rings & Tech Blueprint (Minimal & Interactive) */}
-            {/* Outer Orbit (Dashed) */}
-            <div className="absolute rounded-full border border-dashed border-steel-grey/15 w-[115%] h-[115%] pointer-events-none animate-[spin_80s_linear_infinite]" />
+            {/* Outer Orbit */}
+            <div className="absolute rounded-full border border-transparent w-[115%] h-[115%] pointer-events-none will-change-transform [transform:translateZ(0)] animate-[spin_120s_linear_infinite]" />
 
             {/* Inner Orbit (Solid tech line) */}
-            <div className="absolute rounded-full border border-steel-grey/10 w-[95%] h-[95%] pointer-events-none animate-[spin_50s_linear_infinite_reverse]" />
+            <div className="absolute rounded-full border border-transparent w-[95%] h-[95%] pointer-events-none will-change-transform [transform:translateZ(0)] animate-[spin_70s_linear_infinite_reverse]" />
 
             {/* Innermost Orbit */}
-            <div className="absolute rounded-full border border-steel-grey/10 w-[78%] h-[78%] pointer-events-none animate-[spin_35s_linear_infinite]" />
+            <div className="absolute rounded-full border border-transparent w-[78%] h-[78%] pointer-events-none will-change-transform [transform:translateZ(0)] animate-[spin_55s_linear_infinite]" />
 
             {/* Energy Particle tracking the outer orbit (Producto - Blue) */}
             <div className="absolute w-[115%] h-[115%] pointer-events-none animate-[spin_10s_linear_infinite]">
-              <span className="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-neon-blue shadow-[0_0_8px_#2D8FFF] animate-pulse" />
+              <span className="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-neon-blue/60 shadow-[0_0_6px_#2D8FFF] animate-pulse" />
             </div>
 
             {/* Second Energy Particle on the inner orbit (Tecnología - Violet) */}
             <div className="absolute w-[95%] h-[95%] pointer-events-none animate-[spin_6s_linear_infinite_reverse]">
-              <span className="absolute -top-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-electric-violet shadow-[0_0_6px_#7B4CFF]" />
+              <span className="absolute -top-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-electric-violet/60 shadow-[0_0_4px_#7B4CFF]" />
             </div>
 
             {/* Third Energy Particle on the innermost orbit (Diseño - Orange) */}
             <div className="absolute w-[78%] h-[78%] pointer-events-none animate-[spin_8s_linear_infinite]">
-              <span className="absolute -top-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-[#FF5C00] shadow-[0_0_6px_#FF5C00]" />
+              <span className="absolute -top-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-[#FF5C00]/60 shadow-[0_0_4px_#FF5C00]" />
             </div>
 
             {/* Interactive container that captures mouse and touch gestures, preventing iOS native image popup */}
