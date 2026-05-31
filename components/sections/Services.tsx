@@ -11,7 +11,7 @@ const SERVICES = [
     num: "01",
     title: "Experiencias web de alto rendimiento",
     description:
-      "Sitios web corporativos y landing pages modernas, orientadas a conversión, velocidad extrema, SEO técnico impecable y accesibilidad rigurosa.",
+      "Sitios web corporativos y landing pages modernas, orientadas a conversión, performance, SEO técnico y accesibilidad.",
     icon: Globe,
     features: [
       "Sitios corporativos premium",
@@ -25,7 +25,7 @@ const SERVICES = [
     num: "02",
     title: "Productos digitales a medida",
     description:
-      "Web apps, plataformas internas, paneles de administración y portales privados integrados sólidamente a tu lógica de negocio.",
+      "Web apps, plataformas internas, paneles de administración y portales privados integrados a la lógica de tu negocio.",
     icon: Cpu,
     features: [
       "Web apps robustas",

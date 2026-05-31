@@ -470,7 +470,7 @@ export default function Navbar() {
             }}
           >
             <ArrowRight className="h-4 w-4 text-neon-blue/80" />
-            <span>Iniciar Proyecto</span>
+            <span>Iniciar proyecto</span>
           </Link>
         </div>
       </div>

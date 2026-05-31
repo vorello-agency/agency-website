@@ -173,7 +173,7 @@ export default function Hero() {
             className="text-base sm:text-lg md:text-xl text-[#A8B0BD] max-w-2xl leading-relaxed mb-10"
             style={{ opacity: 0 }}
           >
-            Creamos productos digitales que combinan una estética cuidada, una experiencia de usuario impecable y un rendimiento técnico excepcional.
+            Diseñamos y desarrollamos productos digitales bien pensados, visualmente cuidados y técnicamente sólidos.
           </p>
 
           {/* Call to Actions */}

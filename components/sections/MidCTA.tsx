@@ -176,7 +176,7 @@ export default function MidCTA() {
         >
           {/* Left: Text query (strong bold contrast, limited max-width for premium visual weight, optimized leading for vertical alignment) */}
           <p className="midcta-text text-lg sm:text-xl md:text-2xl font-bold text-white tracking-tight leading-tight max-w-xl">
-            ¿Tenés un proyecto que necesita diseño, tecnología y criterio?
+            ¿Tienes un proyecto que necesita diseño, tecnología y criterio?
           </p>
 
           {/* Right: Focused single conversion action button */}
