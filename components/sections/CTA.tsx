@@ -167,7 +167,7 @@ export default function CTA() {
           <div className="cta-footer mt-8 md:mt-12 text-xs font-mono text-chrome-deep/80 relative z-10">
             Tiempo estimado de respuesta
             <br />
-            &lt; 24 horas hábiles.
+            &lt; 24 horas hábiles
           </div>
         </div>
       </Container>

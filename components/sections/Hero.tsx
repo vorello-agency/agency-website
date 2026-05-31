@@ -170,7 +170,7 @@ export default function Hero() {
           {/* Brand core positioning sentence - improved contrast */}
           <p
             ref={subtitleRef}
-            className="text-base sm:text-lg md:text-xl text-[#A8B0BD] max-w-2xl leading-relaxed mb-10"
+            className="text-base sm:text-lg md:text-xl text-[#A8B0BD] max-w-2xl leading-relaxed text-balance mb-10"
             style={{ opacity: 0 }}
           >
             Diseñamos y desarrollamos productos digitales bien pensados, visualmente cuidados y técnicamente sólidos.
