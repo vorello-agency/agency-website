@@ -265,7 +265,7 @@ export default function Navbar() {
 
   const handleItemMouseLeave = (
     label: string,
-    e: React.MouseEvent<HTMLAnchorElement>
+    e: React.MouseEvent<HTMLAnchorElement> | React.FocusEvent<HTMLAnchorElement>
   ) => {
     // 1. Limpiar el fondo
     handleMouseLeave();

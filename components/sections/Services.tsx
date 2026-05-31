@@ -51,7 +51,7 @@ const SERVICES = [
   },
 ];
 
-function ServiceCard({ service, idx }: { service: typeof SERVICES[0]; idx: number }) {
+function ServiceCard({ service }: { service: typeof SERVICES[0] }) {
   const Icon = service.icon;
   const cardRef = useRef<HTMLDivElement>(null);
   const accentLineRef = useRef<HTMLDivElement>(null);
@@ -113,12 +113,142 @@ function ServiceCard({ service, idx }: { service: typeof SERVICES[0]; idx: numbe
     }
   };
 
+  const handleMouseEnter = () => {
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion) return;
+
+    const card = cardRef.current;
+    if (!card) return;
+
+    const svg = card.querySelector(`.services-svg-${service.num}`);
+    if (!svg) return;
+
+    if (service.num === "01") {
+      const circle = svg.querySelector("circle");
+      const paths = svg.querySelectorAll("path");
+      if (circle) {
+        gsap.to(circle, {
+          scale: 1.12,
+          transformOrigin: "center center",
+          duration: 0.4,
+          ease: "back.out(1.5)",
+          overwrite: "auto",
+        });
+      }
+      if (paths && paths.length > 0) {
+        gsap.to(paths, {
+          stroke: "currentColor",
+          scaleX: 1.15,
+          transformOrigin: "center center",
+          stagger: 0.05,
+          duration: 0.4,
+          ease: "power2.out",
+          overwrite: "auto",
+        });
+      }
+    } else if (service.num === "02") {
+      const rect = svg.querySelector("rect");
+      const paths = svg.querySelectorAll("path, line");
+      if (rect) {
+        gsap.to(rect, {
+          scale: 1.25,
+          transformOrigin: "center center",
+          duration: 0.3,
+          ease: "back.out(2)",
+          overwrite: "auto",
+        });
+      }
+      if (paths && paths.length > 0) {
+        gsap.to(paths, {
+          stroke: "#7B4CFF",
+          stagger: 0.02,
+          duration: 0.25,
+          ease: "power1.out",
+          overwrite: "auto",
+        });
+      }
+    } else if (service.num === "03") {
+      const tl = gsap.timeline();
+      tl.to(svg, { rotation: 15, transformOrigin: "top center", duration: 0.12, ease: "power1.out" })
+        .to(svg, { rotation: -12, duration: 0.12, ease: "power1.inOut" })
+        .to(svg, { rotation: 8, duration: 0.12, ease: "power1.inOut" })
+        .to(svg, { rotation: -4, duration: 0.12, ease: "power1.inOut" })
+        .to(svg, { rotation: 0, duration: 0.18, ease: "power1.inOut" });
+    }
+  };
+
+  const handleMouseLeave = () => {
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion) return;
+
+    const card = cardRef.current;
+    if (!card) return;
+
+    const svg = card.querySelector(`.services-svg-${service.num}`);
+    if (!svg) return;
+
+    if (service.num === "01") {
+      const circle = svg.querySelector("circle");
+      const paths = svg.querySelectorAll("path");
+      if (circle) {
+        gsap.to(circle, {
+          scale: 1,
+          transformOrigin: "center center",
+          duration: 0.4,
+          ease: "power2.out",
+          overwrite: "auto",
+        });
+      }
+      if (paths && paths.length > 0) {
+        gsap.to(paths, {
+          stroke: "currentColor",
+          scaleX: 1,
+          transformOrigin: "center center",
+          duration: 0.4,
+          ease: "power2.out",
+          overwrite: "auto",
+        });
+      }
+    } else if (service.num === "02") {
+      const rect = svg.querySelector("rect");
+      const paths = svg.querySelectorAll("path, line");
+      if (rect) {
+        gsap.to(rect, {
+          scale: 1,
+          transformOrigin: "center center",
+          duration: 0.4,
+          ease: "power2.out",
+          overwrite: "auto",
+        });
+      }
+      if (paths && paths.length > 0) {
+        gsap.to(paths, {
+          stroke: "currentColor",
+          stagger: 0.01,
+          duration: 0.4,
+          ease: "power2.out",
+          overwrite: "auto",
+        });
+      }
+    } else if (service.num === "03") {
+      gsap.to(svg, {
+        rotation: 0,
+        transformOrigin: "top center",
+        duration: 0.4,
+        ease: "power2.out",
+        overwrite: "auto",
+      });
+    }
+  };
+
   return (
     <div
       ref={cardRef}
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
       onTouchCancel={handleTouchEnd}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
       className="group relative flex flex-col p-6 md:p-8 rounded-xl border border-steel-grey/30 bg-graphite-metal/20 md:hover:bg-graphite-metal/40 md:hover:border-electric-violet/40 transition-all duration-300 backdrop-blur-sm h-full min-h-[480px] select-none"
     >
       {/* Accent line animation hover */}
@@ -135,7 +265,7 @@ function ServiceCard({ service, idx }: { service: typeof SERVICES[0]; idx: numbe
             ref={iconRef}
             className="services-icon w-12 h-12 rounded-lg bg-steel-grey/25 border border-steel-grey/30 flex items-center justify-center text-chrome-highlight md:group-hover:text-electric-violet md:group-hover:border-electric-violet/20 transition-all duration-300"
           >
-            <Icon className="w-6 h-6" />
+            <Icon className={`w-6 h-6 services-svg-${service.num}`} />
           </div>
           <span className="services-num font-mono text-sm text-steel-grey md:group-hover:text-chrome-deep transition-colors">
             {"// "} {service.num}
@@ -393,7 +523,7 @@ export default function Services() {
           style={{ perspective: "1000px" }}
         >
           {SERVICES.map((service, idx) => (
-            <ServiceCard service={service} idx={idx} key={idx} />
+            <ServiceCard service={service} key={idx} />
           ))}
         </div>
       </Container>
