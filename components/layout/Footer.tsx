@@ -89,7 +89,7 @@ export default function Footer() {
           </Link>
           <p className="text-sm leading-relaxed max-w-sm">
             Diseñamos y desarrollamos productos digitales bien pensados,
-            visually cuidados y técnicamente sólidos.
+            visualmente cuidados y técnicamente sólidos.
           </p>
         </div>
 

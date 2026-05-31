@@ -45,15 +45,16 @@ export const TextHoverEffect = ({
         <linearGradient
           id="textGradient"
           gradientUnits="userSpaceOnUse"
-          cx="50%"
-          cy="50%"
-          r="25%"
+          x1="0%"
+          y1="0%"
+          x2="100%"
+          y2="0%"
         >
-          <stop offset="0%" stopColor="#2D8FFF" />
-          <stop offset="25%" stopColor="#3B82F6" />
-          <stop offset="50%" stopColor="#5839FF" />
-          <stop offset="75%" stopColor="#7B4CFF" />
-          <stop offset="100%" stopColor="#A855F7" />
+          <stop offset="0%" stopColor="#FF5C00" />
+          <stop offset="12%" stopColor="#2D8FFF" />
+          <stop offset="50%" stopColor="#2D8FFF" />
+          <stop offset="80%" stopColor="#7B4CFF" />
+          <stop offset="100%" stopColor="#FF2A54" />
         </linearGradient>
 
         <motion.radialGradient
@@ -129,7 +130,7 @@ export const TextHoverEffect = ({
         style={{
           opacity: isCurrentlyHovered ? 1 : 0.15,
           filter: isCurrentlyHovered
-            ? "drop-shadow(0 0 10px rgba(123, 76, 255, 0.75)) drop-shadow(0 0 3px rgba(45, 143, 255, 0.65))"
+            ? "drop-shadow(0 0 12px rgba(123, 76, 255, 0.55)) drop-shadow(0 0 8px rgba(45, 143, 255, 0.45)) drop-shadow(0 0 3px rgba(255, 92, 0, 0.15)) drop-shadow(0 0 3px rgba(255, 42, 84, 0.15))"
             : "none",
         }}
       >

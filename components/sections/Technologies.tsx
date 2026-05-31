@@ -29,8 +29,8 @@ const LAYERS = [
     title: "Sistema Visual",
     icon: Palette,
     chips: ["Figma", "Storybook", "Design Systems", "UX/UI", "Prototyping"],
-    colorTheme: "chrome",
-    glowColors: { start: "#e3e7ee", end: "#5a6270" }
+    colorTheme: "orange",
+    glowColors: { start: "#FF6B00", end: "#FF3D00" }
   }
 ];
 
@@ -74,6 +74,8 @@ function LayerCard({ layer }: { layer: LayerItem }) {
         ? "rgba(123, 76, 255, 0.25)"
         : layer.colorTheme === "blue"
         ? "rgba(45, 143, 255, 0.25)"
+        : layer.colorTheme === "orange"
+        ? "rgba(255, 107, 0, 0.25)"
         : "rgba(255, 255, 255, 0.2)";
 
       gsap.to(card, {
@@ -142,6 +144,9 @@ function LayerCard({ layer }: { layer: LayerItem }) {
     if (layer.colorTheme === "blue") {
       return "md:hover:border-neon-blue/20 md:hover:shadow-[inset_0_0_0_1px_rgba(45,143,255,0.15),_inset_0_0_16px_rgba(45,143,255,0.10)]";
     }
+    if (layer.colorTheme === "orange") {
+      return "md:hover:border-[#FF6B00]/20 md:hover:shadow-[inset_0_0_0_1px_rgba(255,107,0,0.15),_inset_0_0_16px_rgba(255,107,0,0.10)]";
+    }
     return "md:hover:border-white/20 md:hover:shadow-[inset_0_0_0_1px_rgba(255,255,255,0.15),_inset_0_0_16px_rgba(255,255,255,0.08)]";
   };
 
@@ -164,6 +169,9 @@ function LayerCard({ layer }: { layer: LayerItem }) {
         {layer.colorTheme === "blue" && (
           <div className="absolute -top-12 -right-12 w-36 h-36 rounded-full bg-neon-blue/10 blur-3xl opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0 animate-glow-drift" />
         )}
+        {layer.colorTheme === "orange" && (
+          <div className="absolute -top-12 -right-12 w-36 h-36 rounded-full bg-[#FF6B00]/10 blur-3xl opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0 animate-glow-drift" />
+        )}
         {layer.colorTheme === "chrome" && (
           <div className="absolute -top-12 -right-12 w-36 h-36 rounded-full bg-white/5 blur-3xl opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0 animate-glow-drift" />
         )}
@@ -177,6 +185,8 @@ function LayerCard({ layer }: { layer: LayerItem }) {
               ? "radial-gradient(circle 120px at var(--mouse-x, -999px) var(--mouse-y, -999px), rgba(123, 76, 255, 0.04), transparent 100%)"
               : layer.colorTheme === "blue"
               ? "radial-gradient(circle 120px at var(--mouse-x, -999px) var(--mouse-y, -999px), rgba(45, 143, 255, 0.04), transparent 100%)"
+              : layer.colorTheme === "orange"
+              ? "radial-gradient(circle 120px at var(--mouse-x, -999px) var(--mouse-y, -999px), rgba(255, 107, 0, 0.04), transparent 100%)"
               : "radial-gradient(circle 120px at var(--mouse-x, -999px) var(--mouse-y, -999px), rgba(255, 255, 255, 0.02), transparent 100%)"
           }}
         />
@@ -215,6 +225,7 @@ function LayerCard({ layer }: { layer: LayerItem }) {
           <div className={`w-10 h-10 rounded-lg bg-steel-grey/15 border border-steel-grey/20 flex items-center justify-center text-chrome-deep transition-all duration-500 ease-out overflow-visible
             ${layer.colorTheme === "violet" ? "md:group-hover:text-electric-violet md:group-hover:border-electric-violet/20 md:group-hover:bg-electric-violet/5" : ""}
             ${layer.colorTheme === "blue" ? "md:group-hover:text-neon-blue md:group-hover:border-neon-blue/20 md:group-hover:bg-neon-blue/5" : ""}
+            ${layer.colorTheme === "orange" ? "md:group-hover:text-[#FF6B00] md:group-hover:border-[#FF6B00]/20 md:group-hover:bg-[#FF6B00]/5" : ""}
             ${layer.colorTheme === "chrome" ? "md:group-hover:text-white md:group-hover:border-white/20 md:group-hover:bg-white/5" : ""}
           `}>
             <Icon className={`w-5 h-5 tech-icon-svg-${layer.num} overflow-visible transition-transform duration-500 ease-out md:group-hover:scale-105`} />
@@ -237,6 +248,7 @@ function LayerCard({ layer }: { layer: LayerItem }) {
               className={`tech-chip px-3.5 py-1.5 text-xs font-mono rounded-full border border-steel-grey/30 bg-graphite-metal/30 text-chrome-highlight hover:text-white hover:scale-[1.03] transition-all duration-500 ease-out cursor-default
                 ${layer.colorTheme === "violet" ? "hover:border-electric-violet/40 hover:bg-electric-violet/10" : ""}
                 ${layer.colorTheme === "blue" ? "hover:border-neon-blue/40 hover:bg-neon-blue/10" : ""}
+                ${layer.colorTheme === "orange" ? "hover:border-[#FF6B00]/40 hover:bg-[#FF6B00]/10" : ""}
                 ${layer.colorTheme === "chrome" ? "hover:border-white/30 hover:bg-white/10" : ""}
               `}
             >
