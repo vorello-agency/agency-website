@@ -4,6 +4,7 @@ import React, { useEffect, useRef } from "react";
 import { gsap } from "@/lib/gsap/register";
 import Button from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
+import Badge from "@/components/ui/Badge";
 import Image from "next/image";
 
 export default function Hero() {
@@ -130,7 +131,7 @@ export default function Hero() {
   return (
     <section
       ref={containerRef}
-      className="relative z-20 min-h-[85vh] flex items-center justify-center pt-28 pb-16 overflow-hidden bg-carbon-black"
+      className="relative z-20 min-h-[85vh] flex items-center justify-center pt-28 pb-20 md:pb-24 2xl:pt-36 2xl:pb-32 overflow-hidden bg-carbon-black"
     >
       {/* Premium clean dots background with radial mask */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
@@ -146,31 +147,29 @@ export default function Hero() {
       </div>
 
 
-      <Container className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+      <Container className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 2xl:gap-24 items-center">
         {/* Left Column: Text & CTA */}
         <div className="lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left">
           {/* Decorative Badge */}
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-steel-grey/30 bg-graphite-metal/50 text-xs font-mono text-chrome-deep mb-8 backdrop-blur-sm transition-all duration-500 ease-out hover:border-chrome-deep/40 hover:bg-white/[0.02] hover:text-chrome-highlight cursor-default select-none group animate-pulse hover:animate-none md:-translate-x-[18px] lg:-translate-x-[50px]">
-            <span className="w-1.5 h-1.5 rounded-full bg-chrome-deep group-hover:bg-chrome-highlight transition-all duration-500 ease-out group-hover:scale-125" />
+          <Badge variant="violet" className="mb-8">
             <span className="hidden sm:inline-flex">VORELLO AGENCY — Agencia digital especializada</span>
             <span className="inline-flex sm:hidden">Agencia digital especializada</span>
-          </div>
+          </Badge>
 
-          {/* Primary Headline in vertical column */}
           <h1
             ref={headlineRef}
-            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight text-chrome-highlight uppercase mb-6 max-w-5xl leading-[0.95] select-none font-sans flex flex-col gap-1 sm:gap-2"
+            className="text-5xl sm:text-7xl lg:text-7xl xl:text-8xl font-bold tracking-tight text-chrome-highlight uppercase mb-6 2xl:mb-8 max-w-5xl leading-[0.95] select-none font-sans flex flex-col gap-2 2xl:gap-3"
             style={{ opacity: 0 }}
           >
-            <span>Diseño<span className="inline-block text-[0.78em] translate-y-[-0.07em] ml-[0.02em] select-none text-[#D95F29]">.</span></span>
-            <span>Tecnología<span className="inline-block text-[0.78em] translate-y-[-0.07em] ml-[0.02em] select-none text-electric-violet/75">.</span></span>
-            <span>Producto<span className="inline-block text-[0.78em] translate-y-[-0.07em] ml-[0.02em] select-none text-neon-blue/75">.</span></span>
+            <span>Diseño<span className="inline-block text-[0.78em] translate-y-[-0.07em] ml-[0.02em] select-none text-chrome-deep">.</span></span>
+            <span>Tecnología<span className="inline-block text-[0.78em] translate-y-[-0.07em] ml-[0.02em] select-none text-chrome-deep">.</span></span>
+            <span>Producto<span className="inline-block text-[0.78em] translate-y-[-0.07em] ml-[0.02em] select-none text-chrome-deep">.</span></span>
           </h1>
 
           {/* Brand core positioning sentence - improved contrast */}
           <p
             ref={subtitleRef}
-            className="text-base sm:text-lg md:text-xl text-[#A8B0BD] max-w-2xl leading-relaxed text-balance mb-10"
+            className="text-base sm:text-lg md:text-xl 2xl:text-2xl text-[#A8B0BD] max-w-2xl 2xl:max-w-3xl leading-relaxed text-balance mb-10 2xl:mb-14"
             style={{ opacity: 0 }}
           >
             Diseñamos y desarrollamos productos digitales bien pensados, visualmente cuidados y técnicamente sólidos.
@@ -195,7 +194,7 @@ export default function Hero() {
         <div className="lg:col-span-5 flex items-center justify-center w-full mt-10 lg:mt-0">
           <div
             ref={visualRef}
-            className="relative w-full max-w-[220px] sm:max-w-sm md:max-w-md mx-auto flex items-center justify-center"
+            className="relative w-full max-w-[224px] sm:max-w-sm md:max-w-md mx-auto flex items-center justify-center"
             style={{ opacity: 0 }}
           >
             {/* Energy Rings & Tech Blueprint (Minimal & Interactive) */}
@@ -225,7 +224,7 @@ export default function Hero() {
 
             {/* Interactive container that captures mouse and touch gestures, preventing iOS native image popup */}
             <div
-              className="w-28 h-28 sm:w-44 sm:h-44 md:w-56 md:h-56 lg:w-76 lg:h-76 flex items-center justify-center cursor-pointer z-10 touch-none select-none select-drag-disabled"
+              className="w-28 h-28 sm:w-44 sm:h-44 md:w-56 md:h-56 lg:w-76 lg:h-76 2xl:w-[350px] 2xl:h-[350px] flex items-center justify-center cursor-pointer z-10 touch-none select-none select-drag-disabled"
               onMouseMove={handleIsotipoMouseMove}
               onMouseLeave={handleIsotipoMouseLeave}
               onTouchStart={handleIsotipoTouchStart}

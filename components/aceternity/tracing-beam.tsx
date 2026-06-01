@@ -88,9 +88,9 @@ export const TracingBeam = ({
     >
       {/* Absolute container for the SVG Tracing Beam line */}
       <div className="absolute inset-x-0 top-0 bottom-0 pointer-events-none z-30 hidden md:block">
-        <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 relative h-full">
+        <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-16 xl:px-20 2xl:px-8 relative h-full">
           {/* Shifted to the left margin out of the Container text alignment for perfect breathing space */}
-          <div className="absolute left-0 md:left-[-18px] lg:left-[-50px] top-[116px] h-[calc(100%-116px)] flex flex-col items-center">
+          <div className="absolute left-0 md:left-[-16px] lg:left-2 xl:left-[0vw] 2xl:left-[-150px] top-[116px] h-[calc(100%-116px)] flex flex-col items-center">
             {/* Pulsing indicator dot at the top of the beam */}
             <motion.div
               style={{

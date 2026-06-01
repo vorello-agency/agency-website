@@ -22,49 +22,49 @@ const STEPS = [
     name: "Descubrimiento",
     desc: "Entendemos objetivos, usuarios y restricciones técnicas para definir una base clara.",
     icon: Compass,
-    area: "md:[grid-area:1/1/2/7] xl:[grid-area:1/1/2/5]",
+    area: "md:[grid-area:1/1/2/7] lg:[grid-area:1/1/2/5]",
   },
   {
     num: "02",
     name: "Estrategia",
     desc: "Definimos arquitectura, alcance funcional y roadmap de ejecución.",
     icon: Route,
-    area: "md:[grid-area:1/7/2/13] xl:[grid-area:2/1/3/5]",
+    area: "md:[grid-area:1/7/2/13] lg:[grid-area:2/1/3/5]",
   },
   {
     num: "03",
     name: "UX/UI",
     desc: "Diseñamos interfaces claras, refinadas y enfocadas en la experiencia.",
     icon: PanelsTopLeft,
-    area: "md:[grid-area:2/1/3/7] xl:[grid-area:1/5/3/8]",
+    area: "md:[grid-area:2/1/3/7] lg:[grid-area:1/5/3/8]",
   },
   {
     num: "04",
     name: "Desarrollo",
     desc: "Construimos con código limpio, arquitectura escalable y foco en rendimiento.",
     icon: Code2,
-    area: "md:[grid-area:2/7/3/13] xl:[grid-area:1/8/2/13]",
+    area: "md:[grid-area:2/7/3/13] lg:[grid-area:1/8/2/13]",
   },
   {
     num: "05",
     name: "Optimización",
     desc: "Validamos accesibilidad, performance, SEO técnico y comportamiento responsive.",
     icon: Gauge,
-    area: "md:[grid-area:3/1/4/13] xl:[grid-area:2/8/3/13]",
+    area: "md:[grid-area:3/1/4/13] lg:[grid-area:2/8/3/13]",
   },
   {
     num: "06",
     name: "Lanzamiento",
     desc: "Desplegamos el producto en un entorno estable, seguro y preparado para operar.",
     icon: Rocket,
-    area: "md:col-span-6 xl:col-span-6",
+    area: "md:col-span-6 lg:col-span-6",
   },
   {
     num: "07",
     name: "Evolución",
     desc: "Acompañamos el crecimiento con mejoras continuas basadas en métricas, uso real y objetivos en evolución.",
     icon: Orbit,
-    area: "md:col-span-6 xl:col-span-6",
+    area: "md:col-span-6 lg:col-span-6",
   },
 ];
 
@@ -382,7 +382,7 @@ export default function Process() {
 
         <ul
           ref={stepsContainerRef}
-          className="group/grid mt-12 grid grid-cols-1 grid-rows-none gap-6 md:grid-cols-12 md:grid-rows-3 xl:max-h-[46rem] xl:grid-rows-3"
+          className="group/grid mt-12 grid grid-cols-1 grid-rows-none gap-6 md:grid-cols-12 md:grid-rows-3 lg:max-h-[46rem] lg:grid-rows-3"
           style={{ perspective: "1200px" }}
         >
           {STEPS.map((step, idx) => (

@@ -113,7 +113,7 @@ export default function CTA() {
     <section
       ref={sectionRef}
       id="contacto"
-      className="py-20 md:py-32 bg-carbon-black relative z-20 overflow-hidden"
+      className="py-20 md:py-32 2xl:py-40 bg-carbon-black relative z-20 overflow-hidden"
     >
       {/* Background decoration */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
@@ -123,7 +123,7 @@ export default function CTA() {
       <Container>
         <div
           ref={cardRef}
-          className="relative max-w-5xl mx-auto rounded-2xl border border-steel-grey/30 bg-graphite-metal/30 pt-8 pb-12 px-5 sm:px-8 md:p-16 text-center overflow-hidden backdrop-blur-sm"
+          className="relative max-w-xl md:max-w-2xl lg:max-w-3xl xl:max-w-4xl 2xl:max-w-6xl mx-auto rounded-2xl border border-steel-grey/30 bg-graphite-metal/30 pt-8 pb-12 px-5 sm:px-8 md:py-10 md:px-8 2xl:py-16 2xl:px-36 text-center overflow-hidden backdrop-blur-sm"
           style={{ opacity: 0 }}
         >
           {/* Internal ambient glowing bulb */}
@@ -136,11 +136,11 @@ export default function CTA() {
             {"// INICIAR CONVERSACIÓN"}
           </span>
 
-          <h2 className="cta-title text-3xl sm:text-4xl md:text-5xl font-bold text-chrome-highlight tracking-tight mb-6 max-w-2xl mx-auto leading-tight relative z-10">
+          <h2 className="cta-title text-3xl sm:text-4xl md:text-5xl 2xl:text-6xl font-bold text-chrome-highlight tracking-tight mb-6 max-w-2xl mx-auto leading-tight relative z-10">
             Hablemos de tu próximo sistema digital
           </h2>
 
-          <p className="cta-desc text-sm sm:text-base text-chrome-deep max-w-lg mx-auto mb-10 leading-relaxed relative z-10">
+          <p className="cta-desc text-sm sm:text-base 2xl:text-lg text-chrome-deep max-w-lg 2xl:max-w-xl mx-auto mb-10 2xl:mb-12 leading-relaxed relative z-10">
             Cuéntanos sobre tus objetivos. Analizaremos tu proyecto y te
             propondremos una dirección clara para avanzar.
           </p>
