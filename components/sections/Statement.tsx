@@ -98,7 +98,7 @@ export default function Statement() {
     <section
       ref={sectionRef}
       id="manifiesto"
-      className="py-20 md:py-28 bg-carbon-black relative z-20 overflow-hidden"
+      className="py-20 md:py-28 2xl:py-36 bg-carbon-black relative z-20 overflow-hidden"
     >
       {/* Dynamic Background Glow */}
       <div 
@@ -107,7 +107,7 @@ export default function Statement() {
       />
 
       <Container>
-        <div className="max-w-4xl mx-auto flex flex-col gap-6">
+        <div className="max-w-4xl mx-auto flex flex-col gap-6 2xl:gap-8">
           {/* Manifesto Intro Tag */}
           <span className="reveal-item font-mono text-xs text-electric-violet uppercase tracking-widest block font-semibold">
             {"// NUESTRO MANIFIESTO"}
@@ -116,7 +116,7 @@ export default function Statement() {
           {/* High-Fidelity Word-Split Manifesto Heading */}
           <h2
             ref={textRef}
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-[50px] font-bold tracking-tight text-[#8F9BA8] leading-tight select-none font-sans"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-[50px] 2xl:text-[64px] font-bold tracking-tight text-[#8F9BA8] leading-tight 2xl:leading-[1.1] select-none font-sans"
           >
             {textSegments.map((segment, segmentIdx) => {
               const words = segment.text.split(" ").filter(Boolean);
@@ -135,7 +135,7 @@ export default function Statement() {
           </h2>
 
           {/* Manifesto Subtext Paragraph */}
-          <p className="reveal-item text-base sm:text-lg text-[#A8B0BD] max-w-2xl leading-relaxed mt-2">
+          <p className="reveal-item text-base sm:text-lg 2xl:text-xl text-[#A8B0BD] max-w-2xl 2xl:max-w-3xl leading-relaxed mt-2 2xl:mt-4">
             Combinamos estrategia, diseño y desarrollo para crear experiencias
             digitales claras, escalables y orientadas a resultados.
           </p>

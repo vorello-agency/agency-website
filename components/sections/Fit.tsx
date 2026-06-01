@@ -122,9 +122,9 @@ export default function Fit() {
     <section
       ref={sectionRef}
       id="fit"
-      className="py-20 md:py-32 bg-carbon-black relative z-20 overflow-hidden"
+      className="py-20 md:py-32 2xl:py-40 bg-carbon-black relative z-20 overflow-hidden"
     >
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-electric-violet/5 blur-[120px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] 2xl:w-[700px] 2xl:h-[700px] rounded-full bg-electric-violet/5 blur-[120px] pointer-events-none" />
 
       <Container>
         <SectionHeading
@@ -132,29 +132,29 @@ export default function Fit() {
           title="Trabajamos mejor con equipos que valoran la calidad"
           description="Buscamos relaciones a largo plazo con marcas que comparten nuestra visión: diseño, tecnología y excelencia."
           align="center"
-          className="fit-heading mb-16"
+          className="fit-heading"
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto mt-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 2xl:gap-12 max-w-5xl 2xl:max-w-7xl mx-auto mt-12 2xl:mt-16">
           {/* Ideal Fit Card */}
           <div
             ref={leftCardRef}
-            className="p-6 md:p-8 rounded-xl border border-electric-violet/20 bg-graphite-metal/30 backdrop-blur-sm relative"
+            className="p-6 md:p-8 2xl:p-10 rounded-xl border border-electric-violet/20 bg-graphite-metal/30 backdrop-blur-sm relative"
           >
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-8 h-8 rounded-full bg-electric-violet/10 border border-electric-violet/30 flex items-center justify-center text-electric-violet shrink-0">
-                <Check className="w-4 h-4" />
+            <div className="flex items-center gap-3 2xl:gap-4 mb-6 2xl:mb-8">
+              <div className="w-8 h-8 2xl:w-10 2xl:h-10 rounded-full bg-electric-violet/10 border border-electric-violet/30 flex items-center justify-center text-electric-violet shrink-0">
+                <Check className="w-4 h-4 2xl:w-5 2xl:h-5" />
               </div>
-              <h3 className="text-lg font-semibold text-chrome-highlight tracking-tight">
+              <h3 className="text-lg 2xl:text-2xl font-semibold text-chrome-highlight tracking-tight">
                 Somos tu aliado ideal si:
               </h3>
             </div>
 
-            <ul className="flex flex-col gap-4">
+            <ul className="flex flex-col gap-4 2xl:gap-5">
               {IDEAL_FITS.map((item, idx) => (
-                <li key={idx} className="fit-ideal-item flex gap-3 text-sm text-chrome-highlight">
-                  <div className="w-8 flex justify-center shrink-0 mt-0.5">
-                    <Check className="w-5 h-5 text-electric-violet" />
+                <li key={idx} className="fit-ideal-item flex gap-3 2xl:gap-4 text-sm 2xl:text-base text-chrome-highlight">
+                  <div className="w-8 2xl:w-10 flex justify-center shrink-0 mt-0.5">
+                    <Check className="w-5 h-5 2xl:w-6 2xl:h-6 text-electric-violet" />
                   </div>
                   <span>{item}</span>
                 </li>
@@ -165,22 +165,22 @@ export default function Fit() {
           {/* Non-Ideal Fit Card */}
           <div
             ref={rightCardRef}
-            className="p-6 md:p-8 rounded-xl border border-steel-grey/30 bg-graphite-metal/10 backdrop-blur-sm relative"
+            className="p-6 md:p-8 2xl:p-10 rounded-xl border border-steel-grey/30 bg-graphite-metal/10 backdrop-blur-sm relative"
           >
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-8 h-8 rounded-full bg-steel-grey/20 border border-steel-grey/30 flex items-center justify-center text-chrome-highlight/75 shrink-0">
-                <X className="w-4 h-4" />
+            <div className="flex items-center gap-3 2xl:gap-4 mb-6 2xl:mb-8">
+              <div className="w-8 h-8 2xl:w-10 2xl:h-10 rounded-full bg-steel-grey/20 border border-steel-grey/30 flex items-center justify-center text-chrome-highlight/75 shrink-0">
+                <X className="w-4 h-4 2xl:w-5 2xl:h-5" />
               </div>
-              <h3 className="text-lg font-semibold text-chrome-highlight tracking-tight">
+              <h3 className="text-lg 2xl:text-2xl font-semibold text-chrome-highlight tracking-tight">
                 No encajamos bien si:
               </h3>
             </div>
 
-            <ul className="flex flex-col gap-4">
+            <ul className="flex flex-col gap-4 2xl:gap-5">
               {AVOID_FITS.map((item, idx) => (
-                <li key={idx} className="fit-avoid-item flex gap-3 text-sm text-chrome-highlight/75">
-                  <div className="w-8 flex justify-center shrink-0 mt-0.5">
-                    <X className="w-5 h-5 text-chrome-highlight/40" />
+                <li key={idx} className="fit-avoid-item flex gap-3 2xl:gap-4 text-sm 2xl:text-base text-chrome-highlight/75">
+                  <div className="w-8 2xl:w-10 flex justify-center shrink-0 mt-0.5">
+                    <X className="w-5 h-5 2xl:w-6 2xl:h-6 text-chrome-highlight/40" />
                   </div>
                   <span>{item}</span>
                 </li>

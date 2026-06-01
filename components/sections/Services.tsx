@@ -249,7 +249,7 @@ function ServiceCard({ service }: { service: typeof SERVICES[0] }) {
       onTouchCancel={handleTouchEnd}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className="group relative flex flex-col p-6 md:p-8 rounded-xl border border-steel-grey/30 bg-graphite-metal/20 md:hover:bg-graphite-metal/40 md:hover:border-electric-violet/40 transition-all duration-300 backdrop-blur-sm h-full min-h-[480px] select-none"
+      className="group relative flex flex-col p-6 md:p-8 2xl:p-10 rounded-xl border border-steel-grey/30 bg-graphite-metal/20 md:hover:bg-graphite-metal/40 md:hover:border-electric-violet/40 transition-all duration-300 backdrop-blur-sm h-full min-h-[480px] 2xl:min-h-[520px] select-none"
     >
       {/* Accent line animation hover */}
       <div
@@ -273,21 +273,21 @@ function ServiceCard({ service }: { service: typeof SERVICES[0] }) {
         </div>
 
         {/* Title */}
-        <h3 className="services-title text-xl font-bold text-chrome-highlight mb-3 tracking-tight leading-snug md:group-hover:text-white transition-colors">
+        <h3 className="services-title text-xl 2xl:text-2xl font-bold text-chrome-highlight mb-3 tracking-tight leading-snug md:group-hover:text-white transition-colors">
           {service.title}
         </h3>
 
         {/* Description */}
-        <p className="services-desc text-sm text-[#8F9BA8] leading-relaxed mb-6 md:group-hover:text-chrome-deep/90">
+        <p className="services-desc text-sm 2xl:text-base text-[#8F9BA8] leading-relaxed mb-6 md:group-hover:text-chrome-deep/90">
           {service.description}
         </p>
 
         {/* Features / Bullets (Separated with border-top) */}
-        <ul className="flex flex-col gap-2.5 mb-8 border-t border-steel-grey/20 pt-6 mt-auto">
+        <ul className="flex flex-col gap-2.5 2xl:gap-3.5 mb-8 border-t border-steel-grey/20 pt-6 mt-auto">
           {service.features.map((feature, fIdx) => (
             <li
               key={fIdx}
-              className="services-list-item text-xs text-[#8F9BA8] flex items-center gap-2"
+              className="services-list-item text-xs 2xl:text-sm text-[#8F9BA8] flex items-center gap-2"
             >
               <span className="w-1 h-1 rounded-full bg-electric-violet/70" />
               {feature}
@@ -300,7 +300,7 @@ function ServiceCard({ service }: { service: typeof SERVICES[0] }) {
       <div className="services-cta mt-auto">
         <a
           href="#contacto"
-          className="inline-flex items-center gap-2 text-xs font-mono text-chrome-highlight font-semibold md:group-hover:text-electric-violet transition-colors focus-visible:outline-none"
+          className="inline-flex items-center gap-2 text-xs 2xl:text-sm font-mono text-chrome-highlight font-semibold md:group-hover:text-electric-violet transition-colors focus-visible:outline-none"
         >
           Explorar servicio{" "}
           <ArrowUpRight className="w-3.5 h-3.5 md:group-hover:translate-x-0.5 md:group-hover:-translate-y-0.5 transition-transform" />
@@ -507,7 +507,7 @@ export default function Services() {
     <section
       ref={sectionRef}
       id="servicios"
-      className="py-20 md:py-32 relative z-20 overflow-hidden"
+      className="py-20 md:py-32 2xl:py-40 relative z-20 overflow-hidden"
       style={{
         background: "radial-gradient(circle at 85% 30%, rgba(45, 143, 255, 0.12), transparent 28%), radial-gradient(circle at 15% 70%, rgba(123, 76, 255, 0.1), transparent 25%), #0D0F11"
       }}
@@ -522,7 +522,7 @@ export default function Services() {
 
         <div
           ref={cardsRef}
-          className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mt-12"
+          className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 2xl:gap-12 mt-12 2xl:mt-16"
           style={{ perspective: "1000px" }}
         >
           {SERVICES.map((service, idx) => (

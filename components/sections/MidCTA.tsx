@@ -174,7 +174,7 @@ export default function MidCTA() {
           className="max-w-4xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-6"
         >
           {/* Left: Text query (strong bold contrast, limited max-width for premium visual weight, optimized leading for vertical alignment) */}
-          <p className="midcta-text text-lg sm:text-xl md:text-2xl font-bold text-white tracking-tight leading-tight max-w-xl">
+          <p className="midcta-text text-lg sm:text-xl md:text-2xl font-bold text-white tracking-tight leading-tight text-balance max-w-xl">
             ¿Tienes un proyecto que necesita diseño, tecnología y criterio?
           </p>
 
