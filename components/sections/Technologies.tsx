@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
-import { Layers, Server, Palette } from "lucide-react";
+import { Layers, Server, Palette, Cpu } from "lucide-react";
 import { gsap } from "@/lib/gsap/register";
 import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
@@ -18,19 +18,27 @@ const LAYERS = [
   },
   {
     num: "2",
-    title: "Capa de Interacción",
+    title: "Interacción y Frontend",
     icon: Layers,
-    chips: ["Next.js", "React", "Angular", "TypeScript", "Tailwind CSS"],
+    chips: ["Next.js", "React", "TypeScript", "Tailwind CSS", "GSAP"],
     colorTheme: "violet",
     glowColors: { start: "#7b4cff", end: "#2d8fff" }
   },
   {
     num: "3",
-    title: "Arquitectura de Producto",
+    title: "Infraestructura Cloud",
     icon: Server,
-    chips: ["Node.js", "Vercel", "Cloudflare", "Firebase", "Google Cloud"],
+    chips: ["Node.js", "Vercel", "Cloudflare", "Supabase", "Google Cloud"],
     colorTheme: "blue",
     glowColors: { start: "#2d8fff", end: "#00f2fe" }
+  },
+  {
+    num: "4",
+    title: "Servicios y Datos",
+    icon: Cpu,
+    chips: ["Sanity", "Stripe", "Resend", "n8n", "Webhooks"],
+    colorTheme: "emerald",
+    glowColors: { start: "#10b981", end: "#059669" }
   }
 ];
 
@@ -76,7 +84,9 @@ function LayerCard({ layer }: { layer: LayerItem }) {
           ? "rgba(45, 143, 255, 0.25)"
           : layer.colorTheme === "orange"
             ? "rgba(255, 107, 0, 0.25)"
-            : "rgba(255, 255, 255, 0.2)";
+            : layer.colorTheme === "emerald"
+              ? "rgba(16, 185, 129, 0.25)"
+              : "rgba(255, 255, 255, 0.2)";
 
       gsap.to(card, {
         borderColor: themeColor,
@@ -147,6 +157,9 @@ function LayerCard({ layer }: { layer: LayerItem }) {
     if (layer.colorTheme === "orange") {
       return "md:hover:border-[#FF6B00]/20 md:hover:shadow-[inset_0_0_0_1px_rgba(255,107,0,0.15),_inset_0_0_16px_rgba(255,107,0,0.10)]";
     }
+    if (layer.colorTheme === "emerald") {
+      return "md:hover:border-emerald-500/20 md:hover:shadow-[inset_0_0_0_1px_rgba(16,185,129,0.15),_inset_0_0_16px_rgba(16,185,129,0.10)]";
+    }
     return "md:hover:border-white/20 md:hover:shadow-[inset_0_0_0_1px_rgba(255,255,255,0.15),_inset_0_0_16px_rgba(255,255,255,0.08)]";
   };
 
@@ -172,6 +185,9 @@ function LayerCard({ layer }: { layer: LayerItem }) {
         {layer.colorTheme === "orange" && (
           <div className="absolute -top-12 -right-12 w-36 h-36 rounded-full bg-[#FF6B00]/10 blur-3xl opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0 animate-glow-drift" />
         )}
+        {layer.colorTheme === "emerald" && (
+          <div className="absolute -top-12 -right-12 w-36 h-36 rounded-full bg-emerald-500/10 blur-3xl opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0 animate-glow-drift" />
+        )}
         {layer.colorTheme === "chrome" && (
           <div className="absolute -top-12 -right-12 w-36 h-36 rounded-full bg-white/5 blur-3xl opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0 animate-glow-drift" />
         )}
@@ -187,7 +203,9 @@ function LayerCard({ layer }: { layer: LayerItem }) {
                 ? "radial-gradient(circle 120px at var(--mouse-x, -999px) var(--mouse-y, -999px), rgba(45, 143, 255, 0.04), transparent 100%)"
                 : layer.colorTheme === "orange"
                   ? "radial-gradient(circle 120px at var(--mouse-x, -999px) var(--mouse-y, -999px), rgba(255, 107, 0, 0.04), transparent 100%)"
-                  : "radial-gradient(circle 120px at var(--mouse-x, -999px) var(--mouse-y, -999px), rgba(255, 255, 255, 0.02), transparent 100%)"
+                  : layer.colorTheme === "emerald"
+                    ? "radial-gradient(circle 120px at var(--mouse-x, -999px) var(--mouse-y, -999px), rgba(16, 185, 129, 0.04), transparent 100%)"
+                    : "radial-gradient(circle 120px at var(--mouse-x, -999px) var(--mouse-y, -999px), rgba(255, 255, 255, 0.02), transparent 100%)"
           }}
         />
 
@@ -226,13 +244,14 @@ function LayerCard({ layer }: { layer: LayerItem }) {
             ${layer.colorTheme === "violet" ? "md:group-hover:text-electric-violet md:group-hover:border-electric-violet/20 md:group-hover:bg-electric-violet/5" : ""}
             ${layer.colorTheme === "blue" ? "md:group-hover:text-neon-blue md:group-hover:border-neon-blue/20 md:group-hover:bg-neon-blue/5" : ""}
             ${layer.colorTheme === "orange" ? "md:group-hover:text-[#FF6B00] md:group-hover:border-[#FF6B00]/20 md:group-hover:bg-[#FF6B00]/5" : ""}
+            ${layer.colorTheme === "emerald" ? "md:group-hover:text-emerald-500 md:group-hover:border-emerald-500/20 md:group-hover:bg-emerald-500/5" : ""}
             ${layer.colorTheme === "chrome" ? "md:group-hover:text-white md:group-hover:border-white/20 md:group-hover:bg-white/5" : ""}
           `}>
             <Icon className={`w-5 h-5 tech-icon-svg-${layer.num} overflow-visible transition-transform duration-500 ease-out md:group-hover:scale-105`} />
           </div>
           <div className="space-y-0.5">
             <span className="block font-mono text-[9px] font-medium tracking-wider text-chrome-deep">
-              CAPA 0{layer.num} {"//"} {layer.colorTheme === "orange" ? "DISEÑO" : layer.colorTheme === "violet" ? "TECNOLOGÍA" : "PRODUCTO"}
+              CAPA 0{layer.num}
             </span>
             <h3 className="text-lg font-bold text-chrome-highlight tracking-tight md:group-hover:text-white transition-colors duration-500 ease-out">
               {layer.title}
@@ -249,6 +268,7 @@ function LayerCard({ layer }: { layer: LayerItem }) {
                 ${layer.colorTheme === "violet" ? "hover:border-electric-violet/40 hover:bg-electric-violet/10" : ""}
                 ${layer.colorTheme === "blue" ? "hover:border-neon-blue/40 hover:bg-neon-blue/10" : ""}
                 ${layer.colorTheme === "orange" ? "hover:border-[#FF6B00]/40 hover:bg-[#FF6B00]/10" : ""}
+                ${layer.colorTheme === "emerald" ? "hover:border-emerald-500/40 hover:bg-emerald-500/10" : ""}
                 ${layer.colorTheme === "chrome" ? "hover:border-white/30 hover:bg-white/10" : ""}
               `}
             >
@@ -404,8 +424,8 @@ export default function Technologies() {
       <Container className="relative z-10">
         <SectionHeading
           eyebrow="// TECNOLOGÍA"
-          title="Tecnología elegida con criterio"
-          description="Seleccionamos herramientas modernas según cada desafío, priorizando rendimiento, escalabilidad y una base técnica preparada para evolucionar."
+          title="Herramientas elegidas con criterio"
+          description="No seguimos tendencias. Seleccionamos tecnologías probadas que garantizan rendimiento, escalabilidad y mantenibilidad a largo plazo."
           className="tech-heading"
         />
 

@@ -547,6 +547,33 @@ export const animateTechIconEnter = (layerNum: string, svg: SVGElement) => {
         }
       }
     );
+  } else if (layerNum === "4") {
+    const rect = svg.querySelector("rect");
+    const paths = svg.querySelectorAll("path");
+    
+    if (rect) {
+      gsap.to(rect, {
+        scale: 1.08,
+        transformOrigin: "center center",
+        duration: 0.35,
+        ease: "power2.out",
+        overwrite: "auto"
+      });
+    }
+    if (paths.length > 0) {
+      gsap.fromTo(paths, 
+        { opacity: 0.4 },
+        {
+          opacity: 1,
+          duration: 0.18,
+          repeat: 3,
+          yoyo: true,
+          stagger: 0.04,
+          ease: "power1.inOut",
+          overwrite: "auto"
+        }
+      );
+    }
   }
 };
 
@@ -566,5 +593,11 @@ export const animateTechIconLeave = (layerNum: string, svg: SVGElement) => {
     gsap.killTweensOf([path, circles]);
     gsap.to(path, { rotation: 0, transformOrigin: "center center", duration: 0.4, overwrite: "auto" });
     gsap.to(circles, { scale: 1, transformOrigin: "center center", duration: 0.4, overwrite: "auto" });
+  } else if (layerNum === "4") {
+    const rect = svg.querySelector("rect");
+    const paths = svg.querySelectorAll("path");
+    gsap.killTweensOf([rect, paths]);
+    if (rect) gsap.to(rect, { scale: 1, transformOrigin: "center center", duration: 0.3, overwrite: "auto" });
+    if (paths.length > 0) gsap.to(paths, { opacity: 1, duration: 0.3, overwrite: "auto" });
   }
 };
