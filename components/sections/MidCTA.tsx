@@ -175,7 +175,7 @@ export default function MidCTA() {
         >
           {/* Left: Text query (strong bold contrast, limited max-width for premium visual weight, optimized leading for vertical alignment) */}
           <p className="midcta-text text-lg sm:text-xl md:text-2xl font-bold text-white tracking-tight leading-tight text-balance max-w-xl">
-            ¿Tienes un proyecto que necesita diseño, tecnología y criterio?
+            Buscamos proyectos que demanden diseño riguroso, tecnología moderna y criterio estratégico.
           </p>
 
           {/* Right: Focused single conversion action button */}
@@ -185,10 +185,10 @@ export default function MidCTA() {
               size="md"
               className="cursor-pointer shadow-lg shadow-neon-blue/20 hover:scale-[1.02] active:scale-[0.98] transition-all"
               onClick={() => handleScrollTo("contacto")}
-              aria-label="Iniciar proyecto y contactar con Vorello"
+              aria-label="Trabajar con nosotros y contactar con Vorello"
               withArrow
             >
-              Iniciar proyecto
+              Trabajar con nosotros
             </Button>
           </div>
         </div>

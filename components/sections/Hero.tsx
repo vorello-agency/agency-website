@@ -152,8 +152,8 @@ export default function Hero() {
         <div className="lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left">
           {/* Decorative Badge */}
           <Badge variant="violet" className="mb-8">
-            <span className="hidden sm:inline-flex">VORELLO AGENCY — Agencia digital especializada</span>
-            <span className="inline-flex sm:hidden">Agencia digital especializada</span>
+            <span className="hidden sm:inline-flex">VORELLO — ESTUDIO DIGITAL PREMIUM</span>
+            <span className="inline-flex sm:hidden">ESTUDIO DIGITAL PREMIUM</span>
           </Badge>
 
           <h1
@@ -239,7 +239,7 @@ export default function Hero() {
                 priority
                 sizes="(max-width: 768px) 120px, (max-width: 1024px) 176px, 304px"
                 src="/assets/isotipo.webp"
-                alt="Vorello Isotipo"
+                alt="Logotipo interactivo de Vorello Agency"
                 className="w-full h-full object-contain pointer-events-none select-none select-drag-disabled"
               />
             </div>

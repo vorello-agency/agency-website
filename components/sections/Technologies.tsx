@@ -10,7 +10,7 @@ import { animateTechIconEnter, animateTechIconLeave } from "@/lib/gsap/animation
 const LAYERS = [
   {
     num: "1",
-    title: "Sistema Visual",
+    title: "Diseño y Sistema Visual",
     icon: Palette,
     chips: ["Figma", "Storybook", "Design Systems", "UX/UI", "Prototyping"],
     colorTheme: "orange",

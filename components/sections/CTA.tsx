@@ -137,12 +137,11 @@ export default function CTA() {
           </span>
 
           <h2 className="cta-title text-3xl sm:text-4xl md:text-5xl 2xl:text-6xl font-bold text-chrome-highlight tracking-tight mb-6 max-w-2xl mx-auto leading-tight relative z-10">
-            Hablemos de tu próximo sistema digital
+            Diseñemos y desarrollemos tu próximo sistema digital
           </h2>
 
           <p className="cta-desc text-sm sm:text-base 2xl:text-lg text-chrome-deep max-w-lg 2xl:max-w-xl mx-auto mb-10 2xl:mb-12 leading-relaxed relative z-10">
-            Cuéntanos sobre tus objetivos. Analizaremos tu proyecto y te
-            propondremos una dirección clara para avanzar.
+            Cuéntanos sobre tus objetivos de negocio. Analizaremos tu caso particular sin compromiso para proponerte una estrategia de producto y tecnología a medida.
           </p>
 
           <div className="cta-buttons flex flex-col sm:flex-row gap-4 justify-center items-center relative z-10">

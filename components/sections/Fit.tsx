@@ -7,17 +7,17 @@ import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
 
 const IDEAL_FITS = [
-  "Valoras una experiencia de usuario clara, cuidada y bien diseñada.",
-  "Entiendes que la tecnología y la ingeniería sólida son inversiones estratégicas.",
-  "Buscas una colaboración basada en procesos claros, transparencia y validación continua.",
-  "Deseas un producto rápido, seguro, accesible y preparado para escalar con solidez.",
+  "Valoras el diseño de interacción y la experiencia de usuario (UX) como ventajas competitivas clave.",
+  "Entiendes que la infraestructura técnica y el desarrollo sólido son inversiones estratégicas de negocio.",
+  "Buscas una alianza basada en procesos metodológicos rigurosos, feedback constante y validación continua.",
+  "Exiges productos de alto rendimiento, accesibles (a11y) y diseñados para escalar a largo plazo.",
 ];
 
 const AVOID_FITS = [
-  "Priorizas reducir costos inmediatos por encima de la calidad técnica y la durabilidad del producto.",
-  "Requieres una entrega inmediata e improvisada sin una etapa previa de estrategia y planificación.",
-  "Prefieres delegar por completo el desarrollo sin participar activamente en el proceso de co-creación.",
-  "Buscas implementar plantillas genéricas rápidas en lugar de construir una solución y una identidad con criterio.",
+  "Buscas la opción de menor costo de desarrollo inmediato, sacrificando la durabilidad técnica del producto.",
+  "Exiges entregas inmediatas e improvisadas que impidan realizar una fase previa de estrategia y planificación.",
+  "Prefieres un proveedor pasivo al que delegar tareas de ejecución en lugar de un socio tecnológico estratégico.",
+  "Buscas desplegar plantillas prefabricadas rápidas que carecen de identidad propia y criterio de ingeniería.",
 ];
 
 export default function Fit() {
@@ -129,8 +129,8 @@ export default function Fit() {
       <Container>
         <SectionHeading
           eyebrow="// CLIENTE IDEAL"
-          title="Trabajamos mejor con equipos que valoran la calidad"
-          description="Buscamos relaciones a largo plazo con marcas que comparten nuestra visión: diseño, tecnología y excelencia."
+          title="Criterios de colaboración estratégica"
+          description="Creemos que la transparencia y la alineación estricta en estándares de calidad son indispensables para construir sistemas digitales competitivos."
           align="center"
           className="fit-heading"
         />

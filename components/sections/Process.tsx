@@ -26,7 +26,7 @@ const STEPS = [
   },
   {
     num: "02",
-    name: "Estrategia",
+    name: "Estrategia y definición",
     desc: "Definimos arquitectura, alcance funcional y roadmap de ejecución.",
     icon: Route,
     area: "md:[grid-area:1/7/2/13] lg:[grid-area:2/1/3/5]",
@@ -34,7 +34,7 @@ const STEPS = [
   {
     num: "03",
     name: "UX/UI",
-    desc: "Diseñamos interfaces claras, refinadas y enfocadas en la experiencia.",
+    desc: "Diseñamos interfaces claras, refinadas y validadas antes del desarrollo.",
     icon: PanelsTopLeft,
     area: "md:[grid-area:2/1/3/7] lg:[grid-area:1/5/3/8]",
   },
@@ -237,7 +237,7 @@ function GridItem({ step }: { step: StepItem }) {
               </h3>
             </div>
           </div>
-          <p className="text-xs md:text-sm leading-relaxed text-chrome-highlight/65 md:group-hover:text-chrome-highlight/90 transition-colors duration-500 ease-out">
+          <p className="text-xs md:text-sm leading-relaxed text-balance text-chrome-highlight/65 md:group-hover:text-chrome-highlight/90 transition-colors duration-500 ease-out">
             {step.desc}
           </p>
         </div>
@@ -375,8 +375,8 @@ export default function Process() {
       <Container className="relative z-10">
         <SectionHeading
           eyebrow="// PROCESO DE TRABAJO"
-          title="Un proceso claro para resultados sólidos"
-          description="Trabajamos por etapas claras para tomar mejores decisiones, reducir incertidumbre y construir productos digitales más sólidos."
+          title="De la idea al producto, con proceso y criterio"
+          description="Cada proyecto pasa por etapas definidas de descubrimiento, diseño, desarrollo y validación antes de salir a producción."
           className="process-heading"
         />
 

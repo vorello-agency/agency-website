@@ -11,21 +11,21 @@ const SERVICES = [
     num: "01",
     title: "Experiencias web de alto rendimiento",
     description:
-      "Sitios web corporativos y landing pages modernas, orientadas a conversión, performance, SEO técnico y accesibilidad.",
+      "Sitios corporativos y landing pages con estándares altos de performance, accesibilidad y SEO técnico.",
     icon: Globe,
     features: [
       "Sitios corporativos premium",
       "Landing pages de alto rendimiento",
       "Optimización de Core Web Vitals",
       "SEO técnico estructurado",
-      "Accesibilidad WCAG 2.2 AA",
+      "Accesibilidad (WCAG AA)",
     ],
   },
   {
     num: "02",
     title: "Productos digitales a medida",
     description:
-      "Web apps, plataformas internas, paneles de administración y portales privados integrados a la lógica de tu negocio.",
+      "Web apps, dashboards, portales privados y sistemas internos diseñados para operar y escalar.",
     icon: Cpu,
     features: [
       "Web apps robustas",
@@ -39,7 +39,7 @@ const SERVICES = [
     num: "03",
     title: "Ecommerce de alto nivel",
     description:
-      "Experiencias de comercio electrónico escalables, optimizadas para conversión y construidas sobre arquitecturas modernas.",
+      "Comercio electrónico con arquitectura headless, UX optimizada y rendimiento técnico cuidado.",
     icon: ShoppingBag,
     features: [
       "Ecommerce custom",
@@ -302,7 +302,7 @@ function ServiceCard({ service }: { service: typeof SERVICES[0] }) {
           href="#contacto"
           className="inline-flex items-center gap-2 text-xs 2xl:text-sm font-mono text-chrome-highlight font-semibold md:group-hover:text-electric-violet transition-colors focus-visible:outline-none"
         >
-          Explorar servicio{" "}
+          Iniciar proyecto{" "}
           <ArrowUpRight className="w-3.5 h-3.5 md:group-hover:translate-x-0.5 md:group-hover:-translate-y-0.5 transition-transform" />
         </a>
       </div>
@@ -515,8 +515,8 @@ export default function Services() {
       <Container>
         <SectionHeading
           eyebrow="// SERVICIOS"
-          title="Soluciones digitales pensadas para escalar"
-          description="Combinamos estrategia, diseño y desarrollo para crear experiencias digitales sólidas, visualmente cuidadas y orientadas a resultados."
+          title="Productos digitales con criterio y ejecución técnica"
+          description="Diseñamos y desarrollamos productos digitales bien pensados, visualmente cuidados y técnicamente sólidos."
           className="services-heading"
         />
 
