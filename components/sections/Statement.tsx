@@ -136,7 +136,9 @@ export default function Statement() {
 
           {/* Manifesto Subtext Paragraph */}
           <p className="reveal-item text-base sm:text-lg 2xl:text-xl text-[#A8B0BD] max-w-2xl 2xl:max-w-3xl leading-relaxed mt-2 2xl:mt-4">
-            Trabajamos con proceso, estándares altos y tecnología moderna. El resultado se nota en cada detalle.
+            Trabajamos con proceso, estándares altos y tecnología moderna.
+            <br />
+            El resultado se nota en cada detalle.
           </p>
         </div>
       </Container>
