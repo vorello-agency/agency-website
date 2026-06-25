@@ -3,7 +3,7 @@
 import React, { useEffect, useRef } from "react";
 import { gsap } from "@/lib/gsap/register";
 import Button from "@/components/ui/Button";
-import Container from "@/components/ui/Container";
+import Container from "@/components/layout/Container";
 
 export default function MidCTA() {
   const sectionRef = useRef<HTMLElement>(null);

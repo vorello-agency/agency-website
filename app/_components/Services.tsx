@@ -1,10 +1,10 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
-import { Globe, Cpu, ShoppingBag, ArrowUpRight } from "lucide-react";
+import { Globe, Cpu, ShoppingBag, ArrowUpRight, RefreshCw, Workflow } from "lucide-react";
 import { gsap } from "@/lib/gsap/register";
-import Container from "@/components/ui/Container";
-import SectionHeading from "@/components/ui/SectionHeading";
+import Container from "@/components/layout/Container";
+import SectionHeading from "@/components/layout/SectionHeading";
 
 const SERVICES = [
   {
@@ -25,13 +25,13 @@ const SERVICES = [
     num: "02",
     title: "Productos digitales a medida",
     description:
-      "Web apps, dashboards, portales privados y sistemas internos diseñados para operar y escalar.",
+      "Web apps, portales, sistemas internos y flujos automatizados diseñados para operar, escalar e integrarse con tu stack existente.",
     icon: Cpu,
     features: [
-      "Web apps robustas",
-      "Dashboards avanzados",
-      "Sistemas y portales privados",
-      "Integraciones y automatización",
+      "Web apps y dashboards avanzados",
+      "Sistemas internos y portales privados",
+      "Automatización de procesos operativos",
+      "Integraciones entre plataformas y APIs",
       "Arquitecturas escalables",
     ],
   },
@@ -310,6 +310,100 @@ function ServiceCard({ service }: { service: typeof SERVICES[0] }) {
   );
 }
 
+function PostLaunchStrip() {
+  const stripRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    const ctx = gsap.context(() => {
+      if (!stripRef.current) return;
+
+      const items = stripRef.current.querySelectorAll(".strip-item");
+      const divider = stripRef.current.querySelector(".strip-divider");
+
+      if (prefersReducedMotion) {
+        gsap.set([stripRef.current, items, divider], { opacity: 1, y: 0, scaleY: 1 });
+        return;
+      }
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: stripRef.current,
+          start: "top 80%",
+          toggleActions: "play none none none",
+        },
+      });
+
+      tl.fromTo(
+        stripRef.current,
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }
+      );
+
+      if (divider) {
+        tl.fromTo(
+          divider,
+          { scaleY: 0, opacity: 0 },
+          { scaleY: 1, opacity: 1, duration: 0.4, ease: "power2.out" },
+          "-=0.3"
+        );
+      }
+
+      tl.fromTo(
+        items,
+        { opacity: 0, y: 12 },
+        { opacity: 1, y: 0, duration: 0.5, stagger: 0.1, ease: "power2.out" },
+        "-=0.3"
+      );
+    }, stripRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  return (
+    <div
+      ref={stripRef}
+      className="mt-10 md:mt-14 2xl:mt-16 rounded-xl border border-steel-grey/20 bg-graphite-metal/20 backdrop-blur-sm p-6 md:p-8 2xl:p-10"
+    >
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-0 relative">
+        {/* Vertical divider (desktop only) */}
+        <div className="strip-divider hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-steel-grey/20 origin-center" />
+
+        {/* Soporte continuo */}
+        <div className="strip-item flex gap-4 md:pr-8 2xl:pr-12">
+          <div className="w-10 h-10 2xl:w-12 2xl:h-12 rounded-lg bg-neon-blue/10 border border-neon-blue/20 flex items-center justify-center shrink-0">
+            <RefreshCw className="w-5 h-5 2xl:w-6 2xl:h-6 text-neon-blue" />
+          </div>
+          <div>
+            <h4 className="text-sm 2xl:text-base font-bold text-chrome-highlight mb-1.5 tracking-tight">
+              Evolución y mantenimiento
+            </h4>
+            <p className="text-xs 2xl:text-sm text-[#8F9BA8] leading-relaxed">
+              Acompañamos cada proyecto después del lanzamiento con mejoras continuas, soporte técnico y optimización de rendimiento.
+            </p>
+          </div>
+        </div>
+
+        {/* Automatización y evolución */}
+        <div className="strip-item flex gap-4 md:pl-8 2xl:pl-12">
+          <div className="w-10 h-10 2xl:w-12 2xl:h-12 rounded-lg bg-electric-violet/10 border border-electric-violet/20 flex items-center justify-center shrink-0">
+            <Workflow className="w-5 h-5 2xl:w-6 2xl:h-6 text-electric-violet" />
+          </div>
+          <div>
+            <h4 className="text-sm 2xl:text-base font-bold text-chrome-highlight mb-1.5 tracking-tight">
+              Automatizaciones e integraciones
+            </h4>
+            <p className="text-xs 2xl:text-sm text-[#8F9BA8] leading-relaxed">
+              Conectamos herramientas, sistemas y procesos para reducir tareas manuales, ordenar operaciones y mejorar la eficiencia del negocio.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function Services() {
   const sectionRef = useRef<HTMLElement>(null);
   const cardsRef = useRef<HTMLDivElement>(null);
@@ -516,7 +610,7 @@ export default function Services() {
         <SectionHeading
           eyebrow="// SERVICIOS"
           title="Productos digitales con criterio y ejecución técnica"
-          description="Diseñamos y desarrollamos productos digitales bien pensados, visualmente cuidados y técnicamente sólidos."
+          description="Combinamos estrategia, diseño UX/UI y desarrollo moderno para crear soluciones digitales con base sólida y capacidad de evolución."
           className="services-heading"
         />
 
@@ -529,6 +623,9 @@ export default function Services() {
             <ServiceCard service={service} key={idx} />
           ))}
         </div>
+
+        {/* Post-launch support strip */}
+        <PostLaunchStrip />
       </Container>
     </section>
   );

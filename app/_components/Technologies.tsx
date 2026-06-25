@@ -3,8 +3,8 @@
 import React, { useEffect, useRef } from "react";
 import { Layers, Server, Palette, Cpu } from "lucide-react";
 import { gsap } from "@/lib/gsap/register";
-import Container from "@/components/ui/Container";
-import SectionHeading from "@/components/ui/SectionHeading";
+import Container from "@/components/layout/Container";
+import SectionHeading from "@/components/layout/SectionHeading";
 import { animateTechIconEnter, animateTechIconLeave } from "@/lib/gsap/animations";
 
 const LAYERS = [
@@ -251,7 +251,7 @@ function LayerCard({ layer }: { layer: LayerItem }) {
           </div>
           <div className="space-y-0.5">
             <span className="block font-mono text-[9px] font-medium tracking-wider text-chrome-deep">
-              CAPA 0{layer.num}
+              {"// CAPA 0"}{layer.num}
             </span>
             <h3 className="text-lg font-bold text-chrome-highlight tracking-tight md:group-hover:text-white transition-colors duration-500 ease-out">
               {layer.title}

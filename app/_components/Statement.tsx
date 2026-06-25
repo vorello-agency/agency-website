@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef } from "react";
 import { gsap } from "@/lib/gsap/register";
-import Container from "@/components/ui/Container";
+import Container from "@/components/layout/Container";
 import { cn } from "@/lib/utils";
 
 export default function Statement() {

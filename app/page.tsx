@@ -1,16 +1,16 @@
 import React from "react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import Hero from "@/components/sections/Hero";
-import Statement from "@/components/sections/Statement";
-import Services from "@/components/sections/Services";
-import Process from "@/components/sections/Process";
-import Technologies from "@/components/sections/Technologies";
-import MidCTA from "@/components/sections/MidCTA";
-import Fit from "@/components/sections/Fit";
-import CTA from "@/components/sections/CTA";
+import Hero from "./_components/Hero";
+import Statement from "./_components/Statement";
+import Services from "./_components/Services";
+import Process from "./_components/Process";
+import Technologies from "./_components/Technologies";
+import MidCTA from "./_components/MidCTA";
+import Fit from "./_components/Fit";
+import CTA from "./_components/CTA";
 import { TracingBeam } from "@/components/aceternity/tracing-beam";
-import TechScaleDivider from "@/components/ui/TechScaleDivider";
+import TechScaleDivider from "@/components/layout/TechScaleDivider";
 
 export default function Home() {
   return (

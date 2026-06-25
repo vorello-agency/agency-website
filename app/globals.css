@@ -71,6 +71,7 @@
   /* Fonts */
   --font-sans: var(--font-sans);
   --font-display: var(--font-display);
+  --font-bebas: var(--font-bebas-neue), sans-serif;
 
   /* Radius overrides */
   --radius-xs: 4px;

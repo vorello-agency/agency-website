@@ -4,7 +4,10 @@ import React, { useEffect, useRef } from "react";
 import { Mail } from "lucide-react";
 import { gsap } from "@/lib/gsap/register";
 import Button from "@/components/ui/Button";
-import Container from "@/components/ui/Container";
+import Container from "@/components/layout/Container";
+import Link from "next/link";
+import { CONTACT_EMAIL } from "@/data/brand";
+
 
 
 export default function CTA() {
@@ -145,22 +148,27 @@ export default function CTA() {
           </p>
 
           <div className="cta-buttons flex flex-col sm:flex-row gap-4 justify-center items-center relative z-10">
-            <Button
-              variant="primary-blue"
-              size="lg"
-              className="w-full sm:w-auto"
-              withArrow
-            >
-              Iniciar proyecto
-            </Button>
-            <Button
-              variant="outline"
-              size="lg"
-              className="w-full sm:w-auto gap-2"
-            >
-              <Mail className="w-4 h-4" />
-              Escríbenos por email
-            </Button>
+            <Link href="/start" className="w-full sm:w-auto focus-visible:outline-none">
+              <Button
+                variant="primary-blue"
+                size="lg"
+                className="w-full"
+                withArrow
+              >
+                Iniciar proyecto
+              </Button>
+            </Link>
+            <a href={`mailto:${CONTACT_EMAIL}`} className="w-full sm:w-auto focus-visible:outline-none">
+              <Button
+                variant="outline"
+                size="lg"
+                className="w-full gap-2"
+              >
+                <Mail className="w-4 h-4" />
+                Escríbenos por email
+              </Button>
+            </a>
+
           </div>
 
           <div className="cta-footer mt-8 md:mt-12 text-xs font-mono text-chrome-deep/80 relative z-10">

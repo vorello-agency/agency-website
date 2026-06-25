@@ -2,8 +2,8 @@
 
 import React, { useEffect, useRef } from "react";
 import { gsap } from "@/lib/gsap/register";
-import Container from "@/components/ui/Container";
-import SectionHeading from "@/components/ui/SectionHeading";
+import Container from "@/components/layout/Container";
+import SectionHeading from "@/components/layout/SectionHeading";
 import { animateProcessIconEnter, animateProcessIconLeave } from "@/lib/gsap/animations";
 import {
   Compass,
@@ -81,16 +81,6 @@ function GridItem({ step }: { step: StepItem }) {
   const cardRef = useRef<HTMLDivElement>(null);
   const glowRef = useRef<HTMLDivElement>(null);
   const borderGlowRef = useRef<HTMLDivElement>(null);
-
-  const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
-    const card = cardRef.current;
-    if (!card) return;
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    card.style.setProperty("--mouse-x", `${x}px`);
-    card.style.setProperty("--mouse-y", `${y}px`);
-  };
 
   const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
     const card = cardRef.current;
@@ -172,34 +162,33 @@ function GridItem({ step }: { step: StepItem }) {
     <li className={`min-h-[15rem] list-none ${step.area}`}>
       <div
         ref={cardRef}
-        onPointerMove={handlePointerMove}
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
         onTouchCancel={handleTouchEnd}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        className="group relative h-full rounded-2xl p-6 md:p-7 xl:p-8 bg-graphite-metal/40 backdrop-blur-md border border-steel-grey/20 shadow-[inset_0_0_0_0px_rgba(45,143,255,0),_inset_0_0_0px_rgba(45,143,255,0)] md:hover:bg-graphite-metal/55 md:hover:border-neon-blue/20 md:hover:scale-[1.012] md:hover:shadow-[inset_0_0_0_1px_rgba(45,143,255,0.15),_inset_0_0_16px_rgba(45,143,255,0.10)] transition-all duration-500 ease-out overflow-hidden select-none"
+        className="process-card group relative h-full rounded-2xl p-6 md:p-7 xl:p-8 bg-graphite-metal/40 backdrop-blur-md border border-steel-grey/20 shadow-[inset_0_0_0_0px_rgba(45,143,255,0),_inset_0_0_0px_rgba(45,143,255,0)] md:hover:bg-graphite-metal/55 md:hover:border-neon-blue/20 md:hover:scale-[1.012] md:hover:shadow-[inset_0_0_0_1px_rgba(45,143,255,0.15),_inset_0_0_16px_rgba(45,143,255,0.10)] transition-all duration-500 ease-out overflow-hidden select-none"
       >
 
         {/* Capa 1: Círculo blurred de luz azul en la esquina superior derecha (Hover) */}
-        <div className="absolute -top-12 -right-12 w-36 h-36 rounded-full bg-neon-blue/35 blur-3xl opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0 animate-glow-drift" />
+        <div className="absolute -top-12 -right-12 w-36 h-36 rounded-full bg-neon-blue/15 blur-3xl opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0 animate-glow-drift" />
 
         {/* Soft background highlight that follows mouse across card boundaries */}
         <div
           ref={glowRef}
-          className="process-glow absolute inset-0 rounded-[inherit] pointer-events-none opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 z-10"
+          className="process-glow absolute inset-0 rounded-[inherit] pointer-events-none opacity-0 md:group-hover/grid:opacity-100 transition-opacity duration-500 z-10"
           style={{
-            background: "radial-gradient(circle 120px at var(--mouse-x, -999px) var(--mouse-y, -999px), rgba(45, 143, 255, 0.05), transparent 100%)"
+            background: "radial-gradient(circle 180px at var(--mouse-x, -999px) var(--mouse-y, -999px), rgba(45, 143, 255, 0.08), transparent 100%)"
           }}
         />
 
         {/* Subtle, ultra-thin border glow following mouse precisely across cards */}
         <div
           ref={borderGlowRef}
-          className="process-border-glow absolute inset-0 rounded-[inherit] pointer-events-none opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 z-10"
+          className="process-border-glow absolute inset-0 rounded-[inherit] pointer-events-none opacity-0 md:group-hover/grid:opacity-100 transition-opacity duration-500 z-10"
           style={{
-            maskImage: "radial-gradient(circle 100px at var(--mouse-x, -999px) var(--mouse-y, -999px), black 20%, transparent 100%)",
-            WebkitMaskImage: "radial-gradient(circle 100px at var(--mouse-x, -999px) var(--mouse-y, -999px), black 20%, transparent 100%)"
+            maskImage: "radial-gradient(circle 160px at var(--mouse-x, -999px) var(--mouse-y, -999px), black 20%, transparent 100%)",
+            WebkitMaskImage: "radial-gradient(circle 160px at var(--mouse-x, -999px) var(--mouse-y, -999px), black 20%, transparent 100%)"
           }}
         >
           <svg className="absolute inset-0 w-full h-full rounded-[inherit] pointer-events-none" style={{ overflow: "visible" }}>
@@ -225,19 +214,19 @@ function GridItem({ step }: { step: StepItem }) {
         {/* Content */}
         <div className="relative z-30 flex h-full flex-col justify-between gap-4">
           <div className="flex flex-col gap-4">
-            <div className="w-fit rounded-lg border border-steel-grey/30 bg-graphite-metal/50 p-2 overflow-visible text-chrome-highlight md:group-hover:text-electric-violet md:group-hover:border-electric-violet/20 transition-all duration-500 ease-out">
+            <div className="process-icon-box w-fit rounded-lg border border-steel-grey/30 bg-graphite-metal/50 p-2 overflow-visible text-chrome-highlight md:group-hover:text-electric-violet md:group-hover:border-electric-violet/20 transition-all duration-500 ease-out">
               <Icon className={`h-5 w-5 overflow-visible process-svg-${step.num}`} />
             </div>
             <div className="space-y-1.5">
-              <span className="block font-mono text-[10px] font-semibold uppercase tracking-wider text-electric-violet">
+              <span className="process-phase block font-mono text-[10px] font-semibold uppercase tracking-wider text-electric-violet">
                 {"// FASE "} {step.num}
               </span>
-              <h3 className="text-lg font-bold uppercase tracking-tight text-chrome-highlight md:group-hover:text-white transition-colors duration-500 ease-out">
+              <h3 className="process-title text-lg font-bold uppercase tracking-tight text-chrome-highlight md:group-hover:text-white transition-colors duration-500 ease-out">
                 {step.name}
               </h3>
             </div>
           </div>
-          <p className="text-xs md:text-sm leading-relaxed text-balance text-chrome-highlight/65 md:group-hover:text-chrome-highlight/90 transition-colors duration-500 ease-out">
+          <p className="process-desc text-xs md:text-sm leading-relaxed text-balance text-chrome-highlight/65 md:group-hover:text-chrome-highlight/90 transition-colors duration-500 ease-out">
             {step.desc}
           </p>
         </div>
@@ -260,7 +249,12 @@ export default function Process() {
 
       if (prefersReducedMotion) {
         gsap.set(".process-heading > *", { opacity: 1, y: 0 });
-        gsap.set(steps, { opacity: 1, y: 0, scale: 1 });
+        gsap.set(steps, { opacity: 1, y: 0, scale: 1, rotationX: 0 });
+        steps.forEach((stepEl) => {
+          gsap.set(stepEl.querySelectorAll(".process-icon-box, .process-phase, .process-title, .process-desc"), {
+            opacity: 1, y: 0, scale: 1, x: 0
+          });
+        });
         return;
       }
 
@@ -273,7 +267,7 @@ export default function Process() {
         },
       });
 
-      // 1. Heading slide-up stagger (Standardized to 0.6s duration)
+      // Heading slide-up stagger
       tl.fromTo(
         ".process-heading > *",
         { opacity: 0, y: 20 },
@@ -286,35 +280,115 @@ export default function Process() {
         }
       );
 
-      // 2. Bento grid cards slide-up stagger - sleek, clean, and solid (Standardized to 0.6s duration)
+      // ─── 2. Bento grid cards with 3D rotationX entrance ───
       tl.fromTo(
         steps,
         {
           opacity: 0,
-          y: 30,
-          scale: 0.98,
+          y: 40,
+          rotationX: 8,
+          scale: 0.97,
         },
         {
           opacity: 1,
           y: 0,
+          rotationX: 0,
           scale: 1,
-          duration: 0.6,
+          duration: 0.7,
           stagger: 0.1,
           ease: "power2.out",
         },
         "-=0.4"
       );
 
-      // 3. Mobile touch-triggered sweep effect via ScrollTrigger for each card
+      // 3. Staggered inner content reveals per card
       steps.forEach((stepEl) => {
+        const cardInner = stepEl.querySelector(".process-card") as HTMLElement | null;
+        if (!cardInner) return;
+
+        const iconBox = cardInner.querySelector(".process-icon-box");
+        const phase = cardInner.querySelector(".process-phase");
+        const title = cardInner.querySelector(".process-title");
+        const desc = cardInner.querySelector(".process-desc");
+
+        // Set initial states
+        gsap.set([iconBox, phase, title, desc], { opacity: 0 });
+
+        const cardTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: stepEl,
+            start: "top 62%",
+            toggleActions: "play none none none",
+          }
+        });
+
+        // Icon scales in with back ease
+        if (iconBox) {
+          cardTl.fromTo(
+            iconBox,
+            { opacity: 0, scale: 0.6 },
+            {
+              opacity: 1,
+              scale: 1,
+              duration: 0.4,
+              ease: "back.out(1.4)",
+            }
+          );
+        }
+
+        // Phase label types in
+        if (phase) {
+          cardTl.fromTo(
+            phase,
+            { opacity: 0, x: -10 },
+            {
+              opacity: 1,
+              x: 0,
+              duration: 0.35,
+              ease: "power2.out",
+            },
+            "-=0.2"
+          );
+        }
+
+        // Title slides up
+        if (title) {
+          cardTl.fromTo(
+            title,
+            { opacity: 0, y: 12 },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.4,
+              ease: "power2.out",
+            },
+            "-=0.25"
+          );
+        }
+
+        // Description fades in
+        if (desc) {
+          cardTl.fromTo(
+            desc,
+            { opacity: 0, y: 8 },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.4,
+              ease: "power2.out",
+            },
+            "-=0.25"
+          );
+        }
+
+        // Mobile touch-triggered sweep effect via ScrollTrigger
         const isTouch = window.matchMedia("(pointer: coarse)").matches;
         if (isTouch) {
-          const cardInner = stepEl.querySelector(".group");
           const glow = stepEl.querySelector(".process-glow");
           const borderGlow = stepEl.querySelector(".process-border-glow");
 
           if (cardInner && glow && borderGlow) {
-            const stepTl = gsap.timeline({
+            const sweepTl = gsap.timeline({
               scrollTrigger: {
                 trigger: stepEl,
                 start: "top 72%",
@@ -324,24 +398,24 @@ export default function Process() {
 
             const obj = { x: -120, y: 80 };
 
-            stepTl.to([glow, borderGlow], {
+            sweepTl.to([glow, borderGlow], {
               opacity: 1,
               duration: 0.35,
               ease: "power2.out",
             });
 
-            stepTl.to(obj, {
+            sweepTl.to(obj, {
               x: 380,
               y: 120,
               duration: 1.4,
               ease: "power2.inOut",
               onUpdate: () => {
-                (cardInner as HTMLElement).style.setProperty("--mouse-x", `${obj.x}px`);
-                (cardInner as HTMLElement).style.setProperty("--mouse-y", `${obj.y}px`);
+                cardInner.style.setProperty("--mouse-x", `${obj.x}px`);
+                cardInner.style.setProperty("--mouse-y", `${obj.y}px`);
               }
             }, "-=0.25");
 
-            stepTl.to([glow, borderGlow], {
+            sweepTl.to([glow, borderGlow], {
               opacity: 0,
               duration: 0.5,
               ease: "power2.inOut",
@@ -352,6 +426,56 @@ export default function Process() {
     }, sectionRef);
 
     return () => ctx.revert();
+  }, []);
+
+  useEffect(() => {
+    const container = stepsContainerRef.current;
+    if (!container) return;
+
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion) return;
+
+    // Deshabilitar en dispositivos táctiles sin hover
+    if (typeof window !== "undefined" && window.matchMedia("(hover: none)").matches) {
+      return;
+    }
+
+    const cards = Array.from(container.querySelectorAll(".process-card")) as HTMLElement[];
+    let frameId: number;
+
+    const handlePointerMove = (e: PointerEvent) => {
+      if (frameId) cancelAnimationFrame(frameId);
+
+      frameId = requestAnimationFrame(() => {
+        const clientX = e.clientX;
+        const clientY = e.clientY;
+
+        cards.forEach((card) => {
+          const rect = card.getBoundingClientRect();
+          const x = clientX - rect.left;
+          const y = clientY - rect.top;
+          card.style.setProperty("--mouse-x", `${x}px`);
+          card.style.setProperty("--mouse-y", `${y}px`);
+        });
+      });
+    };
+
+    const handlePointerLeave = () => {
+      if (frameId) cancelAnimationFrame(frameId);
+      cards.forEach((card) => {
+        card.style.setProperty("--mouse-x", `-999px`);
+        card.style.setProperty("--mouse-y", `-999px`);
+      });
+    };
+
+    container.addEventListener("pointermove", handlePointerMove, { passive: true });
+    container.addEventListener("pointerleave", handlePointerLeave, { passive: true });
+
+    return () => {
+      if (frameId) cancelAnimationFrame(frameId);
+      container.removeEventListener("pointermove", handlePointerMove);
+      container.removeEventListener("pointerleave", handlePointerLeave);
+    };
   }, []);
 
   return (

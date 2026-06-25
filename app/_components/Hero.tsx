@@ -3,9 +3,11 @@
 import React, { useEffect, useRef } from "react";
 import { gsap } from "@/lib/gsap/register";
 import Button from "@/components/ui/Button";
-import Container from "@/components/ui/Container";
+import Container from "@/components/layout/Container";
 import Badge from "@/components/ui/Badge";
 import Image from "next/image";
+import Link from "next/link";
+
 
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -181,12 +183,17 @@ export default function Hero() {
             className="flex flex-col sm:flex-row gap-4 items-center justify-center lg:justify-start w-full sm:w-auto"
             style={{ opacity: 0 }}
           >
-            <Button variant="primary" size="lg" className="w-full sm:w-auto" withArrow>
-              Iniciar proyecto
-            </Button>
-            <Button variant="outline" size="lg" className="w-full sm:w-auto bg-carbon-black/50">
-              Cómo trabajamos
-            </Button>
+            <Link href="/start" className="w-full sm:w-auto focus-visible:outline-none">
+              <Button variant="primary" size="lg" className="w-full" withArrow>
+                Iniciar proyecto
+              </Button>
+            </Link>
+            <Link href="#proceso" className="w-full sm:w-auto focus-visible:outline-none">
+              <Button variant="outline" size="lg" className="w-full bg-carbon-black/50">
+                Cómo trabajamos
+              </Button>
+            </Link>
+
           </div>
         </div>
 
