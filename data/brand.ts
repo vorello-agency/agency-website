@@ -4,6 +4,8 @@
 
 export const BRAND_NAME = "Vorello";
 export const BRAND_FULL_NAME = "Vorello Agency";
+export const BRAND_TAGLINE =
+  "Diseñamos y desarrollamos productos digitales bien pensados, visualmente cuidados y técnicamente sólidos.";
 export const BRAND_DOMAIN = "vorelloagency.com";
 export const BRAND_URL = `https://${BRAND_DOMAIN}`;
 
@@ -28,4 +30,16 @@ export function getWhatsAppLink(message: string = WHATSAPP_MSG_GENERAL, phoneNum
 export const SOCIAL_LINKS = {
   instagram: "https://instagram.com/vorelloagency",
   linkedin: "https://linkedin.com/company/vorello",
+  github: "https://github.com",
+  behance: "https://behance.net",
 };
+
+/**
+ * Returns the current availability quarter label (e.g. "Q3 2026").
+ * Always points to the current quarter — adjust manually if needed.
+ */
+export function getCurrentAvailability(): { quarter: string; year: number } {
+  const now = new Date();
+  const q = Math.ceil((now.getMonth() + 1) / 3);
+  return { quarter: `Q${q}`, year: now.getFullYear() };
+}
