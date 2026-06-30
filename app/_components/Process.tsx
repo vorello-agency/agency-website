@@ -167,18 +167,18 @@ function GridItem({ step }: { step: StepItem }) {
         onTouchCancel={handleTouchEnd}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        className="process-card group relative h-full rounded-2xl p-6 md:p-7 xl:p-8 bg-graphite-metal/40 backdrop-blur-md border border-steel-grey/20 shadow-[inset_0_0_0_0px_rgba(45,143,255,0),_inset_0_0_0px_rgba(45,143,255,0)] md:hover:bg-graphite-metal/55 md:hover:border-neon-blue/20 md:hover:scale-[1.012] md:hover:shadow-[inset_0_0_0_1px_rgba(45,143,255,0.15),_inset_0_0_16px_rgba(45,143,255,0.10)] transition-all duration-500 ease-out overflow-hidden select-none"
+        className="process-card group relative h-full rounded-2xl p-6 md:p-7 xl:p-8 bg-graphite-metal border border-steel-grey/20 transition-all duration-500 ease-out overflow-hidden select-none"
       >
 
         {/* Capa 1: Círculo blurred de luz azul en la esquina superior derecha (Hover) */}
-        <div className="absolute -top-12 -right-12 w-36 h-36 rounded-full bg-neon-blue/15 blur-3xl opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0 animate-glow-drift" />
+        <div className="absolute -top-12 -right-12 w-36 h-36 rounded-full bg-electric-violet/15 blur-3xl opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0 animate-glow-drift" />
 
         {/* Soft background highlight that follows mouse across card boundaries */}
         <div
           ref={glowRef}
-          className="process-glow absolute inset-0 rounded-[inherit] pointer-events-none opacity-0 md:group-hover/grid:opacity-100 transition-opacity duration-500 z-10"
+          className="process-glow absolute inset-0 rounded-[inherit] pointer-events-none opacity-0 md:group-hover/grid:opacity-25 transition-opacity duration-500"
           style={{
-            background: "radial-gradient(circle 180px at var(--mouse-x, -999px) var(--mouse-y, -999px), rgba(45, 143, 255, 0.08), transparent 100%)"
+            background: "radial-gradient(circle 120px at var(--mouse-x, -999px) var(--mouse-y, -999px), rgba(45, 143, 255, 0.08), transparent 100%)"
           }}
         />
 
@@ -484,7 +484,7 @@ export default function Process() {
       id="proceso"
       className="py-20 md:py-32 relative overflow-hidden z-40"
       style={{
-        background: "radial-gradient(circle at 15% 25%, rgba(123, 76, 255, 0.10), transparent 32%), radial-gradient(circle at 85% 65%, rgba(45, 143, 255, 0.10), transparent 34%), linear-gradient(180deg, #0D0F11 0%, #111419 48%, #0D0F11 100%)"
+        background: "radial-gradient(circle at 15% 25%, rgba(123, 76, 255, 0.10), transparent 32%), linear-gradient(180deg, #0D0F11 0%, #111419 48%, #0D0F11 100%)"
       }}
     >
       {/* Premium Small Grid Overlay with center-focused radial mask */}

@@ -1,12 +1,12 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
-import { Mail } from "lucide-react";
+import { MessageSquare } from "lucide-react";
 import { gsap } from "@/lib/gsap/register";
 import Button from "@/components/ui/Button";
-import Container from "@/components/layout/Container";
 import Link from "next/link";
-import { CONTACT_EMAIL } from "@/data/brand";
+import Container from "@/components/layout/Container";
+
 
 
 
@@ -126,7 +126,7 @@ export default function CTA() {
       <Container>
         <div
           ref={cardRef}
-          className="relative max-w-xl md:max-w-2xl lg:max-w-3xl xl:max-w-4xl 2xl:max-w-6xl mx-auto rounded-2xl border border-steel-grey/30 bg-graphite-metal/30 pt-8 pb-12 px-5 sm:px-8 md:py-10 md:px-8 2xl:py-16 2xl:px-36 text-center overflow-hidden backdrop-blur-sm"
+          className="relative max-w-xl md:max-w-2xl lg:max-w-3xl xl:max-w-4xl 2xl:max-w-6xl mx-auto rounded-2xl border border-steel-grey/30 bg-graphite-metal pt-8 pb-12 px-5 sm:px-8 md:py-10 md:px-8 2xl:py-16 2xl:px-36 text-center overflow-hidden"
           style={{ opacity: 0 }}
         >
           {/* Internal ambient glowing bulb */}
@@ -158,16 +158,16 @@ export default function CTA() {
                 Iniciar proyecto
               </Button>
             </Link>
-            <a href={`mailto:${CONTACT_EMAIL}`} className="w-full sm:w-auto focus-visible:outline-none">
+            <Link href="/contact" className="w-full sm:w-auto focus-visible:outline-none">
               <Button
                 variant="outline"
                 size="lg"
-                className="w-full gap-2"
+                className="w-full gap-2 bg-carbon-black"
               >
-                <Mail className="w-4 h-4" />
-                Escríbenos por email
+                <MessageSquare className="w-4 h-4" />
+                Contacto directo
               </Button>
-            </a>
+            </Link>
 
           </div>
 

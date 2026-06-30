@@ -90,8 +90,6 @@ function LayerCard({ layer }: { layer: LayerItem }) {
 
       gsap.to(card, {
         borderColor: themeColor,
-        backgroundColor: "rgba(26, 29, 33, 0.55)",
-        scale: 1.006,
         duration: 0.2,
         ease: "power2.out",
         overwrite: "auto"
@@ -111,9 +109,7 @@ function LayerCard({ layer }: { layer: LayerItem }) {
     }
     if (card) {
       gsap.to(card, {
-        borderColor: "rgba(42, 46, 51, 0.2)",
-        backgroundColor: "rgba(26, 29, 33, 0.2)",
-        scale: 1,
+        borderColor: "rgba(42, 46, 51, 0.25)",
         duration: 0.5,
         ease: "power2.inOut",
         overwrite: "auto"
@@ -173,9 +169,9 @@ function LayerCard({ layer }: { layer: LayerItem }) {
         onTouchCancel={handleTouchEnd}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        className={`group relative flex flex-col md:flex-row md:items-center justify-between gap-6 p-6 md:p-8 rounded-xl border border-steel-grey/25 bg-graphite-metal/20 shadow-[inset_0_0_0_0px_rgba(255,255,255,0),_inset_0_0_0px_rgba(255,255,255,0)] md:hover:bg-graphite-metal/35 md:hover:scale-[1.008] ${getHoverClasses()} transition-all duration-500 ease-out backdrop-blur-sm overflow-hidden select-none`}
+        className="group relative flex flex-col md:flex-row md:items-center justify-between gap-6 p-6 md:p-8 rounded-xl border border-steel-grey/25 bg-graphite-metal transition-all duration-500 ease-out overflow-hidden select-none"
       >
-        {/* Subtle dynamic radial light on hover */}
+        {/* Subtle dynamic radial light on hover - Commented out for non-glassmorphism look */}
         {layer.colorTheme === "violet" && (
           <div className="absolute -top-12 -right-12 w-36 h-36 rounded-full bg-electric-violet/10 blur-3xl opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0 animate-glow-drift" />
         )}
@@ -192,10 +188,10 @@ function LayerCard({ layer }: { layer: LayerItem }) {
           <div className="absolute -top-12 -right-12 w-36 h-36 rounded-full bg-white/5 blur-3xl opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0 animate-glow-drift" />
         )}
 
-        {/* Soft background highlight that follows mouse precisely inside card */}
+        {/* Soft background highlight that follows mouse precisely inside card - Commented out for non-glassmorphism look */}
         <div
           ref={glowRef}
-          className="tech-glow absolute inset-0 rounded-[inherit] pointer-events-none opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 z-10"
+          className="tech-glow absolute inset-0 rounded-[inherit] pointer-events-none opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 blur-2xl"
           style={{
             background: layer.colorTheme === "violet"
               ? "radial-gradient(circle 120px at var(--mouse-x, -999px) var(--mouse-y, -999px), rgba(123, 76, 255, 0.04), transparent 100%)"

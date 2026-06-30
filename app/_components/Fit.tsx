@@ -45,7 +45,6 @@ function FitCard({
     if (cardRef.current) {
       gsap.to(cardRef.current, {
         borderColor: isIdeal ? "rgba(123, 76, 255, 0.4)" : "rgba(90, 98, 112, 0.5)",
-        backgroundColor: isIdeal ? "rgba(26, 29, 33, 0.55)" : "rgba(26, 29, 33, 0.35)",
         scale: 1.008,
         duration: 0.3,
         ease: "power2.out",
@@ -79,7 +78,6 @@ function FitCard({
     if (cardRef.current) {
       gsap.to(cardRef.current, {
         borderColor: isIdeal ? "rgba(123, 76, 255, 0.2)" : "rgba(42, 46, 51, 0.3)",
-        backgroundColor: isIdeal ? "rgba(26, 29, 33, 0.3)" : "rgba(26, 29, 33, 0.1)",
         scale: 1,
         duration: 0.4,
         ease: "power2.inOut",
@@ -159,9 +157,9 @@ function FitCard({
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
       onTouchCancel={handleTouchEnd}
-      className={`relative h-full p-6 md:p-8 2xl:p-10 rounded-xl border backdrop-blur-sm select-none transition-colors duration-300 ${isIdeal
-          ? "border-electric-violet/20 bg-graphite-metal/30"
-          : "border-steel-grey/30 bg-graphite-metal/10"
+      className={`relative h-full p-6 md:p-8 2xl:p-10 rounded-xl border select-none transition-colors duration-300 ${isIdeal
+          ? "border-electric-violet/20 bg-graphite-metal"
+          : "border-steel-grey/30 bg-graphite-metal"
         }`}
     >
       {/* Accent line sweep on hover */}

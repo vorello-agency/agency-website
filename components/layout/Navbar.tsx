@@ -368,7 +368,7 @@ export default function Navbar() {
         {!isOnboardingPage && (
           <nav
             ref={navContainerRef}
-            className="relative hidden md:flex items-center gap-1 py-1.5 px-2 rounded-full border border-steel-grey/30 bg-graphite-metal/40"
+            className="relative hidden md:flex items-center gap-1 py-1.5 px-2 rounded-full border border-steel-grey/30 bg-graphite-metal"
             onMouseLeave={handleMouseLeave}
           >
             {/* Absolute moving highlight pill */}
@@ -417,19 +417,16 @@ export default function Navbar() {
             shouldAnimate && "transition-all duration-300",
             isScrolled && "md:mr-8"
           )}>
-            <Link href="/start" className="focus-visible:outline-none flex">
-              <Button
-                variant="secondary"
-                size="sm"
-                onMouseEnter={handleCtaMouseEnter}
-                onMouseLeave={handleCtaMouseLeave}
-                onFocus={handleCtaMouseEnter}
-                onBlur={handleCtaMouseLeave}
-                className="group relative bg-graphite-metal border border-steel-grey/60 text-chrome-highlight hover:border-electric-violet/60 hover:bg-electric-violet/[0.04] hover:shadow-[0_0_15px_rgba(123,76,255,0.2)] flex items-center justify-center transition-all duration-300"
-              >
-                <span>Iniciar proyecto</span>
-                <ArrowRight className="h-3.5 w-3.5 opacity-60 ml-1.5 nav-cta-arrow transition-colors duration-300 group-hover:text-electric-violet overflow-visible" />
-              </Button>
+            <Link 
+              href="/start" 
+              className="group relative flex items-center justify-center gap-1.5 py-1.5 px-4 rounded-full border border-steel-grey/30 bg-graphite-metal text-sm font-medium text-[#828B9B] hover:text-chrome-highlight hover:border-steel-grey/50 transition-all duration-300 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-electric-violet"
+              onMouseEnter={handleCtaMouseEnter}
+              onMouseLeave={handleCtaMouseLeave}
+              onFocus={handleCtaMouseEnter}
+              onBlur={handleCtaMouseLeave}
+            >
+              <span>Iniciar proyecto</span>
+              <ArrowRight className="h-3.5 w-3.5 opacity-60 ml-1.5 nav-cta-arrow transition-colors duration-300 group-hover:text-electric-violet overflow-visible" />
             </Link>
           </div>
         )}

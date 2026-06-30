@@ -76,7 +76,6 @@ function ServiceCard({ service }: { service: typeof SERVICES[0] }) {
       });
       gsap.to(cardRef.current, {
         borderColor: "rgba(123, 76, 255, 0.35)",
-        backgroundColor: "rgba(26, 29, 33, 0.55)",
         scale: 1.008,
         duration: 0.25,
         ease: "power2.out",
@@ -104,7 +103,6 @@ function ServiceCard({ service }: { service: typeof SERVICES[0] }) {
       });
       gsap.to(cardRef.current, {
         borderColor: "rgba(42, 46, 51, 0.2)",
-        backgroundColor: "rgba(26, 29, 33, 0.2)",
         scale: 1,
         duration: 0.5,
         ease: "power2.inOut",
@@ -249,7 +247,7 @@ function ServiceCard({ service }: { service: typeof SERVICES[0] }) {
       onTouchCancel={handleTouchEnd}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className="group relative flex flex-col p-6 md:p-8 2xl:p-10 rounded-xl border border-steel-grey/30 bg-graphite-metal/20 md:hover:bg-graphite-metal/40 md:hover:border-electric-violet/40 transition-all duration-300 backdrop-blur-sm h-full min-h-[480px] 2xl:min-h-[520px] select-none"
+      className="group relative flex flex-col p-6 md:p-8 2xl:p-10 rounded-xl border border-steel-grey/30 bg-graphite-metal md:hover:border-electric-violet/40 transition-all duration-300 h-full min-h-[480px] 2xl:min-h-[520px] select-none"
     >
       {/* Accent line animation hover */}
       <div
@@ -364,7 +362,7 @@ function PostLaunchStrip() {
   return (
     <div
       ref={stripRef}
-      className="mt-10 md:mt-14 2xl:mt-16 rounded-xl border border-steel-grey/20 bg-graphite-metal/20 backdrop-blur-sm p-6 md:p-8 2xl:p-10"
+      className="mt-10 md:mt-14 2xl:mt-16 rounded-xl border border-steel-grey/20 bg-graphite-metal p-6 md:p-8 2xl:p-10"
     >
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-0 relative">
         {/* Vertical divider (desktop only) */}
