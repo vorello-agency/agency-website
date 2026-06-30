@@ -288,14 +288,14 @@ export default function Navbar() {
     }
   };
 
-  const handleCtaMouseEnter = (e: React.MouseEvent<HTMLButtonElement> | React.FocusEvent<HTMLButtonElement>) => {
+  const handleCtaMouseEnter = (e: React.MouseEvent<HTMLAnchorElement> | React.FocusEvent<HTMLAnchorElement>) => {
     const arrow = e.currentTarget.querySelector(".nav-cta-arrow") as HTMLElement | null;
     if (arrow) {
       animateNavbarCtaArrowEnter(arrow);
     }
   };
 
-  const handleCtaMouseLeave = (e: React.MouseEvent<HTMLButtonElement> | React.FocusEvent<HTMLButtonElement>) => {
+  const handleCtaMouseLeave = (e: React.MouseEvent<HTMLAnchorElement> | React.FocusEvent<HTMLAnchorElement>) => {
     const arrow = e.currentTarget.querySelector(".nav-cta-arrow") as HTMLElement | null;
     if (arrow) {
       animateNavbarCtaArrowLeave(arrow);
