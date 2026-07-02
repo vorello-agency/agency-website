@@ -398,6 +398,7 @@ export function useStartForm() {
   const handleSubmit = useCallback(
     async (event: React.FormEvent) => {
       event.preventDefault();
+      if (isSubmitting || isAnimating) return;
       if (!validateStep(4)) return;
 
       setIsSubmitting(true);

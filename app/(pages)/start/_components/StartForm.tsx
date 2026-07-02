@@ -11,7 +11,7 @@ import { BUDGET_RANGES, DEADLINES, PROJECT_TYPES } from "../_lib/start-data";
 import type { UseStartFormReturn } from "../_lib/use-start-form";
 import SelectionSummary from "./SelectionSummary";
 import StepperNav from "./StepperNav";
-import { CONTACT_EMAIL } from "@/data/brand";
+import { CONTACT_EMAIL, WHATSAPP_HUMAN_NUMBER, getWhatsAppLink, WHATSAPP_MSG_START } from "@/data/brand";
 
 const PhoneInput = dynamic(() => import("@/components/forms/PhoneInput"), {
   ssr: false,
@@ -375,7 +375,7 @@ function StepFourProjectIdea({
             }`}
           >
             {messageLength} / {minChars} caracteres mínimos
-            {messageLength >= minChars ? <span className="ml-1.5">✓</span> : null}
+            {messageLength >= minChars ? <span className="ml-2">✓</span> : null}
           </p>
         }
       />
@@ -452,8 +452,27 @@ export default function StartForm({
 
         <form onSubmit={handleSubmit} className="space-y-8" noValidate>
           {submitStatus === "error" ? (
-            <div className="rounded-lg border border-red-500/25 bg-red-500/10 p-4 text-xs text-red-400">
-              Error al enviar el formulario. Por favor, verifica tu conexión e inténtalo de nuevo, o escríbenos directamente a {CONTACT_EMAIL}.
+            <div className="rounded-xl border border-red-500/20 bg-red-500/5 p-5 text-xs text-red-400 space-y-3">
+              <p className="leading-relaxed">
+                No pudimos enviar tu consulta en este momento. Podés intentarlo nuevamente o comunicarte con nosotros por WhatsApp o correo electrónico.
+              </p>
+              <div className="flex flex-wrap gap-4 pt-1 font-medium">
+                <a
+                  href={`mailto:${CONTACT_EMAIL}`}
+                  className="hover:text-red-300 underline transition-colors focus-visible:outline-none"
+                >
+                  Enviar correo
+                </a>
+                <span className="text-red-500/30">|</span>
+                <a
+                  href={getWhatsAppLink(WHATSAPP_MSG_START)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-emerald-400 underline transition-colors focus-visible:outline-none"
+                >
+                  Escribir por WhatsApp
+                </a>
+              </div>
             </div>
           ) : null}
 
