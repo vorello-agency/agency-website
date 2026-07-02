@@ -28,7 +28,7 @@ const SERVICE_LINKS = [
   { label: "Experiencias Web", href: "/#servicios" },
   { label: "Productos Digitales", href: "/#servicios" },
   { label: "Ecommerce", href: "/#servicios" },
-  { label: "Automatizaciones", href: "/#servicios" },
+  { label: "Automatización", href: "/#servicios" },
 ];
 
 const AGENCY_LINKS = [
@@ -248,7 +248,7 @@ export default function Footer() {
           {/* Badges Container */}
           <div className="flex flex-wrap items-center gap-3 mt-3">
             {/* Combined Availability & Call-to-Action Badge */}
-            <div className="inline-flex items-center gap-3 bg-graphite-metal/30 border border-steel-grey/30 rounded-lg p-1 pl-4 w-full select-none">
+            <div className="inline-flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 bg-graphite-metal/30 border border-steel-grey/30 rounded-lg p-3 sm:p-1 sm:pl-4 w-full select-none">
               <div className="flex items-center gap-3">
                 <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
@@ -258,12 +258,12 @@ export default function Footer() {
                   Disponible para proyectos • {quarter} {year}
                 </span>
               </div>
-              <Link href="/start" className="focus-visible:outline-none flex shrink-0 ml-auto">
+              <Link href="/start" className="focus-visible:outline-none flex shrink-0 sm:ml-auto">
                 <Button
                   variant="primary-blue"
                   size="sm"
                   withArrow
-                  className="!text-[11px] !py-1 !px-3 rounded-md hover:shadow-[0_0_12px_rgba(45,143,255,0.25)] hover:!scale-100 active:!scale-100 transition-all duration-300"
+                  className="!text-[11px] !py-1 !px-3 rounded-md hover:shadow-[0_0_12px_rgba(45,143,255,0.25)] hover:!scale-100 active:!scale-100 transition-all duration-300 w-full sm:w-auto"
                 >
                   Iniciar proyecto
                 </Button>
@@ -271,25 +271,27 @@ export default function Footer() {
             </div>
 
             {/* Location & Timezone Badge */}
-            <div className="flex gap-3 bg-graphite-metal/30 border border-steel-grey/30 rounded-lg px-3 py-2 w-full select-none">
-              <span className="relative flex h-2 w-2 shrink-0 mt-1">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-neon-blue opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-neon-blue" />
-              </span>
-              <div className="flex flex-col min-w-0">
-                <span className="text-[11px] font-medium text-chrome-highlight font-mono tracking-tight whitespace-nowrap flex items-center gap-2">
-                  <span className="whitespace-nowrap">Desde Montevideo, Uruguay</span>
-                  <FlagImage
-                    iso2="uy"
-                    style={{ width: "20px", height: "15px" }}
-                    className="shrink-0 rounded-[2px] select-none"
-                  />
+            <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 bg-graphite-metal/30 border border-steel-grey/30 rounded-lg px-3 py-2 w-full select-none sm:pl-4">
+              <div className="flex items-start sm:items-center gap-3">
+                <span className="relative flex h-2 w-2 shrink-0 mb-4">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-neon-blue opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-neon-blue" />
                 </span>
-                <span className="text-[10px] text-[#828B9B]/60 font-mono tracking-tight mt-0.5 whitespace-nowrap">
-                  Hub tecnológico de exportación en América Latina
-                </span>
+                <div className="flex flex-col min-w-0">
+                  <span className="text-[11px] font-medium text-chrome-highlight font-mono tracking-tight whitespace-nowrap flex items-center gap-2">
+                    <span className="whitespace-nowrap">Desde Montevideo, Uruguay</span>
+                    <FlagImage
+                      iso2="uy"
+                      style={{ width: "20px", height: "15px" }}
+                      className="shrink-0 rounded-[2px] select-none"
+                    />
+                  </span>
+                  <span className="text-[10px] text-[#828B9B]/60 font-mono tracking-tight mt-0.5 whitespace-nowrap hidden min-[375px]:block">
+                    Hub tecnológico en América Latina
+                  </span>
+                </div>
               </div>
-              <span className="ml-auto text-[11px] font-medium text-chrome-highlight font-mono tracking-tight whitespace-nowrap my-auto" title="Hora local en Montevideo, Uruguay">
+              <span className="sm:ml-auto text-[11px] font-medium text-chrome-highlight font-mono tracking-tight whitespace-nowrap sm:my-auto pl-5 sm:pl-0" title="Hora local en Montevideo, Uruguay">
                 <span className="text-chrome-highlight/90 font-semibold">{localTime || "--:--"}</span>{" "}
                 <span className="text-[10px] text-[#828B9B]/60 font-sans">(UTC-3)</span>
               </span>

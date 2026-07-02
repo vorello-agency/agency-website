@@ -5,7 +5,7 @@
 export const BRAND_NAME = "Vorello";
 export const BRAND_FULL_NAME = "Vorello Agency";
 export const BRAND_TAGLINE =
-  "Diseñamos y desarrollamos productos digitales bien pensados, visualmente cuidados y técnicamente sólidos.";
+  "Diseño, tecnología y producto para empresas que buscan crecer con una base digital sólida.";
 export const BRAND_DOMAIN = "vorelloagency.com";
 export const BRAND_URL = `https://${BRAND_DOMAIN}`;
 
@@ -30,8 +30,8 @@ export function getWhatsAppLink(message: string = WHATSAPP_MSG_GENERAL, phoneNum
 export const SOCIAL_LINKS = {
   instagram: "https://instagram.com/vorelloagency",
   linkedin: "https://linkedin.com/company/vorello",
-  github: "https://github.com",
-  behance: "https://behance.net",
+  github: "https://github.com/vorello-agency",
+  behance: "https://behance.net/vorelloagency",
 };
 
 /**

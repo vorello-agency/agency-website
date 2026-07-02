@@ -133,7 +133,7 @@ export default function Hero() {
   return (
     <section
       ref={containerRef}
-      className="relative z-20 min-h-[85vh] flex items-center justify-center pt-28 pb-20 md:pb-24 2xl:pt-36 2xl:pb-32 overflow-hidden bg-carbon-black"
+      className="relative z-20 min-h-[75vh] sm:min-h-[85vh] flex items-center justify-center pt-24 pb-16 sm:pt-28 sm:pb-20 md:pb-24 2xl:pt-36 2xl:pb-32 overflow-hidden bg-carbon-black"
     >
       {/* Premium clean dots background with radial mask */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
@@ -153,14 +153,14 @@ export default function Hero() {
         {/* Left Column: Text & CTA */}
         <div className="lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left">
           {/* Decorative Badge */}
-          <Badge variant="violet" className="mb-8">
+          <Badge variant="violet" className="mb-5 sm:mb-8">
             <span className="hidden sm:inline-flex">VORELLO — ESTUDIO DIGITAL PREMIUM</span>
             <span className="inline-flex sm:hidden">ESTUDIO DIGITAL PREMIUM</span>
           </Badge>
 
           <h1
             ref={headlineRef}
-            className="text-6xl sm:text-8xl lg:text-8xl xl:text-9xl font-bebas tracking-wide text-chrome-highlight uppercase mb-6 2xl:mb-8 max-w-5xl leading-[0.9] select-none flex flex-col gap-2 2xl:gap-3"
+            className="text-5xl sm:text-8xl lg:text-8xl xl:text-9xl font-bebas tracking-wide text-chrome-highlight uppercase mb-4 sm:mb-6 2xl:mb-8 max-w-5xl leading-[0.9] select-none flex flex-col gap-1 sm:gap-2 2xl:gap-3"
             style={{ opacity: 0 }}
           >
             <span>Diseño<span className="inline-block text-[0.78em] translate-y-[-0.07em] ml-[0.02em] select-none text-chrome-deep">.</span></span>
@@ -174,7 +174,7 @@ export default function Hero() {
             className="text-base sm:text-lg md:text-xl 2xl:text-2xl text-[#A8B0BD] max-w-2xl 2xl:max-w-3xl leading-relaxed text-balance mb-10 2xl:mb-14"
             style={{ opacity: 0 }}
           >
-            Diseñamos y desarrollamos productos digitales bien pensados, visualmente cuidados y técnicamente sólidos.
+            Diseñamos y desarrollamos productos bien pensados, visualmente cuidados y técnicamente sólidos.
           </p>
 
           {/* Call to Actions */}
@@ -198,10 +198,10 @@ export default function Hero() {
         </div>
 
         {/* Right Column: Visual Element with Isotipo */}
-        <div className="lg:col-span-5 flex items-center justify-center w-full mt-10 lg:mt-0">
+        <div className="lg:col-span-5 flex items-center justify-center w-full mt-6 sm:mt-10 lg:mt-0">
           <div
             ref={visualRef}
-            className="relative w-full max-w-[224px] sm:max-w-sm md:max-w-md mx-auto flex items-center justify-center"
+            className="relative w-full max-w-[160px] sm:max-w-[224px] md:max-w-md mx-auto flex items-center justify-center"
             style={{ opacity: 0 }}
           >
             {/* Energy Rings & Tech Blueprint (Minimal & Interactive) */}
