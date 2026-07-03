@@ -277,7 +277,7 @@ export default function Footer() {
                   variant="outline"
                   size="sm"
                   withArrow
-                  className="!text-[10px] !py-1 !px-2 rounded-md border-steel-grey/40 hover:border-chrome-highlight/30 text-chrome-highlight bg-carbon-black/30 hover:bg-carbon-black/60 transition-all duration-300 w-auto"
+                  className="!text-[10px] !py-1.5 !px-2.5 rounded-md border-steel-grey/40 hover:border-chrome-highlight/30 text-chrome-highlight bg-carbon-black/30 hover:bg-carbon-black/60 transition-all duration-300 w-auto"
                 >
                   Iniciar proyecto
                 </Button>
@@ -458,7 +458,7 @@ export default function Footer() {
             <span className="text-steel-grey/75 select-none" aria-hidden="true">·</span>
             <button
               onClick={scrollToTop}
-              className="group/top inline-flex items-center gap-1 text-[#828B9B] hover:text-chrome-highlight transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-electric-violet rounded px-1 -mx-1"
+              className="group/top inline-flex items-center gap-1 text-[#828B9B] hover:text-chrome-highlight transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-electric-violet rounded px-1 -mx-1 relative after:absolute after:inset-[-12px] after:content-['']"
               aria-label="Volver arriba"
             >
               <span className="hidden sm:inline">Volver arriba</span>

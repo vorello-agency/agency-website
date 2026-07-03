@@ -277,7 +277,7 @@ function ServiceCard({ service }: { service: typeof SERVICES[0] }) {
         </h3>
 
         {/* Description */}
-        <p className="services-desc text-sm 2xl:text-base text-[#8F9BA8] leading-relaxed mb-4 md:mb-6 md:group-hover:text-chrome-deep/90">
+        <p className="services-desc text-sm 2xl:text-base text-[#8F9BA8] leading-relaxed mb-4 md:mb-6 md:group-hover:text-chrome-highlight/90">
           {service.description}
         </p>
 

@@ -533,7 +533,7 @@ export default function Fit() {
                 role="tab"
                 aria-selected={activeSlide === idx}
                 aria-label={`Ir a tarjeta ${idx + 1}`}
-                className={`rounded-full transition-all duration-300 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-electric-violet ${
+                className={`rounded-full transition-all duration-300 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-electric-violet relative after:absolute after:inset-[-8px] after:content-[''] ${
                   activeSlide === idx
                     ? "w-5 h-2 bg-electric-violet"
                     : "w-2 h-2 bg-steel-grey/40 hover:bg-steel-grey/70"

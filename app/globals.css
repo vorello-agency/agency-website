@@ -106,7 +106,6 @@ body {
   color: var(--foreground);
   font-family: var(--font-sans);
   overflow-x: clip;
-  scroll-behavior: smooth;
 }
 
 /* Ensure the fixed header does not overlap sections when navigating via anchor links (#contacto, etc.) or iOS Safari previews */

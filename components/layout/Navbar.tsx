@@ -324,6 +324,7 @@ export default function Navbar() {
         {/* Brand logo */}
         <Link
           href="/"
+          aria-label="Vorello - Ir al inicio"
           className={cn(
             "relative flex items-center gap-2 group focus-visible:outline-none",
             shouldAnimate && "transition-all duration-300",

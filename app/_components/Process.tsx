@@ -242,7 +242,7 @@ function GridItem({ step, isActive, isMobile }: { step: StepItem; isActive: bool
               <Icon className={`h-5 w-5 overflow-visible process-svg-${step.num}`} />
             </div>
             <div className="space-y-1.5">
-              <span className="process-phase block font-mono text-[10px] font-semibold uppercase tracking-wider text-electric-violet">
+              <span className="process-phase block font-mono text-[10px] font-semibold uppercase tracking-wider text-violet-400">
                 {"// FASE "} {step.num}
               </span>
               <h3 className="process-title text-lg font-bold uppercase tracking-tight text-chrome-highlight md:group-hover:text-white transition-colors duration-500 ease-out">
@@ -250,7 +250,7 @@ function GridItem({ step, isActive, isMobile }: { step: StepItem; isActive: bool
               </h3>
             </div>
           </div>
-          <p className="process-desc text-xs md:text-sm leading-relaxed text-balance text-chrome-highlight/65 md:group-hover:text-chrome-highlight/90 transition-colors duration-500 ease-out">
+          <p className="process-desc text-xs md:text-sm leading-relaxed text-balance text-chrome-highlight/75 md:group-hover:text-chrome-highlight/90 transition-colors duration-500 ease-out">
             {step.desc}
           </p>
         </div>
@@ -649,7 +649,7 @@ export default function Process() {
                   role="tab"
                   aria-selected={activeSlide === idx}
                   aria-label={`Ir a fase ${idx + 1}`}
-                  className={`rounded-full transition-all duration-300 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-electric-violet ${
+                  className={`rounded-full transition-all duration-300 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-electric-violet relative after:absolute after:inset-[-8px] after:content-[''] ${
                     activeSlide === idx
                       ? "w-5 h-2 bg-electric-violet"
                       : "w-2 h-2 bg-steel-grey/40 hover:bg-steel-grey/70"

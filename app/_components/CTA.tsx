@@ -143,7 +143,7 @@ export default function CTA() {
             Diseñemos y desarrollemos tu próximo sistema digital
           </h2>
 
-          <p className="cta-desc text-sm sm:text-base 2xl:text-lg text-chrome-deep max-w-lg 2xl:max-w-xl mx-0 md:mx-auto mb-10 2xl:mb-12 leading-relaxed relative z-10">
+          <p className="cta-desc text-sm sm:text-base 2xl:text-lg text-chrome-highlight/75 max-w-lg 2xl:max-w-xl mx-0 md:mx-auto mb-10 2xl:mb-12 leading-relaxed relative z-10">
             Cuéntanos sobre tus objetivos de negocio. Analizaremos tu caso particular sin compromiso para proponerte una estrategia de producto y tecnología a medida.
           </p>
 
@@ -165,13 +165,13 @@ export default function CTA() {
                 className="w-full gap-2 bg-carbon-black"
               >
                 <MessageSquare className="w-4 h-4" />
-                Contacto directo
+                Contacto
               </Button>
             </Link>
 
           </div>
 
-          <div className="cta-footer mt-8 md:mt-12 text-xs font-mono text-chrome-deep/80 relative z-10">
+          <div className="cta-footer mt-8 md:mt-12 text-xs font-mono text-chrome-highlight/60 relative z-10">
             Tiempo estimado de respuesta
             <br />
             &lt; 24 horas hábiles

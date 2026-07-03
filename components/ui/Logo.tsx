@@ -43,8 +43,8 @@ export default function Logo({
           src="/assets/isotipo.webp"
           alt={variant === "isotipo" ? alt : ""}
           aria-hidden={variant !== "isotipo"}
-          width={1024}
-          height={910}
+          width={256}
+          height={219}
           priority
           className={cn("w-auto", isotipoClassName)}
           style={{ height: `${sizes.isotipoPx}px` }}

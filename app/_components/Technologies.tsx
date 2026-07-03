@@ -26,7 +26,7 @@ const LAYERS = [
   },
   {
     num: "3",
-    title: "Infraestructura & cloud",
+    title: "Infraestructura y cloud",
     icon: Server,
     chips: ["Node.js", "Vercel", "Cloudflare", "Supabase", "Google Cloud"],
     colorTheme: "blue",
@@ -246,7 +246,7 @@ function LayerCard({ layer }: { layer: LayerItem }) {
             <Icon className={`w-5 h-5 tech-icon-svg-${layer.num} overflow-visible transition-transform duration-500 ease-out md:group-hover:scale-105`} />
           </div>
           <div className="space-y-0.5">
-            <span className="block font-mono text-[9px] font-medium tracking-wider text-chrome-deep">
+            <span className="block font-mono text-[9px] font-medium tracking-wider text-chrome-highlight/75">
               {"// CAPA 0"}{layer.num}
             </span>
             <h3 className="text-lg font-bold text-chrome-highlight tracking-tight md:group-hover:text-white transition-colors duration-500 ease-out">
