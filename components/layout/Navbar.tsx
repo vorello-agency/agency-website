@@ -464,6 +464,7 @@ export default function Navbar() {
           mobileMenuOpen ? "pointer-events-auto" : "pointer-events-none"
         )}
         onClick={() => setMobileMenuOpen(false)}
+        style={{ opacity: 0, visibility: "hidden" }}
       />
 
       {/* Mobile menu navigation drawer */}
@@ -474,6 +475,7 @@ export default function Navbar() {
           mobileMenuOpen ? "pointer-events-auto" : "pointer-events-none",
           isScrolled ? "top-20" : "top-28"
         )}
+        style={{ opacity: 0, visibility: "hidden", transform: "translateY(-12px)" }}
       >
         <div ref={mobileLinksRef} className="flex flex-col divide-y divide-steel-grey/10">
           {NAV_ITEMS.map((item) => {

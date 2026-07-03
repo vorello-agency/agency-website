@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import { gsap } from "@/lib/gsap/register";
 import Container from "@/components/layout/Container";
 import SectionHeading from "@/components/layout/SectionHeading";
@@ -76,7 +76,7 @@ type StepItem = {
   area: string;
 };
 
-function GridItem({ step }: { step: StepItem }) {
+function GridItem({ step, isActive, isMobile }: { step: StepItem; isActive: boolean; isMobile: boolean }) {
   const Icon = step.icon;
   const cardRef = useRef<HTMLDivElement>(null);
   const glowRef = useRef<HTMLDivElement>(null);
@@ -92,18 +92,19 @@ function GridItem({ step }: { step: StepItem }) {
     card.style.setProperty("--mouse-x", `${x}px`);
     card.style.setProperty("--mouse-y", `${y}px`);
 
-    if (glowRef.current && borderGlowRef.current) {
-      gsap.to([glowRef.current, borderGlowRef.current], {
-        opacity: 1,
-        duration: 0.2,
-        ease: "power2.out",
-        overwrite: "auto"
-      });
-      gsap.to(card, {
-        borderColor: "rgba(45, 143, 255, 0.25)",
-        backgroundColor: "rgba(26, 29, 33, 0.55)",
-        scale: 1.008,
-        duration: 0.2,
+    // Efecto touch pronunciado: borde electric-violet completo + highlight
+    gsap.to(card, {
+      borderColor: "rgba(123, 76, 255, 0.7)",
+      backgroundColor: "rgba(26, 26, 38, 1)",
+      scale: 1.012,
+      duration: 0.15,
+      ease: "power2.out",
+      overwrite: "auto"
+    });
+    if (glowRef.current) {
+      gsap.to(glowRef.current, {
+        opacity: 0.6,
+        duration: 0.15,
         ease: "power2.out",
         overwrite: "auto"
       });
@@ -112,20 +113,28 @@ function GridItem({ step }: { step: StepItem }) {
 
   const handleTouchEnd = () => {
     const card = cardRef.current;
-    if (glowRef.current && borderGlowRef.current) {
-      gsap.to([glowRef.current, borderGlowRef.current], {
+    if (glowRef.current) {
+      gsap.to(glowRef.current, {
         opacity: 0,
-        duration: 0.5,
+        duration: 0.4,
+        ease: "power2.inOut",
+        overwrite: "auto"
+      });
+    }
+    if (borderGlowRef.current) {
+      gsap.to(borderGlowRef.current, {
+        opacity: 0,
+        duration: 0.4,
         ease: "power2.inOut",
         overwrite: "auto"
       });
     }
     if (card) {
       gsap.to(card, {
-        borderColor: "rgba(42, 46, 51, 0.2)",
-        backgroundColor: "rgba(26, 29, 33, 0.4)",
+        borderColor: isActive ? "rgba(123, 76, 255, 0.45)" : "rgba(42, 46, 51, 0.2)",
+        backgroundColor: "rgba(18, 20, 22, 1)",
         scale: 1,
-        duration: 0.5,
+        duration: 0.4,
         ease: "power2.inOut",
         overwrite: "auto"
       });
@@ -158,8 +167,21 @@ function GridItem({ step }: { step: StepItem }) {
     }
   };
 
+  // Clases condicionales para estado activo/inactivo en mobile
+  const liMobileClasses = isMobile
+    ? isActive
+      ? ""
+      : "opacity-60"
+    : "";
+
+  const cardMobileClasses = isMobile
+    ? isActive
+      ? "scale-[1.02] !border-electric-violet/45 shadow-[0_0_24px_rgba(123,76,255,0.18)]"
+      : "scale-100"
+    : "";
+
   return (
-    <li className={`min-h-[15rem] list-none ${step.area}`}>
+    <li className={`list-none min-w-[85vw] max-w-[320px] shrink-0 snap-center md:min-w-0 md:max-w-none md:shrink md:snap-align-none md:min-h-[15rem] ${step.area} transition-all duration-300 ease-out ${liMobileClasses}`}>
       <div
         ref={cardRef}
         onTouchStart={handleTouchStart}
@@ -167,20 +189,22 @@ function GridItem({ step }: { step: StepItem }) {
         onTouchCancel={handleTouchEnd}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        className="process-card group relative h-full rounded-2xl p-6 md:p-7 xl:p-8 bg-graphite-metal border border-steel-grey/20 transition-all duration-500 ease-out overflow-hidden select-none"
+        className={`process-card group relative h-full rounded-2xl p-6 md:p-7 xl:p-8 bg-graphite-metal border border-steel-grey/20 transition-all duration-300 ease-out select-none ${cardMobileClasses}`}
       >
+        {/* Overflow clip layer — contiene los glows sin recortar el borde exterior */}
+        <div className="absolute inset-0 rounded-[inherit] overflow-hidden pointer-events-none">
+          {/* Capa 1: Círculo blurred de luz azul en la esquina superior derecha (Hover) */}
+          <div className="absolute -top-12 -right-12 w-36 h-36 rounded-full bg-electric-violet/15 blur-3xl opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 z-0 animate-glow-drift" />
 
-        {/* Capa 1: Círculo blurred de luz azul en la esquina superior derecha (Hover) */}
-        <div className="absolute -top-12 -right-12 w-36 h-36 rounded-full bg-electric-violet/15 blur-3xl opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0 animate-glow-drift" />
-
-        {/* Soft background highlight that follows mouse across card boundaries */}
-        <div
-          ref={glowRef}
-          className="process-glow absolute inset-0 rounded-[inherit] pointer-events-none opacity-0 md:group-hover/grid:opacity-25 transition-opacity duration-500"
-          style={{
-            background: "radial-gradient(circle 120px at var(--mouse-x, -999px) var(--mouse-y, -999px), rgba(45, 143, 255, 0.08), transparent 100%)"
-          }}
-        />
+          {/* Soft background highlight that follows mouse across card boundaries */}
+          <div
+            ref={glowRef}
+            className="process-glow absolute inset-0 rounded-[inherit] opacity-0 md:group-hover/grid:opacity-25 transition-opacity duration-500"
+            style={{
+              background: "radial-gradient(circle 120px at var(--mouse-x, -999px) var(--mouse-y, -999px), rgba(45, 143, 255, 0.08), transparent 100%)"
+            }}
+          />
+        </div>
 
         {/* Subtle, ultra-thin border glow following mouse precisely across cards */}
         <div
@@ -238,6 +262,86 @@ function GridItem({ step }: { step: StepItem }) {
 export default function Process() {
   const sectionRef = useRef<HTMLElement>(null);
   const stepsContainerRef = useRef<HTMLUListElement>(null);
+  const [activeSlide, setActiveSlide] = useState(0);
+  const [isMobileSlider, setIsMobileSlider] = useState(false);
+  const swipeHintDone = useRef(false);
+
+  // Track whether we're in mobile slider mode
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobileSlider(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  // Swipe hint: small peek animation on mount (mobile only, runs once)
+  useEffect(() => {
+    if (!isMobileSlider || swipeHintDone.current || !stepsContainerRef.current) return;
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion) return;
+
+    swipeHintDone.current = true;
+    const items = Array.from(stepsContainerRef.current.children) as HTMLElement[];
+    const secondCard = items[1];
+    if (!secondCard) return;
+
+    // Delay to let render settle, then peek
+    const timer = setTimeout(() => {
+      const container = stepsContainerRef.current;
+      if (!container) return;
+      const tl = gsap.timeline();
+      tl.to(container, {
+        x: -28,
+        duration: 0.45,
+        ease: "power2.out",
+      });
+      tl.to(container, {
+        x: 0,
+        duration: 0.5,
+        ease: "power2.inOut",
+        delay: 0.15,
+      });
+    }, 800);
+
+    return () => clearTimeout(timer);
+  }, [isMobileSlider]);
+
+  // IntersectionObserver for dot tracking in mobile slider
+  useEffect(() => {
+    if (!isMobileSlider || !stepsContainerRef.current) return;
+
+    const container = stepsContainerRef.current;
+    const items = Array.from(container.children) as HTMLElement[];
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const idx = items.indexOf(entry.target as HTMLElement);
+            if (idx !== -1) setActiveSlide(idx);
+          }
+        });
+      },
+      {
+        root: container,
+        threshold: 0.6,
+      }
+    );
+
+    items.forEach((item) => observer.observe(item));
+    return () => observer.disconnect();
+  }, [isMobileSlider]);
+
+  // Scroll to a specific slide when dot is clicked
+  const scrollToSlide = useCallback((index: number) => {
+    if (!stepsContainerRef.current) return;
+    const items = Array.from(stepsContainerRef.current.children) as HTMLElement[];
+    if (items[index]) {
+      items[index].scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+    }
+  }, []);
 
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -280,26 +384,29 @@ export default function Process() {
         }
       );
 
-      // ─── 2. Bento grid cards with 3D rotationX entrance ───
-      tl.fromTo(
-        steps,
-        {
-          opacity: 0,
-          y: 40,
-          rotationX: 8,
-          scale: 0.97,
-        },
-        {
-          opacity: 1,
-          y: 0,
-          rotationX: 0,
-          scale: 1,
-          duration: 0.7,
-          stagger: 0.1,
-          ease: "power2.out",
-        },
-        "-=0.4"
-      );
+      // ─── 2. Bento grid cards with 3D rotationX entrance (md+ only) ───
+      const isDesktop = window.innerWidth >= 768;
+      if (isDesktop) {
+        tl.fromTo(
+          steps,
+          {
+            opacity: 0,
+            y: 40,
+            rotationX: 8,
+            scale: 0.97,
+          },
+          {
+            opacity: 1,
+            y: 0,
+            rotationX: 0,
+            scale: 1,
+            duration: 0.7,
+            stagger: 0.1,
+            ease: "power2.out",
+          },
+          "-=0.4"
+        );
+      }
 
       // 3. Staggered inner content reveals per card
       steps.forEach((stepEl) => {
@@ -310,6 +417,12 @@ export default function Process() {
         const phase = cardInner.querySelector(".process-phase");
         const title = cardInner.querySelector(".process-title");
         const desc = cardInner.querySelector(".process-desc");
+
+        // On mobile slider, don't hide inner content — let it be visible
+        if (!isDesktop) {
+          gsap.set([iconBox, phase, title, desc], { opacity: 1 });
+          return;
+        }
 
         // Set initial states
         gsap.set([iconBox, phase, title, desc], { opacity: 0 });
@@ -381,9 +494,9 @@ export default function Process() {
           );
         }
 
-        // Mobile touch-triggered sweep effect via ScrollTrigger
+        // Mobile touch-triggered sweep effect via ScrollTrigger (md+ only)
         const isTouch = window.matchMedia("(pointer: coarse)").matches;
-        if (isTouch) {
+        if (isTouch && isDesktop) {
           const glow = stepEl.querySelector(".process-glow");
           const borderGlow = stepEl.querySelector(".process-border-glow");
 
@@ -504,15 +617,48 @@ export default function Process() {
           className="process-heading"
         />
 
+        {/* Mobile: horizontal scroll-snap slider | md+: bento grid */}
         <ul
           ref={stepsContainerRef}
-          className="group/grid mt-12 grid grid-cols-1 grid-rows-none gap-6 md:grid-cols-12 md:grid-rows-3 lg:max-h-[46rem] lg:grid-rows-3"
+          className="group/grid mt-12 flex gap-4 overflow-x-auto snap-x snap-mandatory scrollbar-hide -mx-4 px-4 py-2 pb-2 md:overflow-x-visible md:mx-0 md:px-0 md:py-0 md:pb-0 md:grid md:grid-cols-12 md:grid-rows-3 md:gap-6 lg:max-h-[46rem] lg:grid-rows-3"
           style={{ perspective: "1200px" }}
         >
           {STEPS.map((step, idx) => (
-            <GridItem key={idx} step={step} />
+            <GridItem
+              key={idx}
+              step={step}
+              isActive={activeSlide === idx}
+              isMobile={isMobileSlider}
+            />
           ))}
         </ul>
+
+        {/* Dot indicators + phase label — mobile only */}
+        {isMobileSlider && (
+          <div className="flex flex-col items-center gap-3 mt-6 md:hidden">
+            {/* Phase label */}
+            <span className="font-mono text-[10px] font-semibold uppercase tracking-widest text-electric-violet/80">
+              Fase {STEPS[activeSlide].num} de {String(STEPS.length).padStart(2, "0")} — {STEPS[activeSlide].name}
+            </span>
+            {/* Dots */}
+            <div className="flex items-center justify-center gap-2" role="tablist" aria-label="Indicadores del slider de proceso">
+              {STEPS.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => scrollToSlide(idx)}
+                  role="tab"
+                  aria-selected={activeSlide === idx}
+                  aria-label={`Ir a fase ${idx + 1}`}
+                  className={`rounded-full transition-all duration-300 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-electric-violet ${
+                    activeSlide === idx
+                      ? "w-5 h-2 bg-electric-violet"
+                      : "w-2 h-2 bg-steel-grey/40 hover:bg-steel-grey/70"
+                  }`}
+                />
+              ))}
+            </div>
+          </div>
+        )}
       </Container>
     </section>
   );

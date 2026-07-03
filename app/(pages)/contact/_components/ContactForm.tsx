@@ -42,7 +42,7 @@ export default function ContactForm({
     <div className="order-1 lg:order-2 lg:col-span-7">
       <form
         onSubmit={onSubmit}
-        className="space-y-6 rounded-2xl border border-steel-grey/30 bg-graphite-metal/30 p-6 backdrop-blur-md sm:p-8"
+        className="space-y-6 rounded-none border-y border-x-0 sm:rounded-2xl sm:border-x border-steel-grey/30 bg-graphite-metal/30 p-6 backdrop-blur-md sm:p-8 -mx-4 sm:mx-0"
         noValidate
       >
         <h2 className="mb-6 border-b border-steel-grey/30 pb-3 text-base font-bold uppercase tracking-wider text-chrome-highlight">

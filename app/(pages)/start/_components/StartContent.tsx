@@ -16,7 +16,7 @@ export default function StartContent({
     <div className="mt-4" ref={setFormElement}>
       <StartIntro />
 
-      <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-14">
+      <div className="grid grid-cols-1 gap-6 md:gap-10 lg:grid-cols-12 lg:gap-14">
         <StartSidebar />
         <StartForm {...startFormProps} />
       </div>

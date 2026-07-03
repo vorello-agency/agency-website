@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import { Check, X } from "lucide-react";
 import { gsap } from "@/lib/gsap/register";
 import Container from "@/components/layout/Container";
@@ -157,7 +157,7 @@ function FitCard({
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
       onTouchCancel={handleTouchEnd}
-      className={`relative h-full p-6 md:p-8 2xl:p-10 rounded-xl border select-none transition-colors duration-300 ${isIdeal
+      className={`relative h-full p-5 md:p-8 2xl:p-10 rounded-xl border select-none transition-colors duration-300 ${isIdeal
           ? "border-electric-violet/20 bg-graphite-metal"
           : "border-steel-grey/30 bg-graphite-metal"
         }`}
@@ -189,7 +189,7 @@ function FitCard({
       />
 
       {/* Header */}
-      <div className="relative flex items-center gap-3 2xl:gap-4 mb-6 2xl:mb-8">
+      <div className="relative flex items-center gap-3 2xl:gap-4 mb-4 md:mb-6 2xl:mb-8">
         <div
           ref={iconContainerRef}
           className={`fit-icon w-8 h-8 2xl:w-10 2xl:h-10 rounded-full flex items-center justify-center shrink-0 transition-colors duration-300 ${isIdeal
@@ -205,11 +205,11 @@ function FitCard({
       </div>
 
       {/* List items */}
-      <ul className="relative flex flex-col gap-4 2xl:gap-5">
+      <ul className="relative flex flex-col gap-3 md:gap-4 2xl:gap-5">
         {items.map((item, idx) => (
           <li
             key={idx}
-            className={`${itemClass} flex gap-3 2xl:gap-4 text-sm 2xl:text-base ${isIdeal
+            className={`${itemClass} flex gap-2 md:gap-3 2xl:gap-4 text-sm 2xl:text-base ${isIdeal
                 ? "text-chrome-highlight"
                 : "text-chrome-highlight/75"
               }`}
@@ -234,6 +234,86 @@ export default function Fit() {
   const sectionRef = useRef<HTMLElement>(null);
   const leftCardRef = useRef<HTMLDivElement>(null);
   const rightCardRef = useRef<HTMLDivElement>(null);
+  const cardsContainerRef = useRef<HTMLDivElement>(null);
+  const [activeSlide, setActiveSlide] = useState(0);
+  const [isMobileSlider, setIsMobileSlider] = useState(false);
+  const swipeHintDone = useRef(false);
+
+  // Track whether we're in mobile slider mode
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobileSlider(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  // Swipe hint: small peek animation on mount (mobile only, runs once)
+  useEffect(() => {
+    if (!isMobileSlider || swipeHintDone.current || !cardsContainerRef.current) return;
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion) return;
+
+    swipeHintDone.current = true;
+    const items = Array.from(cardsContainerRef.current.children) as HTMLElement[];
+    const secondCard = items[1];
+    if (!secondCard) return;
+
+    const timer = setTimeout(() => {
+      const container = cardsContainerRef.current;
+      if (!container) return;
+      const tl = gsap.timeline();
+      tl.to(container, {
+        x: -28,
+        duration: 0.45,
+        ease: "power2.out",
+      });
+      tl.to(container, {
+        x: 0,
+        duration: 0.5,
+        ease: "power2.inOut",
+        delay: 0.15,
+      });
+    }, 800);
+
+    return () => clearTimeout(timer);
+  }, [isMobileSlider]);
+
+  // IntersectionObserver for dot tracking in mobile slider
+  useEffect(() => {
+    if (!isMobileSlider || !cardsContainerRef.current) return;
+
+    const container = cardsContainerRef.current;
+    const items = Array.from(container.children) as HTMLElement[];
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const idx = items.indexOf(entry.target as HTMLElement);
+            if (idx !== -1) setActiveSlide(idx);
+          }
+        });
+      },
+      {
+        root: container,
+        threshold: 0.6,
+      }
+    );
+
+    items.forEach((item) => observer.observe(item));
+    return () => observer.disconnect();
+  }, [isMobileSlider]);
+
+  // Scroll to a specific slide when dot is clicked
+  const scrollToSlide = useCallback((index: number) => {
+    if (!cardsContainerRef.current) return;
+    const items = Array.from(cardsContainerRef.current.children) as HTMLElement[];
+    if (items[index]) {
+      items[index].scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+    }
+  }, []);
 
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -272,34 +352,50 @@ export default function Fit() {
         }
       );
 
-      // 2. Cards slide in symmetrically with 3D rotation (elevating beyond basic fade)
-      tl.fromTo(
-        leftCardRef.current,
-        { x: -30, opacity: 0, rotationY: 4, scale: 0.97 },
-        {
-          x: 0,
-          opacity: 1,
-          rotationY: 0,
-          scale: 1,
-          duration: 0.7,
-          ease: "power2.out",
-        },
-        "-=0.4"
-      );
+      // 2. Cards entrance (3D rotation in desktop, simple fade in mobile)
+      const isDesktop = window.innerWidth >= 768;
+      if (isDesktop) {
+        tl.fromTo(
+          leftCardRef.current,
+          { x: -30, opacity: 0, rotationY: 4, scale: 0.97 },
+          {
+            x: 0,
+            opacity: 1,
+            rotationY: 0,
+            scale: 1,
+            duration: 0.7,
+            ease: "power2.out",
+          },
+          "-=0.4"
+        );
 
-      tl.fromTo(
-        rightCardRef.current,
-        { x: 30, opacity: 0, rotationY: -4, scale: 0.97 },
-        {
-          x: 0,
-          opacity: 1,
-          rotationY: 0,
-          scale: 1,
-          duration: 0.7,
-          ease: "power2.out",
-        },
-        "-=0.5"
-      );
+        tl.fromTo(
+          rightCardRef.current,
+          { x: 30, opacity: 0, rotationY: -4, scale: 0.97 },
+          {
+            x: 0,
+            opacity: 1,
+            rotationY: 0,
+            scale: 1,
+            duration: 0.7,
+            ease: "power2.out",
+          },
+          "-=0.5"
+        );
+      } else {
+        tl.fromTo(
+          [leftCardRef.current, rightCardRef.current],
+          { opacity: 0, y: 15 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            stagger: 0.1,
+            ease: "power2.out",
+          },
+          "-=0.4"
+        );
+      }
 
       // 3. Icon scale-pop entrance (back.out for a satisfying bounce)
       tl.fromTo(
@@ -362,7 +458,7 @@ export default function Fit() {
     }, sectionRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [isMobileSlider]);
 
   return (
     <section
@@ -392,16 +488,19 @@ export default function Fit() {
           eyebrow="// CLIENTE IDEAL"
           title="Criterios de colaboración estratégica"
           description="Trabajamos mejor con empresas que valoran el diseño, la tecnología y un proceso claro para construir productos digitales de calidad."
-          align="center"
           className="fit-heading"
         />
 
         <div
-          className="grid grid-cols-1 md:grid-cols-2 gap-8 2xl:gap-12 max-w-5xl 2xl:max-w-7xl mx-auto mt-12 2xl:mt-16"
+          ref={cardsContainerRef}
+          className="flex gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-hide -mx-4 px-4 py-2 pb-4 md:overflow-x-visible md:mx-0 md:px-0 md:py-0 md:pb-0 md:grid md:grid-cols-2 md:gap-8 2xl:gap-12 max-w-5xl 2xl:max-w-7xl mx-auto mt-12 2xl:mt-16"
           style={{ perspective: "1000px" }}
         >
           {/* Ideal Fit Card */}
-          <div ref={leftCardRef}>
+          <div 
+            ref={leftCardRef}
+            className="min-w-[85vw] max-w-[340px] shrink-0 snap-center md:min-w-0 md:max-w-none md:shrink md:snap-align-none"
+          >
             <FitCard
               variant="ideal"
               items={IDEAL_FITS}
@@ -411,7 +510,10 @@ export default function Fit() {
           </div>
 
           {/* Non-Ideal Fit Card */}
-          <div ref={rightCardRef}>
+          <div 
+            ref={rightCardRef}
+            className="min-w-[85vw] max-w-[340px] shrink-0 snap-center md:min-w-0 md:max-w-none md:shrink md:snap-align-none"
+          >
             <FitCard
               variant="avoid"
               items={AVOID_FITS}
@@ -420,6 +522,26 @@ export default function Fit() {
             />
           </div>
         </div>
+
+        {/* Dot indicators — mobile only */}
+        {isMobileSlider && (
+          <div className="flex items-center justify-center gap-2 mt-6 md:hidden" role="tablist" aria-label="Indicadores del slider de fit">
+            {[0, 1].map((idx) => (
+              <button
+                key={idx}
+                onClick={() => scrollToSlide(idx)}
+                role="tab"
+                aria-selected={activeSlide === idx}
+                aria-label={`Ir a tarjeta ${idx + 1}`}
+                className={`rounded-full transition-all duration-300 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-electric-violet ${
+                  activeSlide === idx
+                    ? "w-5 h-2 bg-electric-violet"
+                    : "w-2 h-2 bg-steel-grey/40 hover:bg-steel-grey/70"
+                }`}
+              />
+            ))}
+          </div>
+        )}
       </Container>
     </section>
   );

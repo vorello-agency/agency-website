@@ -1,6 +1,6 @@
 export default function StartIntro() {
   return (
-    <div className="mb-12 max-w-3xl">
+    <div className="mb-6 max-w-3xl md:mb-12">
       <span className="mb-4 block text-xs font-semibold uppercase tracking-widest text-electric-violet font-mono">
         {"// SOLICITUD DE PROPUESTA FORMAL"}
       </span>

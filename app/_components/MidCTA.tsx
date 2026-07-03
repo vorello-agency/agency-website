@@ -185,7 +185,7 @@ export default function MidCTA() {
               size="md"
               className="cursor-pointer shadow-lg shadow-neon-blue/20 hover:scale-[1.02] active:scale-[0.98] transition-all"
               onClick={() => handleScrollTo("contacto")}
-              aria-label="Iniciar proyecto y contactar con Vorello"
+              aria-label="Iniciar un proyecto con Vorello"
               withArrow
             >
               Iniciar proyecto

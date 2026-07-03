@@ -116,17 +116,17 @@ export default function CTA() {
     <section
       ref={sectionRef}
       id="contacto"
-      className="py-20 md:py-32 2xl:py-40 bg-carbon-black relative z-20 overflow-hidden"
+      className="py-0 md:py-32 2xl:py-40 bg-carbon-black relative z-20 overflow-hidden"
     >
       {/* Background decoration */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] rounded-full bg-electric-violet/10 blur-[120px]" />
       </div>
 
-      <Container>
+      <Container className="px-0 sm:px-0 md:px-6 lg:px-16 xl:px-20 2xl:px-8">
         <div
           ref={cardRef}
-          className="relative max-w-xl md:max-w-2xl lg:max-w-3xl xl:max-w-4xl 2xl:max-w-6xl mx-auto rounded-2xl border border-steel-grey/30 bg-graphite-metal pt-8 pb-12 px-5 sm:px-8 md:py-10 md:px-8 2xl:py-16 2xl:px-36 text-center overflow-hidden"
+          className="relative max-w-xl md:max-w-2xl lg:max-w-3xl xl:max-w-4xl 2xl:max-w-6xl mx-auto md:rounded-2xl border-0 md:border md:border-steel-grey/30 bg-transparent md:bg-graphite-metal pt-8 pb-12 px-5 sm:px-8 md:py-10 md:px-8 2xl:py-16 2xl:px-36 text-left md:text-center overflow-hidden"
           style={{ opacity: 0 }}
         >
           {/* Internal ambient glowing bulb */}
@@ -139,15 +139,15 @@ export default function CTA() {
             {"// INICIAR CONVERSACIÓN"}
           </span>
 
-          <h2 className="cta-title text-3xl sm:text-4xl md:text-5xl 2xl:text-6xl font-bold text-chrome-highlight tracking-tight mb-6 max-w-2xl mx-auto leading-tight relative z-10">
+          <h2 className="cta-title text-2xl sm:text-4xl md:text-5xl 2xl:text-6xl font-bold text-chrome-highlight tracking-tight mb-6 max-w-2xl mx-0 md:mx-auto leading-tight relative z-10">
             Diseñemos y desarrollemos tu próximo sistema digital
           </h2>
 
-          <p className="cta-desc text-sm sm:text-base 2xl:text-lg text-chrome-deep max-w-lg 2xl:max-w-xl mx-auto mb-10 2xl:mb-12 leading-relaxed relative z-10">
+          <p className="cta-desc text-sm sm:text-base 2xl:text-lg text-chrome-deep max-w-lg 2xl:max-w-xl mx-0 md:mx-auto mb-10 2xl:mb-12 leading-relaxed relative z-10">
             Cuéntanos sobre tus objetivos de negocio. Analizaremos tu caso particular sin compromiso para proponerte una estrategia de producto y tecnología a medida.
           </p>
 
-          <div className="cta-buttons flex flex-col sm:flex-row gap-4 justify-center items-center relative z-10">
+          <div className="cta-buttons flex flex-col sm:flex-row gap-4 justify-start md:justify-center items-center relative z-10">
             <Link href="/start" className="w-full sm:w-auto focus-visible:outline-none">
               <Button
                 variant="primary-blue"

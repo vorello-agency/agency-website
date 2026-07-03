@@ -225,25 +225,27 @@ export default function Footer() {
       className="relative border-t border-steel-grey/20 bg-carbon-black text-chrome-deep pt-16 pb-16 sm:pb-24 md:pt-20 md:pb-32 lg:pb-48 mt-auto overflow-hidden"
     >
       {/* ── Main content grid ── */}
-      <Container className="relative z-10 flex flex-col md:flex-row justify-between items-start gap-10 pb-20 xl:px-16!">
+      <Container className="relative z-10 flex flex-col md:flex-row justify-between items-start gap-10 pb-8 md:pb-20 px-4 sm:px-6 lg:px-16 xl:px-16!">
 
         {/* — Brand column — */}
         <div className="footer-col flex flex-col gap-5 max-w-md w-full">
-          <Link
-            href="/"
-            aria-label="Inicio"
-            className="flex items-center gap-1 group focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-electric-violet rounded w-fit"
-          >
-            <Logo
-              variant="both"
-              size="lg"
-              className="opacity-95 transition-opacity group-hover:opacity-100"
-            />
-          </Link>
+          <div className="flex flex-col gap-5 pl-1 sm:pl-0">
+            <Link
+              href="/"
+              aria-label="Inicio"
+              className="flex items-center gap-1 group focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-electric-violet rounded w-fit"
+            >
+              <Logo
+                variant="both"
+                size="lg"
+                className="opacity-95 transition-opacity group-hover:opacity-100"
+              />
+            </Link>
 
-          <p className="text-sm leading-relaxed text-balance text-[#828B9B] max-w-md">
-            {BRAND_TAGLINE}
-          </p>
+            <p className="text-sm leading-relaxed text-balance text-[#828B9B] max-w-md">
+              {BRAND_TAGLINE}
+            </p>
+          </div>
 
           {/* Badges Container */}
           <div className="flex flex-wrap items-center gap-3 mt-3">
@@ -258,7 +260,8 @@ export default function Footer() {
                   Disponible para proyectos • {quarter} {year}
                 </span>
               </div>
-              <Link href="/start" className="focus-visible:outline-none flex shrink-0 sm:ml-auto">
+              {/* Desktop Button: hidden on mobile */}
+              <Link href="/start" className="focus-visible:outline-none hidden sm:flex shrink-0 sm:ml-auto">
                 <Button
                   variant="primary-blue"
                   size="sm"
@@ -268,30 +271,39 @@ export default function Footer() {
                   Iniciar proyecto
                 </Button>
               </Link>
+              {/* Mobile Button: subtle outline style aligned to the left (indented pl-5) */}
+              <Link href="/start" className="focus-visible:outline-none flex sm:hidden shrink-0 mt-1 pl-5">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  withArrow
+                  className="!text-[10px] !py-1 !px-2 rounded-md border-steel-grey/40 hover:border-chrome-highlight/30 text-chrome-highlight bg-carbon-black/30 hover:bg-carbon-black/60 transition-all duration-300 w-auto"
+                >
+                  Iniciar proyecto
+                </Button>
+              </Link>
             </div>
 
             {/* Location & Timezone Badge */}
             <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 bg-graphite-metal/30 border border-steel-grey/30 rounded-lg px-3 py-2 w-full select-none sm:pl-4">
-              <div className="flex items-start sm:items-center gap-3">
-                <span className="relative flex h-2 w-2 shrink-0 mb-4">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-neon-blue opacity-75" />
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-neon-blue" />
+              <div className="flex flex-col min-w-0">
+                <span className="text-[11px] font-medium text-chrome-highlight font-mono tracking-tight whitespace-nowrap flex items-center gap-2">
+                  <span className="relative flex h-2 w-2 shrink-0">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-neon-blue opacity-75" />
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-neon-blue" />
+                  </span>
+                  <span className="whitespace-nowrap">Desde Montevideo, Uruguay</span>
+                  <FlagImage
+                    iso2="uy"
+                    style={{ width: "20px", height: "15px" }}
+                    className="shrink-0 rounded-[2px] select-none"
+                  />
                 </span>
-                <div className="flex flex-col min-w-0">
-                  <span className="text-[11px] font-medium text-chrome-highlight font-mono tracking-tight whitespace-nowrap flex items-center gap-2">
-                    <span className="whitespace-nowrap">Desde Montevideo, Uruguay</span>
-                    <FlagImage
-                      iso2="uy"
-                      style={{ width: "20px", height: "15px" }}
-                      className="shrink-0 rounded-[2px] select-none"
-                    />
-                  </span>
-                  <span className="text-[10px] text-[#828B9B]/60 font-mono tracking-tight mt-0.5 whitespace-nowrap hidden min-[375px]:block">
-                    Hub tecnológico en América Latina
-                  </span>
-                </div>
+                <span className="text-[10px] text-[#828B9B]/60 font-mono tracking-tight mt-1 whitespace-nowrap hidden min-[375px]:block pl-3">
+                  Hub tecnológico en América Latina
+                </span>
               </div>
-              <span className="sm:ml-auto text-[11px] font-medium text-chrome-highlight font-mono tracking-tight whitespace-nowrap sm:my-auto pl-5 sm:pl-0" title="Hora local en Montevideo, Uruguay">
+              <span className="sm:ml-auto text-[11px] font-medium text-chrome-highlight font-mono tracking-tight whitespace-nowrap sm:my-auto pl-4 sm:pl-0" title="Hora local en Montevideo, Uruguay">
                 <span className="text-chrome-highlight/90 font-semibold">{localTime || "--:--"}</span>{" "}
                 <span className="text-[10px] text-[#828B9B]/60 font-sans">(UTC-3)</span>
               </span>
@@ -299,7 +311,7 @@ export default function Footer() {
           </div>
         </div>
         {/* — Links & Contact Wrapper — */}
-        <div className="flex flex-col sm:flex-row items-start gap-y-10 gap-x-12 lg:gap-x-16">
+        <div className="flex flex-col sm:flex-row items-start gap-y-6 gap-x-12 lg:gap-x-16 pl-2 sm:pl-0">
 
           {/* — Services column — */}
           <div className="footer-col flex flex-col gap-4">
@@ -420,11 +432,12 @@ export default function Footer() {
       </div>
 
       {/* ── Bottom info bar ── */}
-      <div className="footer-bottom relative z-10 pt-8">
-        <Container className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
-          <p className="text-[#828B9B]">
+      <div className="footer-bottom relative z-10 py-8">
+        <Container className="flex flex-col items-center gap-6 text-xs sm:flex-row sm:justify-between sm:gap-4">
+          <p className="text-center text-[#828B9B] sm:text-left">
             &copy; {currentYear} Vorello Agency.
-            <br />
+            <br className="sm:hidden" />
+            <span className="hidden sm:inline"> · </span>
             Todos los derechos reservados.
           </p>
 

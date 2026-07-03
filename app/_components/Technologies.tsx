@@ -10,7 +10,7 @@ import { animateTechIconEnter, animateTechIconLeave } from "@/lib/gsap/animation
 const LAYERS = [
   {
     num: "1",
-    title: "Diseño y Sistema Visual",
+    title: "Diseño y sistema visual",
     icon: Palette,
     chips: ["Figma", "Storybook", "Design Systems", "UX/UI", "Prototyping"],
     colorTheme: "orange",
@@ -18,7 +18,7 @@ const LAYERS = [
   },
   {
     num: "2",
-    title: "Interacción y Frontend",
+    title: "Interacción y front-end",
     icon: Layers,
     chips: ["Next.js", "React", "TypeScript", "Tailwind CSS", "GSAP"],
     colorTheme: "violet",
@@ -26,7 +26,7 @@ const LAYERS = [
   },
   {
     num: "3",
-    title: "Infraestructura Cloud",
+    title: "Infraestructura & cloud",
     icon: Server,
     chips: ["Node.js", "Vercel", "Cloudflare", "Supabase", "Google Cloud"],
     colorTheme: "blue",
@@ -34,7 +34,7 @@ const LAYERS = [
   },
   {
     num: "4",
-    title: "Servicios y Datos",
+    title: "Servicios y datos",
     icon: Cpu,
     chips: ["Sanity", "Stripe", "Resend", "n8n", "Webhooks"],
     colorTheme: "emerald",
@@ -169,7 +169,7 @@ function LayerCard({ layer }: { layer: LayerItem }) {
         onTouchCancel={handleTouchEnd}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        className="group relative flex flex-col md:flex-row md:items-center justify-between gap-6 p-6 md:p-8 rounded-xl border border-steel-grey/25 bg-graphite-metal transition-all duration-500 ease-out overflow-hidden select-none"
+        className="group relative flex flex-col md:flex-row md:items-center justify-between gap-4 md:gap-6 p-4 md:p-8 rounded-xl border border-steel-grey/25 bg-graphite-metal transition-all duration-500 ease-out overflow-hidden select-none"
       >
         {/* Subtle dynamic radial light on hover - Commented out for non-glassmorphism look */}
         {layer.colorTheme === "violet" && (
@@ -235,7 +235,7 @@ function LayerCard({ layer }: { layer: LayerItem }) {
         </div>
 
         {/* Left Column: Icon & Title */}
-        <div className="relative z-20 flex items-center gap-4 min-w-[280px]">
+        <div className="relative z-20 flex items-center gap-4 md:min-w-[280px]">
           <div className={`w-10 h-10 rounded-lg bg-steel-grey/15 border border-steel-grey/20 flex items-center justify-center text-chrome-deep transition-all duration-500 ease-out overflow-visible
             ${layer.colorTheme === "violet" ? "md:group-hover:text-electric-violet md:group-hover:border-electric-violet/20 md:group-hover:bg-electric-violet/5" : ""}
             ${layer.colorTheme === "blue" ? "md:group-hover:text-neon-blue md:group-hover:border-neon-blue/20 md:group-hover:bg-neon-blue/5" : ""}
@@ -260,7 +260,7 @@ function LayerCard({ layer }: { layer: LayerItem }) {
           {layer.chips.map((chip, idx) => (
             <span
               key={idx}
-              className={`tech-chip px-3.5 py-1.5 text-xs font-mono rounded-full border border-steel-grey/30 bg-graphite-metal/30 text-chrome-highlight hover:text-white hover:scale-[1.03] transition-all duration-500 ease-out cursor-default
+              className={`tech-chip px-3 py-1 text-xs font-mono rounded-full border border-steel-grey/30 bg-graphite-metal/30 text-chrome-highlight hover:text-white hover:scale-[1.03] transition-all duration-500 ease-out cursor-default
                 ${layer.colorTheme === "violet" ? "hover:border-electric-violet/40 hover:bg-electric-violet/10" : ""}
                 ${layer.colorTheme === "blue" ? "hover:border-neon-blue/40 hover:bg-neon-blue/10" : ""}
                 ${layer.colorTheme === "orange" ? "hover:border-[#FF6B00]/40 hover:bg-[#FF6B00]/10" : ""}

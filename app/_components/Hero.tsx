@@ -133,7 +133,7 @@ export default function Hero() {
   return (
     <section
       ref={containerRef}
-      className="relative z-20 min-h-[75vh] sm:min-h-[85vh] flex items-center justify-center pt-24 pb-16 sm:pt-28 sm:pb-20 md:pb-24 2xl:pt-36 2xl:pb-32 overflow-hidden bg-carbon-black"
+      className="relative z-20 min-h-[90vh] sm:min-h-[85vh] flex flex-col items-stretch lg:items-center justify-center pt-32 pb-16 sm:pt-36 sm:pb-28 md:pb-24 2xl:pt-36 2xl:pb-32 overflow-hidden bg-carbon-black"
     >
       {/* Premium clean dots background with radial mask */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
@@ -149,18 +149,18 @@ export default function Hero() {
       </div>
 
 
-      <Container className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 2xl:gap-24 items-center">
+      <Container className="relative z-10 flex flex-col lg:grid lg:grid-cols-12 gap-16 lg:gap-x-16 lg:gap-y-8 2xl:gap-x-24 2xl:gap-y-10 items-center flex-grow w-full">
         {/* Left Column: Text & CTA */}
-        <div className="lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left">
+        <div className="lg:col-span-7 flex flex-col flex-grow items-center lg:items-start text-center lg:text-left w-full">
           {/* Decorative Badge */}
-          <Badge variant="violet" className="mb-5 sm:mb-8">
+          <Badge variant="violet" className="mb-12 sm:mb-8">
             <span className="hidden sm:inline-flex">VORELLO — ESTUDIO DIGITAL PREMIUM</span>
             <span className="inline-flex sm:hidden">ESTUDIO DIGITAL PREMIUM</span>
           </Badge>
 
           <h1
             ref={headlineRef}
-            className="text-5xl sm:text-8xl lg:text-8xl xl:text-9xl font-bebas tracking-wide text-chrome-highlight uppercase mb-4 sm:mb-6 2xl:mb-8 max-w-5xl leading-[0.9] select-none flex flex-col gap-1 sm:gap-2 2xl:gap-3"
+            className="text-6xl sm:text-8xl lg:text-8xl xl:text-9xl font-bebas tracking-wide text-chrome-highlight uppercase mb-8 sm:mb-6 2xl:mb-8 max-w-5xl leading-[0.9] select-none flex flex-col gap-3 sm:gap-2 2xl:gap-3"
             style={{ opacity: 0 }}
           >
             <span>Diseño<span className="inline-block text-[0.78em] translate-y-[-0.07em] ml-[0.02em] select-none text-chrome-deep">.</span></span>
@@ -171,7 +171,7 @@ export default function Hero() {
           {/* Brand core positioning sentence - improved contrast */}
           <p
             ref={subtitleRef}
-            className="text-base sm:text-lg md:text-xl 2xl:text-2xl text-[#A8B0BD] max-w-2xl 2xl:max-w-3xl leading-relaxed text-balance mb-10 2xl:mb-14"
+            className="text-base sm:text-lg md:text-xl 2xl:text-2xl text-[#A8B0BD] max-w-2xl 2xl:max-w-3xl leading-relaxed text-balance"
             style={{ opacity: 0 }}
           >
             Diseñamos y desarrollamos productos bien pensados, visualmente cuidados y técnicamente sólidos.
@@ -180,16 +180,16 @@ export default function Hero() {
           {/* Call to Actions */}
           <div
             ref={ctaRef}
-            className="flex flex-col sm:flex-row gap-4 items-center justify-center lg:justify-start w-full sm:w-auto"
+            className="mt-auto pt-10 flex flex-col sm:flex-row gap-3 sm:gap-4 items-center justify-center lg:justify-start w-full max-w-72 sm:max-w-none sm:w-auto mx-auto lg:mx-0"
             style={{ opacity: 0 }}
           >
             <Link href="/start" className="w-full sm:w-auto focus-visible:outline-none">
-              <Button variant="primary-blue" size="lg" className="w-full" withArrow>
+              <Button variant="primary" size="lg" className="w-full" withArrow>
                 Iniciar proyecto
               </Button>
             </Link>
             <Link href="#proceso" className="w-full sm:w-auto focus-visible:outline-none">
-              <Button variant="outline" size="lg" className="w-full bg-carbon-black/50">
+              <Button variant="subtle" size="lg" className="w-full text-chrome-deep hover:text-chrome-highlight">
                 Proceso de trabajo
               </Button>
             </Link>
@@ -197,8 +197,8 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Right Column: Visual Element with Isotipo */}
-        <div className="lg:col-span-5 flex items-center justify-center w-full mt-6 sm:mt-10 lg:mt-0">
+        {/* Right Column: Visual Element with Isotipo (Hidden on mobile) */}
+        <div className="hidden lg:flex lg:col-span-5 items-center justify-center w-full mt-6 sm:mt-10 lg:mt-0">
           <div
             ref={visualRef}
             className="relative w-full max-w-[160px] sm:max-w-[224px] md:max-w-md mx-auto flex items-center justify-center"

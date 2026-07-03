@@ -26,7 +26,7 @@ export default function ContactContent(props: ContactContentProps) {
     <div className="mt-4">
       <ContactIntro />
 
-      <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16 xl:gap-20">
+      <div className="grid grid-cols-1 gap-6 md:gap-12 lg:grid-cols-12 lg:gap-16 xl:gap-20">
         <ContactSidebar />
         <ContactForm {...props} />
       </div>

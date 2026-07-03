@@ -263,29 +263,39 @@ function StepThreeBudgetDeadline({
       </div>
 
       <div className="grid grid-cols-1 gap-8 xl:grid-cols-2">
-        <CardSelector
-          id="group-budget"
-          cardIdPrefix="budget"
-          options={BUDGET_RANGES}
-          value={formData.budget}
-          onChange={(value) => handleSelectField("budget", value)}
-          error={errors.budget}
-          theme="violet"
-          cardSize="sm"
-          columnsClass="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-1 gap-2"
-        />
+        <div className="space-y-3">
+          <h3 className="text-[10px] font-bold uppercase tracking-[0.12em] text-[#828B9B] xl:hidden">
+            Presupuesto estimado
+          </h3>
+          <CardSelector
+            id="group-budget"
+            cardIdPrefix="budget"
+            options={BUDGET_RANGES}
+            value={formData.budget}
+            onChange={(value) => handleSelectField("budget", value)}
+            error={errors.budget}
+            theme="violet"
+            cardSize="sm"
+            columnsClass="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-1 gap-2"
+          />
+        </div>
 
-        <CardSelector
-          id="group-deadline"
-          cardIdPrefix="deadline"
-          options={DEADLINES}
-          value={formData.deadline}
-          onChange={(value) => handleSelectField("deadline", value)}
-          error={errors.deadline}
-          theme="violet"
-          cardSize="sm"
-          columnsClass="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-1 gap-2"
-        />
+        <div className="space-y-3">
+          <h3 className="text-[10px] font-bold uppercase tracking-[0.12em] text-[#828B9B] xl:hidden">
+            Plazo de desarrollo
+          </h3>
+          <CardSelector
+            id="group-deadline"
+            cardIdPrefix="deadline"
+            options={DEADLINES}
+            value={formData.deadline}
+            onChange={(value) => handleSelectField("deadline", value)}
+            error={errors.deadline}
+            theme="violet"
+            cardSize="sm"
+            columnsClass="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-1 gap-2"
+          />
+        </div>
       </div>
 
       <div className="flex flex-col gap-3 pt-4 sm:flex-row sm:justify-between">
@@ -443,7 +453,7 @@ export default function StartForm({
 }: StartFormProps) {
   return (
     <div className="order-1 lg:order-2 lg:col-span-8">
-      <div className="relative rounded-2xl border border-steel-grey bg-graphite-metal p-6 backdrop-blur-md sm:p-8">
+      <div className="relative rounded-none border-y border-x-0 sm:rounded-2xl sm:border-x border-steel-grey bg-graphite-metal p-6 backdrop-blur-md sm:p-8 -mx-4 sm:mx-0">
         <h2 className="mb-6 border-b border-steel-grey/30 pb-3 text-base font-bold uppercase tracking-wider text-chrome-highlight">
           Formulario de solicitud
         </h2>

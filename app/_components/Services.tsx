@@ -5,6 +5,7 @@ import { Globe, Cpu, ShoppingBag, ArrowUpRight, RefreshCw, Workflow } from "luci
 import { gsap } from "@/lib/gsap/register";
 import Container from "@/components/layout/Container";
 import SectionHeading from "@/components/layout/SectionHeading";
+import Link from "next/link";
 
 const SERVICES = [
   {
@@ -247,7 +248,7 @@ function ServiceCard({ service }: { service: typeof SERVICES[0] }) {
       onTouchCancel={handleTouchEnd}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className="group relative flex flex-col p-6 md:p-8 2xl:p-10 rounded-xl border border-steel-grey/30 bg-graphite-metal md:hover:border-electric-violet/40 transition-all duration-300 h-full min-h-[480px] 2xl:min-h-[520px] select-none"
+      className="group relative flex flex-col p-5 md:p-8 2xl:p-10 rounded-xl border border-steel-grey/30 bg-graphite-metal md:hover:border-electric-violet/40 transition-all duration-300 h-full md:min-h-[480px] 2xl:min-h-[520px] select-none"
     >
       {/* Accent line animation hover */}
       <div
@@ -258,7 +259,7 @@ function ServiceCard({ service }: { service: typeof SERVICES[0] }) {
       {/* Main content wrapper (takes all available height) */}
       <div className="flex-1 flex flex-col">
         {/* Header: Icon & Num */}
-        <div className="flex items-center justify-between mb-8">
+        <div className="flex items-center justify-between mb-5 md:mb-8">
           <div
             ref={iconRef}
             className="services-icon w-12 h-12 rounded-lg bg-steel-grey/25 border border-steel-grey/30 flex items-center justify-center text-chrome-highlight md:group-hover:text-electric-violet md:group-hover:border-electric-violet/20 transition-all duration-300"
@@ -276,12 +277,12 @@ function ServiceCard({ service }: { service: typeof SERVICES[0] }) {
         </h3>
 
         {/* Description */}
-        <p className="services-desc text-sm 2xl:text-base text-[#8F9BA8] leading-relaxed mb-6 md:group-hover:text-chrome-deep/90">
+        <p className="services-desc text-sm 2xl:text-base text-[#8F9BA8] leading-relaxed mb-4 md:mb-6 md:group-hover:text-chrome-deep/90">
           {service.description}
         </p>
 
         {/* Features / Bullets (Separated with border-top) */}
-        <ul className="flex flex-col gap-2.5 2xl:gap-3.5 mb-8 border-t border-steel-grey/20 pt-6 mt-auto">
+        <ul className="flex flex-col gap-2 md:gap-2.5 2xl:gap-3.5 mb-5 md:mb-8 border-t border-steel-grey/20 pt-4 md:pt-6 mt-auto">
           {service.features.map((feature, fIdx) => (
             <li
               key={fIdx}
@@ -296,13 +297,13 @@ function ServiceCard({ service }: { service: typeof SERVICES[0] }) {
 
       {/* CTA - Pushed strictly to the bottom of the card */}
       <div className="services-cta mt-auto">
-        <a
-          href="#contacto"
+        <Link
+          href="/start"
           className="inline-flex items-center gap-2 text-xs 2xl:text-sm font-mono text-chrome-highlight font-semibold md:group-hover:text-electric-violet transition-colors focus-visible:outline-none"
         >
           Iniciar proyecto{" "}
           <ArrowUpRight className="w-3.5 h-3.5 md:group-hover:translate-x-0.5 md:group-hover:-translate-y-0.5 transition-transform" />
-        </a>
+        </Link>
       </div>
     </div>
   );
