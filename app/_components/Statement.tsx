@@ -51,7 +51,7 @@ export default function Statement() {
       gsap.fromTo(
         ".reveal-word",
         {
-          opacity: 0.15,
+          opacity: 0,
           filter: "blur(4px)",
           y: 4,
         },

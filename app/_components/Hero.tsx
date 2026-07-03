@@ -19,42 +19,69 @@ export default function Hero() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Create a smooth entrance sequence
-      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+      const mm = gsap.matchMedia();
 
-      tl.fromTo(
-        headlineRef.current,
-        { y: 30, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.8, delay: 0.2 }
-      )
-        .fromTo(
-          subtitleRef.current,
-          { y: 20, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.6 },
-          "-=0.5"
-        )
-        .fromTo(
-          ctaRef.current,
-          { y: 15, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.6 },
-          "-=0.4"
-        )
-        .fromTo(
-          visualRef.current,
-          { scale: 0.95, opacity: 0 },
-          { scale: 1, opacity: 1, duration: 1 },
-          "-=0.5"
-        );
+      mm.add(
+        {
+          reduceMotion: "(prefers-reduced-motion: reduce)",
+          noReduce: "(prefers-reduced-motion: no-preference)",
+        },
+        (context) => {
+          const { reduceMotion } = context.conditions as {
+            reduceMotion: boolean;
+          };
 
-      // Idle floating animation for the visual element
-      gsap.to(visualRef.current, {
-        y: -12,
-        duration: 3,
-        ease: "sine.inOut",
-        yoyo: true,
-        repeat: -1,
-        delay: 1.2,
-      });
+          if (reduceMotion) {
+            gsap.set(
+              [
+                headlineRef.current,
+                subtitleRef.current,
+                ctaRef.current,
+                visualRef.current,
+              ],
+              { opacity: 1, y: 0, scale: 1 }
+            );
+            return;
+          }
+
+          // Create a smooth entrance sequence (optimized for faster LCP)
+          const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+          tl.fromTo(
+            headlineRef.current,
+            { y: 20, opacity: 0 },
+            { y: 0, opacity: 1, duration: 0.5, delay: 0.05 }
+          )
+            .fromTo(
+              subtitleRef.current,
+              { y: 15, opacity: 0 },
+              { y: 0, opacity: 1, duration: 0.4 },
+              "-=0.4"
+            )
+            .fromTo(
+              ctaRef.current,
+              { y: 10, opacity: 0 },
+              { y: 0, opacity: 1, duration: 0.4 },
+              "-=0.3"
+            )
+            .fromTo(
+              visualRef.current,
+              { scale: 0.97, opacity: 0 },
+              { scale: 1, opacity: 1, duration: 0.6 },
+              "-=0.3"
+            );
+
+          // Idle floating animation for the visual element
+          gsap.to(visualRef.current, {
+            y: -12,
+            duration: 3,
+            ease: "sine.inOut",
+            yoyo: true,
+            repeat: -1,
+            delay: 0.8,
+          });
+        }
+      );
     }, containerRef);
 
     return () => ctx.revert();
@@ -188,9 +215,9 @@ export default function Hero() {
                 Iniciar proyecto
               </Button>
             </Link>
-            <Link href="#proceso" className="w-full sm:w-auto focus-visible:outline-none">
+            <Link href="/services" className="w-full sm:w-auto focus-visible:outline-none">
               <Button variant="subtle" size="lg" className="w-full text-chrome-deep hover:text-chrome-highlight">
-                Proceso de trabajo
+                Conoce nuestros servicios
               </Button>
             </Link>
 
