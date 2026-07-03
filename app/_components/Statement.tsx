@@ -2,13 +2,12 @@
 
 import React, { useEffect, useRef } from "react";
 import { gsap } from "@/lib/gsap/register";
-import Container from "@/components/ui/Container";
+import Container from "@/components/layout/Container";
 import { cn } from "@/lib/utils";
 
 export default function Statement() {
   const sectionRef = useRef<HTMLElement>(null);
   const textRef = useRef<HTMLHeadingElement>(null);
-  const glowRef = useRef<HTMLDivElement>(null);
 
   const textSegments = [
     { text: "No construimos páginas aisladas, sino", highlight: false },
@@ -70,25 +69,6 @@ export default function Statement() {
           },
         }
       );
-
-      // Background ambient glow expanding organically on scroll
-      if (glowRef.current) {
-        gsap.fromTo(
-          glowRef.current,
-          { scale: 0.8, opacity: 0.3 },
-          {
-            scale: 1.25,
-            opacity: 0.7,
-            ease: "sine.inOut",
-            scrollTrigger: {
-              trigger: sectionRef.current,
-              start: "top 75%",
-              end: "bottom 42%",
-              scrub: true,
-            },
-          }
-        );
-      }
     }, sectionRef);
 
     return () => ctx.revert();
@@ -100,11 +80,6 @@ export default function Statement() {
       id="manifiesto"
       className="py-20 md:py-28 2xl:py-36 bg-carbon-black relative z-20 overflow-hidden"
     >
-      {/* Dynamic Background Glow */}
-      <div 
-        ref={glowRef}
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[450px] h-[450px] rounded-full bg-electric-violet/5 blur-[120px] pointer-events-none" 
-      />
 
       <Container>
         <div className="max-w-4xl mx-auto flex flex-col gap-6 2xl:gap-8">
@@ -136,7 +111,9 @@ export default function Statement() {
 
           {/* Manifesto Subtext Paragraph */}
           <p className="reveal-item text-base sm:text-lg 2xl:text-xl text-[#A8B0BD] max-w-2xl 2xl:max-w-3xl leading-relaxed mt-2 2xl:mt-4">
-            Trabajamos con proceso, estándares altos y tecnología moderna. El resultado se nota en cada detalle.
+            Trabajamos con proceso, estándares altos y tecnología moderna.
+            <br />
+            El resultado se nota en cada detalle.
           </p>
         </div>
       </Container>

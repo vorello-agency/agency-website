@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import Container from "@/components/ui/Container";
+import Container from "@/components/layout/Container";
 import Scales from "@/components/aceternity/scales";
 import { cn } from "@/lib/utils";
 

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Menu, X, ArrowRight, GitMerge, Fingerprint, Send, Boxes } from "lucide-react";
 import { gsap } from "@/lib/gsap/register";
 import Button from "@/components/ui/Button";
-import Container from "@/components/ui/Container";
+import Container from "@/components/layout/Container";
 import Logo from "@/components/ui/Logo";
 import { cn } from "@/lib/utils";
 import {
@@ -15,32 +15,39 @@ import {
   animateNavbarCtaArrowLeave,
 } from "@/lib/gsap/animations";
 
+import { usePathname } from "next/navigation";
+
 const NAV_ITEMS = [
   {
     label: "Servicios",
-    href: "#servicios",
+    href: "/#servicios",
     icon: Boxes,
   },
   {
     label: "Proceso",
-    href: "#proceso",
+    href: "/#proceso",
     icon: GitMerge,
   },
   {
     label: "Manifiesto",
-    href: "#manifiesto",
+    href: "/#manifiesto",
     icon: Fingerprint,
   },
   {
     label: "Contacto",
-    href: "#contacto",
+    href: "/contact",
     icon: Send,
   },
 ];
 
+
 export default function Navbar() {
+  const pathname = usePathname();
+  const isOnboardingPage = pathname === "/start";
+
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+
   const [shouldAnimate, setShouldAnimate] = useState(false);
   const pillRef = useRef<HTMLDivElement>(null);
   const navContainerRef = useRef<HTMLDivElement>(null);
@@ -191,13 +198,16 @@ export default function Navbar() {
     e: React.MouseEvent<HTMLAnchorElement>,
     href: string
   ) => {
-    if (href.startsWith("#")) {
+    const hash = href.includes("#") ? href.substring(href.indexOf("#")) : "";
+    const isCurrentPageHome = window.location.pathname === "/";
+
+    if (hash && isCurrentPageHome) {
       e.preventDefault();
 
       // Update hash in URL smoothly
-      window.history.pushState(null, "", href);
+      window.history.pushState(null, "", hash);
 
-      const target = document.querySelector(href);
+      const target = document.querySelector(hash);
       if (target) {
         const rect = target.getBoundingClientRect();
         const top = rect.top + window.scrollY;
@@ -210,6 +220,7 @@ export default function Navbar() {
       }
     }
   };
+
 
   // Dynamic GSAP Hover/Focus Sliding Animation
   const handleMouseEnter = (
@@ -277,14 +288,14 @@ export default function Navbar() {
     }
   };
 
-  const handleCtaMouseEnter = (e: React.MouseEvent<HTMLButtonElement> | React.FocusEvent<HTMLButtonElement>) => {
+  const handleCtaMouseEnter = (e: React.MouseEvent<HTMLAnchorElement> | React.FocusEvent<HTMLAnchorElement>) => {
     const arrow = e.currentTarget.querySelector(".nav-cta-arrow") as HTMLElement | null;
     if (arrow) {
       animateNavbarCtaArrowEnter(arrow);
     }
   };
 
-  const handleCtaMouseLeave = (e: React.MouseEvent<HTMLButtonElement> | React.FocusEvent<HTMLButtonElement>) => {
+  const handleCtaMouseLeave = (e: React.MouseEvent<HTMLAnchorElement> | React.FocusEvent<HTMLAnchorElement>) => {
     const arrow = e.currentTarget.querySelector(".nav-cta-arrow") as HTMLElement | null;
     if (arrow) {
       animateNavbarCtaArrowLeave(arrow);
@@ -354,71 +365,95 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop sliding highlight navigation */}
-        <nav
-          ref={navContainerRef}
-          className="relative hidden md:flex items-center gap-1 py-1.5 px-2 rounded-full border border-steel-grey/30 bg-graphite-metal/40"
-          onMouseLeave={handleMouseLeave}
-        >
-          {/* Absolute moving highlight pill */}
-          <div
-            ref={pillRef}
-            className="absolute top-1/2 -translate-y-1/2 h-[30px] bg-white/[0.04] border border-white/[0.02] rounded-md pointer-events-none opacity-0 scale-95 z-0"
-            style={{ left: 0, width: 0 }}
-          />
-
-          {/* Navigation Links */}
-          {NAV_ITEMS.map((item) => {
-            const Icon = item.icon;
-            return (
-              <Link
-                key={item.label}
-                href={item.href}
-                className="relative z-10 px-3.5 py-1.5 text-sm font-medium text-[#828B9B] hover:text-chrome-highlight transition-colors duration-200 rounded-lg focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-electric-violet flex items-center gap-1.5 group/nav"
-                onClick={(e) => handleNavLinkClick(e, item.href)}
-                onMouseEnter={(e) => handleItemMouseEnter(item.label, e)}
-                onFocus={(e) => handleItemMouseEnter(item.label, e)}
-                onMouseLeave={(e) => handleItemMouseLeave(item.label, e)}
-                onBlur={(e) => handleItemMouseLeave(item.label, e)}
-              >
-                <Icon className="h-3.5 w-3.5 text-[#828B9B]/60 nav-icon-svg overflow-visible" />
-                <span>{item.label}</span>
-              </Link>
-            );
-          })}
-        </nav>
-
-        {/* CTA Action */}
-        <div className={cn(
-          "hidden md:flex items-center",
-          shouldAnimate && "transition-all duration-300",
-          isScrolled && "md:mr-8"
-        )}>
-          <Button
-            variant="secondary"
-            size="sm"
-            onMouseEnter={handleCtaMouseEnter}
-            onMouseLeave={handleCtaMouseLeave}
-            onFocus={handleCtaMouseEnter}
-            onBlur={handleCtaMouseLeave}
-            className="group relative bg-graphite-metal border border-steel-grey/60 text-chrome-highlight hover:border-electric-violet/60 hover:bg-electric-violet/[0.04] hover:shadow-[0_0_15px_rgba(123,76,255,0.2)] flex items-center justify-center transition-all duration-300"
+        {!isOnboardingPage && (
+          <nav
+            ref={navContainerRef}
+            className="relative hidden md:flex items-center gap-1 py-1.5 px-2 rounded-full border border-steel-grey/30 bg-graphite-metal"
+            onMouseLeave={handleMouseLeave}
           >
-            <span>Iniciar proyecto</span>
-            <ArrowRight className="h-3.5 w-3.5 opacity-60 ml-1.5 nav-cta-arrow transition-colors duration-300 group-hover:text-electric-violet overflow-visible" />
-          </Button>
-        </div>
+            {/* Absolute moving highlight pill */}
+            <div
+              ref={pillRef}
+              className="absolute top-1/2 -translate-y-1/2 h-[30px] bg-white/[0.04] border border-white/[0.02] rounded-md pointer-events-none opacity-0 scale-95 z-0"
+              style={{ left: 0, width: 0 }}
+            />
+
+            {/* Navigation Links */}
+            {NAV_ITEMS.map((item) => {
+              const Icon = item.icon;
+              return (
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  className="relative z-10 px-3.5 py-1.5 text-sm font-medium text-[#828B9B] hover:text-chrome-highlight transition-colors duration-200 rounded-lg focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-electric-violet flex items-center gap-1.5 group/nav"
+                  onClick={(e) => handleNavLinkClick(e, item.href)}
+                  onMouseEnter={(e) => handleItemMouseEnter(item.label, e)}
+                  onFocus={(e) => handleItemMouseEnter(item.label, e)}
+                  onMouseLeave={(e) => handleItemMouseLeave(item.label, e)}
+                  onBlur={(e) => handleItemMouseLeave(item.label, e)}
+                >
+                  <Icon className="h-3.5 w-3.5 text-[#828B9B]/60 nav-icon-svg overflow-visible" />
+                  <span>{item.label}</span>
+                </Link>
+              );
+            })}
+          </nav>
+        )}
+
+        {/* CTA Action / Volver al inicio */}
+        {isOnboardingPage ? (
+          <div className="hidden md:flex items-center">
+            <Link
+              href="/"
+              className="group flex items-center gap-2 px-4 py-2 rounded-lg border border-steel-grey/30 bg-graphite-metal/30 hover:border-steel-grey/60 text-chrome-highlight transition-all font-medium text-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-electric-violet"
+            >
+              <ArrowRight className="h-4 w-4 rotate-180 opacity-60 transition-transform group-hover:-translate-x-1" />
+              <span>Volver al inicio</span>
+            </Link>
+          </div>
+        ) : (
+          <div className={cn(
+            "hidden md:flex items-center",
+            shouldAnimate && "transition-all duration-300",
+            isScrolled && "md:mr-8"
+          )}>
+            <Link 
+              href="/start" 
+              className="group relative flex items-center justify-center gap-1.5 py-1.5 px-4 rounded-full border border-steel-grey/30 bg-graphite-metal text-sm font-medium text-[#828B9B] hover:text-chrome-highlight hover:border-steel-grey/50 transition-all duration-300 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-electric-violet"
+              onMouseEnter={handleCtaMouseEnter}
+              onMouseLeave={handleCtaMouseLeave}
+              onFocus={handleCtaMouseEnter}
+              onBlur={handleCtaMouseLeave}
+            >
+              <span>Iniciar proyecto</span>
+              <ArrowRight className="h-3.5 w-3.5 opacity-60 ml-1.5 nav-cta-arrow transition-colors duration-300 group-hover:text-electric-violet overflow-visible" />
+            </Link>
+          </div>
+        )}
 
         {/* Mobile Menu Toggle Button */}
-        <button
-          className="md:hidden p-2 text-chrome-deep hover:text-chrome-highlight focus-visible:outline-none cursor-pointer"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          aria-label={mobileMenuOpen ? "Cerrar menú" : "Abrir menú"}
-        >
-          {mobileMenuOpen ? (
-            <X className="h-6 w-6" />
-          ) : (
-            <Menu className="h-6 w-6" />
-          )}
-        </button>
+        {isOnboardingPage ? (
+          <Link
+            href="/"
+            className="md:hidden flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-steel-grey/30 bg-graphite-metal/30 text-xs font-medium text-chrome-highlight focus-visible:outline-none"
+          >
+            <X className="h-3.5 w-3.5" />
+            <span>Salir</span>
+          </Link>
+        ) : (
+          <button
+            className="md:hidden p-2 text-chrome-deep hover:text-chrome-highlight focus-visible:outline-none cursor-pointer"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label={mobileMenuOpen ? "Cerrar menú" : "Abrir menú"}
+          >
+            {mobileMenuOpen ? (
+              <X className="h-6 w-6" />
+            ) : (
+              <Menu className="h-6 w-6" />
+            )}
+          </button>
+        )}
+
       </Container>
 
       {/* Mobile menu backdrop overlay */}
@@ -462,17 +497,17 @@ export default function Navbar() {
         <div className="mobile-nav-button flex flex-col">
           <div className="h-px bg-electric-violet/25 w-full mb-3" />
           <Link
-            href="#contacto"
+            href="/start"
             className="mobile-nav-link text-base font-medium text-neon-blue hover:text-neon-blue/80 active:text-neon-blue active:scale-[0.98] active:translate-x-1 transition-all py-2 flex items-center gap-2"
-            onClick={(e) => {
+            onClick={() => {
               setMobileMenuOpen(false);
-              handleNavLinkClick(e, "#contacto");
             }}
           >
             <ArrowRight className="h-4 w-4 text-neon-blue/80" />
             <span>Iniciar proyecto</span>
           </Link>
         </div>
+
       </div>
     </header>
   );

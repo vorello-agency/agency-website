@@ -1,10 +1,13 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
-import { Mail } from "lucide-react";
+import { MessageSquare } from "lucide-react";
 import { gsap } from "@/lib/gsap/register";
 import Button from "@/components/ui/Button";
-import Container from "@/components/ui/Container";
+import Link from "next/link";
+import Container from "@/components/layout/Container";
+
+
 
 
 export default function CTA() {
@@ -123,7 +126,7 @@ export default function CTA() {
       <Container>
         <div
           ref={cardRef}
-          className="relative max-w-xl md:max-w-2xl lg:max-w-3xl xl:max-w-4xl 2xl:max-w-6xl mx-auto rounded-2xl border border-steel-grey/30 bg-graphite-metal/30 pt-8 pb-12 px-5 sm:px-8 md:py-10 md:px-8 2xl:py-16 2xl:px-36 text-center overflow-hidden backdrop-blur-sm"
+          className="relative max-w-xl md:max-w-2xl lg:max-w-3xl xl:max-w-4xl 2xl:max-w-6xl mx-auto rounded-2xl border border-steel-grey/30 bg-graphite-metal pt-8 pb-12 px-5 sm:px-8 md:py-10 md:px-8 2xl:py-16 2xl:px-36 text-center overflow-hidden"
           style={{ opacity: 0 }}
         >
           {/* Internal ambient glowing bulb */}
@@ -145,22 +148,27 @@ export default function CTA() {
           </p>
 
           <div className="cta-buttons flex flex-col sm:flex-row gap-4 justify-center items-center relative z-10">
-            <Button
-              variant="primary-blue"
-              size="lg"
-              className="w-full sm:w-auto"
-              withArrow
-            >
-              Iniciar proyecto
-            </Button>
-            <Button
-              variant="outline"
-              size="lg"
-              className="w-full sm:w-auto gap-2"
-            >
-              <Mail className="w-4 h-4" />
-              Escríbenos por email
-            </Button>
+            <Link href="/start" className="w-full sm:w-auto focus-visible:outline-none">
+              <Button
+                variant="primary-blue"
+                size="lg"
+                className="w-full"
+                withArrow
+              >
+                Iniciar proyecto
+              </Button>
+            </Link>
+            <Link href="/contact" className="w-full sm:w-auto focus-visible:outline-none">
+              <Button
+                variant="outline"
+                size="lg"
+                className="w-full gap-2 bg-carbon-black"
+              >
+                <MessageSquare className="w-4 h-4" />
+                Contacto directo
+              </Button>
+            </Link>
+
           </div>
 
           <div className="cta-footer mt-8 md:mt-12 text-xs font-mono text-chrome-deep/80 relative z-10">

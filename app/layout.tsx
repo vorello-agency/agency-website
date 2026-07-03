@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, Geist_Mono, Geist } from "next/font/google";
+import { Space_Grotesk, Geist_Mono, Geist, Bebas_Neue } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import SmoothScroll from "@/components/layout/SmoothScroll";
@@ -13,6 +13,12 @@ const spaceGrotesk = Space_Grotesk({
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
+const bebasNeue = Bebas_Neue({
+  weight: "400",
+  variable: "--font-bebas-neue",
   subsets: ["latin"],
 });
 
@@ -41,7 +47,16 @@ export default function RootLayout({
   return (
     <html
       lang="es"
-      className={cn("h-full", "dark", "antialiased", spaceGrotesk.variable, geistMono.variable, "font-sans", geist.variable)}
+      className={cn(
+        "h-full",
+        "dark",
+        "antialiased",
+        spaceGrotesk.variable,
+        geistMono.variable,
+        bebasNeue.variable,
+        "font-sans",
+        geist.variable
+      )}
     >
       <body className="min-h-full flex flex-col bg-carbon-black text-chrome-highlight selection:bg-electric-violet/20 selection:text-electric-violet">
         <SmoothScroll>
@@ -51,3 +66,4 @@ export default function RootLayout({
     </html>
   );
 }
+

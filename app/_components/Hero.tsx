@@ -3,9 +3,11 @@
 import React, { useEffect, useRef } from "react";
 import { gsap } from "@/lib/gsap/register";
 import Button from "@/components/ui/Button";
-import Container from "@/components/ui/Container";
+import Container from "@/components/layout/Container";
 import Badge from "@/components/ui/Badge";
 import Image from "next/image";
+import Link from "next/link";
+
 
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -131,7 +133,7 @@ export default function Hero() {
   return (
     <section
       ref={containerRef}
-      className="relative z-20 min-h-[85vh] flex items-center justify-center pt-28 pb-20 md:pb-24 2xl:pt-36 2xl:pb-32 overflow-hidden bg-carbon-black"
+      className="relative z-20 min-h-[75vh] sm:min-h-[85vh] flex items-center justify-center pt-24 pb-16 sm:pt-28 sm:pb-20 md:pb-24 2xl:pt-36 2xl:pb-32 overflow-hidden bg-carbon-black"
     >
       {/* Premium clean dots background with radial mask */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
@@ -151,14 +153,14 @@ export default function Hero() {
         {/* Left Column: Text & CTA */}
         <div className="lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left">
           {/* Decorative Badge */}
-          <Badge variant="violet" className="mb-8">
+          <Badge variant="violet" className="mb-5 sm:mb-8">
             <span className="hidden sm:inline-flex">VORELLO — ESTUDIO DIGITAL PREMIUM</span>
             <span className="inline-flex sm:hidden">ESTUDIO DIGITAL PREMIUM</span>
           </Badge>
 
           <h1
             ref={headlineRef}
-            className="text-5xl sm:text-7xl lg:text-7xl xl:text-8xl font-bold tracking-tight text-chrome-highlight uppercase mb-6 2xl:mb-8 max-w-5xl leading-[0.95] select-none font-sans flex flex-col gap-2 2xl:gap-3"
+            className="text-5xl sm:text-8xl lg:text-8xl xl:text-9xl font-bebas tracking-wide text-chrome-highlight uppercase mb-4 sm:mb-6 2xl:mb-8 max-w-5xl leading-[0.9] select-none flex flex-col gap-1 sm:gap-2 2xl:gap-3"
             style={{ opacity: 0 }}
           >
             <span>Diseño<span className="inline-block text-[0.78em] translate-y-[-0.07em] ml-[0.02em] select-none text-chrome-deep">.</span></span>
@@ -172,7 +174,7 @@ export default function Hero() {
             className="text-base sm:text-lg md:text-xl 2xl:text-2xl text-[#A8B0BD] max-w-2xl 2xl:max-w-3xl leading-relaxed text-balance mb-10 2xl:mb-14"
             style={{ opacity: 0 }}
           >
-            Diseñamos y desarrollamos productos digitales bien pensados, visualmente cuidados y técnicamente sólidos.
+            Diseñamos y desarrollamos productos bien pensados, visualmente cuidados y técnicamente sólidos.
           </p>
 
           {/* Call to Actions */}
@@ -181,44 +183,57 @@ export default function Hero() {
             className="flex flex-col sm:flex-row gap-4 items-center justify-center lg:justify-start w-full sm:w-auto"
             style={{ opacity: 0 }}
           >
-            <Button variant="primary" size="lg" className="w-full sm:w-auto" withArrow>
-              Iniciar proyecto
-            </Button>
-            <Button variant="outline" size="lg" className="w-full sm:w-auto bg-carbon-black/50">
-              Cómo trabajamos
-            </Button>
+            <Link href="/start" className="w-full sm:w-auto focus-visible:outline-none">
+              <Button variant="primary-blue" size="lg" className="w-full" withArrow>
+                Iniciar proyecto
+              </Button>
+            </Link>
+            <Link href="#proceso" className="w-full sm:w-auto focus-visible:outline-none">
+              <Button variant="outline" size="lg" className="w-full bg-carbon-black/50">
+                Proceso de trabajo
+              </Button>
+            </Link>
+
           </div>
         </div>
 
         {/* Right Column: Visual Element with Isotipo */}
-        <div className="lg:col-span-5 flex items-center justify-center w-full mt-10 lg:mt-0">
+        <div className="lg:col-span-5 flex items-center justify-center w-full mt-6 sm:mt-10 lg:mt-0">
           <div
             ref={visualRef}
-            className="relative w-full max-w-[224px] sm:max-w-sm md:max-w-md mx-auto flex items-center justify-center"
+            className="relative w-full max-w-[160px] sm:max-w-[224px] md:max-w-md mx-auto flex items-center justify-center"
             style={{ opacity: 0 }}
           >
             {/* Energy Rings & Tech Blueprint (Minimal & Interactive) */}
-            {/* Outer Orbit */}
-            <div className="absolute rounded-full border border-transparent w-[115%] h-[115%] pointer-events-none will-change-transform [transform:translateZ(0)] animate-[spin_120s_linear_infinite]" />
+            {/* Fourth Orbit (Outer - Green) */}
+            <div className="absolute rounded-full border border-transparent w-[130%] h-[130%] pointer-events-none will-change-transform [transform:translateZ(0)] animate-[spin_150s_linear_infinite]" />
 
-            {/* Inner Orbit (Solid tech line) */}
-            <div className="absolute rounded-full border border-transparent w-[95%] h-[95%] pointer-events-none will-change-transform [transform:translateZ(0)] animate-[spin_70s_linear_infinite_reverse]" />
+            {/* Third Orbit (Blue) */}
+            <div className="absolute rounded-full border border-transparent w-[112%] h-[112%] pointer-events-none will-change-transform [transform:translateZ(0)] animate-[spin_120s_linear_infinite]" />
 
-            {/* Innermost Orbit */}
-            <div className="absolute rounded-full border border-transparent w-[78%] h-[78%] pointer-events-none will-change-transform [transform:translateZ(0)] animate-[spin_55s_linear_infinite]" />
+            {/* Second Orbit (Violet) */}
+            <div className="absolute rounded-full border border-transparent w-[94%] h-[94%] pointer-events-none will-change-transform [transform:translateZ(0)] animate-[spin_70s_linear_infinite_reverse]" />
 
-            {/* Energy Particle tracking the outer orbit (Producto - Blue) */}
-            <div className="absolute w-[115%] h-[115%] pointer-events-none animate-[spin_10s_linear_infinite]">
+            {/* First Orbit (Innermost - Orange) */}
+            <div className="absolute rounded-full border border-transparent w-[76%] h-[76%] pointer-events-none will-change-transform [transform:translateZ(0)] animate-[spin_55s_linear_infinite]" />
+
+            {/* Fourth Energy Particle tracking the outer orbit (Green) */}
+            <div className="absolute w-[130%] h-[130%] pointer-events-none animate-[spin_12s_linear_infinite_reverse]">
+              <span className="absolute -top-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-emerald-500/60 shadow-[0_0_4px_#10b981]" />
+            </div>
+
+            {/* Third Energy Particle (Blue) */}
+            <div className="absolute w-[112%] h-[112%] pointer-events-none animate-[spin_10s_linear_infinite]">
               <span className="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-neon-blue/60 shadow-[0_0_6px_#2D8FFF] animate-pulse" />
             </div>
 
-            {/* Second Energy Particle on the inner orbit (Tecnología - Violet) */}
-            <div className="absolute w-[95%] h-[95%] pointer-events-none animate-[spin_6s_linear_infinite_reverse]">
+            {/* Second Energy Particle (Violet) */}
+            <div className="absolute w-[94%] h-[94%] pointer-events-none animate-[spin_6s_linear_infinite_reverse]">
               <span className="absolute -top-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-electric-violet/60 shadow-[0_0_4px_#7B4CFF]" />
             </div>
 
-            {/* Third Energy Particle on the innermost orbit (Diseño - Orange) */}
-            <div className="absolute w-[78%] h-[78%] pointer-events-none animate-[spin_8s_linear_infinite]">
+            {/* First Energy Particle (Orange) */}
+            <div className="absolute w-[76%] h-[76%] pointer-events-none animate-[spin_8s_linear_infinite]">
               <span className="absolute -top-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-[#FF5C00]/60 shadow-[0_0_4px_#FF5C00]" />
             </div>
 

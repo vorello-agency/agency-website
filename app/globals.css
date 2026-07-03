@@ -7,7 +7,7 @@
 :root {
   /* Vorello Brand Palette */
   --carbon-black: #0d0f11;
-  --graphite-metal: #1a1d21;
+  --graphite-metal: #121416;
   --steel-grey: #2a2e33;
   --neon-blue: #2d8fff;
   --electric-violet: #7b4cff;
@@ -71,6 +71,7 @@
   /* Fonts */
   --font-sans: var(--font-sans);
   --font-display: var(--font-display);
+  --font-bebas: var(--font-bebas-neue), sans-serif;
 
   /* Radius overrides */
   --radius-xs: 4px;
@@ -110,12 +111,14 @@ body {
 
 /* Ensure the fixed header does not overlap sections when navigating via anchor links (#contacto, etc.) or iOS Safari previews */
 section[id] {
-  scroll-margin-top: 80px; /* Compensates the 80px (h-20) scrolled navbar height on mobile */
+  scroll-margin-top: 80px;
+  /* Compensates the 80px (h-20) scrolled navbar height on mobile */
 }
 
 @media (min-width: 768px) {
   section[id] {
-    scroll-margin-top: 96px; /* Compensates the 96px (h-24) navbar height on desktop */
+    scroll-margin-top: 96px;
+    /* Compensates the 96px (h-24) navbar height on desktop */
   }
 }
 
@@ -138,7 +141,8 @@ button,
 
 /* Premium Vorello text selection colors */
 ::selection {
-  background-color: #3b1f8c; /* Solid deep brand violet - forces iOS Safari override */
+  background-color: #3b1f8c;
+  /* Solid deep brand violet - forces iOS Safari override */
   color: #ffffff;
 }
 

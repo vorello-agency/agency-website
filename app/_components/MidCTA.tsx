@@ -3,7 +3,7 @@
 import React, { useEffect, useRef } from "react";
 import { gsap } from "@/lib/gsap/register";
 import Button from "@/components/ui/Button";
-import Container from "@/components/ui/Container";
+import Container from "@/components/layout/Container";
 
 export default function MidCTA() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -185,10 +185,10 @@ export default function MidCTA() {
               size="md"
               className="cursor-pointer shadow-lg shadow-neon-blue/20 hover:scale-[1.02] active:scale-[0.98] transition-all"
               onClick={() => handleScrollTo("contacto")}
-              aria-label="Trabajar con nosotros y contactar con Vorello"
+              aria-label="Iniciar proyecto y contactar con Vorello"
               withArrow
             >
-              Trabajar con nosotros
+              Iniciar proyecto
             </Button>
           </div>
         </div>
