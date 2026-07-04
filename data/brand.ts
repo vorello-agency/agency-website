@@ -14,11 +14,11 @@ export const CALENDAR_URL = "https://cal.com/vorello/intro";
 
 // WhatsApp Configuration
 // Raw number for wa.me links (without "+" or spaces, e.g. "59899000000")
-export const WHATSAPP_RAW_NUMBER = "59899000000";
-export const WHATSAPP_HUMAN_NUMBER = "+598 99 000 000";
+export const WHATSAPP_RAW_NUMBER = "59896144671";
+export const WHATSAPP_HUMAN_NUMBER = "+598 96 144 671";
 
 // Pre-filled WhatsApp messages
-export const WHATSAPP_MSG_GENERAL = "Hola Vorello, quisiera hacer una consulta general.";
+export const WHATSAPP_MSG_GENERAL = "Hola, quisiera hacer una consulta general.";
 export const WHATSAPP_MSG_START = "Hola, estoy interesado en iniciar un proyecto con Vorello.";
 
 // Helper to generate WhatsApp link
