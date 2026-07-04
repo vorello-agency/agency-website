@@ -50,11 +50,11 @@ export const TextHoverEffect = ({
           x2="100%"
           y2="0%"
         >
-          <stop offset="0%" stopColor="#FF5C00" />
-          <stop offset="12%" stopColor="#2D8FFF" />
-          <stop offset="50%" stopColor="#2D8FFF" />
-          <stop offset="80%" stopColor="#7B4CFF" />
-          <stop offset="100%" stopColor="#FF2A54" />
+          <stop offset="0%" stopColor="var(--signal-orange)" />
+          <stop offset="12%" stopColor="var(--neon-blue)" />
+          <stop offset="50%" stopColor="var(--neon-blue)" />
+          <stop offset="80%" stopColor="var(--electric-violet)" />
+          <stop offset="100%" stopColor="var(--signal-emerald)" />
         </linearGradient>
 
         <motion.radialGradient

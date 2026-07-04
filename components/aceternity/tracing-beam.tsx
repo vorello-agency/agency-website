@@ -68,12 +68,12 @@ export const TracingBeam = ({
   const dotBg = useTransform(
     scrollYProgress,
     [0, 0.05],
-    ["#7b4cff", "#ffffff"]
+    ["var(--electric-violet)", "var(--color-white)"]
   );
   const dotBorder = useTransform(
     scrollYProgress,
     [0, 0.05],
-    ["#7b4cff", "#ffffff"]
+    ["var(--electric-violet)", "var(--color-white)"]
   );
   const dotShadow = useTransform(
     scrollYProgress,

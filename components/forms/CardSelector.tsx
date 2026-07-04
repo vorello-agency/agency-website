@@ -172,13 +172,13 @@ const CardSelector: React.FC<CardSelectorProps> = ({
               <div className="space-y-0.5 pr-4 flex-1">
                 <span
                   className={`font-semibold block transition-colors duration-200 ${
-                    isSelected ? "text-chrome-highlight" : "text-[#8F9BA8] group-hover:text-chrome-highlight"
+                    isSelected ? "text-chrome-highlight" : "text-copy-muted group-hover:text-chrome-highlight"
                   }`}
                 >
                   {option.label}
                 </span>
                 {optionDesc && (
-                  <span className="text-chrome-deep text-xs block leading-normal text-balance transition-colors duration-200 group-hover:text-[#8F9BA8]">
+                  <span className="text-chrome-deep text-xs block leading-normal text-balance transition-colors duration-200 group-hover:text-copy-muted">
                     {optionDesc}
                   </span>
                 )}

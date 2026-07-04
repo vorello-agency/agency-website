@@ -228,8 +228,8 @@ function GridItem({ step, isActive, isMobile }: { step: StepItem; isActive: bool
             />
             <defs>
               <linearGradient id={`glow-grad-${step.num}`} x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#7b4cff" stopOpacity="0.85" />
-                <stop offset="100%" stopColor="#2d8fff" stopOpacity="0.85" />
+                <stop offset="0%" stopColor="var(--electric-violet)" stopOpacity="0.85" />
+                <stop offset="100%" stopColor="var(--neon-blue)" stopOpacity="0.85" />
               </linearGradient>
             </defs>
           </svg>
@@ -597,7 +597,7 @@ export default function Process() {
       id="proceso"
       className="py-20 md:py-32 relative overflow-hidden z-40"
       style={{
-        background: "radial-gradient(circle at 15% 25%, rgba(123, 76, 255, 0.10), transparent 32%), linear-gradient(180deg, #0D0F11 0%, #111419 48%, #0D0F11 100%)"
+        background: "radial-gradient(circle at 15% 25%, rgba(123, 76, 255, 0.10), transparent 32%), linear-gradient(180deg, var(--carbon-black) 0%, #111419 48%, var(--carbon-black) 100%)"
       }}
     >
       {/* Premium Small Grid Overlay with center-focused radial mask */}

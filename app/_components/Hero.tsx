@@ -198,7 +198,7 @@ export default function Hero() {
           {/* Brand core positioning sentence - improved contrast */}
           <p
             ref={subtitleRef}
-            className="text-base sm:text-lg md:text-xl 2xl:text-2xl text-[#A8B0BD] max-w-2xl 2xl:max-w-3xl leading-relaxed text-balance"
+            className="text-base sm:text-lg md:text-xl 2xl:text-2xl text-copy-muted max-w-2xl 2xl:max-w-3xl leading-relaxed text-balance"
             style={{ opacity: 0 }}
           >
             Diseñamos y desarrollamos productos bien pensados, visualmente cuidados y técnicamente sólidos.
@@ -246,22 +246,22 @@ export default function Hero() {
 
             {/* Fourth Energy Particle tracking the outer orbit (Green) */}
             <div className="absolute w-[130%] h-[130%] pointer-events-none animate-[spin_12s_linear_infinite_reverse]">
-              <span className="absolute -top-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-emerald-500/60 shadow-[0_0_4px_#10b981]" />
+              <span className="absolute -top-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-signal-emerald/60 shadow-[0_0_4px_var(--signal-emerald)]" />
             </div>
 
             {/* Third Energy Particle (Blue) */}
             <div className="absolute w-[112%] h-[112%] pointer-events-none animate-[spin_10s_linear_infinite]">
-              <span className="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-neon-blue/60 shadow-[0_0_6px_#2D8FFF] animate-pulse" />
+              <span className="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-neon-blue/60 shadow-[0_0_6px_var(--neon-blue)] animate-pulse" />
             </div>
 
             {/* Second Energy Particle (Violet) */}
             <div className="absolute w-[94%] h-[94%] pointer-events-none animate-[spin_6s_linear_infinite_reverse]">
-              <span className="absolute -top-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-electric-violet/60 shadow-[0_0_4px_#7B4CFF]" />
+              <span className="absolute -top-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-electric-violet/60 shadow-[0_0_4px_var(--electric-violet)]" />
             </div>
 
             {/* First Energy Particle (Orange) */}
             <div className="absolute w-[76%] h-[76%] pointer-events-none animate-[spin_8s_linear_infinite]">
-              <span className="absolute -top-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-[#FF5C00]/60 shadow-[0_0_4px_#FF5C00]" />
+              <span className="absolute -top-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-signal-orange/60 shadow-[0_0_4px_var(--signal-orange)]" />
             </div>
 
             {/* Interactive container that captures mouse and touch gestures, preventing iOS native image popup */}

@@ -109,7 +109,7 @@ export default function WhatsAppFloat({
         aria-label="Contactar por WhatsApp"
         className="w-14 h-14 rounded-full flex items-center justify-center transition-colors"
         style={{
-          backgroundColor: "#25D366",
+          backgroundColor: "var(--whatsapp-green)",
           boxShadow: "0 0 12px rgba(37, 211, 102, 0.15)",
           opacity: 0,
         }}

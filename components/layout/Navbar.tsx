@@ -386,14 +386,14 @@ export default function Navbar() {
                 <Link
                   key={item.label}
                   href={item.href}
-                  className="relative z-10 px-3.5 py-1.5 text-sm font-medium text-[#828B9B] hover:text-chrome-highlight transition-colors duration-200 rounded-lg focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-electric-violet flex items-center gap-1.5 group/nav"
+                  className="relative z-10 px-3.5 py-1.5 text-sm font-medium text-copy-muted hover:text-chrome-highlight transition-colors duration-200 rounded-lg focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-electric-violet flex items-center gap-1.5 group/nav"
                   onClick={(e) => handleNavLinkClick(e, item.href)}
                   onMouseEnter={(e) => handleItemMouseEnter(item.label, e)}
                   onFocus={(e) => handleItemMouseEnter(item.label, e)}
                   onMouseLeave={(e) => handleItemMouseLeave(item.label, e)}
                   onBlur={(e) => handleItemMouseLeave(item.label, e)}
                 >
-                  <Icon className="h-3.5 w-3.5 text-[#828B9B]/60 nav-icon-svg overflow-visible" />
+                  <Icon className="h-3.5 w-3.5 text-copy-muted/60 nav-icon-svg overflow-visible" />
                   <span>{item.label}</span>
                 </Link>
               );
@@ -420,7 +420,7 @@ export default function Navbar() {
           )}>
             <Link 
               href="/start" 
-              className="group relative flex items-center justify-center gap-1.5 py-1.5 px-4 rounded-full border border-steel-grey/30 bg-graphite-metal text-sm font-medium text-[#828B9B] hover:text-chrome-highlight hover:border-steel-grey/50 transition-all duration-300 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-electric-violet"
+              className="group relative flex items-center justify-center gap-1.5 py-1.5 px-4 rounded-full border border-steel-grey/30 bg-graphite-metal text-sm font-medium text-copy-muted hover:text-chrome-highlight hover:border-steel-grey/50 transition-all duration-300 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-electric-violet"
               onMouseEnter={handleCtaMouseEnter}
               onMouseLeave={handleCtaMouseLeave}
               onFocus={handleCtaMouseEnter}

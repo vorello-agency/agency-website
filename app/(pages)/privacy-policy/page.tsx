@@ -17,7 +17,7 @@ export default function PrivacidadPage() {
           </h1>
 
 
-          <div className="prose prose-invert prose-sm max-w-none space-y-8 text-[#828B9B] leading-relaxed [&_h2]:text-chrome-highlight [&_h2]:text-lg [&_h2]:font-semibold [&_h2]:mt-10 [&_h2]:mb-3 [&_strong]:text-chrome-highlight/90 [&_a]:text-neon-blue [&_a]:underline [&_a]:underline-offset-2 hover:[&_a]:text-chrome-highlight [&_a]:transition-colors">
+          <div className="prose prose-invert prose-sm max-w-none space-y-8 text-copy-muted leading-relaxed [&_h2]:text-chrome-highlight [&_h2]:text-lg [&_h2]:font-semibold [&_h2]:mt-10 [&_h2]:mb-3 [&_strong]:text-chrome-highlight/90 [&_a]:text-neon-blue [&_a]:underline [&_a]:underline-offset-2 hover:[&_a]:text-chrome-highlight [&_a]:transition-colors">
             <p>
               En <strong>{BRAND_FULL_NAME}</strong> nos tomamos en serio la privacidad de nuestros
               usuarios y clientes. Esta política describe cómo recopilamos, usamos y protegemos

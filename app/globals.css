@@ -13,6 +13,11 @@
   --electric-violet: #7b4cff;
   --chrome-highlight: #e3e7ee;
   --chrome-deep: #8a99ad;
+  --copy-muted: #8f9ba8;
+  --signal-orange: #ff6b00;
+  --signal-emerald: #10b981;
+  --whatsapp-green: #25d366;
+  --selection-violet: #3b1f8c;
 
   /* Semantic UI variables */
 
@@ -63,6 +68,10 @@
   --color-electric-violet: var(--electric-violet);
   --color-chrome-highlight: var(--chrome-highlight);
   --color-chrome-deep: var(--chrome-deep);
+  --color-copy-muted: var(--copy-muted);
+  --color-signal-orange: var(--signal-orange);
+  --color-signal-emerald: var(--signal-emerald);
+  --color-whatsapp-green: var(--whatsapp-green);
 
   /* Semantic mappings */
   --color-background: var(--background);
@@ -140,14 +149,14 @@ button,
 
 /* Premium Vorello text selection colors */
 ::selection {
-  background-color: #3b1f8c;
+  background-color: var(--selection-violet);
   /* Solid deep brand violet - forces iOS Safari override */
-  color: #ffffff;
+  color: var(--color-white);
 }
 
 ::-moz-selection {
-  background-color: #3b1f8c;
-  color: #ffffff;
+  background-color: var(--selection-violet);
+  color: var(--color-white);
 }
 
 /* Custom scrollbar matching premium dark design */

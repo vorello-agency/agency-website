@@ -91,7 +91,7 @@ export default function Statement() {
           {/* High-Fidelity Word-Split Manifesto Heading */}
           <h2
             ref={textRef}
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-[50px] 2xl:text-[64px] font-bold tracking-tight text-[#8F9BA8] leading-tight 2xl:leading-[1.1] select-none font-sans"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-[50px] 2xl:text-[64px] font-bold tracking-tight text-copy-muted leading-tight 2xl:leading-[1.1] select-none font-sans"
           >
             {textSegments.map((segment, segmentIdx) => {
               const words = segment.text.split(" ").filter(Boolean);
@@ -100,7 +100,7 @@ export default function Statement() {
                   key={`${segmentIdx}-${wordIdx}`}
                   className={cn(
                     "reveal-word inline-block mr-[0.25em]",
-                    segment.highlight ? "text-white font-semibold" : "text-[#8F9BA8]"
+                    segment.highlight ? "text-white font-semibold" : "text-copy-muted"
                   )}
                 >
                   {word}
@@ -110,7 +110,7 @@ export default function Statement() {
           </h2>
 
           {/* Manifesto Subtext Paragraph */}
-          <p className="reveal-item text-base sm:text-lg 2xl:text-xl text-[#A8B0BD] max-w-2xl 2xl:max-w-3xl leading-relaxed mt-2 2xl:mt-4">
+          <p className="reveal-item text-base sm:text-lg 2xl:text-xl text-copy-muted max-w-2xl 2xl:max-w-3xl leading-relaxed mt-2 2xl:mt-4">
             Trabajamos con proceso, estándares altos y tecnología moderna.
             <br />
             El resultado se nota en cada detalle.

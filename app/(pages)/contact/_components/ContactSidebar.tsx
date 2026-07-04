@@ -22,18 +22,18 @@ const CHANNEL_TONE_CLASSES: Record<
   }
 > = {
   whatsapp: {
-    card: "hover:border-[#25D366]/40 hover:bg-graphite-metal/30 hover:shadow-[0_0_20px_rgba(37,211,102,0.08)]",
-    icon: "border-[#25D366]/20 bg-[#25D366]/10 group-hover:bg-[#25D366]/20",
-    title: "group-hover:text-[#25D366]",
-    action: "text-[#25D366]",
-    ring: "focus-visible:ring-[#25D366]/50",
+    card: "hover:border-whatsapp-green/40 hover:bg-graphite-metal/30 hover:shadow-[0_0_20px_rgba(37,211,102,0.08)]",
+    icon: "border-whatsapp-green/20 bg-whatsapp-green/10 group-hover:bg-whatsapp-green/20",
+    title: "group-hover:text-whatsapp-green",
+    action: "text-whatsapp-green",
+    ring: "focus-visible:ring-whatsapp-green/50",
   },
   email: {
-    card: "hover:border-[#FF6B00]/40 hover:bg-graphite-metal/30 hover:shadow-[0_0_20px_rgba(255,107,0,0.08)]",
-    icon: "border-[#FF6B00]/20 bg-[#FF6B00]/10 text-[#FF6B00] group-hover:bg-[#FF6B00] group-hover:text-white",
-    title: "group-hover:text-[#FF6B00]",
-    action: "text-[#FF6B00]",
-    ring: "focus-visible:ring-[#FF6B00]/50",
+    card: "hover:border-signal-orange/40 hover:bg-graphite-metal/30 hover:shadow-[0_0_20px_rgba(255,107,0,0.08)]",
+    icon: "border-signal-orange/20 bg-signal-orange/10 text-signal-orange group-hover:bg-signal-orange group-hover:text-white",
+    title: "group-hover:text-signal-orange",
+    action: "text-signal-orange",
+    ring: "focus-visible:ring-signal-orange/50",
   },
   calendar: {
     card: "hover:border-neon-blue/40 hover:bg-graphite-metal/30 hover:shadow-[0_0_20px_rgba(45,143,255,0.08)]",
@@ -96,7 +96,7 @@ function ContactChannelCard({ channel }: { channel: ContactChannel }) {
           >
             {channel.title}
           </h3>
-          <p className="mt-1 text-balance text-xs leading-relaxed text-[#8F9BA8]">
+          <p className="mt-1 text-balance text-xs leading-relaxed text-copy-muted">
             {channel.description}
           </p>
           {channel.badge ? (
@@ -139,7 +139,7 @@ export default function ContactSidebar() {
           <Sparkles className="h-4 w-4 text-electric-violet" />
           ¿Listo para iniciar tu proyecto?
         </h3>
-        <p className="mb-4 text-balance text-xs leading-relaxed text-[#8F9BA8]">
+        <p className="mb-4 text-balance text-xs leading-relaxed text-copy-muted">
           Si necesitas una propuesta formal con arquitectura, plazos y presupuesto cerrado, usa nuestro formulario técnico de proyecto.
         </p>
         <Link href="/start" className="focus-visible:outline-none">

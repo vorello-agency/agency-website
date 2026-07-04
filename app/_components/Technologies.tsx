@@ -14,7 +14,7 @@ const LAYERS = [
     icon: Palette,
     chips: ["Figma", "Storybook", "Design Systems", "UX/UI", "Prototyping"],
     colorTheme: "orange",
-    glowColors: { start: "#FF6B00", end: "#FF3D00" }
+    glowColors: { start: "var(--signal-orange)", end: "#FF3D00" }
   },
   {
     num: "2",
@@ -22,7 +22,7 @@ const LAYERS = [
     icon: Layers,
     chips: ["Next.js", "React", "TypeScript", "Tailwind CSS", "GSAP"],
     colorTheme: "violet",
-    glowColors: { start: "#7b4cff", end: "#2d8fff" }
+    glowColors: { start: "var(--electric-violet)", end: "var(--neon-blue)" }
   },
   {
     num: "3",
@@ -30,7 +30,7 @@ const LAYERS = [
     icon: Server,
     chips: ["Node.js", "Vercel", "Cloudflare", "Supabase", "Google Cloud"],
     colorTheme: "blue",
-    glowColors: { start: "#2d8fff", end: "#00f2fe" }
+    glowColors: { start: "var(--neon-blue)", end: "#00f2fe" }
   },
   {
     num: "4",
@@ -38,7 +38,7 @@ const LAYERS = [
     icon: Cpu,
     chips: ["Sanity", "Stripe", "Resend", "n8n", "Webhooks"],
     colorTheme: "emerald",
-    glowColors: { start: "#10b981", end: "#059669" }
+    glowColors: { start: "var(--signal-emerald)", end: "#059669" }
   }
 ];
 
@@ -151,10 +151,10 @@ function LayerCard({ layer }: { layer: LayerItem }) {
       return "md:hover:border-neon-blue/20 md:hover:shadow-[inset_0_0_0_1px_rgba(45,143,255,0.15),_inset_0_0_16px_rgba(45,143,255,0.10)]";
     }
     if (layer.colorTheme === "orange") {
-      return "md:hover:border-[#FF6B00]/20 md:hover:shadow-[inset_0_0_0_1px_rgba(255,107,0,0.15),_inset_0_0_16px_rgba(255,107,0,0.10)]";
+      return "md:hover:border-signal-orange/20 md:hover:shadow-[inset_0_0_0_1px_rgba(255,107,0,0.15),_inset_0_0_16px_rgba(255,107,0,0.10)]";
     }
     if (layer.colorTheme === "emerald") {
-      return "md:hover:border-emerald-500/20 md:hover:shadow-[inset_0_0_0_1px_rgba(16,185,129,0.15),_inset_0_0_16px_rgba(16,185,129,0.10)]";
+      return "md:hover:border-signal-emerald/20 md:hover:shadow-[inset_0_0_0_1px_rgba(16,185,129,0.15),_inset_0_0_16px_rgba(16,185,129,0.10)]";
     }
     return "md:hover:border-white/20 md:hover:shadow-[inset_0_0_0_1px_rgba(255,255,255,0.15),_inset_0_0_16px_rgba(255,255,255,0.08)]";
   };
@@ -179,10 +179,10 @@ function LayerCard({ layer }: { layer: LayerItem }) {
           <div className="absolute -top-12 -right-12 w-36 h-36 rounded-full bg-neon-blue/10 blur-3xl opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0 animate-glow-drift" />
         )}
         {layer.colorTheme === "orange" && (
-          <div className="absolute -top-12 -right-12 w-36 h-36 rounded-full bg-[#FF6B00]/10 blur-3xl opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0 animate-glow-drift" />
+          <div className="absolute -top-12 -right-12 w-36 h-36 rounded-full bg-signal-orange/10 blur-3xl opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0 animate-glow-drift" />
         )}
         {layer.colorTheme === "emerald" && (
-          <div className="absolute -top-12 -right-12 w-36 h-36 rounded-full bg-emerald-500/10 blur-3xl opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0 animate-glow-drift" />
+          <div className="absolute -top-12 -right-12 w-36 h-36 rounded-full bg-signal-emerald/10 blur-3xl opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0 animate-glow-drift" />
         )}
         {layer.colorTheme === "chrome" && (
           <div className="absolute -top-12 -right-12 w-36 h-36 rounded-full bg-white/5 blur-3xl opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0 animate-glow-drift" />
@@ -239,8 +239,8 @@ function LayerCard({ layer }: { layer: LayerItem }) {
           <div className={`w-10 h-10 rounded-lg bg-steel-grey/15 border border-steel-grey/20 flex items-center justify-center text-chrome-deep transition-all duration-500 ease-out overflow-visible
             ${layer.colorTheme === "violet" ? "md:group-hover:text-electric-violet md:group-hover:border-electric-violet/20 md:group-hover:bg-electric-violet/5" : ""}
             ${layer.colorTheme === "blue" ? "md:group-hover:text-neon-blue md:group-hover:border-neon-blue/20 md:group-hover:bg-neon-blue/5" : ""}
-            ${layer.colorTheme === "orange" ? "md:group-hover:text-[#FF6B00] md:group-hover:border-[#FF6B00]/20 md:group-hover:bg-[#FF6B00]/5" : ""}
-            ${layer.colorTheme === "emerald" ? "md:group-hover:text-emerald-500 md:group-hover:border-emerald-500/20 md:group-hover:bg-emerald-500/5" : ""}
+            ${layer.colorTheme === "orange" ? "md:group-hover:text-signal-orange md:group-hover:border-signal-orange/20 md:group-hover:bg-signal-orange/5" : ""}
+            ${layer.colorTheme === "emerald" ? "md:group-hover:text-signal-emerald md:group-hover:border-signal-emerald/20 md:group-hover:bg-signal-emerald/5" : ""}
             ${layer.colorTheme === "chrome" ? "md:group-hover:text-white md:group-hover:border-white/20 md:group-hover:bg-white/5" : ""}
           `}>
             <Icon className={`w-5 h-5 tech-icon-svg-${layer.num} overflow-visible transition-transform duration-500 ease-out md:group-hover:scale-105`} />
@@ -263,8 +263,8 @@ function LayerCard({ layer }: { layer: LayerItem }) {
               className={`tech-chip px-3 py-1 text-xs font-mono rounded-full border border-steel-grey/30 bg-graphite-metal/30 text-chrome-highlight hover:text-white hover:scale-[1.03] transition-all duration-500 ease-out cursor-default
                 ${layer.colorTheme === "violet" ? "hover:border-electric-violet/40 hover:bg-electric-violet/10" : ""}
                 ${layer.colorTheme === "blue" ? "hover:border-neon-blue/40 hover:bg-neon-blue/10" : ""}
-                ${layer.colorTheme === "orange" ? "hover:border-[#FF6B00]/40 hover:bg-[#FF6B00]/10" : ""}
-                ${layer.colorTheme === "emerald" ? "hover:border-emerald-500/40 hover:bg-emerald-500/10" : ""}
+                ${layer.colorTheme === "orange" ? "hover:border-signal-orange/40 hover:bg-signal-orange/10" : ""}
+                ${layer.colorTheme === "emerald" ? "hover:border-signal-emerald/40 hover:bg-signal-emerald/10" : ""}
                 ${layer.colorTheme === "chrome" ? "hover:border-white/30 hover:bg-white/10" : ""}
               `}
             >
@@ -414,7 +414,7 @@ export default function Technologies() {
       id="tecnologia"
       className="py-20 md:py-32 relative overflow-hidden z-10"
       style={{
-        background: "radial-gradient(circle at 85% 25%, rgba(45, 143, 255, 0.05), transparent 35%), radial-gradient(circle at 15% 75%, rgba(123, 76, 255, 0.05), transparent 35%), #0D0F11"
+        background: "radial-gradient(circle at 85% 25%, rgba(45, 143, 255, 0.05), transparent 35%), radial-gradient(circle at 15% 75%, rgba(123, 76, 255, 0.05), transparent 35%), var(--carbon-black)"
       }}
     >
       <Container className="relative z-10">

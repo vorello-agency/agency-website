@@ -159,7 +159,7 @@ function ServiceCard({ service }: { service: typeof SERVICES[0] }) {
       }
       if (paths && paths.length > 0) {
         gsap.to(paths, {
-          stroke: "#7B4CFF",
+          stroke: "var(--electric-violet)",
           stagger: 0.02,
           duration: 0.25,
           ease: "power1.out",
@@ -277,7 +277,7 @@ function ServiceCard({ service }: { service: typeof SERVICES[0] }) {
         </h3>
 
         {/* Description */}
-        <p className="services-desc text-sm 2xl:text-base text-[#8F9BA8] leading-relaxed mb-4 md:mb-6 md:group-hover:text-chrome-highlight/90">
+        <p className="services-desc text-sm 2xl:text-base text-copy-muted leading-relaxed mb-4 md:mb-6 md:group-hover:text-chrome-highlight/90">
           {service.description}
         </p>
 
@@ -286,7 +286,7 @@ function ServiceCard({ service }: { service: typeof SERVICES[0] }) {
           {service.features.map((feature, fIdx) => (
             <li
               key={fIdx}
-              className="services-list-item text-xs 2xl:text-sm text-[#8F9BA8] flex items-center gap-2"
+              className="services-list-item text-xs 2xl:text-sm text-copy-muted flex items-center gap-2"
             >
               <span className="w-1 h-1 rounded-full bg-electric-violet/70" />
               {feature}
@@ -378,7 +378,7 @@ function PostLaunchStrip() {
             <h4 className="text-sm 2xl:text-base font-bold text-chrome-highlight mb-1.5 tracking-tight">
               Evolución y mantenimiento
             </h4>
-            <p className="text-xs 2xl:text-sm text-[#8F9BA8] leading-relaxed">
+            <p className="text-xs 2xl:text-sm text-copy-muted leading-relaxed">
               Acompañamos cada proyecto después del lanzamiento con mejoras continuas, soporte técnico y optimización de rendimiento.
             </p>
           </div>
@@ -393,7 +393,7 @@ function PostLaunchStrip() {
             <h4 className="text-sm 2xl:text-base font-bold text-chrome-highlight mb-1.5 tracking-tight">
               Automatizaciones e integraciones
             </h4>
-            <p className="text-xs 2xl:text-sm text-[#8F9BA8] leading-relaxed">
+            <p className="text-xs 2xl:text-sm text-copy-muted leading-relaxed">
               Conectamos herramientas, sistemas y procesos para reducir tareas manuales, ordenar operaciones y mejorar la eficiencia del negocio.
             </p>
           </div>
@@ -602,7 +602,7 @@ export default function Services() {
       id="servicios"
       className="py-20 md:py-32 2xl:py-40 relative z-20 overflow-hidden"
       style={{
-        background: "radial-gradient(circle at 85% 30%, rgba(45, 143, 255, 0.12), transparent 28%), radial-gradient(circle at 15% 70%, rgba(123, 76, 255, 0.1), transparent 25%), #0D0F11"
+        background: "radial-gradient(circle at 85% 30%, rgba(45, 143, 255, 0.12), transparent 28%), radial-gradient(circle at 15% 70%, rgba(123, 76, 255, 0.1), transparent 25%), var(--carbon-black)"
       }}
     >
       <Container>
