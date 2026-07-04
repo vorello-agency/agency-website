@@ -4,6 +4,7 @@ import React, { useEffect, useRef } from "react";
 import { MessageSquare } from "lucide-react";
 import { gsap } from "@/lib/gsap/register";
 import Button from "@/components/ui/Button";
+import AmbientGlow from "@/components/ui/AmbientGlow";
 import Link from "next/link";
 import Container from "@/components/layout/Container";
 
@@ -120,7 +121,7 @@ export default function CTA() {
     >
       {/* Background decoration */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] rounded-full bg-electric-violet/10 blur-[120px]" />
+        <AmbientGlow className="bottom-0 left-1/2 h-[300px] w-[600px] -translate-x-1/2 bg-electric-violet/10 blur-[120px]" />
       </div>
 
       <Container className="px-0 sm:px-0 md:px-6 lg:px-16 xl:px-20 2xl:px-8">
@@ -130,7 +131,7 @@ export default function CTA() {
           style={{ opacity: 0 }}
         >
           {/* Internal ambient glowing bulb */}
-          <div className="cta-glow absolute top-0 left-1/2 -translate-x-1/2 w-[300px] h-[300px] rounded-full bg-electric-violet/5 blur-[80px] pointer-events-none" />
+          <AmbientGlow className="cta-glow left-1/2 top-0 h-[300px] w-[300px] -translate-x-1/2 bg-electric-violet/5 blur-[80px]" />
 
           {/* Grid lines mimic */}
           <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.01)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />

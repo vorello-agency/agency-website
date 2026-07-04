@@ -5,6 +5,7 @@ import { Check, X } from "lucide-react";
 import { gsap } from "@/lib/gsap/register";
 import Container from "@/components/layout/Container";
 import SectionHeading from "@/components/layout/SectionHeading";
+import AmbientGlow from "@/components/ui/AmbientGlow";
 
 const IDEAL_FITS = [
   "Valoras el diseño de interacción y la experiencia de usuario (UX) como ventajas competitivas clave.",
@@ -173,7 +174,7 @@ function FitCard({
 
       {/* Card ambient glow */}
       {isIdeal && (
-        <div className="absolute -top-8 left-1/2 -translate-x-1/2 w-48 h-24 rounded-full bg-electric-violet/[0.06] blur-[50px] pointer-events-none" />
+        <AmbientGlow className="-top-8 left-1/2 h-24 w-48 -translate-x-1/2 bg-electric-violet/[0.06] blur-[50px]" />
       )}
 
       {/* Dot grid texture */}
@@ -467,9 +468,9 @@ export default function Fit() {
       className="py-20 md:py-32 2xl:py-40 bg-carbon-black relative z-20 overflow-hidden"
     >
       {/* Ambient background glows */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] 2xl:w-[700px] 2xl:h-[700px] rounded-full bg-electric-violet/5 blur-[120px] pointer-events-none" />
-      <div className="absolute top-0 right-0 w-[300px] h-[300px] rounded-full bg-neon-blue/[0.03] blur-[100px] pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[250px] h-[250px] rounded-full bg-electric-violet/[0.04] blur-[90px] pointer-events-none" />
+      <AmbientGlow className="left-1/2 top-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 bg-electric-violet/5 blur-[120px] 2xl:h-[700px] 2xl:w-[700px]" />
+      <AmbientGlow className="right-0 top-0 h-[300px] w-[300px] bg-neon-blue/[0.03] blur-[100px]" />
+      <AmbientGlow className="bottom-0 left-0 h-[250px] w-[250px] bg-electric-violet/[0.04] blur-[90px]" />
 
       {/* Subtle grid dot pattern across background */}
       <div

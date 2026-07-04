@@ -5,6 +5,7 @@ import { Layers, Server, Palette, Cpu } from "lucide-react";
 import { gsap } from "@/lib/gsap/register";
 import Container from "@/components/layout/Container";
 import SectionHeading from "@/components/layout/SectionHeading";
+import AmbientGlow from "@/components/ui/AmbientGlow";
 import { animateTechIconEnter, animateTechIconLeave } from "@/lib/gsap/animations";
 
 const LAYERS = [
@@ -173,19 +174,19 @@ function LayerCard({ layer }: { layer: LayerItem }) {
       >
         {/* Subtle dynamic radial light on hover - Commented out for non-glassmorphism look */}
         {layer.colorTheme === "violet" && (
-          <div className="absolute -top-12 -right-12 w-36 h-36 rounded-full bg-electric-violet/10 blur-3xl opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0 animate-glow-drift" />
+          <AmbientGlow className="-right-12 -top-12 z-0 h-36 w-36 animate-glow-drift bg-electric-violet/10 opacity-0 blur-3xl transition-opacity duration-500 motion-reduce:animate-none md:group-hover:opacity-100" />
         )}
         {layer.colorTheme === "blue" && (
-          <div className="absolute -top-12 -right-12 w-36 h-36 rounded-full bg-neon-blue/10 blur-3xl opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0 animate-glow-drift" />
+          <AmbientGlow className="-right-12 -top-12 z-0 h-36 w-36 animate-glow-drift bg-neon-blue/10 opacity-0 blur-3xl transition-opacity duration-500 motion-reduce:animate-none md:group-hover:opacity-100" />
         )}
         {layer.colorTheme === "orange" && (
-          <div className="absolute -top-12 -right-12 w-36 h-36 rounded-full bg-signal-orange/10 blur-3xl opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0 animate-glow-drift" />
+          <AmbientGlow className="-right-12 -top-12 z-0 h-36 w-36 animate-glow-drift bg-signal-orange/10 opacity-0 blur-3xl transition-opacity duration-500 motion-reduce:animate-none md:group-hover:opacity-100" />
         )}
         {layer.colorTheme === "emerald" && (
-          <div className="absolute -top-12 -right-12 w-36 h-36 rounded-full bg-signal-emerald/10 blur-3xl opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0 animate-glow-drift" />
+          <AmbientGlow className="-right-12 -top-12 z-0 h-36 w-36 animate-glow-drift bg-signal-emerald/10 opacity-0 blur-3xl transition-opacity duration-500 motion-reduce:animate-none md:group-hover:opacity-100" />
         )}
         {layer.colorTheme === "chrome" && (
-          <div className="absolute -top-12 -right-12 w-36 h-36 rounded-full bg-white/5 blur-3xl opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0 animate-glow-drift" />
+          <AmbientGlow className="-right-12 -top-12 z-0 h-36 w-36 animate-glow-drift bg-white/5 opacity-0 blur-3xl transition-opacity duration-500 motion-reduce:animate-none md:group-hover:opacity-100" />
         )}
 
         {/* Soft background highlight that follows mouse precisely inside card - Commented out for non-glassmorphism look */}

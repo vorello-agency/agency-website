@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState, useCallback } from "react";
 import { gsap } from "@/lib/gsap/register";
 import Container from "@/components/layout/Container";
 import SectionHeading from "@/components/layout/SectionHeading";
+import AmbientGlow from "@/components/ui/AmbientGlow";
 import { animateProcessIconEnter, animateProcessIconLeave } from "@/lib/gsap/animations";
 import {
   Compass,
@@ -194,7 +195,7 @@ function GridItem({ step, isActive, isMobile }: { step: StepItem; isActive: bool
         {/* Overflow clip layer — contiene los glows sin recortar el borde exterior */}
         <div className="absolute inset-0 rounded-[inherit] overflow-hidden pointer-events-none">
           {/* Capa 1: Círculo blurred de luz azul en la esquina superior derecha (Hover) */}
-          <div className="absolute -top-12 -right-12 w-36 h-36 rounded-full bg-electric-violet/15 blur-3xl opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 z-0 animate-glow-drift" />
+          <AmbientGlow className="-right-12 -top-12 z-0 h-36 w-36 animate-glow-drift bg-electric-violet/15 opacity-0 blur-3xl transition-opacity duration-500 motion-reduce:animate-none md:group-hover:opacity-100" />
 
           {/* Soft background highlight that follows mouse across card boundaries */}
           <div

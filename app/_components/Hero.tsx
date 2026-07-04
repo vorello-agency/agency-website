@@ -5,6 +5,7 @@ import { gsap } from "@/lib/gsap/register";
 import Button from "@/components/ui/Button";
 import Container from "@/components/layout/Container";
 import Badge from "@/components/ui/Badge";
+import DotBackground from "@/components/ui/DotBackground";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -165,7 +166,7 @@ export default function Hero() {
       {/* Premium clean dots background with radial mask */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         {/* Dot pattern */}
-        <div className="absolute inset-0 bg-dot-white opacity-80" />
+        <DotBackground className="opacity-80" />
         {/* Radial gradient overlay that fades the dots into solid carbon-black */}
         <div
           className="absolute inset-0"

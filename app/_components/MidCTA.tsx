@@ -3,6 +3,7 @@
 import React, { useEffect, useRef } from "react";
 import { gsap } from "@/lib/gsap/register";
 import Button from "@/components/ui/Button";
+import AmbientGlow from "@/components/ui/AmbientGlow";
 import Container from "@/components/layout/Container";
 
 export default function MidCTA() {
@@ -140,10 +141,10 @@ export default function MidCTA() {
       <div className="midcta-bottom-line absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-electric-violet/35 to-transparent pointer-events-none z-10 origin-center" />
 
       {/* Ambient soft purple glow under text on the left side */}
-      <div className="midcta-left-glow absolute left-0 top-1/2 -translate-y-1/2 w-80 h-32 rounded-full bg-electric-violet/[0.03] blur-[40px] pointer-events-none z-0" />
+      <AmbientGlow className="midcta-left-glow left-0 top-1/2 z-0 h-32 w-80 -translate-y-1/2 bg-electric-violet/[0.03] blur-[40px]" />
 
       {/* Concentrated and vibrant violet glow behind the button on the right side */}
-      <div className="midcta-right-glow absolute right-0 md:right-[15%] top-1/2 -translate-y-1/2 w-48 h-28 rounded-full bg-electric-violet/20 blur-[28px] pointer-events-none z-0" />
+      <AmbientGlow className="midcta-right-glow right-0 top-1/2 z-0 h-28 w-48 -translate-y-1/2 bg-electric-violet/20 blur-[28px] md:right-[15%]" />
 
       {/* Subtle Dot Pattern overlay on the left side with fade-out mask */}
       <div
