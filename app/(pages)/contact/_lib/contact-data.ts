@@ -17,6 +17,7 @@ export type ContactReason = {
   label: string;
   description?: string;
   icon?: React.ComponentType<{ className?: string }>;
+  muted?: boolean;
 };
 
 export type ContactChannelTone = "whatsapp" | "email" | "calendar";
@@ -47,8 +48,8 @@ export const CONTACT_REASONS: readonly ContactReason[] = [
   { id: "orientacion-servicio", label: "Necesito orientación sobre un servicio" },
   { id: "propuesta-colaboracion", label: "Propuesta de colaboración o alianzas" },
   { id: "consulta-tecnica", label: "Consulta técnica o de arquitectura" },
-  { id: "consulta-general", label: "Tengo una consulta general" },
-  { id: "otro", label: "Otro motivo" },
+  { id: "consulta-general", label: "Tengo una consulta general", muted: true },
+  { id: "otro", label: "Otro motivo", muted: true },
 ] as const;
 
 export const CONTACT_CHANNELS: ContactChannel[] = [

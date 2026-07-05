@@ -185,9 +185,12 @@ export function useContactForm() {
 
   const messageLength = formData.message.length;
   const charCountColor = useMemo(() => {
-    if (errors.message && messageLength < 10) return "text-red-400";
-    if (messageLength > CONTACT_MESSAGE_MAX_LENGTH * 0.9) return "text-amber-400";
-    return "text-chrome-deep";
+    if (errors.message) return "text-red-400";
+    if (messageLength === 0) return "text-chrome-deep/60";
+    if (messageLength < 10) return "text-amber-500/90";
+    if (messageLength >= CONTACT_MESSAGE_MAX_LENGTH) return "text-red-400";
+    if (messageLength > CONTACT_MESSAGE_MAX_LENGTH * 0.9) return "text-amber-500/90";
+    return "text-signal-emerald";
   }, [errors.message, messageLength]);
 
   const selectedReasonLabel = useMemo(() => {

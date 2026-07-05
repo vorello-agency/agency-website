@@ -39,15 +39,18 @@ export default function ContactForm({
   onSubmit,
 }: ContactFormProps) {
   return (
-    <div className="order-1 lg:order-2 lg:col-span-7">
+    <div className="lg:col-span-7">
       <form
         onSubmit={onSubmit}
-        className="space-y-6 rounded-none border-y border-x-0 sm:rounded-2xl sm:border-x border-steel-grey/30 bg-graphite-metal/30 p-6 backdrop-blur-md sm:p-8 -mx-4 sm:mx-0"
+        className="space-y-6 rounded-none border-y border-x-0 sm:rounded-2xl sm:border-x border-steel-grey p-6 sm:p-4 md:p-8 -mx-4 sm:mx-0"
+        style={{ background: "linear-gradient(to bottom, var(--graphite-metal), var(--graphite-metal))" }}
         noValidate
       >
-        <h2 className="mb-6 border-b border-steel-grey/30 pb-3 text-base font-bold uppercase tracking-wider text-chrome-highlight">
-          Mensaje directo
-        </h2>
+        <div className="mb-6 border-b border-steel-grey/30 pb-3">
+          <h2 className="text-lg font-bold uppercase tracking-wider text-chrome-highlight">
+            Formulario de contacto
+          </h2>
+        </div>
 
         {submitStatus === "error" ? (
           <div className="rounded-lg border border-red-500/25 bg-red-500/10 p-4 text-xs text-red-400">
@@ -58,7 +61,7 @@ export default function ContactForm({
         <Input
           id="input-name"
           name="name"
-          label="Tu nombre completo"
+          label="Nombre y apellido"
           type="text"
           value={formData.name}
           onChange={onInputChange}
@@ -108,14 +111,13 @@ export default function ContactForm({
           value={formData.message}
           onChange={onInputChange}
           maxLength={CONTACT_MESSAGE_MAX_LENGTH}
-          placeholder="Ej. Hola Vorello, me gustaría saber si tienen disponibilidad para..."
+          placeholder="Describe detalladamente tu consulta, proyecto o propuesta de colaboración..."
           required
           error={errors.message}
           hint={
-            <div className="flex items-center justify-between gap-4">
-              <p className="text-xs text-chrome-deep">Mínimo 10 caracteres.</p>
+            <div className="flex items-center justify-end gap-4">
               <span className={cn("text-xs tabular-nums transition-colors", charCountColor)}>
-                {messageLength} / {CONTACT_MESSAGE_MAX_LENGTH}
+                {messageLength} / {CONTACT_MESSAGE_MAX_LENGTH} caracteres
               </span>
             </div>
           }
@@ -128,6 +130,7 @@ export default function ContactForm({
             size="md"
             disabled={isSubmitting}
             className="w-full sm:w-auto"
+            withArrow={!isSubmitting}
           >
             {isSubmitting ? (
               <>
@@ -137,7 +140,6 @@ export default function ContactForm({
             ) : (
               <>
                 Enviar mensaje
-                <ArrowRight className="ml-2 h-4 w-4" />
               </>
             )}
           </Button>
