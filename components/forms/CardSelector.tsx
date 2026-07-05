@@ -9,6 +9,7 @@ export interface CardSelectorOption {
   description?: string;
   hint?: string;
   icon?: React.ComponentType<{ className?: string }>;
+  muted?: boolean;
 }
 
 interface CardSelectorProps {
@@ -88,6 +89,34 @@ const CardSelector: React.FC<CardSelectorProps> = ({
   const activeTheme = themeConfig[theme];
   const activeSize = sizeConfig[cardSize];
 
+  const getActiveCardClass = (isMuted?: boolean) => {
+    if (theme === "violet") {
+      return isMuted
+        ? "border-electric-violet/60 bg-electric-violet/[0.04] shadow-[0_0_15px_rgba(123,76,255,0.06)]"
+        : "border-electric-violet bg-electric-violet/[0.06] shadow-[0_0_15px_rgba(123,76,255,0.12)]";
+    } else {
+      return isMuted
+        ? "border-neon-blue/60 bg-neon-blue/[0.04] shadow-[0_0_15px_rgba(45,143,255,0.06)]"
+        : "border-neon-blue bg-neon-blue/[0.06] shadow-[0_0_15px_rgba(45,143,255,0.12)]";
+    }
+  };
+
+  const getInactiveCardClass = (isMuted?: boolean) => {
+    if (cardSize === "md") {
+      return isMuted
+        ? "border-steel-grey/30 bg-graphite-metal/10 hover:border-chrome-deep/60 hover:bg-graphite-metal/20 hover:-translate-y-[1px] hover:shadow-[0_4px_12px_rgba(255,255,255,0.01)]"
+        : "border-steel-grey/70 bg-carbon-black/50 hover:border-chrome-deep/85 hover:bg-carbon-black/70 hover:-translate-y-[1px] hover:shadow-[0_4px_12px_rgba(255,255,255,0.01)]";
+    } else {
+      return isMuted
+        ? "border-steel-grey/20 bg-graphite-metal/10 hover:border-chrome-deep/45 hover:bg-graphite-metal/20 hover:-translate-y-[1px] hover:shadow-[0_4px_12px_rgba(255,255,255,0.01)]"
+        : "border-steel-grey/60 bg-carbon-black/50 hover:border-chrome-deep/75 hover:bg-carbon-black/70 hover:-translate-y-[1px] hover:shadow-[0_4px_12px_rgba(255,255,255,0.01)]";
+    }
+  };
+
+  const focusRingClass = theme === "violet"
+    ? "focus-visible:ring-1 focus-visible:ring-electric-violet/60 focus-visible:border-electric-violet/60 outline-none"
+    : "focus-visible:ring-1 focus-visible:ring-neon-blue/60 focus-visible:border-neon-blue/60 outline-none";
+
   return (
     <div className="space-y-3" id={id}>
       <div className={columnsClass}>
@@ -97,6 +126,7 @@ const CardSelector: React.FC<CardSelectorProps> = ({
           const optionDesc = option.description ?? option.hint;
           const isSelected = value === optionVal;
           const isLastImparCard = autoSpanLastOdd && idx === options.length - 1 && options.length % 2 !== 0;
+          const isMuted = option.muted;
 
           return (
             <button
@@ -104,8 +134,8 @@ const CardSelector: React.FC<CardSelectorProps> = ({
               type="button"
               data-card-id={`${cardIdPrefix}-${optionVal}`}
               onClick={(e) => handleSelect(e, optionVal)}
-              className={`group text-left ${activeSize.padding} rounded-xl border transition-all duration-200 select-none cursor-pointer flex items-center gap-3 text-xs relative ${
-                isSelected ? activeTheme.activeCard : activeSize.inactiveCard
+              className={`group text-left ${activeSize.padding} rounded-xl border transition-all duration-200 select-none cursor-pointer flex items-center gap-3 text-xs relative ${focusRingClass} ${
+                isSelected ? getActiveCardClass(isMuted) : getInactiveCardClass(isMuted)
               } ${isLastImparCard ? "sm:col-span-2" : ""}`}
             >
               {indicator && indicator !== "none" && (
