@@ -293,8 +293,11 @@ export function useStartForm() {
         const cleanPhone = formData.phone.replace(/[\s()\-]/g, "");
         const digitsOnly = cleanPhone.replace(/\D/g, "");
 
-        if (!formData.phone.trim() || digitsOnly.length < 8 || isOnlyDialCode(cleanPhone)) {
-          newErrors.phone = "Por favor, ingresa tu teléfono.";
+        // Validar solo si ingresó datos reales (no vacío y no solo el código de área)
+        if (formData.phone.trim() && !isOnlyDialCode(cleanPhone)) {
+          if (digitsOnly.length < 8) {
+            newErrors.phone = "Por favor, ingresa un teléfono válido (mínimo 8 dígitos).";
+          }
         }
 
         if (!formData.country) {
@@ -405,10 +408,16 @@ export function useStartForm() {
       setSubmitStatus("idle");
 
       try {
+        const cleanPhone = formData.phone.replace(/[\s()\-]/g, "");
+        const submitData = { ...formData };
+        if (isOnlyDialCode(cleanPhone)) {
+          submitData.phone = "";
+        }
+
         const response = await fetch("/api/leads", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(formData),
+          body: JSON.stringify(submitData),
         });
 
         const data = (await response.json()) as { success?: boolean };

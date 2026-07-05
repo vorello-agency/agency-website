@@ -11,7 +11,13 @@ import { BUDGET_RANGES, DEADLINES, PROJECT_TYPES } from "../_lib/start-data";
 import type { UseStartFormReturn } from "../_lib/use-start-form";
 import SelectionSummary from "./SelectionSummary";
 import StepperNav from "./StepperNav";
-import { CONTACT_EMAIL, WHATSAPP_HUMAN_NUMBER, getWhatsAppLink, WHATSAPP_MSG_START } from "@/data/brand";
+import {
+  CONTACT_EMAIL,
+  WHATSAPP_HUMAN_NUMBER,
+  getWhatsAppLink,
+  WHATSAPP_MSG_START,
+} from "@/data/brand";
+import Badge from "@/components/ui/Badge";
 
 const PhoneInput = dynamic(() => import("@/components/forms/PhoneInput"), {
   ssr: false,
@@ -73,14 +79,13 @@ function StepOneContactInfo({
 }: StepOneContactInfoProps) {
   return (
     <div className="space-y-6">
-      <div>
-        <h2 className="mb-1 text-base font-bold uppercase tracking-wider text-chrome-highlight">
-          Información de Contacto
+      <div className="flex flex-col gap-2">
+        <h2 className="text-base font-bold uppercase tracking-wider text-chrome-highlight">
+          Información de contacto
         </h2>
-        <p className="text-balance text-xs leading-relaxed text-chrome-deep sm:text-xs">
-          Por favor, facilítanos tus datos básicos para poder dirigirnos a ti de forma personalizada.
-          <br />
-          El teléfono nos sirve para coordinar de forma más ágil en caso de dudas.
+        <p className="text-balance text-xs leading-relaxed text-chrome-deep sm:text-sm">
+          Por favor, completa los siguientes datos para poder dirigirnos a ti de
+          forma personalizada.
         </p>
       </div>
 
@@ -121,31 +126,48 @@ function StepOneContactInfo({
       </div>
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-        <Input
-          id="input-email"
-          name="email"
-          label="Correo electrónico"
-          type="email"
-          value={formData.email}
-          onChange={handleInputChange}
-          placeholder="Ej: nombre@empresa.com"
-          required
-          error={errors.email}
-        />
+        <div className="flex flex-col gap-2">
+          <Input
+            id="input-email"
+            name="email"
+            label="Correo electrónico"
+            type="email"
+            value={formData.email}
+            onChange={handleInputChange}
+            placeholder="Ej: nombre@empresa.com"
+            required
+            error={errors.email}
+          />
+          {!errors.email && (
+            <p className="ml-1 text-xs leading-normal text-copy-muted/70">
+              Te enviaremos tu plan de proyecto a esta dirección.
+            </p>
+          )}
+        </div>
 
-        <PhoneInput
-          id="input-phone"
-          name="phone"
-          label="Teléfono"
-          value={formData.phone}
-          onChange={handlePhoneChange}
-          placeholder="Ej. +54 9 11 222 333"
-          required
-          error={errors.phone}
-        />
+        <div className="flex flex-col gap-2">
+          <PhoneInput
+            id="input-phone"
+            name="phone"
+            label="Teléfono"
+            value={formData.phone}
+            onChange={handlePhoneChange}
+            error={errors.phone}
+          />
+          {!errors.phone && (
+            <p className="ml-1 text-xs leading-normal text-copy-muted/70">
+              No te llamaremos sin coordinarlo previamente.
+            </p>
+          )}
+        </div>
       </div>
 
-      <div className="flex justify-end pt-4">
+      <hr className="border-border" />
+
+      <div className="flex justify-between items-center pt-4">
+        <Badge variant="green">
+          Agenda disponible para nuevos proyectos
+        </Badge>
         <Button
           type="button"
           variant="primary"
@@ -181,14 +203,13 @@ function StepTwoProjectType({
 }: StepTwoProjectTypeProps) {
   return (
     <div className="space-y-6">
-      <div>
-        <h2 className="mb-1 text-base font-bold uppercase tracking-wider text-chrome-highlight">
+      <div className="flex flex-col gap-2">
+        <h2 className="text-base font-bold uppercase tracking-wider text-chrome-highlight">
           Tipo de Proyecto
         </h2>
-        <p className="text-pretty text-xs leading-relaxed text-chrome-deep sm:text-xs">
-          Selecciona la categoría técnica principal.
-          <br />
-          Esto nos sirve para asignar los ingenieros y diseñadores especializados al análisis técnico de encaje.
+        <p className="text-balance text-xs leading-relaxed text-chrome-deep sm:text-sm">
+          Selecciona la opción que mejor describa tu iniciativa para que podamos
+          estructurar la arquitectura y el plan de proyecto adecuado.
         </p>
       </div>
 
@@ -204,7 +225,7 @@ function StepTwoProjectType({
         autoSpanLastOdd
       />
 
-      <div className="flex flex-col gap-3 pt-4 sm:flex-row sm:justify-between">
+      <div className="flex flex-col gap-4 pt-4 sm:flex-row sm:justify-between">
         <Button
           type="button"
           variant="outline"
@@ -251,20 +272,23 @@ function StepThreeBudgetDeadline({
 }: StepThreeBudgetDeadlineProps) {
   return (
     <div className="space-y-8">
-      <div>
-        <h2 className="mb-1 text-base font-bold uppercase tracking-wider text-chrome-highlight">
+      <div className="flex flex-col gap-2">
+        <h2 className="text-base font-bold uppercase tracking-wider text-chrome-highlight">
           Presupuesto y Plazos
         </h2>
-        <p className="text-balance text-xs leading-relaxed text-chrome-deep sm:text-xs">
-          Por favor, indica tu rango de presupuesto e idea de plazos.
+        <p className="text-balance text-xs leading-relaxed text-chrome-deep sm:text-sm">
+          Indícanos un rango aproximado de inversión y cuándo te gustaría
+          avanzar.
           <br />
-          Ambos parámetros definen la velocidad de desarrollo, el tamaño del equipo y la arquitectura recomendada.
+          No buscamos una cifra exacta, sino una referencia inicial para
+          entender el alcance del proyecto y recomendar una solución acorde a
+          tus objetivos.
         </p>
       </div>
 
       <div className="grid grid-cols-1 gap-8 xl:grid-cols-2">
-        <div className="space-y-3">
-          <h3 className="text-[10px] font-bold uppercase tracking-[0.12em] text-[#828B9B] xl:hidden">
+        <div className="space-y-2">
+          <h3 className="text-[10px] font-bold uppercase tracking-[0.12em] text-copy-muted">
             Presupuesto estimado
           </h3>
           <CardSelector
@@ -280,8 +304,8 @@ function StepThreeBudgetDeadline({
           />
         </div>
 
-        <div className="space-y-3">
-          <h3 className="text-[10px] font-bold uppercase tracking-[0.12em] text-[#828B9B] xl:hidden">
+        <div className="space-y-2">
+          <h3 className="text-[10px] font-bold uppercase tracking-[0.12em] text-copy-muted">
             Plazo de desarrollo
           </h3>
           <CardSelector
@@ -298,7 +322,7 @@ function StepThreeBudgetDeadline({
         </div>
       </div>
 
-      <div className="flex flex-col gap-3 pt-4 sm:flex-row sm:justify-between">
+      <div className="flex flex-col gap-4 pt-4 sm:flex-row sm:justify-between">
         <Button
           type="button"
           variant="outline"
@@ -351,14 +375,17 @@ function StepFourProjectIdea({
 }: StepFourProjectIdeaProps) {
   return (
     <div className="space-y-6">
-      <div>
-        <h2 className="mb-1 text-base font-bold uppercase tracking-wider text-chrome-highlight">
+      <div className="flex flex-col gap-2">
+        <h2 className="text-base font-bold uppercase tracking-wider text-chrome-highlight">
           Idea y Objetivos del Proyecto
         </h2>
-        <p className="text-balance text-xs leading-relaxed text-chrome-deep sm:text-xs">
-          Cuéntanos brevemente qué buscas resolver con este desarrollo técnico.
+        <p className="text-balance text-xs leading-relaxed text-chrome-deep sm:text-sm">
+          Cuéntanos brevemente qué quieres construir, mejorar o resolver.
           <br />
-          Menciona cualquier detalle que consideres importante (ej. sistemas a integrar, público objetivo, velocidad de carga, SEO).
+          Puedes mencionar el contexto del negocio, el objetivo principal, el
+          público al que apunta, funcionalidades importantes, sistemas a
+          integrar o cualquier detalle que nos ayude a entender mejor el
+          proyecto.
         </p>
       </div>
 
@@ -376,13 +403,12 @@ function StepFourProjectIdea({
         error={errors.message}
         hint={
           <p
-            className={`text-xs transition-colors ${
-              messageLength === 0
-                ? "text-chrome-deep"
-                : messageLength < minChars
-                  ? "text-amber-400"
-                  : "text-emerald-400"
-            }`}
+            className={`text-xs transition-colors ${messageLength === 0
+              ? "text-chrome-deep"
+              : messageLength < minChars
+                ? "text-amber-400"
+                : "text-signal-emerald"
+              }`}
           >
             {messageLength} / {minChars} caracteres mínimos
             {messageLength >= minChars ? <span className="ml-2">✓</span> : null}
@@ -390,7 +416,7 @@ function StepFourProjectIdea({
         }
       />
 
-      <div className="flex flex-col gap-3 pt-4 sm:flex-row sm:justify-between">
+      <div className="flex flex-col gap-4 pt-4 sm:flex-row sm:justify-between">
         <Button
           type="button"
           variant="outline"
@@ -405,8 +431,8 @@ function StepFourProjectIdea({
         <Button
           type="submit"
           variant="primary-blue"
-          size="lg"
           disabled={isSubmitting || isAnimating}
+          withArrow={!isSubmitting}
           className="order-1 w-full sm:order-2 sm:w-auto"
         >
           {isSubmitting ? (
@@ -415,13 +441,14 @@ function StepFourProjectIdea({
               Enviando solicitud...
             </>
           ) : (
-            <>
-              Iniciar proyecto
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </>
+            <>Enviar solicitud</>
           )}
         </Button>
       </div>
+      <p className="text-xs text-right leading-relaxed text-chrome-deep">
+        Completar este formulario no implica ninguna aceptación automática ni
+        compromiso financiero.
+      </p>
     </div>
   );
 }
@@ -452,24 +479,31 @@ export default function StartForm({
   textareaPlaceholder,
 }: StartFormProps) {
   return (
-    <div className="order-1 lg:order-2 lg:col-span-8">
-      <div className="relative rounded-none border-y border-x-0 sm:rounded-2xl sm:border-x border-steel-grey bg-graphite-metal p-6 backdrop-blur-md sm:p-8 -mx-4 sm:mx-0">
-        <h2 className="mb-6 border-b border-steel-grey/30 pb-3 text-base font-bold uppercase tracking-wider text-chrome-highlight">
-          Formulario de solicitud
-        </h2>
+    <div className="lg:col-span-8">
+      <div
+        className="relative -mx-4 rounded-none border-x-0 border-y border-steel-grey p-6 backdrop-blur-md sm:mx-0 sm:rounded-2xl sm:border-x sm:p-4 md:p-8"
+        style={{ background: "linear-gradient(to bottom, var(--graphite-metal), var(--graphite-metal))" }}
+      >
+        <div className="mb-6 border-b border-steel-grey/30 pb-3">
+          <h2 className="text-lg font-bold uppercase tracking-wider text-chrome-highlight">
+            Formulario de solicitud
+          </h2>
+        </div>
 
         <StepperNav currentStep={currentStep} onStepClick={handleStepClick} />
 
         <form onSubmit={handleSubmit} className="space-y-8" noValidate>
           {submitStatus === "error" ? (
-            <div className="rounded-xl border border-red-500/20 bg-red-500/5 p-5 text-xs text-red-400 space-y-3">
+            <div className="space-y-3 rounded-xl border border-red-500/20 bg-red-500/5 p-5 text-xs text-red-400">
               <p className="leading-relaxed">
-                No pudimos enviar tu consulta en este momento. Podés intentarlo nuevamente o comunicarte con nosotros por WhatsApp o correo electrónico.
+                No pudimos enviar tu consulta en este momento. Podés intentarlo
+                nuevamente o comunicarte con nosotros por WhatsApp o correo
+                electrónico.
               </p>
               <div className="flex flex-wrap gap-4 pt-1 font-medium">
                 <a
                   href={`mailto:${CONTACT_EMAIL}`}
-                  className="hover:text-red-300 underline transition-colors focus-visible:outline-none"
+                  className="underline transition-colors hover:text-red-300 focus-visible:outline-none"
                 >
                   Enviar correo
                 </a>
@@ -478,7 +512,7 @@ export default function StartForm({
                   href={getWhatsAppLink(WHATSAPP_MSG_START)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-emerald-400 underline transition-colors focus-visible:outline-none"
+                  className="underline transition-colors hover:text-signal-emerald focus-visible:outline-none"
                 >
                   Escribir por WhatsApp
                 </a>

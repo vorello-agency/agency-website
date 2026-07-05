@@ -91,85 +91,149 @@ export const TOP_COUNTRY_VALUES = [
 
 export const CONTEXTUAL_PLACEHOLDERS: Record<string, string> = {
   "landing-premium":
-    "Describe el objetivo de tu landing, público objetivo y si hay referentes visuales que te inspiren...",
+    "Cuéntanos el objetivo de la landing, a quién va dirigida y si tienes referencias visuales o marcas que te inspiren...",
   "sitio-corporativo":
-    "Cuéntanos sobre tu empresa, secciones que necesitas (equipo, servicios, portfolio) y si hay una web actual a rediseñar...",
+    "Cuéntanos sobre tu empresa, qué secciones imaginas necesarias y si ya existe una web actual que quieras mejorar o rediseñar...",
   ecommerce:
-    "Describe tu catálogo, volumen de productos, pasarela de pagos preferida y si necesitas migración de datos...",
+    "Cuéntanos qué vendes, cuántos productos tendrías al inicio, si necesitas pagos online, envíos o gestión de stock...",
   "producto-sistema":
-    "Describe la problemática que resuelve tu producto, usuarios esperados y si hay integraciones con sistemas existentes...",
+    "Describe qué problema quieres resolver, quiénes usarán la plataforma y si debe conectarse con herramientas o sistemas existentes...",
   "portal-clientes":
-    "Cuéntanos qué podrán autogestionar tus clientes (facturas, soporte, archivos) y cuántos usuarios activos esperas...",
+    "Cuéntanos qué deberían poder hacer tus clientes dentro del portal: ver archivos, gestionar solicitudes, revisar información, acceder a documentos u otras acciones...",
   automatizacion:
-    "Describe los sistemas a conectar (CRM, ERP, APIs), las tareas a automatizar y el volumen de datos esperado...",
+    "Cuéntanos qué herramientas usas actualmente, qué tareas quieres automatizar y qué información debería moverse entre sistemas...",
   "no-estoy-seguro":
-    "Cuéntanos tu situación actual, qué problema buscas resolver y cualquier idea o referencia que tengas en mente...",
+    "Cuéntanos tu situación actual, qué problema quieres resolver y cualquier idea, referencia o necesidad que tengas en mente...",
   default:
-    "Ej. Buscamos desarrollar una plataforma web para que nuestros clientes puedan gestionar sus pedidos de forma autónoma. Necesitamos que se integre con nuestro ERP actual y tenga una UX excelente...",
+    "Ej. Queremos mejorar nuestra presencia digital y recibir más consultas calificadas. Nos gustaría una web clara, visualmente cuidada y preparada para crecer...",
 };
 
 export const START_MESSAGE_MIN_LENGTH = 20;
-
 export const PROJECT_TYPES = [
   {
     id: "landing-premium",
     label: "Landing page premium",
-    description: "Sitio de una sola página enfocado en vender o captar clientes con alto impacto visual.",
+    description:
+      "Página enfocada en presentar una oferta, captar consultas o validar una idea con alto impacto visual.",
     icon: Layers,
   },
   {
     id: "sitio-corporativo",
     label: "Sitio web corporativo",
-    description: "Múltiples páginas a medida para presentar tu marca, equipo y catálogo de servicios.",
+    description:
+      "Web institucional a medida para comunicar tu marca, servicios, equipo y propuesta de valor.",
     icon: Sparkles,
   },
   {
     id: "ecommerce",
-    label: "E-commerce premium",
-    description: "Tienda online moderna y rápida con carrito de compras, pasarela de pago y autogestión.",
+    label: "Ecommerce premium",
+    description:
+      "Tienda online moderna, rápida y preparada para vender con una experiencia cuidada.",
     icon: ShoppingBag,
   },
   {
     id: "producto-sistema",
     label: "Producto digital a medida",
-    description: "Aplicación web, plataforma interna o sistema personalizado para optimizar tu negocio.",
+    description:
+      "Aplicación web, plataforma interna, dashboard o sistema personalizado para resolver procesos reales.",
     icon: Database,
   },
   {
     id: "portal-clientes",
-    label: "Portal de gestión",
-    description: "Espacio privado y seguro para que tus usuarios autogestionen facturas, archivos o soporte.",
+    label: "Portal de clientes",
+    description:
+      "Espacio privado para centralizar información, documentos, solicitudes o gestiones de tus clientes.",
     icon: UserCheck,
   },
   {
     id: "automatizacion",
-    label: "Automatización / Integración",
-    description: "Conectar sistemas existentes, sincronizar datos o automatizar tareas repetitivas.",
+    label: "Automatización / integración",
+    description:
+      "Conexión entre herramientas, sistemas o procesos para reducir tareas manuales y ordenar operaciones.",
     icon: Terminal,
   },
   {
     id: "no-estoy-seguro",
-    label: "No sé, necesito orientación",
-    description: "Analizaremos tus necesidades juntos para definir la solución técnica adecuada.",
+    label: "No estoy seguro, necesito orientación",
+    description:
+      "Revisaremos tu situación para ayudarte a definir qué tipo de solución tiene más sentido.",
     icon: QuestionIcon,
+    muted: true,
   },
 ] as const;
 
 export const BUDGET_RANGES = [
-  { value: "less-than-1000", label: "Menos de USD 1.000", hint: "Adecuado para landing pages ágiles.", icon: Sparkles },
-  { value: "1000-2500", label: "USD 1.000 – 2.500", hint: "Sitios web estándar y landing pages premium.", icon: Layers },
-  { value: "2500-5000", label: "USD 2.500 – 5.000", hint: "E-commerce estándar o corporativos completos.", icon: ShoppingBag },
-  { value: "5000-10000", label: "USD 5.000 – 10.000", hint: "Plataformas web, integraciones avanzadas y SaaS.", icon: Database },
-  { value: "more-than-10000", label: "Más de USD 10.000", hint: "Sistemas web complejos a gran escala y medida.", icon: Terminal },
-  { value: "not-defined", label: "Sin presupuesto definido", hint: "Te ayudaremos a estimar según tus metas.", icon: QuestionIcon },
+  /* {
+    value: "less-than-1000",
+    label: "Menos de USD 1.000",
+    hint: "Puede aplicar para ajustes puntuales o alcances muy acotados.",
+    icon: Sparkles,
+  }, */
+  {
+    value: "1000-2500",
+    label: "USD 1.000 – 2.500",
+    hint: "Adecuado para landings premium o sitios simples bien definidos.",
+    icon: Layers,
+  },
+  {
+    value: "2500-5000",
+    label: "USD 2.500 – 5.000",
+    hint: "Ideal para sitios corporativos completos o ecommerce iniciales.",
+    icon: ShoppingBag,
+  },
+  {
+    value: "5000-10000",
+    label: "USD 5.000 – 10.000",
+    hint: "Para proyectos con mayor alcance, integraciones o funcionalidades a medida.",
+    icon: Database,
+  },
+  {
+    value: "more-than-10000",
+    label: "Más de USD 10.000",
+    hint: "Para plataformas, sistemas o soluciones digitales más complejas.",
+    icon: Terminal,
+  },
+  {
+    value: "not-defined",
+    label: "Sin inversión definida",
+    hint: "Podemos orientarte según objetivos, alcance y prioridades.",
+    icon: QuestionIcon,
+    muted: true,
+  },
 ] as const;
 
 export const DEADLINES = [
-  { value: "asap", label: "Lo antes posible", hint: "Urgente, requiere priorizar recursos.", icon: Zap },
-  { value: "2-4-weeks", label: "Entre 2 y 4 semanas", hint: "Plazo ideal para landings y webs rápidas.", icon: Clock },
-  { value: "1-2-months", label: "Entre 1 y 2 meses", hint: "Recomendado para desarrollos a medida.", icon: Calendar },
-  { value: "more-than-3-months", label: "Más de 3 meses", hint: "Para plataformas por fases complejas.", icon: Hourglass },
-  { value: "not-defined", label: "Sin fecha definida", hint: "Nos adaptamos al ritmo del alcance.", icon: QuestionIcon },
+  {
+    value: "asap",
+    label: "Lo antes posible",
+    hint: "Buscamos entender la urgencia para evaluar si el alcance es viable.",
+    icon: Zap,
+  },
+  {
+    value: "2-4-weeks",
+    label: "Entre 2 y 4 semanas",
+    hint: "Puede funcionar para landings o proyectos con alcance bien definido.",
+    icon: Clock,
+  },
+  {
+    value: "1-2-months",
+    label: "Entre 1 y 2 meses",
+    hint: "Un plazo razonable para sitios completos o desarrollos iniciales.",
+    icon: Calendar,
+  },
+  {
+    value: "more-than-3-months",
+    label: "Más de 3 meses",
+    hint: "Ideal para soluciones más estratégicas, por fases o con mayor profundidad.",
+    icon: Hourglass,
+  },
+  {
+    value: "not-defined",
+    label: "Sin fecha definida",
+    hint: "Podemos definir un ritmo adecuado según el alcance del proyecto.",
+    icon: QuestionIcon,
+    muted: true,
+  },
 ] as const;
 
 export const STEP_LABELS = ["Contacto", "Proyecto", "Presupuesto", "Mensaje"] as const;

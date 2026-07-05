@@ -37,7 +37,7 @@ const SelectionSummary: React.FC<SelectionSummaryProps> = ({ formData }) => {
       open
       className="bg-steel-grey/10 border border-steel-grey/25 rounded-xl overflow-hidden group"
     >
-      <summary className="px-4 py-3 flex items-center justify-between cursor-pointer text-xs uppercase tracking-wider text-chrome-deep hover:text-chrome-highlight transition-colors select-none">
+      <summary className="px-4 py-2 flex items-center justify-between cursor-pointer text-xs uppercase tracking-wider text-chrome-deep hover:text-chrome-highlight transition-colors select-none">
         <span>Resumen de tus selecciones</span>
         <svg
           className="w-4 h-4 transition-transform duration-200 group-open:rotate-180"
@@ -51,7 +51,7 @@ const SelectionSummary: React.FC<SelectionSummaryProps> = ({ formData }) => {
         </svg>
       </summary>
       <hr />
-      <div className="px-4 pb-4 grid grid-cols-1 sm:grid-cols-3 gap-3 mt-4">
+      <div className="px-4 pb-4 grid grid-cols-1 sm:grid-cols-3 gap-4 mt-4">
         {items.map((item) => {
           const Icon = item.icon;
           return (

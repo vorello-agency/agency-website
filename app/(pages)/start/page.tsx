@@ -1,74 +1,42 @@
-"use client";
-
 import React from "react";
-
-import Footer from "@/components/layout/Footer";
+import { Metadata } from "next";
 import Navbar from "@/components/layout/Navbar";
-import WhatsAppFloat from "@/components/layout/WhatsAppFloat";
-import StartContent from "./_components/StartContent";
-import StartPageShell from "./_components/StartPageShell";
-import StartSuccess from "./_components/StartSuccess";
-import { useStartForm } from "./_lib/use-start-form";
+import Footer from "@/components/layout/Footer";
+import StartPageClient from "./_components/StartPageClient";
+
+export const metadata: Metadata = {
+  title: "Solicitar Propuesta Técnica | Vorello Agency",
+  description:
+    "Inicia tu proyecto digital con Vorello. Completa nuestro formulario para recibir una propuesta técnica estructurada, con diseño, arquitectura de software y presupuesto cerrado.",
+  alternates: {
+    canonical: "https://vorelloagency.com/start",
+  },
+};
 
 export default function StartPage() {
-  const {
-    countries,
-    currentStep,
-    errors,
-    formData,
-    handleBack,
-    handleCountryChange,
-    handleInputChange,
-    handleNext,
-    handlePhoneChange,
-    handleSelectField,
-    handleStepClick,
-    handleSubmit,
-    isAnimating,
-    isSubmitting,
-    messageLength,
-    minChars,
-    setFormElement,
-    setStepContentElement,
-    submitStatus,
-    textareaPlaceholder,
-  } = useStartForm();
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    "@id": "https://vorelloagency.com/start#webpage",
+    "url": "https://vorelloagency.com/start",
+    "name": "Solicitar Propuesta Técnica | Vorello Agency",
+    "description": "Formulario de relevamiento de proyectos para diseño y desarrollo de productos digitales, web apps y ecommerce premium por Vorello Agency.",
+    "isPartOf": {
+      "@id": "https://vorelloagency.com/#website"
+    },
+    "about": {
+      "@id": "https://vorelloagency.com/#org"
+    }
+  };
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <Navbar />
-
-      <StartPageShell
-        footerSlot={submitStatus !== "success" ? <WhatsAppFloat /> : null}
-      >
-        {submitStatus === "success" ? (
-          <StartSuccess name={formData.name} company={formData.company} />
-        ) : (
-          <StartContent
-            countries={countries}
-            currentStep={currentStep}
-            errors={errors}
-            formData={formData}
-            handleBack={handleBack}
-            handleCountryChange={handleCountryChange}
-            handleInputChange={handleInputChange}
-            handleNext={handleNext}
-            handlePhoneChange={handlePhoneChange}
-            handleSelectField={handleSelectField}
-            handleStepClick={handleStepClick}
-            handleSubmit={handleSubmit}
-            isAnimating={isAnimating}
-            isSubmitting={isSubmitting}
-            messageLength={messageLength}
-            minChars={minChars}
-            setFormElement={setFormElement}
-            setStepContentElement={setStepContentElement}
-            submitStatus={submitStatus}
-            textareaPlaceholder={textareaPlaceholder}
-          />
-        )}
-      </StartPageShell>
-
+      <StartPageClient />
       <Footer />
     </>
   );
