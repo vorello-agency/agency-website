@@ -1,9 +1,11 @@
+import Eyebrow from "@/components/ui/Eyebrow";
+
 export default function ContactIntro() {
   return (
     <div className="mb-6 max-w-3xl md:mb-12">
-      <span className="mb-4 block text-xs font-semibold uppercase tracking-widest text-electric-violet font-mono">
-        {"// CONTACTO DIRECTO"}
-      </span>
+      <Eyebrow className="mb-4 block">
+        CONTACTO DIRECTO
+      </Eyebrow>
       <h1 className="mb-4 text-balance font-bebas text-4xl uppercase tracking-wide text-chrome-highlight sm:text-5xl lg:text-6xl">
         ¿Cómo podemos ayudarte?
       </h1>

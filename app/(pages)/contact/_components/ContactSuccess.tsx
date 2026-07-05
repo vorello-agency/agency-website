@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { CheckCircle2 } from "lucide-react";
+import Eyebrow from "@/components/ui/Eyebrow";
 
 import Button from "@/components/ui/Button";
 
@@ -17,9 +18,9 @@ export default function ContactSuccess({ name, reasonLabel }: ContactSuccessProp
       <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full border border-signal-emerald/20 bg-signal-emerald/10 text-signal-emerald">
         <CheckCircle2 className="h-8 w-8" />
       </div>
-      <span className="mb-2 block text-xs font-semibold uppercase tracking-widest text-signal-emerald">
-        {"// MENSAJE ENVIADO"}
-      </span>
+      <Eyebrow variant="green" className="mb-2 block">
+        MENSAJE ENVIADO
+      </Eyebrow>
       <h1 className="mb-4 text-balance font-bebas text-3xl tracking-tight text-chrome-highlight sm:text-4xl">
         ¡Mensaje recibido, {firstName}!
       </h1>
