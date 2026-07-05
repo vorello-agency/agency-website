@@ -5,6 +5,7 @@ import { Globe, Cpu, ShoppingBag, ArrowUpRight, RefreshCw, Workflow } from "luci
 import { gsap } from "@/lib/gsap/register";
 import Container from "@/components/layout/Container";
 import SectionHeading from "@/components/layout/SectionHeading";
+import Eyebrow from "@/components/ui/Eyebrow";
 import Link from "next/link";
 
 const SERVICES = [
@@ -266,9 +267,12 @@ function ServiceCard({ service }: { service: typeof SERVICES[0] }) {
           >
             <Icon className={`w-6 h-6 services-svg-${service.num}`} />
           </div>
-          <span className="services-num font-mono text-sm text-steel-grey md:group-hover:text-chrome-deep transition-colors">
-            {"// "} {service.num}
-          </span>
+          <Eyebrow
+            variant="custom"
+            className="services-num text-sm text-steel-grey md:group-hover:text-chrome-deep transition-colors"
+          >
+            {service.num}
+          </Eyebrow>
         </div>
 
         {/* Title */}
@@ -607,7 +611,7 @@ export default function Services() {
     >
       <Container>
         <SectionHeading
-          eyebrow="// SERVICIOS"
+          eyebrow="SERVICIOS"
           title="Productos digitales con criterio y ejecución técnica"
           description="Combinamos estrategia, diseño UX/UI y desarrollo moderno para crear soluciones digitales con base sólida y capacidad de evolución."
           className="services-heading"

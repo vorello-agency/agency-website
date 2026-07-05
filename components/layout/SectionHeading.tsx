@@ -1,5 +1,6 @@
 import React from "react";
 import { cn } from "@/lib/utils";
+import Eyebrow from "../ui/Eyebrow";
 
 interface SectionHeadingProps extends React.HTMLAttributes<HTMLDivElement> {
   eyebrow?: string;
@@ -26,9 +27,9 @@ export default function SectionHeading({
       {...props}
     >
       {eyebrow && (
-        <span className="text-xs uppercase tracking-widest font-mono text-electric-violet block mb-3 font-semibold">
+        <Eyebrow className="block mb-3">
           {eyebrow}
-        </span>
+        </Eyebrow>
       )}
       <h2 className="text-3xl sm:text-4xl md:text-5xl 2xl:text-6xl font-bold tracking-tight text-chrome-highlight mb-4 leading-tight text-balance">
         {title}

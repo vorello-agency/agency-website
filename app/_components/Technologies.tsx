@@ -5,6 +5,7 @@ import { Layers, Server, Palette, Cpu } from "lucide-react";
 import { gsap } from "@/lib/gsap/register";
 import Container from "@/components/layout/Container";
 import SectionHeading from "@/components/layout/SectionHeading";
+import Eyebrow from "@/components/ui/Eyebrow";
 import AmbientGlow from "@/components/ui/AmbientGlow";
 import { animateTechIconEnter, animateTechIconLeave } from "@/lib/gsap/animations";
 
@@ -247,9 +248,12 @@ function LayerCard({ layer }: { layer: LayerItem }) {
             <Icon className={`w-5 h-5 tech-icon-svg-${layer.num} overflow-visible transition-transform duration-500 ease-out md:group-hover:scale-105`} />
           </div>
           <div className="space-y-0.5">
-            <span className="block font-mono text-[9px] font-medium tracking-wider text-chrome-highlight/75">
-              {"// CAPA 0"}{layer.num}
-            </span>
+            <Eyebrow
+              variant="custom"
+              className="block text-[9px] font-medium tracking-wider text-chrome-highlight/75"
+            >
+              CAPA 0{layer.num}
+            </Eyebrow>
             <h3 className="text-lg font-bold text-chrome-highlight tracking-tight md:group-hover:text-white transition-colors duration-500 ease-out">
               {layer.title}
             </h3>
@@ -420,7 +424,7 @@ export default function Technologies() {
     >
       <Container className="relative z-10">
         <SectionHeading
-          eyebrow="// TECNOLOGÍA"
+          eyebrow="TECNOLOGÍA"
           title="Herramientas elegidas con criterio"
           description="No seguimos tendencias. Seleccionamos tecnologías probadas que garantizan rendimiento, escalabilidad y mantenibilidad a largo plazo."
           className="tech-heading"

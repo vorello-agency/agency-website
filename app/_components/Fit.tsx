@@ -486,7 +486,7 @@ export default function Fit() {
 
       <Container>
         <SectionHeading
-          eyebrow="// CLIENTE IDEAL"
+          eyebrow="CLIENTE IDEAL"
           title="Criterios de colaboración estratégica"
           description="Trabajamos mejor con empresas que valoran el diseño, la tecnología y un proceso claro para construir productos digitales de calidad."
           className="fit-heading"

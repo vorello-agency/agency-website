@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState, useCallback } from "react";
 import { gsap } from "@/lib/gsap/register";
 import Container from "@/components/layout/Container";
 import SectionHeading from "@/components/layout/SectionHeading";
+import Eyebrow from "@/components/ui/Eyebrow";
 import AmbientGlow from "@/components/ui/AmbientGlow";
 import { animateProcessIconEnter, animateProcessIconLeave } from "@/lib/gsap/animations";
 import {
@@ -243,9 +244,12 @@ function GridItem({ step, isActive, isMobile }: { step: StepItem; isActive: bool
               <Icon className={`h-5 w-5 overflow-visible process-svg-${step.num}`} />
             </div>
             <div className="space-y-1.5">
-              <span className="process-phase block font-mono text-[10px] font-semibold uppercase tracking-wider text-violet-400">
-                {"// FASE "} {step.num}
-              </span>
+              <Eyebrow
+                variant="custom"
+                className="process-phase block text-[10px] tracking-wider text-violet-400"
+              >
+                FASE {step.num}
+              </Eyebrow>
               <h3 className="process-title text-lg font-bold uppercase tracking-tight text-chrome-highlight md:group-hover:text-white transition-colors duration-500 ease-out">
                 {step.name}
               </h3>
@@ -612,7 +616,7 @@ export default function Process() {
 
       <Container className="relative z-10">
         <SectionHeading
-          eyebrow="// PROCESO DE TRABAJO"
+          eyebrow="PROCESO DE TRABAJO"
           title="De la idea al producto, con proceso y criterio"
           description="Cada proyecto pasa por etapas definidas de descubrimiento, diseño, desarrollo y validación antes de salir a producción."
           className="process-heading"

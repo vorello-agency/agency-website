@@ -4,6 +4,7 @@ import React, { useEffect, useRef } from "react";
 import { gsap } from "@/lib/gsap/register";
 import Container from "@/components/layout/Container";
 import { cn } from "@/lib/utils";
+import Eyebrow from "@/components/ui/Eyebrow";
 
 export default function Statement() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -84,9 +85,9 @@ export default function Statement() {
       <Container>
         <div className="max-w-4xl mx-auto flex flex-col gap-6 2xl:gap-8">
           {/* Manifesto Intro Tag */}
-          <span className="reveal-item font-mono text-xs text-electric-violet uppercase tracking-widest block font-semibold">
-            {"// NUESTRO MANIFIESTO"}
-          </span>
+          <Eyebrow className="reveal-item mb-4 block">
+            NUESTRO MANIFIESTO
+          </Eyebrow>
 
           {/* High-Fidelity Word-Split Manifesto Heading */}
           <h2

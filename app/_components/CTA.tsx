@@ -7,6 +7,7 @@ import Button from "@/components/ui/Button";
 import AmbientGlow from "@/components/ui/AmbientGlow";
 import Link from "next/link";
 import Container from "@/components/layout/Container";
+import Eyebrow from "@/components/ui/Eyebrow";
 
 
 
@@ -136,9 +137,9 @@ export default function CTA() {
           {/* Grid lines mimic */}
           <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.01)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
 
-          <span className="cta-tag font-mono text-xs text-electric-violet uppercase tracking-widest block mb-4 font-semibold relative z-10">
-            {"// INICIAR CONVERSACIÓN"}
-          </span>
+          <Eyebrow className="cta-tag mb-4 block relative z-10">
+            INICIAR CONVERSACIÓN
+          </Eyebrow>
 
           <h2 className="cta-title text-2xl sm:text-4xl md:text-5xl 2xl:text-6xl font-bold text-chrome-highlight tracking-tight mb-6 max-w-2xl mx-0 md:mx-auto leading-tight relative z-10">
             Diseñemos y desarrollemos tu próximo sistema digital
