@@ -111,7 +111,7 @@ const isOnlyDialCode = (cleanPhone: string): boolean => {
 };
 
 const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(
-  ({ label, error, required, value, onChange, id, name, placeholder = "Teléfono", disabled }, ref) => {
+  ({ label, error, required, value, onChange, id, name, placeholder, disabled }, ref) => {
     const detectedCountry = useMemo(() => guessUserCountry(), []);
     const [isOpen, setIsOpen] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
@@ -131,10 +131,30 @@ const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(
       defaultCountry: detectedCountry,
       value: value,
       inputRef: localInputRef,
+      disableDialCodePrefill: true,
       onChange: (data) => {
         onChange(data.phone);
       },
     });
+
+    const getDynamicPlaceholder = () => {
+      if (!country) return "Ej. +598 96 144 671";
+
+      const placeholders: Record<string, string> = {
+        uy: "+598 96 144 671",
+        ar: "+54 9 11 222 333",
+        es: "+34 600 000 000",
+        us: "+1 (555) 000-0000",
+        cl: "+56 9 1234 5678",
+        co: "+57 300 123 4567",
+        mx: "+52 55 1234 5678",
+      };
+
+      const iso2 = country.iso2.toLowerCase();
+      const formatStr = typeof country.format === "string" ? country.format : "";
+      const example = placeholders[iso2] || `+${country.dialCode} ${formatStr.replace(/\./g, "9")}`;
+      return `Ej. ${example}`;
+    };
 
     // Expose localInputRef through React forwardRef
     React.useImperativeHandle(ref, () => localInputRef.current!);
@@ -322,13 +342,17 @@ const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(
         {label && (
           <label
             htmlFor={id}
-            className="block text-xs uppercase tracking-wider text-chrome-highlight font-medium"
+            className="block text-xs uppercase tracking-wider text-chrome-highlight font-medium animate-fade-in"
           >
-            {label}
-            {required && (
+            <span>{label}</span>
+            {required ? (
               <sup aria-hidden="true" className="text-red-400 ml-0.5 text-[10px] font-sans font-normal select-none">
                 *
               </sup>
+            ) : (
+              <span className="text-[10px] text-copy-muted/50 normal-case tracking-normal font-normal select-none ml-2">
+                (opcional)
+              </span>
             )}
           </label>
         )}
@@ -348,18 +372,14 @@ const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(
             className="flex items-center gap-1.5 pl-4 pr-3 bg-transparent border-r border-steel-grey/30 hover:bg-steel-grey/10 transition-colors shrink-0 text-chrome-highlight cursor-pointer select-none rounded-l-lg disabled:cursor-not-allowed"
             aria-haspopup="listbox"
             aria-expanded={isOpen}
+            aria-label={country ? `Seleccionar prefijo de país (actual: +${country.dialCode})` : "Seleccionar prefijo de país"}
           >
             {country && (
-              <>
-                <FlagImage
-                  iso2={country.iso2}
-                  style={{ width: "20px", height: "15px" }}
-                  className="shrink-0 rounded-sm"
-                />
-                <span className="text-base md:text-sm text-chrome-highlight">
-                  +{country.dialCode}
-                </span>
-              </>
+              <FlagImage
+                iso2={country.iso2}
+                style={{ width: "20px", height: "15px" }}
+                className="shrink-0 rounded-sm"
+              />
             )}
             <ChevronDown className={cn("w-3.5 h-3.5 text-chrome-deep transition-transform duration-200", isOpen && "rotate-180")} />
           </button>
@@ -381,8 +401,19 @@ const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(
             disabled={disabled}
             value={inputValue}
             onChange={handlePhoneValueChange}
-            placeholder={placeholder}
-            className="w-full bg-transparent pl-4 pr-10 py-3 outline-none text-base md:text-sm text-chrome-highlight placeholder:text-chrome-deep/40 rounded-r-lg disabled:cursor-not-allowed"
+            onFocus={() => {
+              if (!value || value.trim() === "") {
+                onChange("+" + (country?.dialCode || "598"));
+              }
+            }}
+            onBlur={() => {
+              const cleanPhone = value.replace(/[\s()\-]/g, "");
+              if (isOnlyDialCode(cleanPhone)) {
+                onChange("");
+              }
+            }}
+            placeholder={placeholder || getDynamicPlaceholder()}
+            className="w-full bg-transparent px-4 py-3 outline-none text-base md:text-sm text-chrome-highlight placeholder:text-chrome-deep/40 rounded-r-lg disabled:cursor-not-allowed"
           />
 
           {value && value.trim() !== "" && !isOnlyDialCode(value.replace(/[\s()\-]/g, "")) && !disabled && (

@@ -174,7 +174,7 @@ const CountrySelect: React.FC<CountrySelectProps> = ({
           disabled && "opacity-50 cursor-not-allowed"
         )}
       >
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 min-w-0">
           {selectedOption ? (
             <>
               {selectedOption.iso2 ? (
@@ -186,10 +186,10 @@ const CountrySelect: React.FC<CountrySelectProps> = ({
               ) : (
                 <Globe className="w-4 h-3.5 text-chrome-deep shrink-0" />
               )}
-              <span>{selectedOption.label}</span>
+              <span className="truncate">{selectedOption.label}</span>
             </>
           ) : (
-            <span className="text-chrome-deep/40">{placeholder}</span>
+            <span className="text-chrome-deep/40 truncate">{placeholder}</span>
           )}
         </div>
         <div className="flex items-center gap-2">
