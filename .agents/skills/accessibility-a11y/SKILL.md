@@ -11,6 +11,7 @@ license: MIT
 Build interfaces that work for everyone: keyboard users, screen reader users, switch devices, and users with motion/visual sensitivity.
 
 This skill is tailored for this stack:
+
 - Next.js App Router
 - React + TypeScript
 - Tailwind CSS
@@ -85,7 +86,7 @@ export function Dialog({ isOpen, onClose, title, children }: DialogProps) {
             type="button"
             onClick={onClose}
             aria-label="Cerrar diálogo"
-            className="rounded-md p-2 hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
+            className="rounded-md p-2 hover:bg-white/10 focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:outline-none"
           >
             <span aria-hidden="true">×</span>
           </button>
@@ -151,7 +152,7 @@ export function FormField({
         onChange={(event) => onChange(event.target.value)}
         aria-invalid={error ? "true" : undefined}
         aria-describedby={describedBy}
-        className="h-10 w-full rounded-md border border-zinc-700 bg-zinc-900 px-3 text-sm text-zinc-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
+        className="h-10 w-full rounded-md border border-zinc-700 bg-zinc-900 px-3 text-sm text-zinc-100 focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:outline-none"
       />
 
       {error && (
@@ -210,7 +211,7 @@ export function Tabs({ tabs }: { tabs: TabItem[] }) {
             tabIndex={index === activeIndex ? 0 : -1}
             onClick={() => setActiveIndex(index)}
             onKeyDown={(event) => onKeyDown(event, index)}
-            className="rounded-md px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
+            className="rounded-md px-3 py-2 text-sm focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:outline-none"
           >
             {tab.label}
           </button>
@@ -249,7 +250,10 @@ export function SearchResultsAnnouncement({ query, count }: { query: string; cou
 
 export function CriticalError({ message }: { message: string }) {
   return (
-    <div role="alert" className="rounded-md border border-red-500/40 bg-red-950/30 p-3 text-red-200">
+    <div
+      role="alert"
+      className="rounded-md border border-red-500/40 bg-red-950/30 p-3 text-red-200"
+    >
       {message}
     </div>
   );

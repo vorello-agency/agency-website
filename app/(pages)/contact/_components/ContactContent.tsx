@@ -1,10 +1,6 @@
 import React from "react";
 
-import type {
-  ContactFormData,
-  ContactFormErrors,
-  ContactSubmitStatus,
-} from "../_lib/contact-data";
+import type { ContactFormData, ContactFormErrors, ContactSubmitStatus } from "../_lib/contact-data";
 import ContactSidebar from "./ContactSidebar";
 import ContactForm from "./ContactForm";
 import ContactIntro from "./ContactIntro";

@@ -39,7 +39,7 @@ export const TextHoverEffect = ({
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       onMouseMove={(e) => setCursor({ x: e.clientX, y: e.clientY })}
-      className="select-none h-auto"
+      className="h-auto select-none"
     >
       <defs>
         <linearGradient
@@ -67,25 +67,19 @@ export const TextHoverEffect = ({
           }}
           transition={{ duration: duration ?? 0.8, ease: "easeOut" }}
 
-        // example for a smoother animation below
+          // example for a smoother animation below
 
-        //   transition={{
-        //     type: "spring",
-        //     stiffness: 300,
-        //     damping: 50,
-        //   }}
+          //   transition={{
+          //     type: "spring",
+          //     stiffness: 300,
+          //     damping: 50,
+          //   }}
         >
           <stop offset="0%" stopColor="white" />
           <stop offset="100%" stopColor="black" />
         </motion.radialGradient>
         <mask id="textMask">
-          <rect
-            x="0"
-            y="0"
-            width="100%"
-            height="100%"
-            fill="url(#revealMask)"
-          />
+          <rect x="0" y="0" width="100%" height="100%" fill="url(#revealMask)" />
         </mask>
       </defs>
       <text
@@ -94,7 +88,7 @@ export const TextHoverEffect = ({
         textAnchor="middle"
         dominantBaseline="middle"
         strokeWidth="0.3"
-        className="fill-transparent stroke-steel-grey/15 font-sans font-black tracking-widest text-6xl uppercase"
+        className="stroke-steel-grey/15 fill-transparent font-sans text-6xl font-black tracking-widest uppercase"
         style={{ opacity: isCurrentlyHovered ? 0.7 : 0.25 }}
       >
         {text}
@@ -105,7 +99,7 @@ export const TextHoverEffect = ({
         textAnchor="middle"
         dominantBaseline="middle"
         strokeWidth="0.3"
-        className="fill-transparent stroke-electric-violet/20 sm:stroke-steel-grey/50 font-sans font-black tracking-widest text-6xl uppercase"
+        className="stroke-electric-violet/20 sm:stroke-steel-grey/50 fill-transparent font-sans text-6xl font-black tracking-widest uppercase"
         initial={{ strokeDashoffset: 1000, strokeDasharray: 1000 }}
         animate={{
           strokeDashoffset: 0,
@@ -126,7 +120,7 @@ export const TextHoverEffect = ({
         stroke="url(#textGradient)"
         strokeWidth={isCurrentlyHovered ? "0.3" : "0.5"}
         mask="url(#textMask)"
-        className="fill-transparent font-sans font-black tracking-widest text-6xl uppercase transition-all duration-500 ease-out"
+        className="fill-transparent font-sans text-6xl font-black tracking-widest uppercase transition-all duration-500 ease-out"
         style={{
           opacity: isCurrentlyHovered ? 1 : 0.15,
           filter: isCurrentlyHovered

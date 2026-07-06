@@ -12,7 +12,11 @@ interface SelectionSummaryProps {
 
 function getSelectedOption(
   value: string,
-  list: readonly { value: string; label: string; icon: React.ComponentType<{ className?: string }> }[]
+  list: readonly {
+    value: string;
+    label: string;
+    icon: React.ComponentType<{ className?: string }>;
+  }[]
 ) {
   return list.find((item) => item.value === value) ?? null;
 }
@@ -27,7 +31,11 @@ const SelectionSummary: React.FC<SelectionSummaryProps> = ({ formData }) => {
   const deadlineOpt = getSelectedOption(formData.deadline, DEADLINES);
 
   const items = [
-    { label: "Proyecto", value: projectOpt?.label ?? "—", icon: projectOpt?.icon },
+    {
+      label: "Proyecto",
+      value: projectOpt?.label ?? "—",
+      icon: projectOpt?.icon,
+    },
     { label: "Presupuesto", value: budgetOpt?.label ?? "—", icon: DollarSign },
     { label: "Plazo", value: deadlineOpt?.label ?? "—", icon: Calendar },
   ];
@@ -35,12 +43,12 @@ const SelectionSummary: React.FC<SelectionSummaryProps> = ({ formData }) => {
   return (
     <details
       open
-      className="bg-steel-grey/10 border border-steel-grey/25 rounded-xl overflow-hidden group"
+      className="bg-steel-grey/10 border-steel-grey/25 group overflow-hidden rounded-xl border"
     >
-      <summary className="px-4 py-2 flex items-center justify-between cursor-pointer text-xs uppercase tracking-wider text-chrome-deep hover:text-chrome-highlight transition-colors select-none">
+      <summary className="text-chrome-deep hover:text-chrome-highlight flex cursor-pointer items-center justify-between px-4 py-2 text-xs tracking-wider uppercase transition-colors select-none">
         <span>Resumen de tus selecciones</span>
         <svg
-          className="w-4 h-4 transition-transform duration-200 group-open:rotate-180"
+          className="h-4 w-4 transition-transform duration-200 group-open:rotate-180"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -51,23 +59,22 @@ const SelectionSummary: React.FC<SelectionSummaryProps> = ({ formData }) => {
         </svg>
       </summary>
       <hr />
-      <div className="px-4 pb-4 grid grid-cols-1 sm:grid-cols-3 gap-4 mt-4">
+      <div className="mt-4 grid grid-cols-1 gap-4 px-4 pb-4 sm:grid-cols-3">
         {items.map((item) => {
           const Icon = item.icon;
           return (
             <div key={item.label} className="space-y-1">
-              <div className="flex items-center gap-2 text-xs text-chrome-deep uppercase tracking-wider block">
+              <div className="text-chrome-deep block flex items-center gap-2 text-xs tracking-wider uppercase">
                 {Icon && (
-                  <div className="w-5 h-5 rounded bg-steel-grey/15 border border-steel-grey/25 flex items-center justify-center text-chrome-highlight shrink-0">
-                    <Icon className="w-3 h-3" />
+                  <div className="bg-steel-grey/15 border-steel-grey/25 text-chrome-highlight flex h-5 w-5 shrink-0 items-center justify-center rounded border">
+                    <Icon className="h-3 w-3" />
                   </div>
                 )}
                 {item.label}
               </div>
               <hr />
-              <div className="flex items-center gap-2 pt-1 mt-1">
-
-                <span className="text-xs text-chrome-highlight font-medium truncate block">
+              <div className="mt-1 flex items-center gap-2 pt-1">
+                <span className="text-chrome-highlight block truncate text-xs font-medium">
                   {item.value}
                 </span>
               </div>

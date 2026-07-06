@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700&family=Newsreader:opsz,wght@6..72,400;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700&family=Newsreader:opsz,wght@6..72,400;600&display=swap");
 
 :root {
   --bg: #0b0c10;
@@ -21,7 +21,7 @@
 
 body {
   margin: 0;
-  font-family: 'Newsreader', 'Times New Roman', serif;
+  font-family: "Newsreader", "Times New Roman", serif;
   color: var(--fg);
   background: var(--bg);
   min-height: 100vh;
@@ -40,7 +40,13 @@ body {
   pointer-events: none;
   background:
     radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.04), transparent 35%),
-    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.02) 1px, transparent 1px, transparent 3px);
+    repeating-linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.02),
+      rgba(255, 255, 255, 0.02) 1px,
+      transparent 1px,
+      transparent 3px
+    );
   mix-blend-mode: soft-light;
   opacity: 0.7;
   z-index: 1;
@@ -82,7 +88,7 @@ a {
 }
 
 .logo {
-  font-family: 'Bricolage Grotesque', 'Arial Black', sans-serif;
+  font-family: "Bricolage Grotesque", "Arial Black", sans-serif;
   font-weight: 700;
   letter-spacing: -0.02em;
 }
@@ -97,7 +103,9 @@ nav a {
   padding: 8px 12px;
   border-radius: 999px;
   border: 1px solid transparent;
-  transition: border-color 220ms var(--ease), color 220ms var(--ease);
+  transition:
+    border-color 220ms var(--ease),
+    color 220ms var(--ease);
 }
 
 nav a:hover,
@@ -107,7 +115,7 @@ nav a:focus-visible {
 }
 
 button {
-  font-family: 'Bricolage Grotesque', sans-serif;
+  font-family: "Bricolage Grotesque", sans-serif;
   font-weight: 700;
   border: none;
   cursor: pointer;
@@ -119,7 +127,9 @@ button {
   background: linear-gradient(120deg, var(--accent), var(--accent-2));
   color: #0b0c10;
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
-  transition: transform 200ms var(--ease), box-shadow 200ms var(--ease);
+  transition:
+    transform 200ms var(--ease),
+    box-shadow 200ms var(--ease);
 }
 
 .cta:hover {
@@ -136,7 +146,7 @@ button {
 }
 
 .hero-copy h1 {
-  font-family: 'Bricolage Grotesque', sans-serif;
+  font-family: "Bricolage Grotesque", sans-serif;
   font-size: clamp(2.4rem, 5vw, 3.6rem);
   line-height: 1.1;
   letter-spacing: -0.03em;
@@ -169,7 +179,10 @@ button {
   background: transparent;
   border: 1.5px solid var(--stroke);
   color: var(--fg);
-  transition: border-color 220ms var(--ease), color 220ms var(--ease), transform 220ms var(--ease);
+  transition:
+    border-color 220ms var(--ease),
+    color 220ms var(--ease),
+    transform 220ms var(--ease);
 }
 
 .ghost:hover {
@@ -189,7 +202,7 @@ button {
 
 .stats span {
   display: block;
-  font-family: 'Bricolage Grotesque', sans-serif;
+  font-family: "Bricolage Grotesque", sans-serif;
   font-size: 1.5rem;
   color: var(--fg);
 }
@@ -205,7 +218,7 @@ button {
 }
 
 .hero-card::after {
-  content: '';
+  content: "";
   position: absolute;
   inset: -30%;
   background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.04), transparent 45%);
@@ -230,7 +243,7 @@ button {
 }
 
 .hero-card h2 {
-  font-family: 'Bricolage Grotesque', sans-serif;
+  font-family: "Bricolage Grotesque", sans-serif;
   margin: 12px 0 8px;
 }
 
@@ -279,7 +292,7 @@ button {
 
 .panel h3 {
   margin: 6px 0 10px;
-  font-family: 'Bricolage Grotesque', sans-serif;
+  font-family: "Bricolage Grotesque", sans-serif;
 }
 
 .panel p {
@@ -292,7 +305,7 @@ button {
 }
 
 .timeline-head h3 {
-  font-family: 'Bricolage Grotesque', sans-serif;
+  font-family: "Bricolage Grotesque", sans-serif;
   margin: 8px 0 16px;
 }
 
@@ -314,9 +327,15 @@ button {
   box-shadow: 0 0 0 6px rgba(255, 107, 74, 0.15);
 }
 
-.timeline-rail .dot:nth-child(1) { left: 8%; }
-.timeline-rail .dot:nth-child(2) { left: 50%; }
-.timeline-rail .dot:nth-child(3) { left: 88%; }
+.timeline-rail .dot:nth-child(1) {
+  left: 8%;
+}
+.timeline-rail .dot:nth-child(2) {
+  left: 50%;
+}
+.timeline-rail .dot:nth-child(3) {
+  left: 88%;
+}
 
 .timeline-items {
   display: grid;
@@ -342,7 +361,7 @@ button {
 
 .timeline-card h4 {
   margin: 4px 0 8px;
-  font-family: 'Bricolage Grotesque', sans-serif;
+  font-family: "Bricolage Grotesque", sans-serif;
 }
 
 .timeline-card p {
@@ -360,7 +379,7 @@ button {
   display: grid;
   grid-auto-flow: column;
   gap: 16px;
-  font-family: 'Bricolage Grotesque', sans-serif;
+  font-family: "Bricolage Grotesque", sans-serif;
   text-transform: uppercase;
   letter-spacing: 0.14em;
   color: var(--muted);
@@ -368,8 +387,12 @@ button {
 }
 
 @keyframes scroll {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 .footer-grid {
@@ -389,7 +412,9 @@ button {
 .reveal {
   opacity: 0;
   transform: translateY(22px);
-  transition: transform 320ms var(--ease), opacity 320ms var(--ease);
+  transition:
+    transform 320ms var(--ease),
+    opacity 320ms var(--ease);
 }
 
 .reveal.visible {

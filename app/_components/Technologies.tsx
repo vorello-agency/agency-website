@@ -16,7 +16,7 @@ const LAYERS = [
     icon: Palette,
     chips: ["Figma", "Storybook", "Design Systems", "UX/UI", "Prototyping"],
     colorTheme: "orange",
-    glowColors: { start: "var(--signal-orange)", end: "#FF3D00" }
+    glowColors: { start: "var(--signal-orange)", end: "#FF3D00" },
   },
   {
     num: "2",
@@ -24,7 +24,7 @@ const LAYERS = [
     icon: Layers,
     chips: ["Next.js", "React", "TypeScript", "Tailwind CSS", "GSAP"],
     colorTheme: "violet",
-    glowColors: { start: "var(--electric-violet)", end: "var(--neon-blue)" }
+    glowColors: { start: "var(--electric-violet)", end: "var(--neon-blue)" },
   },
   {
     num: "3",
@@ -32,7 +32,7 @@ const LAYERS = [
     icon: Server,
     chips: ["Node.js", "Vercel", "Cloudflare", "Supabase", "Google Cloud"],
     colorTheme: "blue",
-    glowColors: { start: "var(--neon-blue)", end: "#00f2fe" }
+    glowColors: { start: "var(--neon-blue)", end: "#00f2fe" },
   },
   {
     num: "4",
@@ -40,11 +40,11 @@ const LAYERS = [
     icon: Cpu,
     chips: ["Sanity", "Stripe", "Resend", "n8n", "Webhooks"],
     colorTheme: "emerald",
-    glowColors: { start: "var(--signal-emerald)", end: "#059669" }
-  }
+    glowColors: { start: "var(--signal-emerald)", end: "#059669" },
+  },
 ];
 
-type LayerItem = typeof LAYERS[0];
+type LayerItem = (typeof LAYERS)[0];
 
 function LayerCard({ layer }: { layer: LayerItem }) {
   const Icon = layer.icon;
@@ -77,24 +77,25 @@ function LayerCard({ layer }: { layer: LayerItem }) {
         opacity: 1,
         duration: 0.2,
         ease: "power2.out",
-        overwrite: "auto"
+        overwrite: "auto",
       });
 
-      const themeColor = layer.colorTheme === "violet"
-        ? "rgba(123, 76, 255, 0.25)"
-        : layer.colorTheme === "blue"
-          ? "rgba(45, 143, 255, 0.25)"
-          : layer.colorTheme === "orange"
-            ? "rgba(255, 107, 0, 0.25)"
-            : layer.colorTheme === "emerald"
-              ? "rgba(16, 185, 129, 0.25)"
-              : "rgba(255, 255, 255, 0.2)";
+      const themeColor =
+        layer.colorTheme === "violet"
+          ? "rgba(123, 76, 255, 0.25)"
+          : layer.colorTheme === "blue"
+            ? "rgba(45, 143, 255, 0.25)"
+            : layer.colorTheme === "orange"
+              ? "rgba(255, 107, 0, 0.25)"
+              : layer.colorTheme === "emerald"
+                ? "rgba(16, 185, 129, 0.25)"
+                : "rgba(255, 255, 255, 0.2)";
 
       gsap.to(card, {
         borderColor: themeColor,
         duration: 0.2,
         ease: "power2.out",
-        overwrite: "auto"
+        overwrite: "auto",
       });
     }
   };
@@ -106,7 +107,7 @@ function LayerCard({ layer }: { layer: LayerItem }) {
         opacity: 0,
         duration: 0.5,
         ease: "power2.inOut",
-        overwrite: "auto"
+        overwrite: "auto",
       });
     }
     if (card) {
@@ -114,7 +115,7 @@ function LayerCard({ layer }: { layer: LayerItem }) {
         borderColor: "rgba(42, 46, 51, 0.25)",
         duration: 0.5,
         ease: "power2.inOut",
-        overwrite: "auto"
+        overwrite: "auto",
       });
     }
   };
@@ -162,7 +163,7 @@ function LayerCard({ layer }: { layer: LayerItem }) {
   };
 
   return (
-    <li className="list-none flex flex-col w-full">
+    <li className="flex w-full list-none flex-col">
       <div
         ref={cardRef}
         onPointerMove={handlePointerMove}
@@ -171,52 +172,58 @@ function LayerCard({ layer }: { layer: LayerItem }) {
         onTouchCancel={handleTouchEnd}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        className="group relative flex flex-col md:flex-row md:items-center justify-between gap-4 md:gap-6 p-4 md:p-8 rounded-xl border border-steel-grey/25 bg-graphite-metal transition-all duration-500 ease-out overflow-hidden select-none"
+        className="group border-steel-grey/25 bg-graphite-metal relative flex flex-col justify-between gap-4 overflow-hidden rounded-xl border p-4 transition-all duration-500 ease-out select-none md:flex-row md:items-center md:gap-6 md:p-8"
       >
         {/* Subtle dynamic radial light on hover - Commented out for non-glassmorphism look */}
         {layer.colorTheme === "violet" && (
-          <AmbientGlow className="-right-12 -top-12 z-0 h-36 w-36 animate-glow-drift bg-electric-violet/10 opacity-0 blur-3xl transition-opacity duration-500 motion-reduce:animate-none md:group-hover:opacity-100" />
+          <AmbientGlow className="animate-glow-drift bg-electric-violet/10 -top-12 -right-12 z-0 h-36 w-36 opacity-0 blur-3xl transition-opacity duration-500 motion-reduce:animate-none md:group-hover:opacity-100" />
         )}
         {layer.colorTheme === "blue" && (
-          <AmbientGlow className="-right-12 -top-12 z-0 h-36 w-36 animate-glow-drift bg-neon-blue/10 opacity-0 blur-3xl transition-opacity duration-500 motion-reduce:animate-none md:group-hover:opacity-100" />
+          <AmbientGlow className="animate-glow-drift bg-neon-blue/10 -top-12 -right-12 z-0 h-36 w-36 opacity-0 blur-3xl transition-opacity duration-500 motion-reduce:animate-none md:group-hover:opacity-100" />
         )}
         {layer.colorTheme === "orange" && (
-          <AmbientGlow className="-right-12 -top-12 z-0 h-36 w-36 animate-glow-drift bg-signal-orange/10 opacity-0 blur-3xl transition-opacity duration-500 motion-reduce:animate-none md:group-hover:opacity-100" />
+          <AmbientGlow className="animate-glow-drift bg-signal-orange/10 -top-12 -right-12 z-0 h-36 w-36 opacity-0 blur-3xl transition-opacity duration-500 motion-reduce:animate-none md:group-hover:opacity-100" />
         )}
         {layer.colorTheme === "emerald" && (
-          <AmbientGlow className="-right-12 -top-12 z-0 h-36 w-36 animate-glow-drift bg-signal-emerald/10 opacity-0 blur-3xl transition-opacity duration-500 motion-reduce:animate-none md:group-hover:opacity-100" />
+          <AmbientGlow className="animate-glow-drift bg-signal-emerald/10 -top-12 -right-12 z-0 h-36 w-36 opacity-0 blur-3xl transition-opacity duration-500 motion-reduce:animate-none md:group-hover:opacity-100" />
         )}
         {layer.colorTheme === "chrome" && (
-          <AmbientGlow className="-right-12 -top-12 z-0 h-36 w-36 animate-glow-drift bg-white/5 opacity-0 blur-3xl transition-opacity duration-500 motion-reduce:animate-none md:group-hover:opacity-100" />
+          <AmbientGlow className="animate-glow-drift -top-12 -right-12 z-0 h-36 w-36 bg-white/5 opacity-0 blur-3xl transition-opacity duration-500 motion-reduce:animate-none md:group-hover:opacity-100" />
         )}
 
         {/* Soft background highlight that follows mouse precisely inside card - Commented out for non-glassmorphism look */}
         <div
           ref={glowRef}
-          className="tech-glow absolute inset-0 rounded-[inherit] pointer-events-none opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 blur-2xl"
+          className="tech-glow pointer-events-none absolute inset-0 rounded-[inherit] opacity-0 blur-2xl transition-opacity duration-500 md:group-hover:opacity-100"
           style={{
-            background: layer.colorTheme === "violet"
-              ? "radial-gradient(circle 120px at var(--mouse-x, -999px) var(--mouse-y, -999px), rgba(123, 76, 255, 0.04), transparent 100%)"
-              : layer.colorTheme === "blue"
-                ? "radial-gradient(circle 120px at var(--mouse-x, -999px) var(--mouse-y, -999px), rgba(45, 143, 255, 0.04), transparent 100%)"
-                : layer.colorTheme === "orange"
-                  ? "radial-gradient(circle 120px at var(--mouse-x, -999px) var(--mouse-y, -999px), rgba(255, 107, 0, 0.04), transparent 100%)"
-                  : layer.colorTheme === "emerald"
-                    ? "radial-gradient(circle 120px at var(--mouse-x, -999px) var(--mouse-y, -999px), rgba(16, 185, 129, 0.04), transparent 100%)"
-                    : "radial-gradient(circle 120px at var(--mouse-x, -999px) var(--mouse-y, -999px), rgba(255, 255, 255, 0.02), transparent 100%)"
+            background:
+              layer.colorTheme === "violet"
+                ? "radial-gradient(circle 120px at var(--mouse-x, -999px) var(--mouse-y, -999px), rgba(123, 76, 255, 0.04), transparent 100%)"
+                : layer.colorTheme === "blue"
+                  ? "radial-gradient(circle 120px at var(--mouse-x, -999px) var(--mouse-y, -999px), rgba(45, 143, 255, 0.04), transparent 100%)"
+                  : layer.colorTheme === "orange"
+                    ? "radial-gradient(circle 120px at var(--mouse-x, -999px) var(--mouse-y, -999px), rgba(255, 107, 0, 0.04), transparent 100%)"
+                    : layer.colorTheme === "emerald"
+                      ? "radial-gradient(circle 120px at var(--mouse-x, -999px) var(--mouse-y, -999px), rgba(16, 185, 129, 0.04), transparent 100%)"
+                      : "radial-gradient(circle 120px at var(--mouse-x, -999px) var(--mouse-y, -999px), rgba(255, 255, 255, 0.02), transparent 100%)",
           }}
         />
 
         {/* Hover Border Glow Following Mouse */}
         <div
           ref={borderGlowRef}
-          className="tech-border-glow absolute inset-0 rounded-[inherit] pointer-events-none opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 z-10"
+          className="tech-border-glow pointer-events-none absolute inset-0 z-10 rounded-[inherit] opacity-0 transition-opacity duration-500 md:group-hover:opacity-100"
           style={{
-            maskImage: "radial-gradient(circle 100px at var(--mouse-x, -999px) var(--mouse-y, -999px), black 20%, transparent 100%)",
-            WebkitMaskImage: "radial-gradient(circle 100px at var(--mouse-x, -999px) var(--mouse-y, -999px), black 20%, transparent 100%)"
+            maskImage:
+              "radial-gradient(circle 100px at var(--mouse-x, -999px) var(--mouse-y, -999px), black 20%, transparent 100%)",
+            WebkitMaskImage:
+              "radial-gradient(circle 100px at var(--mouse-x, -999px) var(--mouse-y, -999px), black 20%, transparent 100%)",
           }}
         >
-          <svg className="absolute inset-0 w-full h-full rounded-[inherit] pointer-events-none" style={{ overflow: "visible" }}>
+          <svg
+            className="pointer-events-none absolute inset-0 h-full w-full rounded-[inherit]"
+            style={{ overflow: "visible" }}
+          >
             <rect
               x="0.75"
               y="0.75"
@@ -228,7 +235,13 @@ function LayerCard({ layer }: { layer: LayerItem }) {
               strokeWidth="1.5"
             />
             <defs>
-              <linearGradient id={`glow-grad-tech-${layer.num}`} x1="0%" y1="0%" x2="100%" y2="100%">
+              <linearGradient
+                id={`glow-grad-tech-${layer.num}`}
+                x1="0%"
+                y1="0%"
+                x2="100%"
+                y2="100%"
+              >
                 <stop offset="0%" stopColor={layer.glowColors.start} stopOpacity="0.8" />
                 <stop offset="100%" stopColor={layer.glowColors.end} stopOpacity="0.8" />
               </linearGradient>
@@ -238,40 +251,32 @@ function LayerCard({ layer }: { layer: LayerItem }) {
 
         {/* Left Column: Icon & Title */}
         <div className="relative z-20 flex items-center gap-4 md:min-w-[280px]">
-          <div className={`w-10 h-10 rounded-lg bg-steel-grey/15 border border-steel-grey/20 flex items-center justify-center text-chrome-deep transition-all duration-500 ease-out overflow-visible
-            ${layer.colorTheme === "violet" ? "md:group-hover:text-electric-violet md:group-hover:border-electric-violet/20 md:group-hover:bg-electric-violet/5" : ""}
-            ${layer.colorTheme === "blue" ? "md:group-hover:text-neon-blue md:group-hover:border-neon-blue/20 md:group-hover:bg-neon-blue/5" : ""}
-            ${layer.colorTheme === "orange" ? "md:group-hover:text-signal-orange md:group-hover:border-signal-orange/20 md:group-hover:bg-signal-orange/5" : ""}
-            ${layer.colorTheme === "emerald" ? "md:group-hover:text-signal-emerald md:group-hover:border-signal-emerald/20 md:group-hover:bg-signal-emerald/5" : ""}
-            ${layer.colorTheme === "chrome" ? "md:group-hover:text-white md:group-hover:border-white/20 md:group-hover:bg-white/5" : ""}
-          `}>
-            <Icon className={`w-5 h-5 tech-icon-svg-${layer.num} overflow-visible transition-transform duration-500 ease-out md:group-hover:scale-105`} />
+          <div
+            className={`bg-steel-grey/15 border-steel-grey/20 text-chrome-deep flex h-10 w-10 items-center justify-center overflow-visible rounded-lg border transition-all duration-500 ease-out ${layer.colorTheme === "violet" ? "md:group-hover:text-electric-violet md:group-hover:border-electric-violet/20 md:group-hover:bg-electric-violet/5" : ""} ${layer.colorTheme === "blue" ? "md:group-hover:text-neon-blue md:group-hover:border-neon-blue/20 md:group-hover:bg-neon-blue/5" : ""} ${layer.colorTheme === "orange" ? "md:group-hover:text-signal-orange md:group-hover:border-signal-orange/20 md:group-hover:bg-signal-orange/5" : ""} ${layer.colorTheme === "emerald" ? "md:group-hover:text-signal-emerald md:group-hover:border-signal-emerald/20 md:group-hover:bg-signal-emerald/5" : ""} ${layer.colorTheme === "chrome" ? "md:group-hover:border-white/20 md:group-hover:bg-white/5 md:group-hover:text-white" : ""} `}
+          >
+            <Icon
+              className={`h-5 w-5 tech-icon-svg-${layer.num} overflow-visible transition-transform duration-500 ease-out md:group-hover:scale-105`}
+            />
           </div>
           <div className="space-y-0.5">
             <Eyebrow
               variant="custom"
-              className="block text-[9px] font-medium tracking-wider text-chrome-highlight/75"
+              className="text-chrome-highlight/75 block text-[9px] font-medium tracking-wider"
             >
               CAPA 0{layer.num}
             </Eyebrow>
-            <h3 className="text-lg font-bold text-chrome-highlight tracking-tight md:group-hover:text-white transition-colors duration-500 ease-out">
+            <h3 className="text-chrome-highlight text-lg font-bold tracking-tight transition-colors duration-500 ease-out md:group-hover:text-white">
               {layer.title}
             </h3>
           </div>
         </div>
 
         {/* Right Column: Chips */}
-        <div className="relative z-20 flex flex-wrap gap-2 md:gap-3 items-center">
+        <div className="relative z-20 flex flex-wrap items-center gap-2 md:gap-3">
           {layer.chips.map((chip, idx) => (
             <span
               key={idx}
-              className={`tech-chip px-3 py-1 text-xs font-mono rounded-full border border-steel-grey/30 bg-graphite-metal/30 text-chrome-highlight hover:text-white hover:scale-[1.03] transition-all duration-500 ease-out cursor-default
-                ${layer.colorTheme === "violet" ? "hover:border-electric-violet/40 hover:bg-electric-violet/10" : ""}
-                ${layer.colorTheme === "blue" ? "hover:border-neon-blue/40 hover:bg-neon-blue/10" : ""}
-                ${layer.colorTheme === "orange" ? "hover:border-signal-orange/40 hover:bg-signal-orange/10" : ""}
-                ${layer.colorTheme === "emerald" ? "hover:border-signal-emerald/40 hover:bg-signal-emerald/10" : ""}
-                ${layer.colorTheme === "chrome" ? "hover:border-white/30 hover:bg-white/10" : ""}
-              `}
+              className={`tech-chip border-steel-grey/30 bg-graphite-metal/30 text-chrome-highlight cursor-default rounded-full border px-3 py-1 font-mono text-xs transition-all duration-500 ease-out hover:scale-[1.03] hover:text-white ${layer.colorTheme === "violet" ? "hover:border-electric-violet/40 hover:bg-electric-violet/10" : ""} ${layer.colorTheme === "blue" ? "hover:border-neon-blue/40 hover:bg-neon-blue/10" : ""} ${layer.colorTheme === "orange" ? "hover:border-signal-orange/40 hover:bg-signal-orange/10" : ""} ${layer.colorTheme === "emerald" ? "hover:border-signal-emerald/40 hover:bg-signal-emerald/10" : ""} ${layer.colorTheme === "chrome" ? "hover:border-white/30 hover:bg-white/10" : ""} `}
             >
               {chip}
             </span>
@@ -299,7 +304,11 @@ export default function Technologies() {
         gsap.set(".tech-heading > *", { opacity: 1, y: 0 });
         gsap.set(cards, { opacity: 1, y: 0, scale: 1 });
         cards.forEach((card) => {
-          gsap.set(card.querySelectorAll(".tech-chip"), { opacity: 1, scale: 1, x: 0 });
+          gsap.set(card.querySelectorAll(".tech-chip"), {
+            opacity: 1,
+            scale: 1,
+            x: 0,
+          });
         });
         return;
       }
@@ -377,7 +386,7 @@ export default function Technologies() {
                 trigger: card,
                 start: "top 72%",
                 toggleActions: "play none none none",
-              }
+              },
             });
 
             const obj = { x: -120, y: 50 };
@@ -388,26 +397,33 @@ export default function Technologies() {
               ease: "power2.out",
             });
 
-            cardTl.to(obj, {
-              x: 500,
-              y: 50,
-              duration: 1.4,
-              ease: "power2.inOut",
-              onUpdate: () => {
-                (cardInner as HTMLElement).style.setProperty("--mouse-x", `${obj.x}px`);
-                (cardInner as HTMLElement).style.setProperty("--mouse-y", `${obj.y}px`);
-              }
-            }, "-=0.25");
+            cardTl.to(
+              obj,
+              {
+                x: 500,
+                y: 50,
+                duration: 1.4,
+                ease: "power2.inOut",
+                onUpdate: () => {
+                  (cardInner as HTMLElement).style.setProperty("--mouse-x", `${obj.x}px`);
+                  (cardInner as HTMLElement).style.setProperty("--mouse-y", `${obj.y}px`);
+                },
+              },
+              "-=0.25"
+            );
 
-            cardTl.to([glow, borderGlow], {
-              opacity: 0,
-              duration: 0.5,
-              ease: "power2.inOut",
-            }, "-=0.3");
+            cardTl.to(
+              [glow, borderGlow],
+              {
+                opacity: 0,
+                duration: 0.5,
+                ease: "power2.inOut",
+              },
+              "-=0.3"
+            );
           }
         }
       });
-
     }, sectionRef);
 
     return () => ctx.revert();
@@ -417,9 +433,10 @@ export default function Technologies() {
     <section
       ref={sectionRef}
       id="tecnologia"
-      className="py-20 md:py-32 relative overflow-hidden z-10"
+      className="relative z-10 overflow-hidden py-20 md:py-32"
       style={{
-        background: "radial-gradient(circle at 85% 25%, rgba(45, 143, 255, 0.05), transparent 35%), radial-gradient(circle at 15% 75%, rgba(123, 76, 255, 0.05), transparent 35%), var(--carbon-black)"
+        background:
+          "radial-gradient(circle at 85% 25%, rgba(45, 143, 255, 0.05), transparent 35%), radial-gradient(circle at 15% 75%, rgba(123, 76, 255, 0.05), transparent 35%), var(--carbon-black)",
       }}
     >
       <Container className="relative z-10">
@@ -432,7 +449,7 @@ export default function Technologies() {
 
         <ul
           ref={cardsContainerRef}
-          className="group/grid mt-12 flex flex-col gap-6 max-w-5xl mx-auto"
+          className="group/grid mx-auto mt-12 flex max-w-5xl flex-col gap-6"
         >
           {LAYERS.map((layer, idx) => (
             <LayerCard key={idx} layer={layer} />

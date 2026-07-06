@@ -53,7 +53,7 @@ const SERVICES = [
   },
 ];
 
-function ServiceCard({ service }: { service: typeof SERVICES[0] }) {
+function ServiceCard({ service }: { service: (typeof SERVICES)[0] }) {
   const Icon = service.icon;
   const cardRef = useRef<HTMLDivElement>(null);
   const accentLineRef = useRef<HTMLDivElement>(null);
@@ -66,7 +66,7 @@ function ServiceCard({ service }: { service: typeof SERVICES[0] }) {
         opacity: 1,
         duration: 0.25,
         ease: "power2.out",
-        overwrite: "auto"
+        overwrite: "auto",
       });
       gsap.to(iconRef.current, {
         borderColor: "rgba(123, 76, 255, 0.4)",
@@ -74,14 +74,14 @@ function ServiceCard({ service }: { service: typeof SERVICES[0] }) {
         backgroundColor: "rgba(123, 76, 255, 0.05)",
         duration: 0.25,
         ease: "power2.out",
-        overwrite: "auto"
+        overwrite: "auto",
       });
       gsap.to(cardRef.current, {
         borderColor: "rgba(123, 76, 255, 0.35)",
         scale: 1.008,
         duration: 0.25,
         ease: "power2.out",
-        overwrite: "auto"
+        overwrite: "auto",
       });
     }
   };
@@ -93,7 +93,7 @@ function ServiceCard({ service }: { service: typeof SERVICES[0] }) {
         opacity: 0,
         duration: 0.5,
         ease: "power2.inOut",
-        overwrite: "auto"
+        overwrite: "auto",
       });
       gsap.to(iconRef.current, {
         borderColor: "rgba(42, 46, 51, 0.3)",
@@ -101,14 +101,14 @@ function ServiceCard({ service }: { service: typeof SERVICES[0] }) {
         backgroundColor: "rgba(42, 46, 51, 0.25)",
         duration: 0.5,
         ease: "power2.inOut",
-        overwrite: "auto"
+        overwrite: "auto",
       });
       gsap.to(cardRef.current, {
         borderColor: "rgba(42, 46, 51, 0.2)",
         scale: 1,
         duration: 0.5,
         ease: "power2.inOut",
-        overwrite: "auto"
+        overwrite: "auto",
       });
     }
   };
@@ -169,7 +169,12 @@ function ServiceCard({ service }: { service: typeof SERVICES[0] }) {
       }
     } else if (service.num === "03") {
       const tl = gsap.timeline();
-      tl.to(svg, { rotation: 15, transformOrigin: "top center", duration: 0.12, ease: "power1.out" })
+      tl.to(svg, {
+        rotation: 15,
+        transformOrigin: "top center",
+        duration: 0.12,
+        ease: "power1.out",
+      })
         .to(svg, { rotation: -12, duration: 0.12, ease: "power1.inOut" })
         .to(svg, { rotation: 8, duration: 0.12, ease: "power1.inOut" })
         .to(svg, { rotation: -4, duration: 0.12, ease: "power1.inOut" })
@@ -249,50 +254,50 @@ function ServiceCard({ service }: { service: typeof SERVICES[0] }) {
       onTouchCancel={handleTouchEnd}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className="group relative flex flex-col p-5 md:p-8 2xl:p-10 rounded-xl border border-steel-grey/30 bg-graphite-metal md:hover:border-electric-violet/40 transition-all duration-300 h-full md:min-h-[480px] 2xl:min-h-[520px] select-none"
+      className="group border-steel-grey/30 bg-graphite-metal md:hover:border-electric-violet/40 relative flex h-full flex-col rounded-xl border p-5 transition-all duration-300 select-none md:min-h-[480px] md:p-8 2xl:min-h-[520px] 2xl:p-10"
     >
       {/* Accent line animation hover */}
       <div
         ref={accentLineRef}
-        className="services-accent-line absolute inset-x-0 -top-px h-[2px] bg-gradient-to-r from-transparent via-electric-violet/40 to-transparent scale-x-0 md:group-hover:scale-x-100 md:transition-transform md:duration-500 rounded-full"
+        className="services-accent-line via-electric-violet/40 absolute inset-x-0 -top-px h-[2px] scale-x-0 rounded-full bg-gradient-to-r from-transparent to-transparent md:transition-transform md:duration-500 md:group-hover:scale-x-100"
       />
 
       {/* Main content wrapper (takes all available height) */}
-      <div className="flex-1 flex flex-col">
+      <div className="flex flex-1 flex-col">
         {/* Header: Icon & Num */}
-        <div className="flex items-center justify-between mb-5 md:mb-8">
+        <div className="mb-5 flex items-center justify-between md:mb-8">
           <div
             ref={iconRef}
-            className="services-icon w-12 h-12 rounded-lg bg-steel-grey/25 border border-steel-grey/30 flex items-center justify-center text-chrome-highlight md:group-hover:text-electric-violet md:group-hover:border-electric-violet/20 transition-all duration-300"
+            className="services-icon bg-steel-grey/25 border-steel-grey/30 text-chrome-highlight md:group-hover:text-electric-violet md:group-hover:border-electric-violet/20 flex h-12 w-12 items-center justify-center rounded-lg border transition-all duration-300"
           >
-            <Icon className={`w-6 h-6 services-svg-${service.num}`} />
+            <Icon className={`h-6 w-6 services-svg-${service.num}`} />
           </div>
           <Eyebrow
             variant="custom"
-            className="services-num text-sm text-steel-grey md:group-hover:text-chrome-deep transition-colors"
+            className="services-num text-steel-grey md:group-hover:text-chrome-deep text-sm transition-colors"
           >
             {service.num}
           </Eyebrow>
         </div>
 
         {/* Title */}
-        <h3 className="services-title text-xl 2xl:text-2xl font-bold text-chrome-highlight mb-3 tracking-tight leading-snug md:group-hover:text-white transition-colors">
+        <h3 className="services-title text-chrome-highlight mb-3 text-xl leading-snug font-bold tracking-tight transition-colors md:group-hover:text-white 2xl:text-2xl">
           {service.title}
         </h3>
 
         {/* Description */}
-        <p className="services-desc text-sm 2xl:text-base text-copy-muted leading-relaxed mb-4 md:mb-6 md:group-hover:text-chrome-highlight/90">
+        <p className="services-desc text-copy-muted md:group-hover:text-chrome-highlight/90 mb-4 text-sm leading-relaxed md:mb-6 2xl:text-base">
           {service.description}
         </p>
 
         {/* Features / Bullets (Separated with border-top) */}
-        <ul className="flex flex-col gap-2 md:gap-2.5 2xl:gap-3.5 mb-5 md:mb-8 border-t border-steel-grey/20 pt-4 md:pt-6 mt-auto">
+        <ul className="border-steel-grey/20 mt-auto mb-5 flex flex-col gap-2 border-t pt-4 md:mb-8 md:gap-2.5 md:pt-6 2xl:gap-3.5">
           {service.features.map((feature, fIdx) => (
             <li
               key={fIdx}
-              className="services-list-item text-xs 2xl:text-sm text-copy-muted flex items-center gap-2"
+              className="services-list-item text-copy-muted flex items-center gap-2 text-xs 2xl:text-sm"
             >
-              <span className="w-1 h-1 rounded-full bg-electric-violet/70" />
+              <span className="bg-electric-violet/70 h-1 w-1 rounded-full" />
               {feature}
             </li>
           ))}
@@ -303,10 +308,10 @@ function ServiceCard({ service }: { service: typeof SERVICES[0] }) {
       <div className="services-cta mt-auto">
         <Link
           href="/start"
-          className="inline-flex items-center gap-2 text-xs 2xl:text-sm font-mono text-chrome-highlight font-semibold md:group-hover:text-electric-violet transition-colors focus-visible:outline-none"
+          className="text-chrome-highlight md:group-hover:text-electric-violet inline-flex items-center gap-2 font-mono text-xs font-semibold transition-colors focus-visible:outline-none 2xl:text-sm"
         >
           Iniciar proyecto{" "}
-          <ArrowUpRight className="w-3.5 h-3.5 md:group-hover:translate-x-0.5 md:group-hover:-translate-y-0.5 transition-transform" />
+          <ArrowUpRight className="h-3.5 w-3.5 transition-transform md:group-hover:translate-x-0.5 md:group-hover:-translate-y-0.5" />
         </Link>
       </div>
     </div>
@@ -326,7 +331,11 @@ function PostLaunchStrip() {
       const divider = stripRef.current.querySelector(".strip-divider");
 
       if (prefersReducedMotion) {
-        gsap.set([stripRef.current, items, divider], { opacity: 1, y: 0, scaleY: 1 });
+        gsap.set([stripRef.current, items, divider], {
+          opacity: 1,
+          y: 0,
+          scaleY: 1,
+        });
         return;
       }
 
@@ -367,38 +376,40 @@ function PostLaunchStrip() {
   return (
     <div
       ref={stripRef}
-      className="mt-10 md:mt-14 2xl:mt-16 rounded-xl border border-steel-grey/20 bg-graphite-metal p-6 md:p-8 2xl:p-10"
+      className="border-steel-grey/20 bg-graphite-metal mt-10 rounded-xl border p-6 md:mt-14 md:p-8 2xl:mt-16 2xl:p-10"
     >
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-0 relative">
+      <div className="relative grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-0">
         {/* Vertical divider (desktop only) */}
-        <div className="strip-divider hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-steel-grey/20 origin-center" />
+        <div className="strip-divider bg-steel-grey/20 absolute top-0 bottom-0 left-1/2 hidden w-px origin-center md:block" />
 
         {/* Soporte continuo */}
         <div className="strip-item flex gap-4 md:pr-8 2xl:pr-12">
-          <div className="w-10 h-10 2xl:w-12 2xl:h-12 rounded-lg bg-neon-blue/10 border border-neon-blue/20 flex items-center justify-center shrink-0">
-            <RefreshCw className="w-5 h-5 2xl:w-6 2xl:h-6 text-neon-blue" />
+          <div className="bg-neon-blue/10 border-neon-blue/20 flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border 2xl:h-12 2xl:w-12">
+            <RefreshCw className="text-neon-blue h-5 w-5 2xl:h-6 2xl:w-6" />
           </div>
           <div>
-            <h4 className="text-sm 2xl:text-base font-bold text-chrome-highlight mb-1.5 tracking-tight">
+            <h4 className="text-chrome-highlight mb-1.5 text-sm font-bold tracking-tight 2xl:text-base">
               Evolución y mantenimiento
             </h4>
-            <p className="text-xs 2xl:text-sm text-copy-muted leading-relaxed">
-              Acompañamos cada proyecto después del lanzamiento con mejoras continuas, soporte técnico y optimización de rendimiento.
+            <p className="text-copy-muted text-xs leading-relaxed 2xl:text-sm">
+              Acompañamos cada proyecto después del lanzamiento con mejoras continuas, soporte
+              técnico y optimización de rendimiento.
             </p>
           </div>
         </div>
 
         {/* Automatización y evolución */}
         <div className="strip-item flex gap-4 md:pl-8 2xl:pl-12">
-          <div className="w-10 h-10 2xl:w-12 2xl:h-12 rounded-lg bg-electric-violet/10 border border-electric-violet/20 flex items-center justify-center shrink-0">
-            <Workflow className="w-5 h-5 2xl:w-6 2xl:h-6 text-electric-violet" />
+          <div className="bg-electric-violet/10 border-electric-violet/20 flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border 2xl:h-12 2xl:w-12">
+            <Workflow className="text-electric-violet h-5 w-5 2xl:h-6 2xl:w-6" />
           </div>
           <div>
-            <h4 className="text-sm 2xl:text-base font-bold text-chrome-highlight mb-1.5 tracking-tight">
+            <h4 className="text-chrome-highlight mb-1.5 text-sm font-bold tracking-tight 2xl:text-base">
               Automatizaciones e integraciones
             </h4>
-            <p className="text-xs 2xl:text-sm text-copy-muted leading-relaxed">
-              Conectamos herramientas, sistemas y procesos para reducir tareas manuales, ordenar operaciones y mejorar la eficiencia del negocio.
+            <p className="text-copy-muted text-xs leading-relaxed 2xl:text-sm">
+              Conectamos herramientas, sistemas y procesos para reducir tareas manuales, ordenar
+              operaciones y mejorar la eficiencia del negocio.
             </p>
           </div>
         </div>
@@ -424,12 +435,17 @@ export default function Services() {
         gsap.set(".services-heading > *", { opacity: 1, y: 0 });
         gsap.set(cards, { opacity: 1, y: 0, scale: 1, rotationX: 0 });
         cards.forEach((card) => {
-          gsap.set(card.querySelectorAll(".services-icon, .services-num, .services-title, .services-desc, .services-list-item, .services-cta"), {
-            opacity: 1,
-            scale: 1,
-            x: 0,
-            y: 0
-          });
+          gsap.set(
+            card.querySelectorAll(
+              ".services-icon, .services-num, .services-title, .services-desc, .services-list-item, .services-cta"
+            ),
+            {
+              opacity: 1,
+              scale: 1,
+              x: 0,
+              y: 0,
+            }
+          );
         });
         return;
       }
@@ -491,7 +507,7 @@ export default function Services() {
             trigger: card,
             start: "top 52%",
             toggleActions: "play none none none",
-          }
+          },
         });
 
         // Set initial states to avoid flashing
@@ -550,49 +566,56 @@ export default function Services() {
         // Mobile touch-triggered sweep effect via ScrollTrigger
         const isTouch = window.matchMedia("(pointer: coarse)").matches;
         if (isTouch && accentLine && icon) {
-          cardTl.fromTo(
-            accentLine,
-            { scaleX: 0, opacity: 0 },
-            {
-              scaleX: 1,
-              opacity: 1,
-              duration: 0.8,
-              ease: "power2.inOut",
-            },
-            "-=0.4"
-          ).to(
-            accentLine,
-            {
-              scaleX: 0,
-              opacity: 0,
-              duration: 0.8,
-              ease: "power2.inOut",
-            },
-            "+=0.2"
-          );
+          cardTl
+            .fromTo(
+              accentLine,
+              { scaleX: 0, opacity: 0 },
+              {
+                scaleX: 1,
+                opacity: 1,
+                duration: 0.8,
+                ease: "power2.inOut",
+              },
+              "-=0.4"
+            )
+            .to(
+              accentLine,
+              {
+                scaleX: 0,
+                opacity: 0,
+                duration: 0.8,
+                ease: "power2.inOut",
+              },
+              "+=0.2"
+            );
 
-          cardTl.fromTo(
-            icon,
-            { borderColor: "rgba(42, 46, 51, 0.3)", color: "var(--chrome-highlight)" },
-            {
-              borderColor: "rgba(123, 76, 255, 0.4)",
-              color: "var(--electric-violet)",
-              backgroundColor: "rgba(123, 76, 255, 0.05)",
-              duration: 0.6,
-              ease: "power2.out",
-            },
-            "-=1.6"
-          ).to(
-            icon,
-            {
-              borderColor: "rgba(42, 46, 51, 0.3)",
-              color: "var(--chrome-highlight)",
-              backgroundColor: "rgba(42, 46, 51, 0.25)",
-              duration: 0.8,
-              ease: "power2.inOut",
-            },
-            "+=0.2"
-          );
+          cardTl
+            .fromTo(
+              icon,
+              {
+                borderColor: "rgba(42, 46, 51, 0.3)",
+                color: "var(--chrome-highlight)",
+              },
+              {
+                borderColor: "rgba(123, 76, 255, 0.4)",
+                color: "var(--electric-violet)",
+                backgroundColor: "rgba(123, 76, 255, 0.05)",
+                duration: 0.6,
+                ease: "power2.out",
+              },
+              "-=1.6"
+            )
+            .to(
+              icon,
+              {
+                borderColor: "rgba(42, 46, 51, 0.3)",
+                color: "var(--chrome-highlight)",
+                backgroundColor: "rgba(42, 46, 51, 0.25)",
+                duration: 0.8,
+                ease: "power2.inOut",
+              },
+              "+=0.2"
+            );
         }
       });
     }, sectionRef);
@@ -604,9 +627,10 @@ export default function Services() {
     <section
       ref={sectionRef}
       id="servicios"
-      className="py-20 md:py-32 2xl:py-40 relative z-20 overflow-hidden"
+      className="relative z-20 overflow-hidden py-20 md:py-32 2xl:py-40"
       style={{
-        background: "radial-gradient(circle at 85% 30%, rgba(45, 143, 255, 0.12), transparent 28%), radial-gradient(circle at 15% 70%, rgba(123, 76, 255, 0.1), transparent 25%), var(--carbon-black)"
+        background:
+          "radial-gradient(circle at 85% 30%, rgba(45, 143, 255, 0.12), transparent 28%), radial-gradient(circle at 15% 70%, rgba(123, 76, 255, 0.1), transparent 25%), var(--carbon-black)",
       }}
     >
       <Container>
@@ -619,7 +643,7 @@ export default function Services() {
 
         <div
           ref={cardsRef}
-          className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 2xl:gap-12 mt-12 2xl:mt-16"
+          className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-8 2xl:mt-16 2xl:gap-12"
           style={{ perspective: "1000px" }}
         >
           {SERVICES.map((service, idx) => (

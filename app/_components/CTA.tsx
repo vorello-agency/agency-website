@@ -9,9 +9,6 @@ import Link from "next/link";
 import Container from "@/components/layout/Container";
 import Eyebrow from "@/components/ui/Eyebrow";
 
-
-
-
 export default function CTA() {
   const sectionRef = useRef<HTMLElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
@@ -24,14 +21,10 @@ export default function CTA() {
 
       if (prefersReducedMotion) {
         gsap.set(cardRef.current, { opacity: 1, scale: 1 });
-        gsap.set([
-          ".cta-glow",
-          ".cta-tag",
-          ".cta-title",
-          ".cta-desc",
-          ".cta-buttons",
-          ".cta-footer"
-        ], { opacity: 1, y: 0, scale: 1 });
+        gsap.set(
+          [".cta-glow", ".cta-tag", ".cta-title", ".cta-desc", ".cta-buttons", ".cta-footer"],
+          { opacity: 1, y: 0, scale: 1 }
+        );
         return;
       }
 
@@ -108,7 +101,6 @@ export default function CTA() {
         },
         "-=0.2"
       );
-
     }, sectionRef);
 
     return () => ctx.revert();
@@ -118,62 +110,51 @@ export default function CTA() {
     <section
       ref={sectionRef}
       id="contacto"
-      className="py-0 md:py-32 2xl:py-40 bg-carbon-black relative z-20 overflow-hidden"
+      className="bg-carbon-black relative z-20 overflow-hidden py-0 md:py-32 2xl:py-40"
     >
       {/* Background decoration */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <AmbientGlow className="bottom-0 left-1/2 h-[300px] w-[600px] -translate-x-1/2 bg-electric-violet/10 blur-[120px]" />
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <AmbientGlow className="bg-electric-violet/10 bottom-0 left-1/2 h-[300px] w-[600px] -translate-x-1/2 blur-[120px]" />
       </div>
 
       <Container className="px-0 sm:px-0 md:px-6 lg:px-16 xl:px-20 2xl:px-8">
         <div
           ref={cardRef}
-          className="relative max-w-xl md:max-w-2xl lg:max-w-3xl xl:max-w-4xl 2xl:max-w-6xl mx-auto md:rounded-2xl border-0 md:border md:border-steel-grey/30 bg-transparent md:bg-graphite-metal pt-8 pb-12 px-5 sm:px-8 md:py-10 md:px-8 2xl:py-16 2xl:px-36 text-left md:text-center overflow-hidden"
+          className="md:border-steel-grey/30 md:bg-graphite-metal relative mx-auto max-w-xl overflow-hidden border-0 bg-transparent px-5 pt-8 pb-12 text-left sm:px-8 md:max-w-2xl md:rounded-2xl md:border md:px-8 md:py-10 md:text-center lg:max-w-3xl xl:max-w-4xl 2xl:max-w-6xl 2xl:px-36 2xl:py-16"
           style={{ opacity: 0 }}
         >
           {/* Internal ambient glowing bulb */}
-          <AmbientGlow className="cta-glow left-1/2 top-0 h-[300px] w-[300px] -translate-x-1/2 bg-electric-violet/5 blur-[80px]" />
+          <AmbientGlow className="cta-glow bg-electric-violet/5 top-0 left-1/2 h-[300px] w-[300px] -translate-x-1/2 blur-[80px]" />
 
           {/* Grid lines mimic */}
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.01)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
+          <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.01)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:24px_24px]" />
 
-          <Eyebrow className="cta-tag mb-4 block relative z-10">
-            INICIAR CONVERSACIÓN
-          </Eyebrow>
+          <Eyebrow className="cta-tag relative z-10 mb-4 block">INICIAR CONVERSACIÓN</Eyebrow>
 
-          <h2 className="cta-title text-2xl sm:text-4xl md:text-5xl 2xl:text-6xl font-bold text-chrome-highlight tracking-tight mb-6 max-w-2xl mx-0 md:mx-auto leading-tight relative z-10">
+          <h2 className="cta-title text-chrome-highlight relative z-10 mx-0 mb-6 max-w-2xl text-2xl leading-tight font-bold tracking-tight sm:text-4xl md:mx-auto md:text-5xl 2xl:text-6xl">
             Diseñemos y desarrollemos tu próximo sistema digital
           </h2>
 
-          <p className="cta-desc text-sm sm:text-base 2xl:text-lg text-chrome-highlight/75 max-w-lg 2xl:max-w-xl mx-0 md:mx-auto mb-10 2xl:mb-12 leading-relaxed relative z-10">
-            Cuéntanos sobre tus objetivos de negocio. Analizaremos tu caso particular sin compromiso para proponerte una estrategia de producto y tecnología a medida.
+          <p className="cta-desc text-chrome-highlight/75 relative z-10 mx-0 mb-10 max-w-lg text-sm leading-relaxed sm:text-base md:mx-auto 2xl:mb-12 2xl:max-w-xl 2xl:text-lg">
+            Cuéntanos sobre tus objetivos de negocio. Analizaremos tu caso particular sin compromiso
+            para proponerte una estrategia de producto y tecnología a medida.
           </p>
 
-          <div className="cta-buttons flex flex-col sm:flex-row gap-4 justify-start md:justify-center items-center relative z-10">
-            <Link href="/start" className="w-full sm:w-auto focus-visible:outline-none">
-              <Button
-                variant="primary-blue"
-                size="lg"
-                className="w-full"
-                withArrow
-              >
+          <div className="cta-buttons relative z-10 flex flex-col items-center justify-start gap-4 sm:flex-row md:justify-center">
+            <Link href="/start" className="w-full focus-visible:outline-none sm:w-auto">
+              <Button variant="primary-blue" size="lg" className="w-full" withArrow>
                 Iniciar proyecto
               </Button>
             </Link>
-            <Link href="/contact" className="w-full sm:w-auto focus-visible:outline-none">
-              <Button
-                variant="outline"
-                size="lg"
-                className="w-full gap-2 bg-carbon-black"
-              >
-                <MessageSquare className="w-4 h-4" />
+            <Link href="/contact" className="w-full focus-visible:outline-none sm:w-auto">
+              <Button variant="outline" size="lg" className="bg-carbon-black w-full gap-2">
+                <MessageSquare className="h-4 w-4" />
                 Contacto
               </Button>
             </Link>
-
           </div>
 
-          <div className="cta-footer mt-8 md:mt-12 text-xs font-mono text-chrome-highlight/60 relative z-10">
+          <div className="cta-footer text-chrome-highlight/60 relative z-10 mt-8 font-mono text-xs md:mt-12">
             Tiempo estimado de respuesta
             <br />
             &lt; 24 horas hábiles

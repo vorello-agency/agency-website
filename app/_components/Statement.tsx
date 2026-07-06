@@ -14,7 +14,7 @@ export default function Statement() {
     { text: "No construimos páginas aisladas, sino", highlight: false },
     { text: "sistemas digitales", highlight: true },
     { text: "pensados para funcionar, escalar y generar", highlight: false },
-    { text: "resultados reales.", highlight: true }
+    { text: "resultados reales.", highlight: true },
   ];
 
   useEffect(() => {
@@ -79,20 +79,17 @@ export default function Statement() {
     <section
       ref={sectionRef}
       id="manifiesto"
-      className="py-20 md:py-28 2xl:py-36 bg-carbon-black relative z-20 overflow-hidden"
+      className="bg-carbon-black relative z-20 overflow-hidden py-20 md:py-28 2xl:py-36"
     >
-
       <Container>
-        <div className="max-w-4xl mx-auto flex flex-col gap-6 2xl:gap-8">
+        <div className="mx-auto flex max-w-4xl flex-col gap-6 2xl:gap-8">
           {/* Manifesto Intro Tag */}
-          <Eyebrow className="reveal-item mb-4 block">
-            NUESTRO MANIFIESTO
-          </Eyebrow>
+          <Eyebrow className="reveal-item mb-4 block">NUESTRO MANIFIESTO</Eyebrow>
 
           {/* High-Fidelity Word-Split Manifesto Heading */}
           <h2
             ref={textRef}
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-[50px] 2xl:text-[64px] font-bold tracking-tight text-copy-muted leading-tight 2xl:leading-[1.1] select-none font-sans"
+            className="text-copy-muted font-sans text-3xl leading-tight font-bold tracking-tight select-none sm:text-4xl md:text-5xl lg:text-[50px] 2xl:text-[64px] 2xl:leading-[1.1]"
           >
             {textSegments.map((segment, segmentIdx) => {
               const words = segment.text.split(" ").filter(Boolean);
@@ -100,8 +97,8 @@ export default function Statement() {
                 <span
                   key={`${segmentIdx}-${wordIdx}`}
                   className={cn(
-                    "reveal-word inline-block mr-[0.25em]",
-                    segment.highlight ? "text-white font-semibold" : "text-copy-muted"
+                    "reveal-word mr-[0.25em] inline-block",
+                    segment.highlight ? "font-semibold text-white" : "text-copy-muted"
                   )}
                 >
                   {word}
@@ -111,7 +108,7 @@ export default function Statement() {
           </h2>
 
           {/* Manifesto Subtext Paragraph */}
-          <p className="reveal-item text-base sm:text-lg 2xl:text-xl text-copy-muted max-w-2xl 2xl:max-w-3xl leading-relaxed mt-2 2xl:mt-4">
+          <p className="reveal-item text-copy-muted mt-2 max-w-2xl text-base leading-relaxed sm:text-lg 2xl:mt-4 2xl:max-w-3xl 2xl:text-xl">
             Trabajamos con proceso, estándares altos y tecnología moderna.
             <br />
             El resultado se nota en cada detalle.

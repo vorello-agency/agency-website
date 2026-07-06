@@ -194,7 +194,9 @@ export function useContactForm() {
   }, [errors.message, messageLength]);
 
   const selectedReasonLabel = useMemo(() => {
-    return CONTACT_REASONS.find((reason) => reason.id === formData.reason)?.label ?? formData.reason;
+    return (
+      CONTACT_REASONS.find((reason) => reason.id === formData.reason)?.label ?? formData.reason
+    );
   }, [formData.reason]);
 
   return {

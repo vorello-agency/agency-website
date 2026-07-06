@@ -6,9 +6,22 @@ export async function POST(request: Request) {
     const { name, company, email, phone, country, projectType, budget, deadline, message } = body;
 
     // Server-side validation
-    if (!name?.trim() || !company?.trim() || !email?.trim() || !phone?.trim() || !country?.trim() || !projectType || !budget || !deadline || !message?.trim()) {
+    if (
+      !name?.trim() ||
+      !company?.trim() ||
+      !email?.trim() ||
+      !phone?.trim() ||
+      !country?.trim() ||
+      !projectType ||
+      !budget ||
+      !deadline ||
+      !message?.trim()
+    ) {
       return NextResponse.json(
-        { success: false, error: "Todos los campos obligatorios deben ser completados." },
+        {
+          success: false,
+          error: "Todos los campos obligatorios deben ser completados.",
+        },
         { status: 400 }
       );
     }
@@ -16,7 +29,10 @@ export async function POST(request: Request) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       return NextResponse.json(
-        { success: false, error: "El correo electrónico no tiene un formato válido." },
+        {
+          success: false,
+          error: "El correo electrónico no tiene un formato válido.",
+        },
         { status: 400 }
       );
     }
@@ -55,12 +71,12 @@ ${message}
           { name: "company", value: company },
           { name: "phone", value: phone },
           { name: "country", value: country },
-          { name: "message", value: combinedDescription }
+          { name: "message", value: combinedDescription },
         ],
         context: {
           pageUri: "https://vorello.agency/start",
-          pageName: "Iniciar Proyecto - Vorello"
-        }
+          pageName: "Iniciar Proyecto - Vorello",
+        },
       };
 
       const response = await fetch(hubspotFormUrl, {
@@ -77,7 +93,6 @@ ${message}
 
       console.log("Lead registrado exitosamente en HubSpot Forms API.");
       return NextResponse.json({ success: true, mock: false });
-
     } else if (accessToken) {
       // 2. Submit via HubSpot CRM Contacts API (Fallback if Access Token is provided)
       const hubspotContactsUrl = "https://api.hubapi.com/crm/v3/objects/contacts";
@@ -90,15 +105,15 @@ ${message}
           phone,
           country,
           message: combinedDescription,
-          description: combinedDescription
-        }
+          description: combinedDescription,
+        },
       };
 
       const response = await fetch(hubspotContactsUrl, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${accessToken}`
+          Authorization: `Bearer ${accessToken}`,
         },
         body: JSON.stringify(payload),
       });
@@ -108,7 +123,10 @@ ${message}
         if (response.status === 409) {
           console.warn("El contacto ya existe en HubSpot CRM. Email:", email);
           // Standard success return to keep client flow uninterrupted
-          return NextResponse.json({ success: true, warning: "Contact already exists, CRM mapping skipped." });
+          return NextResponse.json({
+            success: true,
+            warning: "Contact already exists, CRM mapping skipped.",
+          });
         }
         const errorText = await response.text();
         console.error("Error al enviar lead a HubSpot CRM Contacts API:", errorText);
@@ -133,11 +151,13 @@ ${message}
     console.log("=============================");
 
     return NextResponse.json({ success: true, mock: true });
-
   } catch (error) {
     console.error("Error en /api/leads:", error);
     return NextResponse.json(
-      { success: false, error: "Ocurrió un error al procesar tu solicitud. Inténtalo de nuevo más tarde." },
+      {
+        success: false,
+        error: "Ocurrió un error al procesar tu solicitud. Inténtalo de nuevo más tarde.",
+      },
       { status: 500 }
     );
   }

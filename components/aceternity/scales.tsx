@@ -10,12 +10,7 @@ export interface ScalesProps {
   color?: string;
 }
 
-export const Scales = ({
-  orientation = "diagonal",
-  size = 10,
-  className,
-  color,
-}: ScalesProps) => {
+export const Scales = ({ orientation = "diagonal", size = 10, className, color }: ScalesProps) => {
   const getGradientAngle = () => {
     switch (orientation) {
       case "horizontal":
@@ -31,7 +26,7 @@ export const Scales = ({
   return (
     <div
       className={cn(
-        "absolute inset-0 h-full w-full overflow-hidden pointer-events-none select-none",
+        "pointer-events-none absolute inset-0 h-full w-full overflow-hidden select-none",
         "[--pattern-scales:rgba(227,231,238,0.07)]", // Subtle light grey for dark mode
         "dark:[--pattern-scales:rgba(255,255,255,0.07)]",
         className
@@ -69,12 +64,7 @@ export const ScalesContainer = ({
 }: ScalesContainerProps) => {
   return (
     <div className={cn("relative", containerClassName)}>
-      <Scales
-        orientation={orientation}
-        size={size}
-        className={className}
-        color={color}
-      />
+      <Scales orientation={orientation} size={size} className={className} color={color} />
       <div className="relative z-10">{children}</div>
     </div>
   );

@@ -40,7 +40,6 @@ const NAV_ITEMS = [
   },
 ];
 
-
 export default function Navbar() {
   const pathname = usePathname();
   const isOnboardingPage = pathname === "/start";
@@ -194,10 +193,7 @@ export default function Navbar() {
     }
   }, []);
 
-  const handleNavLinkClick = (
-    e: React.MouseEvent<HTMLAnchorElement>,
-    href: string
-  ) => {
+  const handleNavLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     const hash = href.includes("#") ? href.substring(href.indexOf("#")) : "";
     const isCurrentPageHome = window.location.pathname === "/";
 
@@ -220,7 +216,6 @@ export default function Navbar() {
       }
     }
   };
-
 
   // Dynamic GSAP Hover/Focus Sliding Animation
   const handleMouseEnter = (
@@ -288,14 +283,18 @@ export default function Navbar() {
     }
   };
 
-  const handleCtaMouseEnter = (e: React.MouseEvent<HTMLAnchorElement> | React.FocusEvent<HTMLAnchorElement>) => {
+  const handleCtaMouseEnter = (
+    e: React.MouseEvent<HTMLAnchorElement> | React.FocusEvent<HTMLAnchorElement>
+  ) => {
     const arrow = e.currentTarget.querySelector(".nav-cta-arrow") as HTMLElement | null;
     if (arrow) {
       animateNavbarCtaArrowEnter(arrow);
     }
   };
 
-  const handleCtaMouseLeave = (e: React.MouseEvent<HTMLAnchorElement> | React.FocusEvent<HTMLAnchorElement>) => {
+  const handleCtaMouseLeave = (
+    e: React.MouseEvent<HTMLAnchorElement> | React.FocusEvent<HTMLAnchorElement>
+  ) => {
     const arrow = e.currentTarget.querySelector(".nav-cta-arrow") as HTMLElement | null;
     if (arrow) {
       animateNavbarCtaArrowLeave(arrow);
@@ -305,13 +304,13 @@ export default function Navbar() {
   return (
     <header
       className={cn(
-        "fixed top-0 left-0 right-0 z-200 w-full",
+        "fixed top-0 right-0 left-0 z-200 w-full",
         shouldAnimate && "transition-all duration-300",
         mobileMenuOpen
-          ? "border-b border-steel-grey/30 bg-carbon-black"
-          : (isScrolled
-            ? "border-b border-steel-grey/30 bg-carbon-black/80 backdrop-blur-md"
-            : "border-b border-transparent bg-transparent")
+          ? "border-steel-grey/30 bg-carbon-black border-b"
+          : isScrolled
+            ? "border-steel-grey/30 bg-carbon-black/80 border-b backdrop-blur-md"
+            : "border-b border-transparent bg-transparent"
       )}
     >
       <Container
@@ -326,7 +325,7 @@ export default function Navbar() {
           href="/"
           aria-label="Vorello - Ir al inicio"
           className={cn(
-            "relative flex items-center gap-2 group focus-visible:outline-none",
+            "group relative flex items-center gap-2 focus-visible:outline-none",
             shouldAnimate && "transition-all duration-300",
             isScrolled && "md:ml-8"
           )}
@@ -334,17 +333,17 @@ export default function Navbar() {
           {/* Animated large, soft atmospheric white glow behind the logo when menu is open */}
           <div
             className={cn(
-              "absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none -z-10 transition-all duration-1000 ease-out overflow-visible flex items-center justify-center",
-              mobileMenuOpen ? "opacity-100 scale-100" : "opacity-0 scale-75"
+              "pointer-events-none absolute top-1/2 left-1/2 -z-10 flex -translate-x-1/2 -translate-y-1/2 items-center justify-center overflow-visible transition-all duration-1000 ease-out",
+              mobileMenuOpen ? "scale-100 opacity-100" : "scale-75 opacity-0"
             )}
             style={{ width: "350px", height: "350px" }}
           >
             {/* Outer ambient aura: wide, extremely soft, premium low-opacity dispersion */}
-            <div className="absolute w-80 h-80 rounded-full bg-white/[0.03] blur-[64px]" />
+            <div className="absolute h-80 w-80 rounded-full bg-white/[0.03] blur-[64px]" />
             {/* Mid ambient aura: smooth transition blur */}
-            <div className="absolute w-56 h-56 rounded-full bg-white/[0.06] blur-[40px]" />
+            <div className="absolute h-56 w-56 rounded-full bg-white/[0.06] blur-[40px]" />
             {/* Core glow: soft white center to gently outline the logo area */}
-            <div className="absolute w-36 h-20 rounded-full bg-white/[0.09] blur-[24px] animate-[pulse_6s_ease-in-out_infinite]" />
+            <div className="absolute h-20 w-36 animate-[pulse_6s_ease-in-out_infinite] rounded-full bg-white/[0.09] blur-[24px]" />
           </div>
 
           {/* Mobile logo: both isotype and logotipo */}
@@ -369,13 +368,13 @@ export default function Navbar() {
         {!isOnboardingPage && (
           <nav
             ref={navContainerRef}
-            className="relative hidden md:flex items-center gap-1 py-1.5 px-2 rounded-full border border-steel-grey/30 bg-graphite-metal"
+            className="border-steel-grey/30 bg-graphite-metal relative hidden items-center gap-1 rounded-full border px-2 py-1.5 md:flex"
             onMouseLeave={handleMouseLeave}
           >
             {/* Absolute moving highlight pill */}
             <div
               ref={pillRef}
-              className="absolute top-1/2 -translate-y-1/2 h-[30px] bg-white/[0.04] border border-white/[0.02] rounded-md pointer-events-none opacity-0 scale-95 z-0"
+              className="pointer-events-none absolute top-1/2 z-0 h-[30px] -translate-y-1/2 scale-95 rounded-md border border-white/[0.02] bg-white/[0.04] opacity-0"
               style={{ left: 0, width: 0 }}
             />
 
@@ -386,14 +385,14 @@ export default function Navbar() {
                 <Link
                   key={item.label}
                   href={item.href}
-                  className="relative z-10 px-3.5 py-1.5 text-sm font-medium text-copy-muted hover:text-chrome-highlight transition-colors duration-200 rounded-lg focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-electric-violet flex items-center gap-1.5 group/nav"
+                  className="text-copy-muted hover:text-chrome-highlight focus-visible:ring-electric-violet group/nav relative z-10 flex items-center gap-1.5 rounded-lg px-3.5 py-1.5 text-sm font-medium transition-colors duration-200 focus-visible:ring-1 focus-visible:outline-none"
                   onClick={(e) => handleNavLinkClick(e, item.href)}
                   onMouseEnter={(e) => handleItemMouseEnter(item.label, e)}
                   onFocus={(e) => handleItemMouseEnter(item.label, e)}
                   onMouseLeave={(e) => handleItemMouseLeave(item.label, e)}
                   onBlur={(e) => handleItemMouseLeave(item.label, e)}
                 >
-                  <Icon className="h-3.5 w-3.5 text-copy-muted/60 nav-icon-svg overflow-visible" />
+                  <Icon className="text-copy-muted/60 nav-icon-svg h-3.5 w-3.5 overflow-visible" />
                   <span>{item.label}</span>
                 </Link>
               );
@@ -403,31 +402,33 @@ export default function Navbar() {
 
         {/* CTA Action / Volver al inicio */}
         {isOnboardingPage ? (
-          <div className="hidden md:flex items-center">
+          <div className="hidden items-center md:flex">
             <Link
               href="/"
-              className="group flex items-center gap-2 px-4 py-2 rounded-lg border border-steel-grey/30 bg-graphite-metal/30 hover:border-steel-grey/60 text-chrome-highlight transition-all font-medium text-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-electric-violet"
+              className="group border-steel-grey/30 bg-graphite-metal/30 hover:border-steel-grey/60 text-chrome-highlight focus-visible:ring-electric-violet flex items-center gap-2 rounded-lg border px-4 py-2 text-sm font-medium transition-all focus-visible:ring-1 focus-visible:outline-none"
             >
               <ArrowRight className="h-4 w-4 rotate-180 opacity-60 transition-transform group-hover:-translate-x-1" />
               <span>Volver al inicio</span>
             </Link>
           </div>
         ) : (
-          <div className={cn(
-            "hidden md:flex items-center",
-            shouldAnimate && "transition-all duration-300",
-            isScrolled && "md:mr-8"
-          )}>
-            <Link 
-              href="/start" 
-              className="group relative flex items-center justify-center gap-1.5 py-1.5 px-4 rounded-full border border-steel-grey/30 bg-graphite-metal text-sm font-medium text-copy-muted hover:text-chrome-highlight hover:border-steel-grey/50 transition-all duration-300 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-electric-violet"
+          <div
+            className={cn(
+              "hidden items-center md:flex",
+              shouldAnimate && "transition-all duration-300",
+              isScrolled && "md:mr-8"
+            )}
+          >
+            <Link
+              href="/start"
+              className="group border-steel-grey/30 bg-graphite-metal text-copy-muted hover:text-chrome-highlight hover:border-steel-grey/50 focus-visible:ring-electric-violet relative flex items-center justify-center gap-1.5 rounded-full border px-4 py-1.5 text-sm font-medium transition-all duration-300 focus-visible:ring-1 focus-visible:outline-none"
               onMouseEnter={handleCtaMouseEnter}
               onMouseLeave={handleCtaMouseLeave}
               onFocus={handleCtaMouseEnter}
               onBlur={handleCtaMouseLeave}
             >
               <span>Iniciar proyecto</span>
-              <ArrowRight className="h-3.5 w-3.5 opacity-60 ml-1.5 nav-cta-arrow transition-colors duration-300 group-hover:text-electric-violet overflow-visible" />
+              <ArrowRight className="nav-cta-arrow group-hover:text-electric-violet ml-1.5 h-3.5 w-3.5 overflow-visible opacity-60 transition-colors duration-300" />
             </Link>
           </div>
         )}
@@ -436,32 +437,27 @@ export default function Navbar() {
         {isOnboardingPage ? (
           <Link
             href="/"
-            className="md:hidden flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-steel-grey/30 bg-graphite-metal/30 text-xs font-medium text-chrome-highlight focus-visible:outline-none"
+            className="border-steel-grey/30 bg-graphite-metal/30 text-chrome-highlight flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-medium focus-visible:outline-none md:hidden"
           >
             <X className="h-3.5 w-3.5" />
             <span>Salir</span>
           </Link>
         ) : (
           <button
-            className="md:hidden p-2 text-chrome-deep hover:text-chrome-highlight focus-visible:outline-none cursor-pointer"
+            className="text-chrome-deep hover:text-chrome-highlight cursor-pointer p-2 focus-visible:outline-none md:hidden"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label={mobileMenuOpen ? "Cerrar menú" : "Abrir menú"}
           >
-            {mobileMenuOpen ? (
-              <X className="h-6 w-6" />
-            ) : (
-              <Menu className="h-6 w-6" />
-            )}
+            {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
         )}
-
       </Container>
 
       {/* Mobile menu backdrop overlay */}
       <div
         ref={mobileBackdropRef}
         className={cn(
-          "md:hidden fixed inset-0 bg-carbon-black/60 backdrop-blur-[4px] z-30 transition-[opacity] duration-300",
+          "bg-carbon-black/60 fixed inset-0 z-30 backdrop-blur-[4px] transition-[opacity] duration-300 md:hidden",
           mobileMenuOpen ? "pointer-events-auto" : "pointer-events-none"
         )}
         onClick={() => setMobileMenuOpen(false)}
@@ -472,45 +468,48 @@ export default function Navbar() {
       <div
         ref={mobileMenuRef}
         className={cn(
-          "md:hidden absolute left-0 w-full bg-carbon-black border-b border-steel-grey/30 px-6 py-8 flex flex-col gap-6 shadow-2xl z-40 transition-[top] duration-300",
+          "bg-carbon-black border-steel-grey/30 absolute left-0 z-40 flex w-full flex-col gap-6 border-b px-6 py-8 shadow-2xl transition-[top] duration-300 md:hidden",
           mobileMenuOpen ? "pointer-events-auto" : "pointer-events-none",
           isScrolled ? "top-20" : "top-28"
         )}
-        style={{ opacity: 0, visibility: "hidden", transform: "translateY(-12px)" }}
+        style={{
+          opacity: 0,
+          visibility: "hidden",
+          transform: "translateY(-12px)",
+        }}
       >
-        <div ref={mobileLinksRef} className="flex flex-col divide-y divide-steel-grey/10">
+        <div ref={mobileLinksRef} className="divide-steel-grey/10 flex flex-col divide-y">
           {NAV_ITEMS.map((item) => {
             const Icon = item.icon;
             return (
               <Link
                 key={item.label}
                 href={item.href}
-                className="mobile-nav-link text-base font-medium text-chrome-deep hover:text-chrome-highlight active:text-chrome-highlight active:scale-[0.98] active:translate-x-1 transition-all py-4 flex items-center gap-2"
+                className="mobile-nav-link text-chrome-deep hover:text-chrome-highlight active:text-chrome-highlight flex items-center gap-2 py-4 text-base font-medium transition-all active:translate-x-1 active:scale-[0.98]"
                 onClick={(e) => {
                   setMobileMenuOpen(false);
                   handleNavLinkClick(e, item.href);
                 }}
               >
-                <Icon className="h-4 w-4 text-chrome-deep/60" />
+                <Icon className="text-chrome-deep/60 h-4 w-4" />
                 <span>{item.label}</span>
               </Link>
             );
           })}
         </div>
         <div className="mobile-nav-button flex flex-col">
-          <div className="h-px bg-electric-violet/25 w-full mb-3" />
+          <div className="bg-electric-violet/25 mb-3 h-px w-full" />
           <Link
             href="/start"
-            className="mobile-nav-link text-base font-medium text-neon-blue hover:text-neon-blue/80 active:text-neon-blue active:scale-[0.98] active:translate-x-1 transition-all py-2 flex items-center gap-2"
+            className="mobile-nav-link text-neon-blue hover:text-neon-blue/80 active:text-neon-blue flex items-center gap-2 py-2 text-base font-medium transition-all active:translate-x-1 active:scale-[0.98]"
             onClick={() => {
               setMobileMenuOpen(false);
             }}
           >
-            <ArrowRight className="h-4 w-4 text-neon-blue/80" />
+            <ArrowRight className="text-neon-blue/80 h-4 w-4" />
             <span>Iniciar proyecto</span>
           </Link>
         </div>
-
       </div>
     </header>
   );

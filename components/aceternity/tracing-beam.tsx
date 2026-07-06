@@ -1,12 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import {
-  motion,
-  useTransform,
-  useScroll,
-  useSpring,
-} from "framer-motion";
+import { motion, useTransform, useScroll, useSpring } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 export const TracingBeam = ({
@@ -49,20 +44,14 @@ export const TracingBeam = ({
   }, []);
 
   // Spring animations for the gradient stop values
-  const y1 = useSpring(
-    useTransform(scrollYProgress, [0, 1], [50, svgHeight]),
-    {
-      stiffness: 400,
-      damping: 80,
-    }
-  );
-  const y2 = useSpring(
-    useTransform(scrollYProgress, [0, 1], [50, svgHeight - 200]),
-    {
-      stiffness: 400,
-      damping: 80,
-    }
-  );
+  const y1 = useSpring(useTransform(scrollYProgress, [0, 1], [50, svgHeight]), {
+    stiffness: 400,
+    damping: 80,
+  });
+  const y2 = useSpring(useTransform(scrollYProgress, [0, 1], [50, svgHeight - 200]), {
+    stiffness: 400,
+    damping: 80,
+  });
 
   // Transform scroll progress to hardware-accelerated values (0 layout reflows)
   const dotBg = useTransform(
@@ -82,28 +71,25 @@ export const TracingBeam = ({
   );
 
   return (
-    <motion.div
-      ref={ref}
-      className={cn("relative w-full", className)}
-    >
+    <motion.div ref={ref} className={cn("relative w-full", className)}>
       {/* Absolute container for the SVG Tracing Beam line */}
-      <div className="absolute inset-x-0 top-0 bottom-0 pointer-events-none z-30 hidden md:block">
-        <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-16 xl:px-20 2xl:px-8 relative h-full">
+      <div className="pointer-events-none absolute inset-x-0 top-0 bottom-0 z-30 hidden md:block">
+        <div className="relative mx-auto h-full w-full max-w-7xl px-4 sm:px-6 lg:px-16 xl:px-20 2xl:px-8">
           {/* Shifted to the left margin out of the Container text alignment for perfect breathing space */}
-          <div className="absolute left-0 md:left-[-16px] lg:left-2 xl:left-[0vw] 2xl:left-[-150px] top-[116px] h-[calc(100%-116px)] flex flex-col items-center">
+          <div className="absolute top-[116px] left-0 flex h-[calc(100%-116px)] flex-col items-center md:left-[-16px] lg:left-2 xl:left-[0vw] 2xl:left-[-150px]">
             {/* Pulsing indicator dot at the top of the beam */}
             <motion.div
               style={{
                 boxShadow: dotShadow,
               }}
-              className="h-4.5 w-4.5 rounded-full border border-steel-grey/30 bg-graphite-metal shadow-sm flex items-center justify-center mb-1"
+              className="border-steel-grey/30 bg-graphite-metal mb-1 flex h-4.5 w-4.5 items-center justify-center rounded-full border shadow-sm"
             >
               <motion.div
                 style={{
                   backgroundColor: dotBg,
                   borderColor: dotBorder,
                 }}
-                className="h-2 w-2 rounded-full border border-steel-grey bg-white"
+                className="border-steel-grey h-2 w-2 rounded-full border bg-white"
               />
             </motion.div>
 
@@ -154,7 +140,7 @@ export const TracingBeam = ({
       </div>
 
       {/* Main Content Area */}
-      <div ref={contentRef} className="w-full relative">
+      <div ref={contentRef} className="relative w-full">
         {children}
       </div>
     </motion.div>

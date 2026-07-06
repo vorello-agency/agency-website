@@ -1,13 +1,6 @@
 type ClassDictionary = Record<string, boolean | null | undefined>;
 type ClassArray = ClassValue[];
-type ClassValue =
-  | string
-  | number
-  | null
-  | undefined
-  | boolean
-  | ClassDictionary
-  | ClassArray;
+type ClassValue = string | number | null | undefined | boolean | ClassDictionary | ClassArray;
 
 function toClassName(value: ClassValue): string {
   if (!value) return "";

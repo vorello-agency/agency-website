@@ -56,7 +56,8 @@ const CardSelector: React.FC<CardSelectorProps> = ({
 
   const themeConfig = {
     violet: {
-      activeCard: "border-electric-violet/60 bg-electric-violet/[0.04] shadow-[0_0_15px_rgba(123,76,255,0.06)]",
+      activeCard:
+        "border-electric-violet/60 bg-electric-violet/[0.04] shadow-[0_0_15px_rgba(123,76,255,0.06)]",
       activeBadge: "bg-electric-violet/20 border-electric-violet/30 text-electric-violet",
       checkmark: "text-electric-violet",
     },
@@ -70,7 +71,8 @@ const CardSelector: React.FC<CardSelectorProps> = ({
   const sizeConfig = {
     md: {
       padding: "p-4",
-      inactiveCard: "border-steel-grey/30 bg-graphite-metal/10 hover:border-chrome-deep/60 hover:bg-graphite-metal/20 hover:-translate-y-[1px] hover:shadow-[0_4px_12px_rgba(255,255,255,0.01)]",
+      inactiveCard:
+        "border-steel-grey/30 bg-graphite-metal/10 hover:border-chrome-deep/60 hover:bg-graphite-metal/20 hover:-translate-y-[1px] hover:shadow-[0_4px_12px_rgba(255,255,255,0.01)]",
       iconWrapper: "w-8 h-8 rounded-lg",
       icon: "w-4 h-4",
       checkmarkPosition: "top-2.5 right-2.5",
@@ -78,7 +80,8 @@ const CardSelector: React.FC<CardSelectorProps> = ({
     },
     sm: {
       padding: "p-3",
-      inactiveCard: "border-steel-grey/20 bg-graphite-metal/10 hover:border-chrome-deep/45 hover:bg-graphite-metal/20 hover:-translate-y-[1px] hover:shadow-[0_4px_12px_rgba(255,255,255,0.01)]",
+      inactiveCard:
+        "border-steel-grey/20 bg-graphite-metal/10 hover:border-chrome-deep/45 hover:bg-graphite-metal/20 hover:-translate-y-[1px] hover:shadow-[0_4px_12px_rgba(255,255,255,0.01)]",
       iconWrapper: "w-6 h-6 rounded-md",
       icon: "w-3 h-3",
       checkmarkPosition: "top-2 right-2",
@@ -113,9 +116,10 @@ const CardSelector: React.FC<CardSelectorProps> = ({
     }
   };
 
-  const focusRingClass = theme === "violet"
-    ? "focus-visible:ring-1 focus-visible:ring-electric-violet/60 focus-visible:border-electric-violet/60 outline-none"
-    : "focus-visible:ring-1 focus-visible:ring-neon-blue/60 focus-visible:border-neon-blue/60 outline-none";
+  const focusRingClass =
+    theme === "violet"
+      ? "focus-visible:ring-1 focus-visible:ring-electric-violet/60 focus-visible:border-electric-violet/60 outline-none"
+      : "focus-visible:ring-1 focus-visible:ring-neon-blue/60 focus-visible:border-neon-blue/60 outline-none";
 
   return (
     <div className="space-y-3" id={id}>
@@ -125,7 +129,8 @@ const CardSelector: React.FC<CardSelectorProps> = ({
           const optionVal = option.value ?? option.id ?? "";
           const optionDesc = option.description ?? option.hint;
           const isSelected = value === optionVal;
-          const isLastImparCard = autoSpanLastOdd && idx === options.length - 1 && options.length % 2 !== 0;
+          const isLastImparCard =
+            autoSpanLastOdd && idx === options.length - 1 && options.length % 2 !== 0;
           const isMuted = option.muted;
 
           return (
@@ -134,24 +139,24 @@ const CardSelector: React.FC<CardSelectorProps> = ({
               type="button"
               data-card-id={`${cardIdPrefix}-${optionVal}`}
               onClick={(e) => handleSelect(e, optionVal)}
-              className={`group text-left ${activeSize.padding} rounded-xl border transition-all duration-200 select-none cursor-pointer flex items-center gap-3 text-xs relative ${focusRingClass} ${
+              className={`group text-left ${activeSize.padding} relative flex cursor-pointer items-center gap-3 rounded-xl border text-xs transition-all duration-200 select-none ${focusRingClass} ${
                 isSelected ? getActiveCardClass(isMuted) : getInactiveCardClass(isMuted)
               } ${isLastImparCard ? "sm:col-span-2" : ""}`}
             >
               {indicator && indicator !== "none" && (
-                <div className="flex items-center justify-center shrink-0">
+                <div className="flex shrink-0 items-center justify-center">
                   {indicator === "radio" && (
                     <div
-                      className={`w-3.5 h-3.5 rounded-full border flex items-center justify-center transition-all duration-200 ${
+                      className={`flex h-3.5 w-3.5 items-center justify-center rounded-full border transition-all duration-200 ${
                         isSelected
                           ? theme === "violet"
                             ? "border-electric-violet bg-electric-violet/10"
                             : "border-neon-blue bg-neon-blue/10"
-                          : "border-steel-grey/40 bg-transparent group-hover:border-steel-grey/65"
+                          : "border-steel-grey/40 group-hover:border-steel-grey/65 bg-transparent"
                       }`}
                     >
                       <div
-                        className={`w-1.5 h-1.5 rounded-full transition-all duration-200 ${
+                        className={`h-1.5 w-1.5 rounded-full transition-all duration-200 ${
                           isSelected
                             ? theme === "violet"
                               ? "bg-electric-violet scale-100"
@@ -163,7 +168,7 @@ const CardSelector: React.FC<CardSelectorProps> = ({
                   )}
                   {indicator === "dot" && (
                     <div
-                      className={`w-2 h-2 rounded-full transition-all duration-200 ${
+                      className={`h-2 w-2 rounded-full transition-all duration-200 ${
                         isSelected
                           ? theme === "violet"
                             ? "bg-electric-violet shadow-[0_0_8px_rgba(123,76,255,0.6)]"
@@ -174,15 +179,15 @@ const CardSelector: React.FC<CardSelectorProps> = ({
                   )}
                   {indicator === "checkmark" && (
                     <div
-                      className={`w-3.5 h-3.5 rounded border flex items-center justify-center transition-all duration-200 ${
+                      className={`flex h-3.5 w-3.5 items-center justify-center rounded border transition-all duration-200 ${
                         isSelected
                           ? theme === "violet"
                             ? "border-electric-violet bg-electric-violet text-carbon-black"
                             : "border-neon-blue bg-neon-blue text-carbon-black"
-                          : "border-steel-grey/40 bg-transparent group-hover:border-steel-grey/65"
+                          : "border-steel-grey/40 group-hover:border-steel-grey/65 bg-transparent"
                       }`}
                     >
-                      {isSelected && <Check className="w-2.5 h-2.5 stroke-[3]" />}
+                      {isSelected && <Check className="h-2.5 w-2.5 stroke-[3]" />}
                     </div>
                   )}
                 </div>
@@ -190,7 +195,7 @@ const CardSelector: React.FC<CardSelectorProps> = ({
 
               {Icon && (
                 <div
-                  className={`${activeSize.iconWrapper} flex items-center justify-center shrink-0 border transition-all duration-200 ${
+                  className={`${activeSize.iconWrapper} flex shrink-0 items-center justify-center border transition-all duration-200 ${
                     isSelected
                       ? activeTheme.activeBadge
                       : "bg-steel-grey/25 border-steel-grey/30 text-chrome-deep group-hover:border-steel-grey/50 group-hover:text-chrome-highlight"
@@ -199,16 +204,18 @@ const CardSelector: React.FC<CardSelectorProps> = ({
                   <Icon className={activeSize.icon} />
                 </div>
               )}
-              <div className="space-y-0.5 pr-4 flex-1">
+              <div className="flex-1 space-y-0.5 pr-4">
                 <span
-                  className={`font-semibold block transition-colors duration-200 ${
-                    isSelected ? "text-chrome-highlight" : "text-copy-muted group-hover:text-chrome-highlight"
+                  className={`block font-semibold transition-colors duration-200 ${
+                    isSelected
+                      ? "text-chrome-highlight"
+                      : "text-copy-muted group-hover:text-chrome-highlight"
                   }`}
                 >
                   {option.label}
                 </span>
                 {optionDesc && (
-                  <span className="text-chrome-deep text-xs block leading-normal text-balance transition-colors duration-200 group-hover:text-copy-muted">
+                  <span className="text-chrome-deep group-hover:text-copy-muted block text-xs leading-normal text-balance transition-colors duration-200">
                     {optionDesc}
                   </span>
                 )}
@@ -223,9 +230,7 @@ const CardSelector: React.FC<CardSelectorProps> = ({
           );
         })}
       </div>
-      {error && (
-        <p className="text-red-400 text-xs mt-1">{error}</p>
-      )}
+      {error && <p className="mt-1 text-xs text-red-400">{error}</p>}
     </div>
   );
 };

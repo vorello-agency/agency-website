@@ -14,10 +14,17 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
         {label && (
           <label
             htmlFor={id}
-            className="block text-xs uppercase tracking-wider text-chrome-highlight font-medium"
+            className="text-chrome-highlight block text-xs font-medium tracking-wider uppercase"
           >
             {label}
-            {required && <sup aria-hidden="true" className="text-red-400 ml-0.5 text-[10px] font-sans font-normal select-none">*</sup>}
+            {required && (
+              <sup
+                aria-hidden="true"
+                className="ml-0.5 font-sans text-[10px] font-normal text-red-400 select-none"
+              >
+                *
+              </sup>
+            )}
           </label>
         )}
         <textarea
@@ -25,14 +32,14 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
           ref={ref}
           required={required}
           className={cn(
-            "w-full bg-carbon-black/50 border border-steel-grey/50 rounded-lg px-4 py-3.5 text-base md:text-sm text-chrome-highlight placeholder-chrome-deep/40 focus:border-electric-violet focus:ring-1 focus:ring-electric-violet outline-none transition-all resize-y min-h-[120px]",
+            "bg-carbon-black/50 border-steel-grey/50 text-chrome-highlight placeholder-chrome-deep/40 focus:border-electric-violet focus:ring-electric-violet min-h-[120px] w-full resize-y rounded-lg border px-4 py-3.5 text-base transition-all outline-none focus:ring-1 md:text-sm",
             error && "border-red-500/50 focus:border-red-500 focus:ring-red-500",
             className
           )}
           {...props}
         />
         {error ? (
-          <p className="text-red-400 text-xs mt-1.5">{error}</p>
+          <p className="mt-1.5 text-xs text-red-400">{error}</p>
         ) : (
           hint && <div className="mt-1.5">{hint}</div>
         )}

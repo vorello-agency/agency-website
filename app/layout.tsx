@@ -4,7 +4,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import SmoothScroll from "@/components/layout/SmoothScroll";
 
-const geist = Geist({ subsets: ['latin'], variable: '--font-sans' });
+const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     "Next.js",
     "Ecommerce Premium",
     "Estudio de Diseño",
-    "GSAP React"
+    "GSAP React",
   ],
   authors: [{ name: "Vorello Team" }],
 };
@@ -58,12 +58,9 @@ export default function RootLayout({
         geist.variable
       )}
     >
-      <body className="min-h-full flex flex-col bg-carbon-black text-chrome-highlight selection:bg-electric-violet/20 selection:text-electric-violet">
-        <SmoothScroll>
-          {children}
-        </SmoothScroll>
+      <body className="bg-carbon-black text-chrome-highlight selection:bg-electric-violet/20 selection:text-electric-violet flex min-h-full flex-col">
+        <SmoothScroll>{children}</SmoothScroll>
       </body>
     </html>
   );
 }
-

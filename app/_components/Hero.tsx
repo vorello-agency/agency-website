@@ -9,7 +9,6 @@ import DotBackground from "@/components/ui/DotBackground";
 import Image from "next/image";
 import Link from "next/link";
 
-
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
   const headlineRef = useRef<HTMLHeadingElement>(null);
@@ -34,12 +33,7 @@ export default function Hero() {
 
           if (reduceMotion) {
             gsap.set(
-              [
-                headlineRef.current,
-                subtitleRef.current,
-                ctaRef.current,
-                visualRef.current,
-              ],
+              [headlineRef.current, subtitleRef.current, ctaRef.current, visualRef.current],
               { opacity: 1, y: 0, scale: 1 }
             );
             return;
@@ -161,25 +155,25 @@ export default function Hero() {
   return (
     <section
       ref={containerRef}
-      className="relative z-20 min-h-[90vh] sm:min-h-[85vh] flex flex-col items-stretch lg:items-center justify-center pt-32 pb-16 sm:pt-36 sm:pb-28 md:pb-24 2xl:pt-36 2xl:pb-32 overflow-hidden bg-carbon-black"
+      className="bg-carbon-black relative z-20 flex min-h-[90vh] flex-col items-stretch justify-center overflow-hidden pt-32 pb-16 sm:min-h-[85vh] sm:pt-36 sm:pb-28 md:pb-24 lg:items-center 2xl:pt-36 2xl:pb-32"
     >
       {/* Premium clean dots background with radial mask */}
-      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+      <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
         {/* Dot pattern */}
         <DotBackground className="opacity-80" />
         {/* Radial gradient overlay that fades the dots into solid carbon-black */}
         <div
           className="absolute inset-0"
           style={{
-            backgroundImage: "radial-gradient(ellipse 80% 80% at 50% 50%, transparent 20%, var(--carbon-black) 80%)"
+            backgroundImage:
+              "radial-gradient(ellipse 80% 80% at 50% 50%, transparent 20%, var(--carbon-black) 80%)",
           }}
         />
       </div>
 
-
-      <Container className="relative z-10 flex flex-col lg:grid lg:grid-cols-12 gap-16 lg:gap-x-16 lg:gap-y-8 2xl:gap-x-24 2xl:gap-y-10 items-center flex-grow w-full">
+      <Container className="relative z-10 flex w-full flex-grow flex-col items-center gap-16 lg:grid lg:grid-cols-12 lg:gap-x-16 lg:gap-y-8 2xl:gap-x-24 2xl:gap-y-10">
         {/* Left Column: Text & CTA */}
-        <div className="lg:col-span-7 flex flex-col flex-grow items-center lg:items-start text-center lg:text-left w-full">
+        <div className="flex w-full flex-grow flex-col items-center text-center lg:col-span-7 lg:items-start lg:text-left">
           {/* Decorative Badge */}
           <Badge variant="violet" className="mb-12 sm:mb-8">
             <span className="hidden sm:inline-flex">VORELLO — ESTUDIO DIGITAL PREMIUM</span>
@@ -188,86 +182,105 @@ export default function Hero() {
 
           <h1
             ref={headlineRef}
-            className="text-6xl sm:text-8xl lg:text-8xl xl:text-9xl font-bebas tracking-wide text-chrome-highlight uppercase mb-8 sm:mb-6 2xl:mb-8 max-w-5xl leading-[0.9] select-none flex flex-col gap-3 sm:gap-2 2xl:gap-3"
+            className="font-bebas text-chrome-highlight mb-8 flex max-w-5xl flex-col gap-3 text-6xl leading-[0.9] tracking-wide uppercase select-none sm:mb-6 sm:gap-2 sm:text-8xl lg:text-8xl xl:text-9xl 2xl:mb-8 2xl:gap-3"
             style={{ opacity: 0 }}
           >
-            <span>Diseño<span className="inline-block text-[0.78em] translate-y-[-0.07em] ml-[0.02em] select-none text-chrome-deep">.</span></span>
-            <span>Tecnología<span className="inline-block text-[0.78em] translate-y-[-0.07em] ml-[0.02em] select-none text-chrome-deep">.</span></span>
-            <span>Producto<span className="inline-block text-[0.78em] translate-y-[-0.07em] ml-[0.02em] select-none text-chrome-deep">.</span></span>
+            <span>
+              Diseño
+              <span className="text-chrome-deep ml-[0.02em] inline-block translate-y-[-0.07em] text-[0.78em] select-none">
+                .
+              </span>
+            </span>
+            <span>
+              Tecnología
+              <span className="text-chrome-deep ml-[0.02em] inline-block translate-y-[-0.07em] text-[0.78em] select-none">
+                .
+              </span>
+            </span>
+            <span>
+              Producto
+              <span className="text-chrome-deep ml-[0.02em] inline-block translate-y-[-0.07em] text-[0.78em] select-none">
+                .
+              </span>
+            </span>
           </h1>
 
           {/* Brand core positioning sentence - improved contrast */}
           <p
             ref={subtitleRef}
-            className="text-base sm:text-lg md:text-xl 2xl:text-2xl text-copy-muted max-w-2xl 2xl:max-w-3xl leading-relaxed text-balance"
+            className="text-copy-muted max-w-2xl text-base leading-relaxed text-balance sm:text-lg md:text-xl 2xl:max-w-3xl 2xl:text-2xl"
             style={{ opacity: 0 }}
           >
-            Diseñamos y desarrollamos productos bien pensados, visualmente cuidados y técnicamente sólidos.
+            Diseñamos y desarrollamos productos bien pensados, visualmente cuidados y técnicamente
+            sólidos.
           </p>
 
           {/* Call to Actions */}
           <div
             ref={ctaRef}
-            className="mt-auto pt-10 flex flex-col sm:flex-row gap-3 sm:gap-4 items-center justify-center lg:justify-start w-full max-w-72 sm:max-w-none sm:w-auto mx-auto lg:mx-0"
+            className="mx-auto mt-auto flex w-full max-w-72 flex-col items-center justify-center gap-3 pt-10 sm:w-auto sm:max-w-none sm:flex-row sm:gap-4 lg:mx-0 lg:justify-start"
             style={{ opacity: 0 }}
           >
-            <Link href="/start" className="w-full sm:w-auto focus-visible:outline-none">
+            <Link href="/start" className="w-full focus-visible:outline-none sm:w-auto">
               <Button variant="primary" size="lg" className="w-full" withArrow>
                 Iniciar proyecto
               </Button>
             </Link>
-            <Link href="/services" className="w-full sm:w-auto focus-visible:outline-none">
-              <Button variant="subtle" size="lg" className="w-full text-chrome-deep hover:text-chrome-highlight">
+            <Link href="/services" className="w-full focus-visible:outline-none sm:w-auto">
+              <Button
+                variant="subtle"
+                size="lg"
+                className="text-chrome-deep hover:text-chrome-highlight w-full"
+              >
                 Conoce nuestros servicios
               </Button>
             </Link>
-
           </div>
         </div>
 
         {/* Right Column: Visual Element with Isotipo (Hidden on mobile) */}
-        <div className="hidden lg:flex lg:col-span-5 items-center justify-center w-full mt-6 sm:mt-10 lg:mt-0">
+        <div className="mt-6 hidden w-full items-center justify-center sm:mt-10 lg:col-span-5 lg:mt-0 lg:flex">
           <div
             ref={visualRef}
-            className="relative w-full max-w-[160px] sm:max-w-[224px] md:max-w-md mx-auto flex items-center justify-center"
+            className="relative mx-auto flex w-full max-w-[160px] items-center justify-center sm:max-w-[224px] md:max-w-md"
             style={{ opacity: 0 }}
           >
             {/* Energy Rings & Tech Blueprint (Minimal & Interactive) */}
             {/* Fourth Orbit (Outer - Green) */}
-            <div className="absolute rounded-full border border-transparent w-[130%] h-[130%] pointer-events-none will-change-transform [transform:translateZ(0)] animate-[spin_150s_linear_infinite]" />
+            <div className="pointer-events-none absolute h-[130%] w-[130%] [transform:translateZ(0)] animate-[spin_150s_linear_infinite] rounded-full border border-transparent will-change-transform" />
 
             {/* Third Orbit (Blue) */}
-            <div className="absolute rounded-full border border-transparent w-[112%] h-[112%] pointer-events-none will-change-transform [transform:translateZ(0)] animate-[spin_120s_linear_infinite]" />
+            <div className="pointer-events-none absolute h-[112%] w-[112%] [transform:translateZ(0)] animate-[spin_120s_linear_infinite] rounded-full border border-transparent will-change-transform" />
 
             {/* Second Orbit (Violet) */}
-            <div className="absolute rounded-full border border-transparent w-[94%] h-[94%] pointer-events-none will-change-transform [transform:translateZ(0)] animate-[spin_70s_linear_infinite_reverse]" />
+            <div className="pointer-events-none absolute h-[94%] w-[94%] [transform:translateZ(0)] animate-[spin_70s_linear_infinite_reverse] rounded-full border border-transparent will-change-transform" />
 
             {/* First Orbit (Innermost - Orange) */}
-            <div className="absolute rounded-full border border-transparent w-[76%] h-[76%] pointer-events-none will-change-transform [transform:translateZ(0)] animate-[spin_55s_linear_infinite]" />
+            <div className="pointer-events-none absolute h-[76%] w-[76%] [transform:translateZ(0)] animate-[spin_55s_linear_infinite] rounded-full border border-transparent will-change-transform" />
 
             {/* Fourth Energy Particle tracking the outer orbit (Green) */}
-            <div className="absolute w-[130%] h-[130%] pointer-events-none animate-[spin_12s_linear_infinite_reverse]">
-              <span className="absolute -top-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-signal-emerald/60 shadow-[0_0_4px_var(--signal-emerald)]" />
+            <div className="pointer-events-none absolute h-[130%] w-[130%] animate-[spin_12s_linear_infinite_reverse]">
+              <span className="bg-signal-emerald/60 absolute -top-1 left-1/2 h-1.5 w-1.5 -translate-x-1/2 rounded-full shadow-[0_0_4px_var(--signal-emerald)]" />
             </div>
 
             {/* Third Energy Particle (Blue) */}
-            <div className="absolute w-[112%] h-[112%] pointer-events-none animate-[spin_10s_linear_infinite]">
-              <span className="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-neon-blue/60 shadow-[0_0_6px_var(--neon-blue)] animate-pulse" />
+            <div className="pointer-events-none absolute h-[112%] w-[112%] animate-[spin_10s_linear_infinite]">
+              <span className="bg-neon-blue/60 absolute -top-1 left-1/2 h-2 w-2 -translate-x-1/2 animate-pulse rounded-full shadow-[0_0_6px_var(--neon-blue)]" />
             </div>
 
             {/* Second Energy Particle (Violet) */}
-            <div className="absolute w-[94%] h-[94%] pointer-events-none animate-[spin_6s_linear_infinite_reverse]">
-              <span className="absolute -top-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-electric-violet/60 shadow-[0_0_4px_var(--electric-violet)]" />
+            <div className="pointer-events-none absolute h-[94%] w-[94%] animate-[spin_6s_linear_infinite_reverse]">
+              <span className="bg-electric-violet/60 absolute -top-1 left-1/2 h-1.5 w-1.5 -translate-x-1/2 rounded-full shadow-[0_0_4px_var(--electric-violet)]" />
             </div>
 
             {/* First Energy Particle (Orange) */}
-            <div className="absolute w-[76%] h-[76%] pointer-events-none animate-[spin_8s_linear_infinite]">
-              <span className="absolute -top-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-signal-orange/60 shadow-[0_0_4px_var(--signal-orange)]" />
+            <div className="pointer-events-none absolute h-[76%] w-[76%] animate-[spin_8s_linear_infinite]">
+              <span className="bg-signal-orange/60 absolute -top-1 left-1/2 h-1.5 w-1.5 -translate-x-1/2 rounded-full shadow-[0_0_4px_var(--signal-orange)]" />
             </div>
 
             {/* Interactive container that captures mouse and touch gestures, preventing iOS native image popup */}
             <div
-              className="w-28 h-28 sm:w-44 sm:h-44 md:w-56 md:h-56 lg:w-76 lg:h-76 2xl:w-[350px] 2xl:h-[350px] flex items-center justify-center cursor-pointer z-10 touch-none select-none select-drag-disabled"
+              className="select-drag-disabled z-10 flex h-28 w-28 cursor-pointer touch-none items-center justify-center select-none sm:h-44 sm:w-44 md:h-56 md:w-56 lg:h-76 lg:w-76 2xl:h-[350px] 2xl:w-[350px]"
               onMouseMove={handleIsotipoMouseMove}
               onMouseLeave={handleIsotipoMouseLeave}
               onTouchStart={handleIsotipoTouchStart}
@@ -283,7 +296,7 @@ export default function Hero() {
                 sizes="(max-width: 768px) 120px, (max-width: 1024px) 176px, 304px"
                 src="/assets/isotipo.webp"
                 alt="Logotipo interactivo de Vorello Agency"
-                className="w-full h-full object-contain pointer-events-none select-none select-drag-disabled"
+                className="select-drag-disabled pointer-events-none h-full w-full object-contain select-none"
               />
             </div>
           </div>

@@ -1,5 +1,10 @@
 import React, { forwardRef, useState, useMemo, useRef, useEffect } from "react";
-import { usePhoneInput, defaultCountries, parseCountry, FlagImage } from "react-international-phone";
+import {
+  usePhoneInput,
+  defaultCountries,
+  parseCountry,
+  FlagImage,
+} from "react-international-phone";
 import { ChevronDown, Search, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import "react-international-phone/style.css";
@@ -32,7 +37,12 @@ export const guessUserCountry = (): string => {
       if (lowerTz.includes("madrid") || lowerTz.includes("canary")) return "es";
       if (lowerTz.includes("santiago")) return "cl";
       if (lowerTz.includes("bogota")) return "co";
-      if (lowerTz.includes("mexico_city") || lowerTz.includes("monterrey") || lowerTz.includes("tijuana")) return "mx";
+      if (
+        lowerTz.includes("mexico_city") ||
+        lowerTz.includes("monterrey") ||
+        lowerTz.includes("tijuana")
+      )
+        return "mx";
       if (lowerTz.includes("lima")) return "pe";
       if (lowerTz.includes("quito")) return "ec";
       if (lowerTz.includes("caracas")) return "ve";
@@ -78,7 +88,10 @@ export const guessUserCountry = (): string => {
 
   // Fallback to browser language
   try {
-    const lang = typeof navigator !== "undefined" ? navigator.language || (navigator.languages && navigator.languages[0]) : "";
+    const lang =
+      typeof navigator !== "undefined"
+        ? navigator.language || (navigator.languages && navigator.languages[0])
+        : "";
     if (lang) {
       const code = lang.split("-")[1]?.toLowerCase();
       if (code && code.length === 2) {
@@ -122,12 +135,7 @@ const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(
     const listRef = useRef<HTMLUListElement>(null);
     const localInputRef = useRef<HTMLInputElement | null>(null);
 
-    const {
-      inputValue,
-      country,
-      setCountry,
-      handlePhoneValueChange,
-    } = usePhoneInput({
+    const { inputValue, country, setCountry, handlePhoneValueChange } = usePhoneInput({
       defaultCountry: detectedCountry,
       value: value,
       inputRef: localInputRef,
@@ -179,7 +187,7 @@ const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(
         });
 
         // Unique countries by iso2
-        const uniqueMap = new Map<string, typeof mapped[0]>();
+        const uniqueMap = new Map<string, (typeof mapped)[0]>();
         mapped.forEach((item) => {
           if (!uniqueMap.has(item.iso2)) {
             uniqueMap.set(item.iso2, item);
@@ -240,10 +248,7 @@ const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(
       const cleanQuery = query.startsWith("+") ? query.slice(1) : query;
 
       return phoneCountries.all.filter((c) => {
-        return (
-          normalizeString(c.name).includes(query) ||
-          c.dialCode.includes(cleanQuery)
-        );
+        return normalizeString(c.name).includes(query) || c.dialCode.includes(cleanQuery);
       });
     }, [phoneCountries, searchQuery]);
 
@@ -338,19 +343,22 @@ const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(
     }, []);
 
     return (
-      <div className="w-full space-y-2 relative" ref={containerRef}>
+      <div className="relative w-full space-y-2" ref={containerRef}>
         {label && (
           <label
             htmlFor={id}
-            className="block text-xs uppercase tracking-wider text-chrome-highlight font-medium animate-fade-in"
+            className="text-chrome-highlight animate-fade-in block text-xs font-medium tracking-wider uppercase"
           >
             <span>{label}</span>
             {required ? (
-              <sup aria-hidden="true" className="text-red-400 ml-0.5 text-[10px] font-sans font-normal select-none">
+              <sup
+                aria-hidden="true"
+                className="ml-0.5 font-sans text-[10px] font-normal text-red-400 select-none"
+              >
                 *
               </sup>
             ) : (
-              <span className="text-[10px] text-copy-muted/50 normal-case tracking-normal font-normal select-none ml-2">
+              <span className="text-copy-muted/50 ml-2 text-[10px] font-normal tracking-normal normal-case select-none">
                 (opcional)
               </span>
             )}
@@ -359,9 +367,9 @@ const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(
 
         <div
           className={cn(
-            "flex items-stretch rounded-lg bg-carbon-black/50 border border-steel-grey/50 transition-all focus-within:border-electric-violet focus-within:ring-1 focus-within:ring-electric-violet min-h-[46px] md:min-h-[42px] overflow-visible relative",
+            "bg-carbon-black/50 border-steel-grey/50 focus-within:border-electric-violet focus-within:ring-electric-violet relative flex min-h-[46px] items-stretch overflow-visible rounded-lg border transition-all focus-within:ring-1 md:min-h-[42px]",
             error && "border-red-500/50 focus-within:border-red-500",
-            disabled && "opacity-50 cursor-not-allowed"
+            disabled && "cursor-not-allowed opacity-50"
           )}
         >
           {/* Country Selector Button */}
@@ -369,10 +377,14 @@ const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(
             type="button"
             disabled={disabled}
             onClick={() => toggleDropdown(!isOpen)}
-            className="flex items-center gap-1.5 pl-4 pr-3 bg-transparent border-r border-steel-grey/30 hover:bg-steel-grey/10 transition-colors shrink-0 text-chrome-highlight cursor-pointer select-none rounded-l-lg disabled:cursor-not-allowed"
+            className="border-steel-grey/30 hover:bg-steel-grey/10 text-chrome-highlight flex shrink-0 cursor-pointer items-center gap-1.5 rounded-l-lg border-r bg-transparent pr-3 pl-4 transition-colors select-none disabled:cursor-not-allowed"
             aria-haspopup="listbox"
             aria-expanded={isOpen}
-            aria-label={country ? `Seleccionar prefijo de país (actual: +${country.dialCode})` : "Seleccionar prefijo de país"}
+            aria-label={
+              country
+                ? `Seleccionar prefijo de país (actual: +${country.dialCode})`
+                : "Seleccionar prefijo de país"
+            }
           >
             {country && (
               <FlagImage
@@ -381,7 +393,12 @@ const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(
                 className="shrink-0 rounded-sm"
               />
             )}
-            <ChevronDown className={cn("w-3.5 h-3.5 text-chrome-deep transition-transform duration-200", isOpen && "rotate-180")} />
+            <ChevronDown
+              className={cn(
+                "text-chrome-deep h-3.5 w-3.5 transition-transform duration-200",
+                isOpen && "rotate-180"
+              )}
+            />
           </button>
 
           {/* Tel Input */}
@@ -413,35 +430,38 @@ const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(
               }
             }}
             placeholder={placeholder || getDynamicPlaceholder()}
-            className="w-full bg-transparent px-4 py-3 outline-none text-base md:text-sm text-chrome-highlight placeholder:text-chrome-deep/40 rounded-r-lg disabled:cursor-not-allowed"
+            className="text-chrome-highlight placeholder:text-chrome-deep/40 w-full rounded-r-lg bg-transparent px-4 py-3 text-base outline-none disabled:cursor-not-allowed md:text-sm"
           />
 
-          {value && value.trim() !== "" && !isOnlyDialCode(value.replace(/[\s()\-]/g, "")) && !disabled && (
-            <div className="flex items-center pr-3 shrink-0">
-              <button
-                type="button"
-                onClick={() => {
-                  onChange("");
-                  if (localInputRef.current) {
-                    localInputRef.current.value = "";
-                    localInputRef.current.focus();
-                  }
-                }}
-                className="p-0.5 rounded-full hover:bg-steel-grey/30 text-chrome-deep hover:text-chrome-highlight transition-all shrink-0 cursor-pointer select-none"
-                aria-label="Limpiar teléfono"
-              >
-                <X className="w-3.5 h-3.5 stroke-[2.5]" />
-              </button>
-            </div>
-          )}
+          {value &&
+            value.trim() !== "" &&
+            !isOnlyDialCode(value.replace(/[\s()\-]/g, "")) &&
+            !disabled && (
+              <div className="flex shrink-0 items-center pr-3">
+                <button
+                  type="button"
+                  onClick={() => {
+                    onChange("");
+                    if (localInputRef.current) {
+                      localInputRef.current.value = "";
+                      localInputRef.current.focus();
+                    }
+                  }}
+                  className="hover:bg-steel-grey/30 text-chrome-deep hover:text-chrome-highlight shrink-0 cursor-pointer rounded-full p-0.5 transition-all select-none"
+                  aria-label="Limpiar teléfono"
+                >
+                  <X className="h-3.5 w-3.5 stroke-[2.5]" />
+                </button>
+              </div>
+            )}
         </div>
 
         {/* Custom Country Dropdown */}
         {isOpen && (
-          <div className="absolute left-0 mt-0.5 w-[280px] bg-carbon-black border border-steel-grey/50 rounded-lg shadow-[0_10px_15px_-3px_rgba(0,0,0,0.5)] z-50 overflow-hidden">
+          <div className="bg-carbon-black border-steel-grey/50 absolute left-0 z-50 mt-0.5 w-[280px] overflow-hidden rounded-lg border shadow-[0_10px_15px_-3px_rgba(0,0,0,0.5)]">
             {/* Search Input */}
-            <div className="p-2 border-b border-steel-grey/30 flex items-center gap-2 bg-carbon-black">
-              <Search className="w-4 h-3.5 text-chrome-deep shrink-0 ml-1" />
+            <div className="border-steel-grey/30 bg-carbon-black flex items-center gap-2 border-b p-2">
+              <Search className="text-chrome-deep ml-1 h-3.5 w-4 shrink-0" />
               <input
                 ref={searchInputRef}
                 type="text"
@@ -452,7 +472,7 @@ const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(
                 }}
                 onKeyDown={handleKeyDown}
                 placeholder="Buscar país o código..."
-                className="w-full bg-transparent text-chrome-highlight placeholder:text-chrome-deep/40 text-base md:text-sm outline-none py-1"
+                className="text-chrome-highlight placeholder:text-chrome-deep/40 w-full bg-transparent py-1 text-base outline-none md:text-sm"
               />
               {searchQuery && (
                 <button
@@ -462,10 +482,10 @@ const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(
                     setFocusedIndex(0);
                     searchInputRef.current?.focus();
                   }}
-                  className="flex items-center justify-center w-4 h-4 rounded-full bg-steel-grey/35 hover:bg-steel-grey/55 text-chrome-deep hover:text-chrome-highlight transition-colors shrink-0 cursor-pointer select-none mr-1"
+                  className="bg-steel-grey/35 hover:bg-steel-grey/55 text-chrome-deep hover:text-chrome-highlight mr-1 flex h-4 w-4 shrink-0 cursor-pointer items-center justify-center rounded-full transition-colors select-none"
                   aria-label="Limpiar búsqueda"
                 >
-                  <X className="w-2.5 h-2.5 stroke-[2.5]" />
+                  <X className="h-2.5 w-2.5 stroke-[2.5]" />
                 </button>
               )}
             </div>
@@ -478,14 +498,14 @@ const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(
               data-lenis-prevent="true"
             >
               {filteredCountries.length === 0 ? (
-                <li className="px-4 py-3 text-chrome-deep/60 text-sm text-center">
+                <li className="text-chrome-deep/60 px-4 py-3 text-center text-sm">
                   No se encontraron resultados
                 </li>
               ) : (
                 filteredCountries.map((c, idx) => {
                   if (c.iso2 === "divider") {
                     return (
-                      <li key={`divider-${idx}`} className="h-px bg-steel-grey/30 my-1 mx-2" />
+                      <li key={`divider-${idx}`} className="bg-steel-grey/30 mx-2 my-1 h-px" />
                     );
                   }
 
@@ -504,8 +524,9 @@ const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(
                       }}
                       onMouseEnter={() => setFocusedIndex(idx)}
                       className={cn(
-                        "w-full text-left flex items-center justify-between px-4 py-2.5 text-base md:text-sm text-chrome-highlight cursor-pointer hover:bg-steel-grey/30 hover:text-white transition-colors select-none",
-                        isSelected && "bg-electric-violet/10 text-electric-violet font-semibold hover:bg-electric-violet/15 hover:text-electric-violet",
+                        "text-chrome-highlight hover:bg-steel-grey/30 flex w-full cursor-pointer items-center justify-between px-4 py-2.5 text-left text-base transition-colors select-none hover:text-white md:text-sm",
+                        isSelected &&
+                          "bg-electric-violet/10 text-electric-violet hover:bg-electric-violet/15 hover:text-electric-violet font-semibold",
                         isFocused && "bg-steel-grey/30 text-white"
                       )}
                     >
@@ -515,9 +536,9 @@ const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(
                           style={{ width: "20px", height: "15px" }}
                           className="shrink-0 rounded-sm"
                         />
-                        <span className="truncate max-w-[140px]">{c.name}</span>
+                        <span className="max-w-[140px] truncate">{c.name}</span>
                       </div>
-                      <span className="text-xs text-chrome-deep font-normal select-none">
+                      <span className="text-chrome-deep text-xs font-normal select-none">
                         +{c.dialCode}
                       </span>
                     </button>
@@ -528,9 +549,7 @@ const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(
           </div>
         )}
 
-        {error && (
-          <p className="text-red-400 text-xs ml-1">{error}</p>
-        )}
+        {error && <p className="ml-1 text-xs text-red-400">{error}</p>}
       </div>
     );
   }

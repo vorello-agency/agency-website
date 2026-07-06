@@ -45,13 +45,7 @@ const CHANNEL_TONE_CLASSES: Record<
 function ContactChannelIcon({ tone }: { tone: ContactChannelTone }) {
   if (tone === "whatsapp") {
     return (
-      <Image
-        src="/assets/whatsapp.svg"
-        alt="WhatsApp"
-        width={20}
-        height={20}
-        className="h-5 w-5"
-      />
+      <Image src="/assets/whatsapp.svg" alt="WhatsApp" width={20} height={20} className="h-5 w-5" />
     );
   }
 
@@ -71,7 +65,7 @@ function ContactChannelCard({ channel }: { channel: ContactChannel }) {
       target={channel.external ? "_blank" : undefined}
       rel={channel.external ? "noopener noreferrer" : undefined}
       className={cn(
-        "group block rounded-xl border border-steel-grey/30 bg-graphite-metal/20 p-4 backdrop-blur-sm transition-all focus-visible:outline-none focus-visible:ring-2",
+        "group border-steel-grey/30 bg-graphite-metal/20 block rounded-xl border p-4 backdrop-blur-sm transition-all focus-visible:ring-2 focus-visible:outline-none",
         tone.ring,
         tone.card
       )}
@@ -88,24 +82,26 @@ function ContactChannelCard({ channel }: { channel: ContactChannel }) {
         <div>
           <h3
             className={cn(
-              "text-sm font-semibold text-chrome-highlight transition-colors sm:text-base",
+              "text-chrome-highlight text-sm font-semibold transition-colors sm:text-base",
               tone.title
             )}
           >
             {channel.title}
           </h3>
-          <p className="mt-1 text-balance text-xs leading-relaxed text-copy-muted">
+          <p className="text-copy-muted mt-1 text-xs leading-relaxed text-balance">
             {channel.description}
           </p>
           {channel.badge ? (
             <>
-              <span className="mt-2 inline-block rounded border border-steel-grey/50 bg-steel-grey/35 px-2 py-0.5 text-xs text-chrome-highlight/85">
+              <span className="border-steel-grey/50 bg-steel-grey/35 text-chrome-highlight/85 mt-2 inline-block rounded border px-2 py-0.5 text-xs">
                 {channel.badge}
               </span>
               <br />
             </>
           ) : null}
-          <span className={cn("mt-4 inline-flex items-center gap-1 text-xs font-semibold", tone.action)}>
+          <span
+            className={cn("mt-4 inline-flex items-center gap-1 text-xs font-semibold", tone.action)}
+          >
             {channel.actionLabel}
             <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />
           </span>
@@ -117,10 +113,10 @@ function ContactChannelCard({ channel }: { channel: ContactChannel }) {
 
 export default function ContactSidebar() {
   return (
-    <div className="space-y-8 lg:col-span-5 sm:pt-8">
+    <div className="space-y-8 sm:pt-8 lg:col-span-5">
       <div className="space-y-8">
-        <div className="border-b border-steel-grey/30 pb-4">
-          <h2 className="text-lg font-bold uppercase tracking-wider text-chrome-highlight">
+        <div className="border-steel-grey/30 border-b pb-4">
+          <h2 className="text-chrome-highlight text-lg font-bold tracking-wider uppercase">
             Otros canales de contacto
           </h2>
         </div>

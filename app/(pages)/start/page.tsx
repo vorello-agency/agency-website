@@ -18,15 +18,16 @@ export default function StartPage() {
     "@context": "https://schema.org",
     "@type": "ContactPage",
     "@id": "https://vorelloagency.com/start#webpage",
-    "url": "https://vorelloagency.com/start",
-    "name": "Solicitar Propuesta Técnica | Vorello Agency",
-    "description": "Formulario de relevamiento de proyectos para diseño y desarrollo de productos digitales, web apps y ecommerce premium por Vorello Agency.",
-    "isPartOf": {
-      "@id": "https://vorelloagency.com/#website"
+    url: "https://vorelloagency.com/start",
+    name: "Solicitar Propuesta Técnica | Vorello Agency",
+    description:
+      "Formulario de relevamiento de proyectos para diseño y desarrollo de productos digitales, web apps y ecommerce premium por Vorello Agency.",
+    isPartOf: {
+      "@id": "https://vorelloagency.com/#website",
     },
-    "about": {
-      "@id": "https://vorelloagency.com/#org"
-    }
+    about: {
+      "@id": "https://vorelloagency.com/#org",
+    },
   };
 
   return (

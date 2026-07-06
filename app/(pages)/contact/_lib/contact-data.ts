@@ -45,8 +45,14 @@ export const INITIAL_CONTACT_FORM_DATA: ContactFormData = {
 
 export const CONTACT_REASONS: readonly ContactReason[] = [
   { id: "consultar-proyecto", label: "Quiero consultar por un proyecto" },
-  { id: "orientacion-servicio", label: "Necesito orientación sobre un servicio" },
-  { id: "propuesta-colaboracion", label: "Propuesta de colaboración o alianzas" },
+  {
+    id: "orientacion-servicio",
+    label: "Necesito orientación sobre un servicio",
+  },
+  {
+    id: "propuesta-colaboracion",
+    label: "Propuesta de colaboración o alianzas",
+  },
   { id: "consulta-tecnica", label: "Consulta técnica o de arquitectura" },
   { id: "consulta-general", label: "Tengo una consulta general", muted: true },
   { id: "otro", label: "Otro motivo", muted: true },
@@ -66,7 +72,8 @@ export const CONTACT_CHANNELS: ContactChannel[] = [
   {
     id: "email",
     title: "Correo electrónico",
-    description: "Para consultas sobre servicios, propuestas de negocios, colaboraciones formales y prensa.",
+    description:
+      "Para consultas sobre servicios, propuestas de negocios, colaboraciones formales y prensa.",
     actionLabel: "Enviar correo electrónico",
     href: `mailto:${CONTACT_EMAIL}`,
     tone: "email",

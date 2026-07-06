@@ -6,10 +6,6 @@ export const metadata: Metadata = {
     "Política de privacidad de Vorello Agency. Conocé cómo recopilamos, usamos y protegemos tu información personal.",
 };
 
-export default function PrivacidadLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function PrivacidadLayout({ children }: { children: React.ReactNode }) {
   return children;
 }

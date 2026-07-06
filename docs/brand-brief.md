@@ -5,6 +5,7 @@
 Vorello Agency es una agencia digital especializada en crear experiencias web, productos digitales y ecommerce de alto nivel.
 
 La marca busca transmitir:
+
 - calidad
 - criterio
 - diseño cuidado
@@ -46,12 +47,14 @@ Subheadline:
 “Diseñamos y desarrollamos productos digitales bien pensados, visualmente cuidados y técnicamente sólidos.”
 
 CTAs posibles:
+
 - “Iniciar proyecto”
 - “Ver cómo trabajamos”
 - “Explorar servicios”
 - “Trabajar con nosotros”
 
 Evitar frases genéricas como:
+
 - “Transformamos ideas en realidad”
 - “Impulsamos tu negocio”
 - “Creamos soluciones digitales”
@@ -64,6 +67,7 @@ Evitar frases genéricas como:
 Sitios web modernos orientados a conversión, performance, SEO técnico, accesibilidad y calidad visual.
 
 Incluye:
+
 - sitios corporativos premium
 - landing pages
 - CRO
@@ -76,6 +80,7 @@ Incluye:
 Web apps, plataformas internas, paneles de gestión, portales de clientes, sistemas a medida e integraciones.
 
 Incluye:
+
 - web apps
 - dashboards
 - sistemas internos
@@ -88,6 +93,7 @@ Incluye:
 Experiencias ecommerce modernas, escalables y orientadas a conversión.
 
 Incluye:
+
 - ecommerce custom
 - arquitectura headless
 - UX optimizada
@@ -97,6 +103,7 @@ Incluye:
 ## 6. Qué NO hace Vorello
 
 Vorello no ofrece como servicio principal:
+
 - gestión de redes sociales
 - creación de contenido para redes
 - campañas publicitarias Meta Ads / Google Ads
@@ -133,6 +140,7 @@ Cada sección de la web debería reforzar la idea de orden, claridad y calidad.
 ## 9. Personalidad visual
 
 Estética deseada:
+
 - premium
 - minimalista
 - oscura
@@ -142,6 +150,7 @@ Estética deseada:
 - similar en sensibilidad a Vercel, Linear, Stripe, pero con identidad propia
 
 Evitar:
+
 - diseños coloridos genéricos
 - exceso de ilustraciones stock
 - estilo startup cliché
@@ -152,15 +161,18 @@ Evitar:
 ## 10. Paleta de colores
 
 Base:
+
 - Carbon Black: #0D0F11
 - Graphite Metal: #1A1D21
 - Steel Grey: #2A2E33
 
 Acentos:
+
 - Neon Blue: #2D8FFF
 - Vorello Electric Violet: #7B4CFF
 
 Chrome / tonos metálicos:
+
 - Chrome Highlight: #E3E7EE
 - Chrome Deep: #5A6270
 
@@ -171,6 +183,7 @@ La interfaz debe usar principalmente negros, grises, blanco suave y acentos viol
 Usar una combinación moderna y premium.
 
 Preferencia:
+
 - Headings: Bebas Neue o alternativa fuerte/condensada si encaja
 - Body: Space Grotesk o tipografía sans moderna
 
@@ -216,6 +229,7 @@ Pensar el proyecto como un sistema de diseño, no como una página armada de for
 Storybook puede ser útil para Vorello porque la marca necesita consistencia visual y escalabilidad.
 
 Si se usa Storybook, documentar:
+
 - botones
 - cards
 - inputs
@@ -257,6 +271,7 @@ Stack principal para la web:
 - Figma como fuente de diseño
 
 Posibles futuras integraciones:
+
 - Firebase Auth
 - Firestore
 - Firebase Storage
@@ -266,6 +281,7 @@ Posibles futuras integraciones:
 ## 17. Criterios técnicos
 
 El código debe priorizar:
+
 - componentes reutilizables
 - estructura clara
 - accesibilidad
@@ -277,6 +293,7 @@ El código debe priorizar:
 - separación entre layout, sections y UI components
 
 Evitar:
+
 - componentes gigantes
 - lógica mezclada con presentación
 - estilos duplicados
@@ -287,6 +304,7 @@ Evitar:
 ## 18. Tono de comunicación
 
 El copy debe sonar:
+
 - claro
 - seguro
 - premium

@@ -4,10 +4,7 @@ import { cn } from "@/lib/utils";
 
 type AmbientGlowProps = ComponentProps<"div">;
 
-export default function AmbientGlow({
-  className,
-  ...props
-}: AmbientGlowProps) {
+export default function AmbientGlow({ className, ...props }: AmbientGlowProps) {
   return (
     <div
       aria-hidden="true"

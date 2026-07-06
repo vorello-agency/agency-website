@@ -29,6 +29,7 @@
 ## Response Checklist
 
 In final responses, include:
+
 - Which files changed.
 - Any dependencies added/removed.
 - What was tested locally and what could not be tested.

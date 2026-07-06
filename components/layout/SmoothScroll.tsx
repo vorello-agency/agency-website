@@ -14,10 +14,10 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
 
     // Initialize Lenis with enhanced smooth dampening for an ultra-fluid, floaty experience
     const lenis = new Lenis({
-      duration: 1.25,          // Extended dampening duration (buttery slow-motion deceleration)
+      duration: 1.25, // Extended dampening duration (buttery slow-motion deceleration)
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Premium exponential ease-out
-      wheelMultiplier: 0.70,  // Lowered multiplier to dampen mouse-wheel force and jumps
-      touchMultiplier: 1.2,   // Fluid touch response
+      wheelMultiplier: 0.7, // Lowered multiplier to dampen mouse-wheel force and jumps
+      touchMultiplier: 1.2, // Fluid touch response
       infinite: false,
     });
 

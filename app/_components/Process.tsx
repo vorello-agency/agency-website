@@ -7,15 +7,7 @@ import SectionHeading from "@/components/layout/SectionHeading";
 import Eyebrow from "@/components/ui/Eyebrow";
 import AmbientGlow from "@/components/ui/AmbientGlow";
 import { animateProcessIconEnter, animateProcessIconLeave } from "@/lib/gsap/animations";
-import {
-  Compass,
-  Route,
-  PanelsTopLeft,
-  Code2,
-  Gauge,
-  Rocket,
-  Orbit,
-} from "lucide-react";
+import { Compass, Route, PanelsTopLeft, Code2, Gauge, Rocket, Orbit } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
 const STEPS = [
@@ -78,7 +70,15 @@ type StepItem = {
   area: string;
 };
 
-function GridItem({ step, isActive, isMobile }: { step: StepItem; isActive: boolean; isMobile: boolean }) {
+function GridItem({
+  step,
+  isActive,
+  isMobile,
+}: {
+  step: StepItem;
+  isActive: boolean;
+  isMobile: boolean;
+}) {
   const Icon = step.icon;
   const cardRef = useRef<HTMLDivElement>(null);
   const glowRef = useRef<HTMLDivElement>(null);
@@ -101,14 +101,14 @@ function GridItem({ step, isActive, isMobile }: { step: StepItem; isActive: bool
       scale: 1.012,
       duration: 0.15,
       ease: "power2.out",
-      overwrite: "auto"
+      overwrite: "auto",
     });
     if (glowRef.current) {
       gsap.to(glowRef.current, {
         opacity: 0.6,
         duration: 0.15,
         ease: "power2.out",
-        overwrite: "auto"
+        overwrite: "auto",
       });
     }
   };
@@ -120,7 +120,7 @@ function GridItem({ step, isActive, isMobile }: { step: StepItem; isActive: bool
         opacity: 0,
         duration: 0.4,
         ease: "power2.inOut",
-        overwrite: "auto"
+        overwrite: "auto",
       });
     }
     if (borderGlowRef.current) {
@@ -128,7 +128,7 @@ function GridItem({ step, isActive, isMobile }: { step: StepItem; isActive: bool
         opacity: 0,
         duration: 0.4,
         ease: "power2.inOut",
-        overwrite: "auto"
+        overwrite: "auto",
       });
     }
     if (card) {
@@ -138,7 +138,7 @@ function GridItem({ step, isActive, isMobile }: { step: StepItem; isActive: bool
         scale: 1,
         duration: 0.4,
         ease: "power2.inOut",
-        overwrite: "auto"
+        overwrite: "auto",
       });
     }
   };
@@ -170,11 +170,7 @@ function GridItem({ step, isActive, isMobile }: { step: StepItem; isActive: bool
   };
 
   // Clases condicionales para estado activo/inactivo en mobile
-  const liMobileClasses = isMobile
-    ? isActive
-      ? ""
-      : "opacity-60"
-    : "";
+  const liMobileClasses = isMobile ? (isActive ? "" : "opacity-60") : "";
 
   const cardMobileClasses = isMobile
     ? isActive
@@ -183,7 +179,9 @@ function GridItem({ step, isActive, isMobile }: { step: StepItem; isActive: bool
     : "";
 
   return (
-    <li className={`list-none min-w-[85vw] max-w-[320px] shrink-0 snap-center md:min-w-0 md:max-w-none md:shrink md:snap-align-none md:min-h-[15rem] ${step.area} transition-all duration-300 ease-out ${liMobileClasses}`}>
+    <li
+      className={`max-w-[320px] min-w-[85vw] shrink-0 snap-center list-none md:min-h-[15rem] md:max-w-none md:min-w-0 md:shrink md:snap-align-none ${step.area} transition-all duration-300 ease-out ${liMobileClasses}`}
+    >
       <div
         ref={cardRef}
         onTouchStart={handleTouchStart}
@@ -191,19 +189,20 @@ function GridItem({ step, isActive, isMobile }: { step: StepItem; isActive: bool
         onTouchCancel={handleTouchEnd}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        className={`process-card group relative h-full rounded-2xl p-6 md:p-7 xl:p-8 bg-graphite-metal border border-steel-grey/20 transition-all duration-300 ease-out select-none ${cardMobileClasses}`}
+        className={`process-card group bg-graphite-metal border-steel-grey/20 relative h-full rounded-2xl border p-6 transition-all duration-300 ease-out select-none md:p-7 xl:p-8 ${cardMobileClasses}`}
       >
         {/* Overflow clip layer — contiene los glows sin recortar el borde exterior */}
-        <div className="absolute inset-0 rounded-[inherit] overflow-hidden pointer-events-none">
+        <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-[inherit]">
           {/* Capa 1: Círculo blurred de luz azul en la esquina superior derecha (Hover) */}
-          <AmbientGlow className="-right-12 -top-12 z-0 h-36 w-36 animate-glow-drift bg-electric-violet/15 opacity-0 blur-3xl transition-opacity duration-500 motion-reduce:animate-none md:group-hover:opacity-100" />
+          <AmbientGlow className="animate-glow-drift bg-electric-violet/15 -top-12 -right-12 z-0 h-36 w-36 opacity-0 blur-3xl transition-opacity duration-500 motion-reduce:animate-none md:group-hover:opacity-100" />
 
           {/* Soft background highlight that follows mouse across card boundaries */}
           <div
             ref={glowRef}
-            className="process-glow absolute inset-0 rounded-[inherit] opacity-0 md:group-hover/grid:opacity-25 transition-opacity duration-500"
+            className="process-glow absolute inset-0 rounded-[inherit] opacity-0 transition-opacity duration-500 md:group-hover/grid:opacity-25"
             style={{
-              background: "radial-gradient(circle 120px at var(--mouse-x, -999px) var(--mouse-y, -999px), rgba(45, 143, 255, 0.08), transparent 100%)"
+              background:
+                "radial-gradient(circle 120px at var(--mouse-x, -999px) var(--mouse-y, -999px), rgba(45, 143, 255, 0.08), transparent 100%)",
             }}
           />
         </div>
@@ -211,13 +210,18 @@ function GridItem({ step, isActive, isMobile }: { step: StepItem; isActive: bool
         {/* Subtle, ultra-thin border glow following mouse precisely across cards */}
         <div
           ref={borderGlowRef}
-          className="process-border-glow absolute inset-0 rounded-[inherit] pointer-events-none opacity-0 md:group-hover/grid:opacity-100 transition-opacity duration-500 z-10"
+          className="process-border-glow pointer-events-none absolute inset-0 z-10 rounded-[inherit] opacity-0 transition-opacity duration-500 md:group-hover/grid:opacity-100"
           style={{
-            maskImage: "radial-gradient(circle 160px at var(--mouse-x, -999px) var(--mouse-y, -999px), black 20%, transparent 100%)",
-            WebkitMaskImage: "radial-gradient(circle 160px at var(--mouse-x, -999px) var(--mouse-y, -999px), black 20%, transparent 100%)"
+            maskImage:
+              "radial-gradient(circle 160px at var(--mouse-x, -999px) var(--mouse-y, -999px), black 20%, transparent 100%)",
+            WebkitMaskImage:
+              "radial-gradient(circle 160px at var(--mouse-x, -999px) var(--mouse-y, -999px), black 20%, transparent 100%)",
           }}
         >
-          <svg className="absolute inset-0 w-full h-full rounded-[inherit] pointer-events-none" style={{ overflow: "visible" }}>
+          <svg
+            className="pointer-events-none absolute inset-0 h-full w-full rounded-[inherit]"
+            style={{ overflow: "visible" }}
+          >
             <rect
               x="0.75"
               y="0.75"
@@ -240,7 +244,7 @@ function GridItem({ step, isActive, isMobile }: { step: StepItem; isActive: bool
         {/* Content */}
         <div className="relative z-30 flex h-full flex-col justify-between gap-4">
           <div className="flex flex-col gap-4">
-            <div className="process-icon-box w-fit rounded-lg border border-steel-grey/30 bg-graphite-metal/50 p-2 overflow-visible text-chrome-highlight md:group-hover:text-electric-violet md:group-hover:border-electric-violet/20 transition-all duration-500 ease-out">
+            <div className="process-icon-box border-steel-grey/30 bg-graphite-metal/50 text-chrome-highlight md:group-hover:text-electric-violet md:group-hover:border-electric-violet/20 w-fit overflow-visible rounded-lg border p-2 transition-all duration-500 ease-out">
               <Icon className={`h-5 w-5 overflow-visible process-svg-${step.num}`} />
             </div>
             <div className="space-y-1.5">
@@ -250,12 +254,12 @@ function GridItem({ step, isActive, isMobile }: { step: StepItem; isActive: bool
               >
                 FASE {step.num}
               </Eyebrow>
-              <h3 className="process-title text-lg font-bold uppercase tracking-tight text-chrome-highlight md:group-hover:text-white transition-colors duration-500 ease-out">
+              <h3 className="process-title text-chrome-highlight text-lg font-bold tracking-tight uppercase transition-colors duration-500 ease-out md:group-hover:text-white">
                 {step.name}
               </h3>
             </div>
           </div>
-          <p className="process-desc text-xs md:text-sm leading-relaxed text-balance text-chrome-highlight/75 md:group-hover:text-chrome-highlight/90 transition-colors duration-500 ease-out">
+          <p className="process-desc text-chrome-highlight/75 md:group-hover:text-chrome-highlight/90 text-xs leading-relaxed text-balance transition-colors duration-500 ease-out md:text-sm">
             {step.desc}
           </p>
         </div>
@@ -344,7 +348,11 @@ export default function Process() {
     if (!stepsContainerRef.current) return;
     const items = Array.from(stepsContainerRef.current.children) as HTMLElement[];
     if (items[index]) {
-      items[index].scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+      items[index].scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+        inline: "center",
+      });
     }
   }, []);
 
@@ -360,9 +368,17 @@ export default function Process() {
         gsap.set(".process-heading > *", { opacity: 1, y: 0 });
         gsap.set(steps, { opacity: 1, y: 0, scale: 1, rotationX: 0 });
         steps.forEach((stepEl) => {
-          gsap.set(stepEl.querySelectorAll(".process-icon-box, .process-phase, .process-title, .process-desc"), {
-            opacity: 1, y: 0, scale: 1, x: 0
-          });
+          gsap.set(
+            stepEl.querySelectorAll(
+              ".process-icon-box, .process-phase, .process-title, .process-desc"
+            ),
+            {
+              opacity: 1,
+              y: 0,
+              scale: 1,
+              x: 0,
+            }
+          );
         });
         return;
       }
@@ -437,7 +453,7 @@ export default function Process() {
             trigger: stepEl,
             start: "top 62%",
             toggleActions: "play none none none",
-          }
+          },
         });
 
         // Icon scales in with back ease
@@ -511,7 +527,7 @@ export default function Process() {
                 trigger: stepEl,
                 start: "top 72%",
                 toggleActions: "play none none none",
-              }
+              },
             });
 
             const obj = { x: -120, y: 80 };
@@ -522,22 +538,30 @@ export default function Process() {
               ease: "power2.out",
             });
 
-            sweepTl.to(obj, {
-              x: 380,
-              y: 120,
-              duration: 1.4,
-              ease: "power2.inOut",
-              onUpdate: () => {
-                cardInner.style.setProperty("--mouse-x", `${obj.x}px`);
-                cardInner.style.setProperty("--mouse-y", `${obj.y}px`);
-              }
-            }, "-=0.25");
+            sweepTl.to(
+              obj,
+              {
+                x: 380,
+                y: 120,
+                duration: 1.4,
+                ease: "power2.inOut",
+                onUpdate: () => {
+                  cardInner.style.setProperty("--mouse-x", `${obj.x}px`);
+                  cardInner.style.setProperty("--mouse-y", `${obj.y}px`);
+                },
+              },
+              "-=0.25"
+            );
 
-            sweepTl.to([glow, borderGlow], {
-              opacity: 0,
-              duration: 0.5,
-              ease: "power2.inOut",
-            }, "-=0.3");
+            sweepTl.to(
+              [glow, borderGlow],
+              {
+                opacity: 0,
+                duration: 0.5,
+                ease: "power2.inOut",
+              },
+              "-=0.3"
+            );
           }
         }
       });
@@ -586,8 +610,12 @@ export default function Process() {
       });
     };
 
-    container.addEventListener("pointermove", handlePointerMove, { passive: true });
-    container.addEventListener("pointerleave", handlePointerLeave, { passive: true });
+    container.addEventListener("pointermove", handlePointerMove, {
+      passive: true,
+    });
+    container.addEventListener("pointerleave", handlePointerLeave, {
+      passive: true,
+    });
 
     return () => {
       if (frameId) cancelAnimationFrame(frameId);
@@ -600,17 +628,18 @@ export default function Process() {
     <section
       ref={sectionRef}
       id="proceso"
-      className="py-20 md:py-32 relative overflow-hidden z-40"
+      className="relative z-40 overflow-hidden py-20 md:py-32"
       style={{
-        background: "radial-gradient(circle at 15% 25%, rgba(123, 76, 255, 0.10), transparent 32%), linear-gradient(180deg, var(--carbon-black) 0%, #111419 48%, var(--carbon-black) 100%)"
+        background:
+          "radial-gradient(circle at 15% 25%, rgba(123, 76, 255, 0.10), transparent 32%), linear-gradient(180deg, var(--carbon-black) 0%, #111419 48%, var(--carbon-black) 100%)",
       }}
     >
       {/* Premium Small Grid Overlay with center-focused radial mask */}
       <div
-        className="absolute inset-0 z-0 bg-grid-small pointer-events-none"
+        className="bg-grid-small pointer-events-none absolute inset-0 z-0"
         style={{
           maskImage: "radial-gradient(circle at center, white 30%, transparent 85%)",
-          WebkitMaskImage: "radial-gradient(circle at center, white 30%, transparent 85%)"
+          WebkitMaskImage: "radial-gradient(circle at center, white 30%, transparent 85%)",
         }}
       />
 
@@ -625,7 +654,7 @@ export default function Process() {
         {/* Mobile: horizontal scroll-snap slider | md+: bento grid */}
         <ul
           ref={stepsContainerRef}
-          className="group/grid mt-12 flex gap-4 overflow-x-auto snap-x snap-mandatory scrollbar-hide -mx-4 px-4 py-2 pb-2 md:overflow-x-visible md:mx-0 md:px-0 md:py-0 md:pb-0 md:grid md:grid-cols-12 md:grid-rows-3 md:gap-6 lg:max-h-[46rem] lg:grid-rows-3"
+          className="group/grid scrollbar-hide -mx-4 mt-12 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 py-2 pb-2 md:mx-0 md:grid md:grid-cols-12 md:grid-rows-3 md:gap-6 md:overflow-x-visible md:px-0 md:py-0 md:pb-0 lg:max-h-[46rem] lg:grid-rows-3"
           style={{ perspective: "1200px" }}
         >
           {STEPS.map((step, idx) => (
@@ -640,13 +669,18 @@ export default function Process() {
 
         {/* Dot indicators + phase label — mobile only */}
         {isMobileSlider && (
-          <div className="flex flex-col items-center gap-3 mt-6 md:hidden">
+          <div className="mt-6 flex flex-col items-center gap-3 md:hidden">
             {/* Phase label */}
-            <span className="font-mono text-[10px] font-semibold uppercase tracking-widest text-electric-violet/80">
-              Fase {STEPS[activeSlide].num} de {String(STEPS.length).padStart(2, "0")} — {STEPS[activeSlide].name}
+            <span className="text-electric-violet/80 font-mono text-[10px] font-semibold tracking-widest uppercase">
+              Fase {STEPS[activeSlide].num} de {String(STEPS.length).padStart(2, "0")} —{" "}
+              {STEPS[activeSlide].name}
             </span>
             {/* Dots */}
-            <div className="flex items-center justify-center gap-2" role="tablist" aria-label="Indicadores del slider de proceso">
+            <div
+              className="flex items-center justify-center gap-2"
+              role="tablist"
+              aria-label="Indicadores del slider de proceso"
+            >
               {STEPS.map((_, idx) => (
                 <button
                   key={idx}
@@ -654,10 +688,10 @@ export default function Process() {
                   role="tab"
                   aria-selected={activeSlide === idx}
                   aria-label={`Ir a fase ${idx + 1}`}
-                  className={`rounded-full transition-all duration-300 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-electric-violet relative after:absolute after:inset-[-8px] after:content-[''] ${
+                  className={`focus-visible:ring-electric-violet relative rounded-full transition-all duration-300 after:absolute after:inset-[-8px] after:content-[''] focus-visible:ring-1 focus-visible:outline-none ${
                     activeSlide === idx
-                      ? "w-5 h-2 bg-electric-violet"
-                      : "w-2 h-2 bg-steel-grey/40 hover:bg-steel-grey/70"
+                      ? "bg-electric-violet h-2 w-5"
+                      : "bg-steel-grey/40 hover:bg-steel-grey/70 h-2 w-2"
                   }`}
                 />
               ))}

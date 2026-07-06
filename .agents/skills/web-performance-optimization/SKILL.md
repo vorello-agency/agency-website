@@ -21,12 +21,12 @@ Implement performance optimization strategies including lazy loading, code split
 ## Code Splitting (React)
 
 ```javascript
-import { lazy, Suspense } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { lazy, Suspense } from "react";
+import { Routes, Route } from "react-router-dom";
 
-const Home = lazy(() => import('./pages/Home'));
-const Dashboard = lazy(() => import('./pages/Dashboard'));
-const Settings = lazy(() => import('./pages/Settings'));
+const Home = lazy(() => import("./pages/Home"));
+const Dashboard = lazy(() => import("./pages/Dashboard"));
+const Settings = lazy(() => import("./pages/Settings"));
 
 function App() {
   return (
@@ -48,16 +48,16 @@ function App() {
 module.exports = {
   optimization: {
     splitChunks: {
-      chunks: 'all',
+      chunks: "all",
       cacheGroups: {
         vendor: {
           test: /[\\/]node_modules[\\/]/,
-          name: 'vendors',
-          chunks: 'all'
-        }
-      }
-    }
-  }
+          name: "vendors",
+          chunks: "all",
+        },
+      },
+    },
+  },
 };
 ```
 
@@ -65,8 +65,8 @@ module.exports = {
 
 ```html
 <picture>
-  <source srcset="image.webp" type="image/webp">
-  <source srcset="image.jpg" type="image/jpeg">
+  <source srcset="image.webp" type="image/webp" />
+  <source srcset="image.jpg" type="image/jpeg" />
   <img
     src="image.jpg"
     srcset="image-400.jpg 400w, image-800.jpg 800w, image-1200.jpg 1200w"
@@ -74,7 +74,7 @@ module.exports = {
     loading="lazy"
     decoding="async"
     alt="Description"
-  >
+  />
 </picture>
 ```
 
@@ -82,24 +82,25 @@ module.exports = {
 
 ```javascript
 // sw.js
-const CACHE_NAME = 'app-v1';
-const ASSETS = ['/', '/index.html', '/main.js', '/styles.css'];
+const CACHE_NAME = "app-v1";
+const ASSETS = ["/", "/index.html", "/main.js", "/styles.css"];
 
-self.addEventListener('install', (event) => {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => cache.addAll(ASSETS))
-  );
+self.addEventListener("install", (event) => {
+  event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS)));
 });
 
-self.addEventListener('fetch', (event) => {
+self.addEventListener("fetch", (event) => {
   event.respondWith(
-    caches.match(event.request).then(cached => {
-      return cached || fetch(event.request).then(response => {
-        return caches.open(CACHE_NAME).then(cache => {
-          cache.put(event.request, response.clone());
-          return response;
-        });
-      });
+    caches.match(event.request).then((cached) => {
+      return (
+        cached ||
+        fetch(event.request).then((response) => {
+          return caches.open(CACHE_NAME).then((cache) => {
+            cache.put(event.request, response.clone());
+            return response;
+          });
+        })
+      );
     })
   );
 });
@@ -114,10 +115,10 @@ self.addEventListener('fetch', (event) => {
 // Example implementation:
 function sendToAnalytics({ metric, value }) {
   // Replace with your analytics implementation (e.g., Google Analytics, Segment)
-  fetch('/api/analytics', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ metric, value, timestamp: Date.now() })
+  fetch("/api/analytics", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ metric, value, timestamp: Date.now() }),
   });
 }
 
@@ -125,9 +126,9 @@ function sendToAnalytics({ metric, value }) {
 new PerformanceObserver((list) => {
   for (const entry of list.getEntries()) {
     console.log(`LCP: ${entry.startTime}ms`);
-    sendToAnalytics({ metric: 'LCP', value: entry.startTime });
+    sendToAnalytics({ metric: "LCP", value: entry.startTime });
   }
-}).observe({ type: 'largest-contentful-paint', buffered: true });
+}).observe({ type: "largest-contentful-paint", buffered: true });
 
 // Cumulative Layout Shift (CLS)
 new PerformanceObserver((list) => {
@@ -135,8 +136,8 @@ new PerformanceObserver((list) => {
   for (const entry of list.getEntries()) {
     if (!entry.hadRecentInput) cls += entry.value;
   }
-  sendToAnalytics({ metric: 'CLS', value: cls });
-}).observe({ type: 'layout-shift', buffered: true });
+  sendToAnalytics({ metric: "CLS", value: cls });
+}).observe({ type: "layout-shift", buffered: true });
 
 // Interaction to Next Paint (INP) - replaces FID
 new PerformanceObserver((list) => {
@@ -144,19 +145,19 @@ new PerformanceObserver((list) => {
     // INP measures responsiveness - duration of slowest interaction
     const inp = entry.processingEnd - entry.processingStart;
     console.log(`INP: ${inp}ms`);
-    sendToAnalytics({ metric: 'INP', value: inp });
+    sendToAnalytics({ metric: "INP", value: inp });
   }
-}).observe({ type: 'event', buffered: true }); // 'event' captures interaction events
+}).observe({ type: "event", buffered: true }); // 'event' captures interaction events
 ```
 
 ## Performance Targets
 
-| Metric | Good | Needs Improvement |
-|--------|------|-------------------|
-| LCP | <2.5s | 2.5-4s |
-| INP | <200ms | 200-500ms |
-| CLS | <0.1 | 0.1-0.25 |
-| TTI | <3.8s | 3.8-7.3s |
+| Metric | Good   | Needs Improvement |
+| ------ | ------ | ----------------- |
+| LCP    | <2.5s  | 2.5-4s            |
+| INP    | <200ms | 200-500ms         |
+| CLS    | <0.1   | 0.1-0.25          |
+| TTI    | <3.8s  | 3.8-7.3s          |
 
 **Note:** INP (Interaction to Next Paint) replaced FID (First Input Delay) as a Core Web Vital in March 2024. INP provides a more comprehensive measure of page responsiveness by capturing the full duration of interactions, not just the input delay.
 
@@ -195,12 +196,14 @@ gzip_comp_level 6;
 ## Additional Configuration
 
 See [references/compression-monitoring.md](references/compression-monitoring.md) for:
+
 - Webpack compression plugin setup
 - Apache .htaccess compression config
 - TTFB monitoring implementation
 - Puppeteer automation for measurement
 
 See [references/typescript-advanced.md](references/typescript-advanced.md) for:
+
 - TypeScript lazyLoad utility
 - TypeScript image component
 - Advanced service worker with offline fallback

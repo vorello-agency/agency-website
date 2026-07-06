@@ -8,6 +8,7 @@ description: Writing copilot for Vorello content. Helps plan, research, draft, a
 ## Purpose
 
 Use this skill to create or improve content with a structured workflow:
+
 - clarify goal and audience
 - build a solid outline
 - research with credible sources and citations
@@ -19,6 +20,7 @@ This skill is optimized for Codex and this repository.
 ## Required Inputs
 
 Before drafting, confirm:
+
 - topic
 - target audience
 - objective (`educate`, `persuade`, `explain`, `announce`)
@@ -26,6 +28,7 @@ Before drafting, confirm:
 - citation style (`inline`, `numbered`, `footnotes`)
 
 For UI/site copy, review first:
+
 - `docs/brand-brief.md` (mandatory)
 
 ## Output Location (Repo-Local)
@@ -47,6 +50,7 @@ Avoid global paths like `~/writing/...`.
 ### 1) Align scope
 
 Ask only what is missing:
+
 - what is the core claim?
 - who is this for?
 - what action should the reader take?
@@ -56,6 +60,7 @@ Then define a one-line editorial goal.
 ### 2) Build outline
 
 Create:
+
 - hook
 - introduction
 - 2-5 main sections
@@ -67,12 +72,14 @@ Mark claims that require evidence with `[[source needed]]`.
 ### 3) Research and citations
 
 Rules:
+
 - prioritize primary and credible sources
 - include publication date
 - avoid unsupported claims
 - if a fact is uncertain, label it as tentative
 
 For each key claim, provide:
+
 - finding
 - source
 - citation snippet in chosen format
@@ -81,6 +88,7 @@ For each key claim, provide:
 
 Draft section by section, preserving user voice.
 After each section, provide:
+
 - what works
 - what to improve
 - 2-3 concrete line edits
@@ -91,6 +99,7 @@ Do not overwrite tone unless requested.
 ### 5) Final review
 
 Run this checklist:
+
 - argument is clear and consistent
 - transitions are smooth
 - claims are sourced
@@ -106,24 +115,30 @@ Run this checklist:
 # Title (working)
 
 ## Hook
+
 - ...
 
 ## Intro
+
 - ...
 
 ## Section 1
+
 - key point
 - evidence
 
 ## Section 2
+
 - key point
 - evidence
 
 ## Conclusion
+
 - summary
 - CTA
 
 ## Research To-Do
+
 - [ ] ...
 ```
 
@@ -133,16 +148,20 @@ Run this checklist:
 ## Feedback: <section name>
 
 ### Works well
+
 - ...
 
 ### Improve
+
 - issue -> fix
 - issue -> fix
 
 ### Missing support
+
 - claim -> required source
 
 ### Suggested edits
+
 1. Original: "..."
    Suggested: "..."
 2. Original: "..."

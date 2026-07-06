@@ -158,28 +158,30 @@ function FitCard({
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
       onTouchCancel={handleTouchEnd}
-      className={`relative h-full p-5 md:p-8 2xl:p-10 rounded-xl border select-none transition-colors duration-300 ${isIdeal
+      className={`relative h-full rounded-xl border p-5 transition-colors duration-300 select-none md:p-8 2xl:p-10 ${
+        isIdeal
           ? "border-electric-violet/20 bg-graphite-metal"
           : "border-steel-grey/30 bg-graphite-metal"
-        }`}
+      }`}
     >
       {/* Accent line sweep on hover */}
       <div
         ref={accentLineRef}
-        className={`absolute inset-x-0 -top-px h-[2px] rounded-full scale-x-0 origin-center pointer-events-none ${isIdeal
-            ? "bg-gradient-to-r from-transparent via-electric-violet/50 to-transparent"
-            : "bg-gradient-to-r from-transparent via-steel-grey/40 to-transparent"
-          }`}
+        className={`pointer-events-none absolute inset-x-0 -top-px h-[2px] origin-center scale-x-0 rounded-full ${
+          isIdeal
+            ? "via-electric-violet/50 bg-gradient-to-r from-transparent to-transparent"
+            : "via-steel-grey/40 bg-gradient-to-r from-transparent to-transparent"
+        }`}
       />
 
       {/* Card ambient glow */}
       {isIdeal && (
-        <AmbientGlow className="-top-8 left-1/2 h-24 w-48 -translate-x-1/2 bg-electric-violet/[0.06] blur-[50px]" />
+        <AmbientGlow className="bg-electric-violet/[0.06] -top-8 left-1/2 h-24 w-48 -translate-x-1/2 blur-[50px]" />
       )}
 
       {/* Dot grid texture */}
       <div
-        className="absolute inset-0 rounded-xl opacity-[0.04] pointer-events-none"
+        className="pointer-events-none absolute inset-0 rounded-xl opacity-[0.04]"
         style={{
           backgroundImage: "radial-gradient(rgba(255, 255, 255, 0.5) 1px, transparent 1px)",
           backgroundSize: "20px 20px",
@@ -190,17 +192,18 @@ function FitCard({
       />
 
       {/* Header */}
-      <div className="relative flex items-center gap-3 2xl:gap-4 mb-4 md:mb-6 2xl:mb-8">
+      <div className="relative mb-4 flex items-center gap-3 md:mb-6 2xl:mb-8 2xl:gap-4">
         <div
           ref={iconContainerRef}
-          className={`fit-icon w-8 h-8 2xl:w-10 2xl:h-10 rounded-full flex items-center justify-center shrink-0 transition-colors duration-300 ${isIdeal
-              ? "bg-electric-violet/10 border border-electric-violet/30 text-electric-violet"
-              : "bg-steel-grey/20 border border-steel-grey/30 text-chrome-highlight/75"
-            }`}
+          className={`fit-icon flex h-8 w-8 shrink-0 items-center justify-center rounded-full transition-colors duration-300 2xl:h-10 2xl:w-10 ${
+            isIdeal
+              ? "bg-electric-violet/10 border-electric-violet/30 text-electric-violet border"
+              : "bg-steel-grey/20 border-steel-grey/30 text-chrome-highlight/75 border"
+          }`}
         >
-          <Icon className="w-4 h-4 2xl:w-5 2xl:h-5" />
+          <Icon className="h-4 w-4 2xl:h-5 2xl:w-5" />
         </div>
-        <h3 className="text-lg 2xl:text-2xl font-semibold text-chrome-highlight tracking-tight">
+        <h3 className="text-chrome-highlight text-lg font-semibold tracking-tight 2xl:text-2xl">
           {title}
         </h3>
       </div>
@@ -210,17 +213,15 @@ function FitCard({
         {items.map((item, idx) => (
           <li
             key={idx}
-            className={`${itemClass} flex gap-2 md:gap-3 2xl:gap-4 text-sm 2xl:text-base ${isIdeal
-                ? "text-chrome-highlight"
-                : "text-chrome-highlight/75"
-              }`}
+            className={`${itemClass} flex gap-2 text-sm md:gap-3 2xl:gap-4 2xl:text-base ${
+              isIdeal ? "text-chrome-highlight" : "text-chrome-highlight/75"
+            }`}
           >
-            <div className="w-8 2xl:w-10 flex justify-center shrink-0 mt-0.5">
+            <div className="mt-0.5 flex w-8 shrink-0 justify-center 2xl:w-10">
               <Icon
-                className={`w-5 h-5 2xl:w-6 2xl:h-6 ${isIdeal
-                    ? "text-electric-violet"
-                    : "text-chrome-highlight/40"
-                  }`}
+                className={`h-5 w-5 2xl:h-6 2xl:w-6 ${
+                  isIdeal ? "text-electric-violet" : "text-chrome-highlight/40"
+                }`}
               />
             </div>
             <span>{item}</span>
@@ -312,7 +313,11 @@ export default function Fit() {
     if (!cardsContainerRef.current) return;
     const items = Array.from(cardsContainerRef.current.children) as HTMLElement[];
     if (items[index]) {
-      items[index].scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+      items[index].scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+        inline: "center",
+      });
     }
   }, []);
 
@@ -324,7 +329,10 @@ export default function Fit() {
 
       if (prefersReducedMotion) {
         gsap.set(".fit-heading > *", { opacity: 1, y: 0 });
-        gsap.set([leftCardRef.current, rightCardRef.current], { opacity: 1, x: 0 });
+        gsap.set([leftCardRef.current, rightCardRef.current], {
+          opacity: 1,
+          x: 0,
+        });
         gsap.set(".fit-ideal-item", { opacity: 1, y: 0 });
         gsap.set(".fit-avoid-item", { opacity: 1, y: 0 });
         gsap.set(".fit-icon", { opacity: 1, scale: 1 });
@@ -449,11 +457,7 @@ export default function Fit() {
             { scaleX: 0, opacity: 0 },
             { scaleX: 1, opacity: 1, duration: 0.8, ease: "power2.inOut" },
             "-=0.2"
-          ).to(
-            accentLine,
-            { scaleX: 0, opacity: 0, duration: 0.8, ease: "power2.inOut" },
-            "+=0.3"
-          );
+          ).to(accentLine, { scaleX: 0, opacity: 0, duration: 0.8, ease: "power2.inOut" }, "+=0.3");
         }
       }
     }, sectionRef);
@@ -465,16 +469,16 @@ export default function Fit() {
     <section
       ref={sectionRef}
       id="fit"
-      className="py-20 md:py-32 2xl:py-40 bg-carbon-black relative z-20 overflow-hidden"
+      className="bg-carbon-black relative z-20 overflow-hidden py-20 md:py-32 2xl:py-40"
     >
       {/* Ambient background glows */}
-      <AmbientGlow className="left-1/2 top-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 bg-electric-violet/5 blur-[120px] 2xl:h-[700px] 2xl:w-[700px]" />
-      <AmbientGlow className="right-0 top-0 h-[300px] w-[300px] bg-neon-blue/[0.03] blur-[100px]" />
-      <AmbientGlow className="bottom-0 left-0 h-[250px] w-[250px] bg-electric-violet/[0.04] blur-[90px]" />
+      <AmbientGlow className="bg-electric-violet/5 top-1/2 left-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 blur-[120px] 2xl:h-[700px] 2xl:w-[700px]" />
+      <AmbientGlow className="bg-neon-blue/[0.03] top-0 right-0 h-[300px] w-[300px] blur-[100px]" />
+      <AmbientGlow className="bg-electric-violet/[0.04] bottom-0 left-0 h-[250px] w-[250px] blur-[90px]" />
 
       {/* Subtle grid dot pattern across background */}
       <div
-        className="absolute inset-0 opacity-[0.025] pointer-events-none"
+        className="pointer-events-none absolute inset-0 opacity-[0.025]"
         style={{
           backgroundImage: "radial-gradient(rgba(255, 255, 255, 0.6) 1px, transparent 1px)",
           backgroundSize: "24px 24px",
@@ -494,13 +498,13 @@ export default function Fit() {
 
         <div
           ref={cardsContainerRef}
-          className="flex gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-hide -mx-4 px-4 py-2 pb-4 md:overflow-x-visible md:mx-0 md:px-0 md:py-0 md:pb-0 md:grid md:grid-cols-2 md:gap-8 2xl:gap-12 max-w-5xl 2xl:max-w-7xl mx-auto mt-12 2xl:mt-16"
+          className="scrollbar-hide -mx-4 mx-auto mt-12 flex max-w-5xl snap-x snap-mandatory gap-6 overflow-x-auto px-4 py-2 pb-4 md:mx-0 md:grid md:grid-cols-2 md:gap-8 md:overflow-x-visible md:px-0 md:py-0 md:pb-0 2xl:mt-16 2xl:max-w-7xl 2xl:gap-12"
           style={{ perspective: "1000px" }}
         >
           {/* Ideal Fit Card */}
-          <div 
+          <div
             ref={leftCardRef}
-            className="min-w-[85vw] max-w-[340px] shrink-0 snap-center md:min-w-0 md:max-w-none md:shrink md:snap-align-none"
+            className="max-w-[340px] min-w-[85vw] shrink-0 snap-center md:max-w-none md:min-w-0 md:shrink md:snap-align-none"
           >
             <FitCard
               variant="ideal"
@@ -511,22 +515,21 @@ export default function Fit() {
           </div>
 
           {/* Non-Ideal Fit Card */}
-          <div 
+          <div
             ref={rightCardRef}
-            className="min-w-[85vw] max-w-[340px] shrink-0 snap-center md:min-w-0 md:max-w-none md:shrink md:snap-align-none"
+            className="max-w-[340px] min-w-[85vw] shrink-0 snap-center md:max-w-none md:min-w-0 md:shrink md:snap-align-none"
           >
-            <FitCard
-              variant="avoid"
-              items={AVOID_FITS}
-              title="No encajamos bien si:"
-              icon={X}
-            />
+            <FitCard variant="avoid" items={AVOID_FITS} title="No encajamos bien si:" icon={X} />
           </div>
         </div>
 
         {/* Dot indicators — mobile only */}
         {isMobileSlider && (
-          <div className="flex items-center justify-center gap-2 mt-6 md:hidden" role="tablist" aria-label="Indicadores del slider de fit">
+          <div
+            className="mt-6 flex items-center justify-center gap-2 md:hidden"
+            role="tablist"
+            aria-label="Indicadores del slider de fit"
+          >
             {[0, 1].map((idx) => (
               <button
                 key={idx}
@@ -534,10 +537,10 @@ export default function Fit() {
                 role="tab"
                 aria-selected={activeSlide === idx}
                 aria-label={`Ir a tarjeta ${idx + 1}`}
-                className={`rounded-full transition-all duration-300 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-electric-violet relative after:absolute after:inset-[-8px] after:content-[''] ${
+                className={`focus-visible:ring-electric-violet relative rounded-full transition-all duration-300 after:absolute after:inset-[-8px] after:content-[''] focus-visible:ring-1 focus-visible:outline-none ${
                   activeSlide === idx
-                    ? "w-5 h-2 bg-electric-violet"
-                    : "w-2 h-2 bg-steel-grey/40 hover:bg-steel-grey/70"
+                    ? "bg-electric-violet h-2 w-5"
+                    : "bg-steel-grey/40 hover:bg-steel-grey/70 h-2 w-2"
                 }`}
               />
             ))}

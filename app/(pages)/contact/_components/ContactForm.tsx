@@ -42,19 +42,22 @@ export default function ContactForm({
     <div className="lg:col-span-7">
       <form
         onSubmit={onSubmit}
-        className="space-y-6 rounded-none border-y border-x-0 sm:rounded-2xl sm:border-x border-steel-grey p-6 sm:p-4 md:p-8 -mx-4 sm:mx-0"
-        style={{ background: "linear-gradient(to bottom, var(--graphite-metal), var(--graphite-metal))" }}
+        className="border-steel-grey -mx-4 space-y-6 rounded-none border-x-0 border-y p-6 sm:mx-0 sm:rounded-2xl sm:border-x sm:p-4 md:p-8"
+        style={{
+          background: "linear-gradient(to bottom, var(--graphite-metal), var(--graphite-metal))",
+        }}
         noValidate
       >
-        <div className="mb-6 border-b border-steel-grey/30 pb-3">
-          <h2 className="text-lg font-bold uppercase tracking-wider text-chrome-highlight">
+        <div className="border-steel-grey/30 mb-6 border-b pb-3">
+          <h2 className="text-chrome-highlight text-lg font-bold tracking-wider uppercase">
             Formulario de contacto
           </h2>
         </div>
 
         {submitStatus === "error" ? (
           <div className="rounded-lg border border-red-500/25 bg-red-500/10 p-4 text-xs text-red-400">
-            Error al enviar el formulario. Por favor, verifica tu conexión e inténtalo de nuevo, o escríbenos directamente a {CONTACT_EMAIL}.
+            Error al enviar el formulario. Por favor, verifica tu conexión e inténtalo de nuevo, o
+            escríbenos directamente a {CONTACT_EMAIL}.
           </div>
         ) : null}
 
@@ -83,9 +86,12 @@ export default function ContactForm({
         />
 
         <div id="group-reason" className="space-y-2">
-          <span className="block text-xs font-medium uppercase tracking-wider text-chrome-highlight">
+          <span className="text-chrome-highlight block text-xs font-medium tracking-wider uppercase">
             Motivo de contacto{" "}
-            <sup aria-hidden="true" className="ml-0.5 select-none font-sans text-[10px] font-normal text-red-400">
+            <sup
+              aria-hidden="true"
+              className="ml-0.5 font-sans text-[10px] font-normal text-red-400 select-none"
+            >
               *
             </sup>
           </span>
@@ -138,9 +144,7 @@ export default function ContactForm({
                 Enviando...
               </>
             ) : (
-              <>
-                Enviar mensaje
-              </>
+              <>Enviar mensaje</>
             )}
           </Button>
         </div>

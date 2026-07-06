@@ -22,7 +22,10 @@ export const WHATSAPP_MSG_GENERAL = "Hola, quisiera hacer una consulta general."
 export const WHATSAPP_MSG_START = "Hola, estoy interesado en iniciar un proyecto con Vorello.";
 
 // Helper to generate WhatsApp link
-export function getWhatsAppLink(message: string = WHATSAPP_MSG_GENERAL, phoneNumber: string = WHATSAPP_RAW_NUMBER): string {
+export function getWhatsAppLink(
+  message: string = WHATSAPP_MSG_GENERAL,
+  phoneNumber: string = WHATSAPP_RAW_NUMBER
+): string {
   return `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 }
 

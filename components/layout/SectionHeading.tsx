@@ -20,22 +20,18 @@ export default function SectionHeading({
   return (
     <div
       className={cn(
-        "max-w-3xl 2xl:max-w-5xl mb-12 md:mb-16 2xl:mb-20",
+        "mb-12 max-w-3xl md:mb-16 2xl:mb-20 2xl:max-w-5xl",
         align === "center" ? "mx-auto text-center" : "text-left",
         className
       )}
       {...props}
     >
-      {eyebrow && (
-        <Eyebrow className="block mb-3">
-          {eyebrow}
-        </Eyebrow>
-      )}
-      <h2 className="text-3xl sm:text-4xl md:text-5xl 2xl:text-6xl font-bold tracking-tight text-chrome-highlight mb-4 leading-tight text-balance">
+      {eyebrow && <Eyebrow className="mb-3 block">{eyebrow}</Eyebrow>}
+      <h2 className="text-chrome-highlight mb-4 text-3xl leading-tight font-bold tracking-tight text-balance sm:text-4xl md:text-5xl 2xl:text-6xl">
         {title}
       </h2>
       {description && (
-        <p className="text-base sm:text-lg text-chrome-deep leading-relaxed text-balance">
+        <p className="text-chrome-deep text-base leading-relaxed text-balance sm:text-lg">
           {description}
         </p>
       )}

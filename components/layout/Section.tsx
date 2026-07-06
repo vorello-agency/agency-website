@@ -5,17 +5,10 @@ interface SectionProps extends React.HTMLAttributes<HTMLElement> {
   children: React.ReactNode;
 }
 
-export default function Section({
-  children,
-  className,
-  ...props
-}: SectionProps) {
+export default function Section({ children, className, ...props }: SectionProps) {
   return (
     <section
-      className={cn(
-        "py-16 md:py-24 lg:py-32 relative overflow-hidden",
-        className
-      )}
+      className={cn("relative overflow-hidden py-16 md:py-24 lg:py-32", className)}
       {...props}
     >
       {children}

@@ -149,12 +149,15 @@ const CountrySelect: React.FC<CountrySelectProps> = ({
   }, []);
 
   return (
-    <div className="w-full space-y-2 relative" ref={containerRef} id={id}>
+    <div className="relative w-full space-y-2" ref={containerRef} id={id}>
       {label && (
-        <label className="block text-xs uppercase tracking-wider text-chrome-highlight font-medium">
+        <label className="text-chrome-highlight block text-xs font-medium tracking-wider uppercase">
           {label}
           {required && (
-            <sup aria-hidden="true" className="text-red-400 ml-0.5 text-[10px] font-sans font-normal select-none">
+            <sup
+              aria-hidden="true"
+              className="ml-0.5 font-sans text-[10px] font-normal text-red-400 select-none"
+            >
               *
             </sup>
           )}
@@ -168,13 +171,13 @@ const CountrySelect: React.FC<CountrySelectProps> = ({
         aria-haspopup="listbox"
         aria-expanded={isOpen}
         className={cn(
-          "w-full bg-carbon-black/50 border border-steel-grey/50 rounded-lg px-4 py-3 text-base md:text-sm text-chrome-highlight focus:border-electric-violet outline-none transition-all flex items-center justify-between cursor-pointer select-none min-h-[46px] md:min-h-[42px]",
-          isOpen && "border-electric-violet ring-1 ring-electric-violet",
+          "bg-carbon-black/50 border-steel-grey/50 text-chrome-highlight focus:border-electric-violet flex min-h-[46px] w-full cursor-pointer items-center justify-between rounded-lg border px-4 py-3 text-base transition-all outline-none select-none md:min-h-[42px] md:text-sm",
+          isOpen && "border-electric-violet ring-electric-violet ring-1",
           error && "border-red-500/50 focus:border-red-500",
-          disabled && "opacity-50 cursor-not-allowed"
+          disabled && "cursor-not-allowed opacity-50"
         )}
       >
-        <div className="flex items-center gap-3 min-w-0">
+        <div className="flex min-w-0 items-center gap-3">
           {selectedOption ? (
             <>
               {selectedOption.iso2 ? (
@@ -184,7 +187,7 @@ const CountrySelect: React.FC<CountrySelectProps> = ({
                   className="shrink-0 rounded-sm"
                 />
               ) : (
-                <Globe className="w-4 h-3.5 text-chrome-deep shrink-0" />
+                <Globe className="text-chrome-deep h-3.5 w-4 shrink-0" />
               )}
               <span className="truncate">{selectedOption.label}</span>
             </>
@@ -208,20 +211,25 @@ const CountrySelect: React.FC<CountrySelectProps> = ({
                   onChange("");
                 }
               }}
-              className="p-0.5 rounded-full hover:bg-steel-grey/30 text-chrome-deep hover:text-chrome-highlight transition-all shrink-0 cursor-pointer select-none z-10"
+              className="hover:bg-steel-grey/30 text-chrome-deep hover:text-chrome-highlight z-10 shrink-0 cursor-pointer rounded-full p-0.5 transition-all select-none"
             >
-              <X className="w-3 h-3 stroke-[2.5]" />
+              <X className="h-3 w-3 stroke-[2.5]" />
             </span>
           )}
-          <ChevronDown className={cn("w-4 h-4 text-chrome-deep transition-transform duration-200 shrink-0", isOpen && "rotate-180")} />
+          <ChevronDown
+            className={cn(
+              "text-chrome-deep h-4 w-4 shrink-0 transition-transform duration-200",
+              isOpen && "rotate-180"
+            )}
+          />
         </div>
       </button>
 
       {isOpen && (
-        <div className="absolute left-0 right-0 mt-0.5 bg-carbon-black border border-steel-grey/50 rounded-lg shadow-[0_10px_15px_-3px_rgba(0,0,0,0.5)] z-50 overflow-hidden">
+        <div className="bg-carbon-black border-steel-grey/50 absolute right-0 left-0 z-50 mt-0.5 overflow-hidden rounded-lg border shadow-[0_10px_15px_-3px_rgba(0,0,0,0.5)]">
           {/* Search Input */}
-          <div className="p-2 border-b border-steel-grey/30 flex items-center gap-2 bg-carbon-black">
-            <Search className="w-4 h-3.5 text-chrome-deep shrink-0 ml-1" />
+          <div className="border-steel-grey/30 bg-carbon-black flex items-center gap-2 border-b p-2">
+            <Search className="text-chrome-deep ml-1 h-3.5 w-4 shrink-0" />
             <input
               ref={searchInputRef}
               type="text"
@@ -232,7 +240,7 @@ const CountrySelect: React.FC<CountrySelectProps> = ({
               }}
               onKeyDown={handleKeyDown}
               placeholder="Buscar país..."
-              className="w-full bg-transparent text-chrome-highlight placeholder:text-chrome-deep/40 text-base md:text-sm outline-none py-1"
+              className="text-chrome-highlight placeholder:text-chrome-deep/40 w-full bg-transparent py-1 text-base outline-none md:text-sm"
             />
             {searchQuery && (
               <button
@@ -242,10 +250,10 @@ const CountrySelect: React.FC<CountrySelectProps> = ({
                   setFocusedIndex(0);
                   searchInputRef.current?.focus();
                 }}
-                className="flex items-center justify-center w-4 h-4 rounded-full bg-steel-grey/35 hover:bg-steel-grey/55 text-chrome-deep hover:text-chrome-highlight transition-colors shrink-0 cursor-pointer select-none mr-1"
+                className="bg-steel-grey/35 hover:bg-steel-grey/55 text-chrome-deep hover:text-chrome-highlight mr-1 flex h-4 w-4 shrink-0 cursor-pointer items-center justify-center rounded-full transition-colors select-none"
                 aria-label="Limpiar búsqueda"
               >
-                <X className="w-2.5 h-2.5 stroke-[2.5]" />
+                <X className="h-2.5 w-2.5 stroke-[2.5]" />
               </button>
             )}
           </div>
@@ -258,15 +266,13 @@ const CountrySelect: React.FC<CountrySelectProps> = ({
             data-lenis-prevent="true"
           >
             {filteredOptions.length === 0 ? (
-              <li className="px-4 py-3 text-chrome-deep/60 text-sm text-center">
+              <li className="text-chrome-deep/60 px-4 py-3 text-center text-sm">
                 No se encontraron resultados
               </li>
             ) : (
               filteredOptions.map((opt, idx) => {
                 if (opt.value === "divider") {
-                  return (
-                    <li key={opt.value} className="h-px bg-steel-grey/30 my-1 mx-2" />
-                  );
+                  return <li key={opt.value} className="bg-steel-grey/30 mx-2 my-1 h-px" />;
                 }
 
                 const isSelected = opt.value === value;
@@ -284,8 +290,9 @@ const CountrySelect: React.FC<CountrySelectProps> = ({
                     }}
                     onMouseEnter={() => setFocusedIndex(idx)}
                     className={cn(
-                      "w-full text-left flex items-center gap-3 px-4 py-2.5 text-base md:text-sm text-chrome-highlight cursor-pointer hover:bg-steel-grey/30 hover:text-white transition-colors select-none",
-                      isSelected && "bg-electric-violet/10 text-electric-violet font-semibold hover:bg-electric-violet/15 hover:text-electric-violet",
+                      "text-chrome-highlight hover:bg-steel-grey/30 flex w-full cursor-pointer items-center gap-3 px-4 py-2.5 text-left text-base transition-colors select-none hover:text-white md:text-sm",
+                      isSelected &&
+                        "bg-electric-violet/10 text-electric-violet hover:bg-electric-violet/15 hover:text-electric-violet font-semibold",
                       isFocused && "bg-steel-grey/30 text-white"
                     )}
                   >
@@ -296,7 +303,7 @@ const CountrySelect: React.FC<CountrySelectProps> = ({
                         className="shrink-0 rounded-sm"
                       />
                     ) : (
-                      <Globe className="w-4 h-3.5 text-chrome-deep shrink-0" />
+                      <Globe className="text-chrome-deep h-3.5 w-4 shrink-0" />
                     )}
                     <span>{opt.label}</span>
                   </button>
@@ -307,9 +314,7 @@ const CountrySelect: React.FC<CountrySelectProps> = ({
         </div>
       )}
 
-      {error && (
-        <p className="text-red-400 text-xs ml-1">{error}</p>
-      )}
+      {error && <p className="ml-1 text-xs text-red-400">{error}</p>}
     </div>
   );
 };

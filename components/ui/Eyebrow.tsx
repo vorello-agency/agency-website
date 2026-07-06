@@ -18,13 +18,13 @@ export default function Eyebrow({
     <span
       className={cn(
         "font-mono font-semibold uppercase",
-        variant === "violet" && "text-xs tracking-widest text-electric-violet",
-        variant === "green" && "text-xs tracking-widest text-signal-emerald",
+        variant === "violet" && "text-electric-violet text-xs tracking-widest",
+        variant === "green" && "text-signal-emerald text-xs tracking-widest",
         className
       )}
       {...props}
     >
-      <span aria-hidden="true" className="select-none pointer-events-none mr-2">
+      <span aria-hidden="true" className="pointer-events-none mr-2 select-none">
         {"//"}
       </span>
       {children}

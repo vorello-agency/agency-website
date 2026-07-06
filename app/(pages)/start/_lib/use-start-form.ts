@@ -357,7 +357,10 @@ export function useStartForm() {
       ease: "power2.in",
       onComplete: () => {
         callback();
-        formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+        formRef.current?.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
       },
     });
   }, []);

@@ -17,7 +17,7 @@ export default function Home() {
     <>
       <Navbar />
       <TracingBeam>
-        <main className="flex-1 flex flex-col bg-carbon-black">
+        <main className="bg-carbon-black flex flex-1 flex-col">
           <Hero />
           <TechScaleDivider index={1} />
           <Statement />
@@ -37,4 +37,3 @@ export default function Home() {
     </>
   );
 }
-

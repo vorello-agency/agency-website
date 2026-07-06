@@ -26,16 +26,19 @@ export default function MidCTA() {
           };
 
           if (reduceMotion) {
-            gsap.set([
-              ".midcta-top-line",
-              ".midcta-bottom-line",
-              ".midcta-left-dots",
-              ".midcta-right-dots",
-              ".midcta-left-glow",
-              ".midcta-right-glow",
-              ".midcta-text",
-              ".midcta-button-wrapper"
-            ], { opacity: 1, scaleX: 1, scale: 1, x: 0 });
+            gsap.set(
+              [
+                ".midcta-top-line",
+                ".midcta-bottom-line",
+                ".midcta-left-dots",
+                ".midcta-right-dots",
+                ".midcta-left-glow",
+                ".midcta-right-glow",
+                ".midcta-text",
+                ".midcta-button-wrapper",
+              ],
+              { opacity: 1, scaleX: 1, scale: 1, x: 0 }
+            );
             return;
           }
 
@@ -126,65 +129,64 @@ export default function MidCTA() {
   return (
     <section
       ref={sectionRef}
-      className="w-full border-t border-b border-steel-grey/30 py-8 md:py-10 relative z-40 overflow-hidden"
+      className="border-steel-grey/30 relative z-40 w-full overflow-hidden border-t border-b py-8 md:py-10"
     >
       {/* Opaque Carbon Black solid base to completely block the Tracing Beam line */}
-      <div className="absolute inset-0 bg-carbon-black z-0 pointer-events-none" />
+      <div className="bg-carbon-black pointer-events-none absolute inset-0 z-0" />
 
       {/* Translucent premium Electric Violet overlay on top of the solid base */}
-      <div className="absolute inset-0 bg-electric-violet/[0.04] z-0 pointer-events-none" />
+      <div className="bg-electric-violet/[0.04] pointer-events-none absolute inset-0 z-0" />
 
       {/* Subtle top border micro-glow in pure electric violet */}
-      <div className="midcta-top-line absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-electric-violet/35 to-transparent pointer-events-none z-10 origin-center" />
+      <div className="midcta-top-line via-electric-violet/35 pointer-events-none absolute top-0 left-0 z-10 h-px w-full origin-center bg-gradient-to-r from-transparent to-transparent" />
 
       {/* Subtle bottom border micro-glow in pure electric violet */}
-      <div className="midcta-bottom-line absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-electric-violet/35 to-transparent pointer-events-none z-10 origin-center" />
+      <div className="midcta-bottom-line via-electric-violet/35 pointer-events-none absolute bottom-0 left-0 z-10 h-px w-full origin-center bg-gradient-to-r from-transparent to-transparent" />
 
       {/* Ambient soft purple glow under text on the left side */}
-      <AmbientGlow className="midcta-left-glow left-0 top-1/2 z-0 h-32 w-80 -translate-y-1/2 bg-electric-violet/[0.03] blur-[40px]" />
+      <AmbientGlow className="midcta-left-glow bg-electric-violet/[0.03] top-1/2 left-0 z-0 h-32 w-80 -translate-y-1/2 blur-[40px]" />
 
       {/* Concentrated and vibrant violet glow behind the button on the right side */}
-      <AmbientGlow className="midcta-right-glow right-0 top-1/2 z-0 h-28 w-48 -translate-y-1/2 bg-electric-violet/20 blur-[28px] md:right-[15%]" />
+      <AmbientGlow className="midcta-right-glow bg-electric-violet/20 top-1/2 right-0 z-0 h-28 w-48 -translate-y-1/2 blur-[28px] md:right-[15%]" />
 
       {/* Subtle Dot Pattern overlay on the left side with fade-out mask */}
       <div
-        className="midcta-left-dots absolute left-0 top-0 bottom-0 w-1/3 opacity-20 z-0 pointer-events-none"
+        className="midcta-left-dots pointer-events-none absolute top-0 bottom-0 left-0 z-0 w-1/3 opacity-20"
         style={{
           backgroundImage: "radial-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1px)",
           backgroundSize: "16px 16px",
           backgroundPosition: "center",
           WebkitMaskImage: "linear-gradient(to right, white 10%, transparent 90%)",
-          maskImage: "linear-gradient(to right, white 10%, transparent 90%)"
+          maskImage: "linear-gradient(to right, white 10%, transparent 90%)",
         }}
       />
 
       {/* Subtle Dot Pattern overlay on the right side with fade-out mask */}
       <div
-        className="midcta-right-dots absolute right-0 top-0 bottom-0 w-1/3 opacity-20 z-0 pointer-events-none"
+        className="midcta-right-dots pointer-events-none absolute top-0 right-0 bottom-0 z-0 w-1/3 opacity-20"
         style={{
           backgroundImage: "radial-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1px)",
           backgroundSize: "16px 16px",
           backgroundPosition: "center",
           WebkitMaskImage: "linear-gradient(to left, white 10%, transparent 90%)",
-          maskImage: "linear-gradient(to left, white 10%, transparent 90%)"
+          maskImage: "linear-gradient(to left, white 10%, transparent 90%)",
         }}
       />
 
       <Container className="relative z-10">
-        <div
-          className="max-w-4xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-6"
-        >
+        <div className="mx-auto flex max-w-4xl flex-col justify-between gap-6 md:flex-row md:items-center">
           {/* Left: Text query (strong bold contrast, limited max-width for premium visual weight, optimized leading for vertical alignment) */}
-          <p className="midcta-text text-lg sm:text-xl md:text-2xl font-bold text-white tracking-tight leading-tight text-balance max-w-xl">
-            Buscamos proyectos que demanden diseño riguroso, tecnología moderna y criterio estratégico.
+          <p className="midcta-text max-w-xl text-lg leading-tight font-bold tracking-tight text-balance text-white sm:text-xl md:text-2xl">
+            Buscamos proyectos que demanden diseño riguroso, tecnología moderna y criterio
+            estratégico.
           </p>
 
           {/* Right: Focused single conversion action button */}
-          <div className="midcta-button-wrapper flex items-center shrink-0">
+          <div className="midcta-button-wrapper flex shrink-0 items-center">
             <Button
               variant="primary-blue"
               size="md"
-              className="cursor-pointer shadow-lg shadow-neon-blue/20 hover:scale-[1.02] active:scale-[0.98] transition-all"
+              className="shadow-neon-blue/20 cursor-pointer shadow-lg transition-all hover:scale-[1.02] active:scale-[0.98]"
               onClick={() => handleScrollTo("contacto")}
               aria-label="Iniciar un proyecto con Vorello"
               withArrow

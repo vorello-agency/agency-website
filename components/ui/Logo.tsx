@@ -14,10 +14,7 @@ type LogoProps = {
   alt?: string;
 };
 
-const sizeMap: Record<
-  LogoSize,
-  { isotipoPx: number; logotipoPx: number; gap: string }
-> = {
+const sizeMap: Record<LogoSize, { isotipoPx: number; logotipoPx: number; gap: string }> = {
   sm: { isotipoPx: 28, logotipoPx: 24, gap: "gap-2" },
   md: { isotipoPx: 36, logotipoPx: 32, gap: "gap-2.5" },
   lg: { isotipoPx: 44, logotipoPx: 40, gap: "gap-3" },

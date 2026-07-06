@@ -10,12 +10,14 @@ description: Diseña e implementa interfaces frontend premium para Vorello Web c
 Construir interfaces modernas, premium y técnicamente sólidas para Vorello Web.
 
 El diseño y el motion deben reforzar:
+
 - jerarquía
 - claridad
 - storytelling
 - percepción de calidad
 
 Antes de cualquier decisión visual o de copy, revisar:
+
 - `docs/brand-brief.md`
 
 ## Stack y dirección base
@@ -45,6 +47,7 @@ Usar **GSAP como librería principal de animaciones**.
 ## Cuándo usar GSAP
 
 Implementar GSAP para:
+
 - apariciones suaves al entrar en viewport
 - stagger en textos, cards, listas y bloques
 - animaciones ligadas al scroll
@@ -56,6 +59,7 @@ Implementar GSAP para:
 ## Cuándo usar solo CSS/Tailwind
 
 Usar transiciones CSS/Tailwind para interacciones simples:
+
 - color
 - borde
 - opacity
@@ -67,6 +71,7 @@ No usar GSAP para hovers simples que ya se resuelven limpio con CSS.
 ## Hero (criterio obligatorio)
 
 El hero debe tener entrada fuerte, sobria y cuidada, transmitiendo:
+
 - diseño
 - tecnología
 - producto
@@ -75,6 +80,7 @@ El hero debe tener entrada fuerte, sobria y cuidada, transmitiendo:
 - solidez
 
 Recursos posibles:
+
 - headline por bloques o palabras
 - glow sutil azul/violeta
 - grid/fondo técnico oscuro
@@ -86,6 +92,7 @@ Recursos posibles:
 ### Proceso
 
 Aplicar scroll-driven narrative por etapas:
+
 1. Descubrimiento
 2. Estrategia
 3. UX/UI
@@ -132,6 +139,7 @@ src/
 ```
 
 Reglas:
+
 - Registrar plugins GSAP en un único punto.
 - Centralizar utilidades de animación para evitar duplicación.
 - Usar `gsap.context()` (o patrón equivalente) en componentes React.
@@ -149,12 +157,14 @@ Reglas:
 ## Accesibilidad y reduced motion
 
 Respetar `prefers-reduced-motion`:
+
 - desactivar scrub complejo
 - limitar parallax
 - mantener reveals simples o estado estático
 - no ocultar contenido esencial por depender de animación
 
 Además:
+
 - no bloquear navegación por teclado
 - no comprometer legibilidad
 - no interferir con botones/links
@@ -163,6 +173,7 @@ Además:
 ## Definition of Done (motion)
 
 Una sección con motion está terminada solo si:
+
 - funciona bien en mobile y desktop
 - respeta `prefers-reduced-motion`
 - no degrada performance

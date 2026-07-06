@@ -33,9 +33,7 @@ export default function StartPageClient() {
   } = useStartForm();
 
   return (
-    <StartPageShell
-      footerSlot={submitStatus !== "success" ? <WhatsAppFloat /> : null}
-    >
+    <StartPageShell footerSlot={submitStatus !== "success" ? <WhatsAppFloat /> : null}>
       {submitStatus === "success" ? (
         <StartSuccess name={formData.name} company={formData.company} />
       ) : (
