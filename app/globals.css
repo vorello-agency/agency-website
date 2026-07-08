@@ -164,6 +164,12 @@ button,
   height: 8px;
 }
 
+/* Force horizontal scrollbars to be completely hidden globally to prevent temporary rendering artifacts */
+::-webkit-scrollbar:horizontal {
+  height: 0px;
+  display: none;
+}
+
 ::-webkit-scrollbar-track {
   background: var(--carbon-black);
 }

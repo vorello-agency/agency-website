@@ -36,7 +36,8 @@ export default function Badge({
           // Orange theme
           "border-steel-grey/30 bg-graphite-metal/50 text-chrome-deep hover:border-signal-orange/40 hover:text-chrome-highlight hover:bg-white/[0.02]":
             variant === "orange",
-        }
+        },
+        className
       )}
       {...props}
     >

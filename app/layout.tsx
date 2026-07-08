@@ -19,7 +19,7 @@ const geistMono = Geist_Mono({
 const bebasNeue = Bebas_Neue({
   weight: "400",
   variable: "--font-bebas-neue",
-  subsets: ["latin"],
+  subsets: ["latin", "latin-ext"],
 });
 
 export const metadata: Metadata = {

@@ -4,7 +4,6 @@ import React, { useRef, useState, useEffect } from "react";
 import Link from "next/link";
 import { Menu, X, ArrowRight, GitMerge, Fingerprint, Send, Boxes } from "lucide-react";
 import { gsap } from "@/lib/gsap/register";
-import Button from "@/components/ui/Button";
 import Container from "@/components/layout/Container";
 import Logo from "@/components/ui/Logo";
 import { cn } from "@/lib/utils";
@@ -304,13 +303,13 @@ export default function Navbar() {
   return (
     <header
       className={cn(
-        "fixed top-0 right-0 left-0 z-200 w-full",
+        "fixed top-0 right-0 left-0 z-[100] w-full",
         shouldAnimate && "transition-all duration-300",
         mobileMenuOpen
-          ? "border-steel-grey/30 bg-carbon-black border-b"
+          ? "border-b border-steel-grey/30 bg-carbon-black"
           : isScrolled
-            ? "border-steel-grey/30 bg-carbon-black/80 border-b backdrop-blur-md"
-            : "border-b border-transparent bg-transparent"
+            ? "border-b border-steel-grey/30 bg-carbon-black/80 backdrop-blur-md"
+            : "border-b-0 bg-transparent"
       )}
     >
       <Container
