@@ -54,31 +54,31 @@ export const TracingBeam = ({
   });
 
   // Transform scroll progress to hardware-accelerated values (0 layout reflows)
-  const dotBg = useTransform(
-    scrollYProgress,
-    [0, 0.05],
-    ["var(--electric-violet)", "var(--color-white)"]
-  );
-  const dotBorder = useTransform(
-    scrollYProgress,
-    [0, 0.05],
-    ["var(--electric-violet)", "var(--color-white)"]
-  );
-  const dotShadow = useTransform(
-    scrollYProgress,
-    [0, 0.05],
-    ["rgba(0, 0, 0, 0.24) 0px 3px 8px", "rgba(0, 0, 0, 0)"]
-  );
+  /*   const dotBg = useTransform(
+      scrollYProgress,
+      [0, 0.05],
+      ["var(--electric-violet)", "var(--color-white)"]
+    );
+    const dotBorder = useTransform(
+      scrollYProgress,
+      [0, 0.05],
+      ["var(--electric-violet)", "var(--color-white)"]
+    );
+    const dotShadow = useTransform(
+      scrollYProgress,
+      [0, 0.05],
+      ["rgba(0, 0, 0, 0.24) 0px 3px 8px", "rgba(0, 0, 0, 0)"]
+    ); */
 
   return (
     <motion.div ref={ref} className={cn("relative w-full", className)}>
       {/* Absolute container for the SVG Tracing Beam line */}
-      <div className="pointer-events-none absolute inset-x-0 top-0 bottom-0 z-30 hidden md:block">
-        <div className="relative mx-auto h-full w-full max-w-7xl px-4 sm:px-6 lg:px-16 xl:px-20 2xl:px-8">
+      <div className="pointer-events-none absolute inset-x-0 top-0 bottom-0 z-30 hidden md:block ">
+        <div className="relative h-full w-full">
           {/* Shifted to the left margin out of the Container text alignment for perfect breathing space */}
-          <div className="absolute top-[116px] left-0 flex h-[calc(100%-116px)] flex-col items-center md:left-[-16px] lg:left-2 xl:left-[0vw] 2xl:left-[-150px]">
+          <div className="absolute top-0 flex flex-col items-center left-4 sm:left-6 lg:left-8 2xl:left-12 translate-x-[-9.5px]">
             {/* Pulsing indicator dot at the top of the beam */}
-            <motion.div
+            {/* <motion.div
               style={{
                 boxShadow: dotShadow,
               }}
@@ -91,7 +91,7 @@ export const TracingBeam = ({
                 }}
                 className="border-steel-grey h-2 w-2 rounded-full border bg-white"
               />
-            </motion.div>
+            </motion.div> */}
 
             {/* Tracing Beam SVG */}
             <svg
@@ -107,7 +107,7 @@ export const TracingBeam = ({
                 fill="none"
                 stroke="var(--color-steel-grey)"
                 strokeOpacity="0.12"
-                strokeWidth="1.5"
+                strokeWidth="1"
               />
 
               {/* Scroll-activated glowing gradient path */}
@@ -115,7 +115,7 @@ export const TracingBeam = ({
                 d={`M 10 0 V ${svgHeight * 0.3} l 6 12 V ${svgHeight * 0.7} l -6 12 V ${svgHeight}`}
                 fill="none"
                 stroke="url(#tracing-beam-gradient)"
-                strokeWidth="2"
+                strokeWidth="1"
                 className="motion-reduce:hidden"
               />
 

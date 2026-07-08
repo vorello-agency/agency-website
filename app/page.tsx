@@ -19,13 +19,15 @@ export default function Home() {
       <TracingBeam>
         <main className="bg-carbon-black flex flex-1 flex-col">
           <Hero />
-          <TechScaleDivider index={1} />
+          <div className="bg-carbon-black z-30">
+            <TechScaleDivider leftContent="VORELLO AGENCY" rightContent="DESIGN // PRODUCT // TECHNOLOGY" />
+          </div>
           <Statement />
           <TechScaleDivider index={2} />
           <Services />
-          <TechScaleDivider index={3} className="translate-y-4" />
+          <TechScaleDivider compact index={3} className="translate-y-4" />
           <Process />
-          <TechScaleDivider index={4} />
+          <TechScaleDivider compact index={4} />
           <Technologies />
           <MidCTA />
           <Fit />

@@ -313,6 +313,7 @@ export default function Navbar() {
       )}
     >
       <Container
+        spacing="compact"
         className={cn(
           "relative z-50 flex items-center justify-between",
           shouldAnimate && "transition-all duration-300",

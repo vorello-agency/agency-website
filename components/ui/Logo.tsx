@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
+import isotipoImg from "@/public/assets/isotipo.png";
 
 type LogoVariant = "isotipo" | "logotipo" | "both";
 type LogoSize = "sm" | "md" | "lg" | "xl";
@@ -37,11 +38,9 @@ export default function Logo({
     <span className={cn("inline-flex items-center", sizes.gap, className)}>
       {showIsotipo && (
         <Image
-          src="/assets/isotipo.webp"
+          src={isotipoImg}
           alt={variant === "isotipo" ? alt : ""}
           aria-hidden={variant !== "isotipo"}
-          width={256}
-          height={219}
           priority
           className={cn("w-auto", isotipoClassName)}
           style={{ height: `${sizes.isotipoPx}px` }}

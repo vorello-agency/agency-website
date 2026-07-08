@@ -8,9 +8,18 @@ import { cn } from "@/lib/utils";
 interface TechScaleDividerProps {
   className?: string;
   index?: number;
+  leftContent?: string;
+  rightContent?: string;
+  compact?: boolean;
 }
 
-export default function TechScaleDivider({ className, index = 1 }: TechScaleDividerProps) {
+export default function TechScaleDivider({
+  className,
+  index = 1,
+  leftContent,
+  rightContent,
+  compact,
+}: TechScaleDividerProps) {
   const formattedIndex = String(index).padStart(2, "0");
   const scaleValue = index * 10;
 
@@ -37,18 +46,28 @@ export default function TechScaleDivider({ className, index = 1 }: TechScaleDivi
       {/* Margins Indicators & Register Crosses aligned with Container */}
       <Container className="relative flex h-full items-center justify-between">
         {/* Left Register */}
-        <div className="bg-steel-grey/30 absolute top-1/2 left-4 flex h-6 w-px -translate-y-1/2 items-center justify-center sm:left-6 lg:left-8">
+        <div
+          className={cn(
+            "bg-steel-grey/30 absolute top-1/2 left-4 flex h-6 w-px -translate-y-1/2 items-center justify-center sm:left-6 lg:left-8 2xl:left-12",
+            compact && "translate-x-[6.2px]"
+          )}
+        >
           <div className="bg-steel-grey/30 absolute h-px w-6" />
           <span className="text-chrome-deep absolute left-5 font-mono text-[7px] tracking-widest whitespace-nowrap">
-            + REG_{formattedIndex} {"// SEC_DIV"}
+            {leftContent || `+ REG_${formattedIndex} // SEC_DIV`}
           </span>
         </div>
 
         {/* Right Register */}
-        <div className="bg-steel-grey/30 absolute top-1/2 right-4 flex h-6 w-px -translate-y-1/2 items-center justify-center sm:right-6 lg:right-8">
+        <div
+          className={cn(
+            "bg-steel-grey/30 absolute top-1/2 right-4 flex h-6 w-px -translate-y-1/2 items-center justify-center sm:right-6 lg:right-8 2xl:right-12",
+            compact && "translate-x-[9.5px]"
+          )}
+        >
           <div className="bg-steel-grey/30 absolute h-px w-6" />
           <span className="text-chrome-deep absolute right-5 font-mono text-[7px] tracking-widest whitespace-nowrap">
-            + SCALE_X_{scaleValue} {"// SEC_DIV"}
+            {rightContent || `+ SCALE_X_${scaleValue} // SEC_DIV`}
           </span>
         </div>
       </Container>
