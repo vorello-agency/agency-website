@@ -633,154 +633,129 @@ export const animateProcessIconLeave = (stepNum: string, svg: SVGElement) => {
 
 export const animateTechIconEnter = (layerNum: string, svg: SVGElement) => {
   if (layerNum === "1") {
-    const paths = svg.querySelectorAll("path");
-    if (paths.length >= 3) {
-      const tl = gsap.timeline({ overwrite: "auto" });
-      tl.to(paths[0], { y: -3, duration: 0.35, ease: "back.out(2)" }).to(
-        paths[2],
-        { y: 3, duration: 0.35, ease: "back.out(2)" },
-        0
-      );
-    }
-  } else if (layerNum === "2") {
-    const leds = svg.querySelectorAll("line");
-    const rects = svg.querySelectorAll("rect");
-
-    const tl = gsap.timeline({ overwrite: "auto" });
-    tl.to(leds, {
-      opacity: 0.2,
-      duration: 0.15,
-      repeat: -1,
-      yoyo: true,
-      stagger: 0.1,
-    });
-
-    gsap.to(rects, {
-      scale: 1.05,
-      transformOrigin: "center center",
-      duration: 0.4,
-      ease: "power2.out",
-      overwrite: "auto",
-    });
-  } else if (layerNum === "3") {
-    const path = svg.querySelector("path");
+    // Palette icon: circles (color dots) appear in staggered cascade from invisible
     const circles = svg.querySelectorAll("circle");
-
-    const tl = gsap.timeline({ overwrite: "auto" });
-    tl.to(path, {
-      rotation: 12,
-      transformOrigin: "center center",
-      duration: 0.3,
-      ease: "power2.out",
-    })
-      .to(path, {
-        rotation: -8,
+    if (circles.length > 0) {
+      // Kill any running tweens, then set all hidden and cascade reveal
+      gsap.killTweensOf(circles);
+      gsap.set(circles, { scale: 0, opacity: 0, transformOrigin: "center center" });
+      gsap.to(circles, {
+        scale: 1,
+        opacity: 1,
         duration: 0.25,
-        ease: "power2.inOut",
-      })
-      .to(path, {
-        rotation: 0,
-        duration: 0.3,
-        ease: "power2.out",
-      });
-
-    gsap.fromTo(
-      circles,
-      { scale: 0.5, transformOrigin: "center center" },
-      {
-        scale: 1.4,
-        transformOrigin: "center center",
-        duration: 0.25,
-        stagger: 0.06,
+        stagger: 0.07,
         ease: "back.out(2.5)",
         overwrite: "auto",
-        onComplete: () => {
-          gsap.to(circles, {
-            scale: 1,
-            transformOrigin: "center center",
-            duration: 0.2,
-          });
-        },
-      }
-    );
-  } else if (layerNum === "4") {
-    const rect = svg.querySelector("rect");
+      });
+    }
+    // Subtle handle rotate
+    const path = svg.querySelector("path");
+    if (path) {
+      gsap.to(path, { rotation: -8, transformOrigin: "50% 80%", duration: 0.35, ease: "back.out(1.5)", overwrite: "auto" });
+    }
+  } else if (layerNum === "2") {
+    // Layers (Stack) icon: expand layers vertically — top up, bottom down
     const paths = svg.querySelectorAll("path");
+    const polylines = svg.querySelectorAll("polyline");
+    const allLines = [...Array.from(paths), ...Array.from(polylines)];
 
-    if (rect) {
-      gsap.to(rect, {
-        scale: 1.08,
+    if (allLines.length >= 3) {
+      gsap.killTweensOf(allLines);
+      const tl = gsap.timeline({ overwrite: "auto" });
+      // Top layer slides up
+      tl.to(allLines[0], { y: -3, duration: 0.3, ease: "power2.out" }, 0);
+      // Middle layer stays but scales slightly
+      tl.to(allLines[1], { scaleX: 1.08, transformOrigin: "center center", duration: 0.3, ease: "power2.out" }, 0);
+      // Bottom layer slides down
+      tl.to(allLines[allLines.length - 1], { y: 3, duration: 0.3, ease: "power2.out" }, 0);
+    } else if (allLines.length > 0) {
+      // Fallback for fewer segments
+      gsap.killTweensOf(allLines);
+      gsap.to(allLines, { y: (i) => (i % 2 === 0 ? -2.5 : 2.5), duration: 0.3, ease: "power2.out", overwrite: "auto" });
+    }
+  } else if (layerNum === "3") {
+    // Server icon: LED lights blink on/off in continuous loop
+    const rects = svg.querySelectorAll("rect");
+    const circles = svg.querySelectorAll("circle");
+    const lines = svg.querySelectorAll("line");
+    const lights = [...Array.from(circles), ...Array.from(lines)];
+
+    gsap.killTweensOf(lights);
+
+    if (lights.length > 0) {
+      // Continuous flicker loop — each light independently blinks
+      gsap.to(lights, {
+        opacity: 0.15,
+        duration: 0.18,
+        repeat: -1,
+        yoyo: true,
+        stagger: {
+          each: 0.12,
+          from: "random",
+        },
+        ease: "power1.inOut",
+        overwrite: "auto",
+      });
+    }
+
+    // Server body slightly scales in
+    if (rects.length > 0) {
+      gsap.to(rects, {
+        scaleY: 1.04,
         transformOrigin: "center center",
         duration: 0.35,
         ease: "power2.out",
         overwrite: "auto",
       });
     }
-    if (paths.length > 0) {
-      gsap.fromTo(
-        paths,
-        { opacity: 0.4 },
-        {
-          opacity: 1,
-          duration: 0.18,
-          repeat: 3,
-          yoyo: true,
-          stagger: 0.04,
-          ease: "power1.inOut",
-          overwrite: "auto",
-        }
-      );
-    }
   }
 };
 
 export const animateTechIconLeave = (layerNum: string, svg: SVGElement) => {
   if (layerNum === "1") {
+    const circles = svg.querySelectorAll("circle");
+    const path = svg.querySelector("path");
+    gsap.killTweensOf(circles);
+    // Dots cascade hide on leave
+    gsap.to(circles, {
+      scale: 0,
+      opacity: 0,
+      duration: 0.18,
+      stagger: { each: 0.04, from: "end" },
+      ease: "power2.in",
+      overwrite: "auto",
+      onComplete: () => {
+        // Reset to normal after leave so next enter starts fresh
+        gsap.set(circles, { scale: 1, opacity: 1 });
+      },
+    });
+    if (path) {
+      gsap.to(path, { rotation: 0, transformOrigin: "50% 80%", duration: 0.3, ease: "power2.out", overwrite: "auto" });
+    }
+  } else if (layerNum === "2") {
     const paths = svg.querySelectorAll("path");
-    gsap.to(paths, {
+    const polylines = svg.querySelectorAll("polyline");
+    const allLines = [...Array.from(paths), ...Array.from(polylines)];
+    gsap.killTweensOf(allLines);
+    gsap.to(allLines, {
       y: 0,
+      scaleX: 1,
+      transformOrigin: "center center",
       duration: 0.3,
       ease: "power2.out",
       overwrite: "auto",
     });
-  } else if (layerNum === "2") {
-    const leds = svg.querySelectorAll("line");
-    const rects = svg.querySelectorAll("rect");
-    gsap.killTweensOf(leds);
-    gsap.to(leds, { opacity: 1, duration: 0.3, overwrite: "auto" });
-    gsap.to(rects, {
-      scale: 1,
-      transformOrigin: "center center",
-      duration: 0.3,
-      overwrite: "auto",
-    });
   } else if (layerNum === "3") {
-    const path = svg.querySelector("path");
+    const rects = svg.querySelectorAll("rect");
     const circles = svg.querySelectorAll("circle");
-    gsap.killTweensOf([path, circles]);
-    gsap.to(path, {
-      rotation: 0,
-      transformOrigin: "center center",
-      duration: 0.4,
-      overwrite: "auto",
-    });
-    gsap.to(circles, {
-      scale: 1,
-      transformOrigin: "center center",
-      duration: 0.4,
-      overwrite: "auto",
-    });
-  } else if (layerNum === "4") {
-    const rect = svg.querySelector("rect");
-    const paths = svg.querySelectorAll("path");
-    gsap.killTweensOf([rect, paths]);
-    if (rect)
-      gsap.to(rect, {
-        scale: 1,
-        transformOrigin: "center center",
-        duration: 0.3,
-        overwrite: "auto",
-      });
-    if (paths.length > 0) gsap.to(paths, { opacity: 1, duration: 0.3, overwrite: "auto" });
+    const lines = svg.querySelectorAll("line");
+    const lights = [...Array.from(circles), ...Array.from(lines)];
+    gsap.killTweensOf(lights);
+    gsap.to(lights, { opacity: 1, duration: 0.3, ease: "power2.out", overwrite: "auto" });
+    if (rects.length > 0) {
+      gsap.killTweensOf(rects);
+      gsap.to(rects, { scaleY: 1, transformOrigin: "center center", duration: 0.3, ease: "power2.out", overwrite: "auto" });
+    }
   }
 };
+

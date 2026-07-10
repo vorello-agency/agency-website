@@ -33,7 +33,7 @@ export interface ServiceDetail {
 export const servicesCategories: ServiceCategory[] = [
   {
     num: "01",
-    title: "Experiencias web de alto rendimiento",
+    title: "Experiencias web premium",
     description:
       "Sitios corporativos y landing pages con estándares altos de performance, accesibilidad y SEO técnico.",
     iconName: "Globe",
@@ -41,8 +41,7 @@ export const servicesCategories: ServiceCategory[] = [
       "Sitios corporativos premium",
       "Landing pages de alto rendimiento",
       "Optimización de Core Web Vitals",
-      "SEO técnico estructurado",
-      "Accesibilidad (WCAG AA)",
+      "SEO técnico y accesibilidad",
     ],
   },
   {
@@ -56,17 +55,15 @@ export const servicesCategories: ServiceCategory[] = [
       "Sistemas internos y portales privados",
       "Automatización de procesos operativos",
       "Integraciones entre plataformas y APIs",
-      "Arquitecturas escalables",
     ],
   },
   {
     num: "03",
-    title: "Ecommerce de alto nivel",
+    title: "Ecommerce premium",
     description:
       "Comercio electrónico con arquitectura headless, UX optimizada y rendimiento técnico cuidado.",
     iconName: "ShoppingBag",
     features: [
-      "Ecommerce custom",
       "Arquitecturas headless",
       "Experiencia UX optimizada",
       "Integraciones con pasarelas",
@@ -80,7 +77,7 @@ export const servicesDetail: ServiceDetail[] = [
     id: "sitios-web",
     num: "01",
     title: "Sitios web",
-    category: "Experiencias web de alto rendimiento",
+    category: "Experiencias web premium",
     headline: "Tu web debe abrir conversaciones, no solo verse bien",
     description:
       "Convertir la web corporativa en un activo comercial y reputacional, no en un folleto.",
@@ -102,7 +99,7 @@ export const servicesDetail: ServiceDetail[] = [
       "Performance LCP ≤ 2,5 s garantizado",
       "Diseño a medida alineado a tu marca",
       "Arquitectura modular escalable",
-      "Accesibilidad WCAG AA básica",
+      "Estándares modernos de accesibilidad",
     ],
     caseStudy:
       "Cómo una nueva arquitectura de contenidos redujo la fricción comercial y mejoró la calidad de las consultas.",
@@ -112,7 +109,7 @@ export const servicesDetail: ServiceDetail[] = [
     id: "landing-pages",
     num: "02",
     title: "Landing pages",
-    category: "Experiencias web de alto rendimiento",
+    category: "Experiencias web premium",
     headline: "Una landing con un solo objetivo y cero ruido",
     description:
       "Crear páginas enfocadas a una única acción: campaña, validación, lead gen, evento o captación de demanda.",
@@ -176,7 +173,7 @@ export const servicesDetail: ServiceDetail[] = [
     id: "ecommerce",
     num: "04",
     title: "E‑commerce",
-    category: "Ecommerce de alto nivel",
+    category: "Ecommerce premium",
     headline: "Tu tienda online no solo debe vender: debe facilitar la compra",
     description:
       "Construir o rediseñar experiencias de compra orientadas a conversión, gestión eficiente del catálogo y escalabilidad comercial.",

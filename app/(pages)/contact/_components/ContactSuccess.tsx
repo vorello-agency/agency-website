@@ -21,7 +21,7 @@ export default function ContactSuccess({ name, reasonLabel }: ContactSuccessProp
   const whatsappUrl = getWhatsAppLink(WHATSAPP_MSG_GENERAL);
 
   return (
-    <Container className="relative z-10 px-4 sm:px-6 lg:px-8">
+    <Container className="relative z-10">
       <div className="bg-graphite-metal border-steel-grey animate-in fade-in zoom-in mx-auto mt-6 max-w-2xl rounded-2xl border p-8 text-center backdrop-blur-md duration-500 sm:p-12">
         <div className="bg-signal-emerald/10 border-signal-emerald/20 text-signal-emerald mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full border">
           <CheckCircle2 className="h-8 w-8" />

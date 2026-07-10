@@ -50,7 +50,7 @@ export default function ContactForm({
       >
         <div className="border-steel-grey/30 mb-6 border-b pb-3">
           <h2 className="text-chrome-highlight text-lg font-bold tracking-wider uppercase">
-            Formulario de contacto
+            Mensaje directo
           </h2>
         </div>
 
@@ -117,7 +117,7 @@ export default function ContactForm({
           value={formData.message}
           onChange={onInputChange}
           maxLength={CONTACT_MESSAGE_MAX_LENGTH}
-          placeholder="Describe detalladamente tu consulta, proyecto o propuesta de colaboración..."
+          placeholder="Cuéntanos brevemente sobre tu producto o consulta..."
           required
           error={errors.message}
           hint={

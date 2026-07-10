@@ -99,16 +99,16 @@ export default function MidCTA() {
             "-=0.35"
           );
 
-          // 5. Reveal CTA conversion button with a sophisticated pop (Standardized to 0.5s / back.out(1.2))
+          // 5. Reveal CTA conversion button (power2.out for clean, premium feel)
           tl.fromTo(
             ".midcta-button-wrapper",
-            { opacity: 0, scale: 0.9, x: 12 },
+            { opacity: 0, scale: 0.95, x: 12 },
             {
               opacity: 1,
               scale: 1,
               x: 0,
               duration: 0.5,
-              ease: "back.out(1.2)",
+              ease: "power2.out",
             },
             "-=0.35"
           );
@@ -122,14 +122,14 @@ export default function MidCTA() {
   const handleScrollTo = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+      element.scrollIntoView({ behavior: "smooth", block: "center" });
     }
   };
 
   return (
     <section
       ref={sectionRef}
-      className="border-steel-grey/30 relative z-40 w-full overflow-hidden border-t border-b py-8 md:py-10"
+      className="border-steel-grey/30 relative z-40 w-full overflow-hidden border-t border-b py-8 md:py-10 2xl:max-w-[1500px] 2xl:mx-auto 2xl:rounded-2xl 2xl:border 2xl:my-16"
     >
       {/* Opaque Carbon Black solid base to completely block the Tracing Beam line */}
       <div className="bg-carbon-black pointer-events-none absolute inset-0 z-0" />
@@ -177,8 +177,7 @@ export default function MidCTA() {
         <div className="mx-auto flex max-w-4xl flex-col justify-between gap-6 md:flex-row md:items-center">
           {/* Left: Text query (strong bold contrast, limited max-width for premium visual weight, optimized leading for vertical alignment) */}
           <p className="midcta-text max-w-xl text-lg leading-tight font-bold tracking-tight text-balance text-white sm:text-xl md:text-2xl">
-            Buscamos proyectos que demanden diseño riguroso, tecnología moderna y criterio
-            estratégico.
+            Colaboramos con equipos que no comprometen la calidad técnica ni el estándar visual.
           </p>
 
           {/* Right: Focused single conversion action button */}
@@ -186,12 +185,12 @@ export default function MidCTA() {
             <Button
               variant="primary-blue"
               size="md"
-              className="shadow-neon-blue/20 cursor-pointer shadow-lg transition-all hover:scale-[1.02] active:scale-[0.98]"
-              onClick={() => handleScrollTo("contacto")}
+              className="shadow-dark-blue/20 cursor-pointer shadow-lg transition-all hover:scale-[1.02] active:scale-[0.98]"
+              onClick={() => handleScrollTo("contact")}
               aria-label="Iniciar un proyecto con Vorello"
               withArrow
             >
-              Iniciar proyecto
+              Hablemos de tu proyecto
             </Button>
           </div>
         </div>

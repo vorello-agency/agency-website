@@ -17,7 +17,7 @@ export default function ContactPageShell({ children }: ContactPageShellProps) {
         <div className="from-carbon-black absolute inset-x-0 bottom-0 h-[500px] bg-linear-to-t to-transparent" />
       </div>
 
-      <Container className="relative z-10 px-4 sm:px-6 lg:px-8">{children}</Container>
+      <Container className="relative z-10">{children}</Container>
     </main>
   );
 }

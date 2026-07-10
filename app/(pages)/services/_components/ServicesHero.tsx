@@ -84,7 +84,7 @@ export default function ServicesHero() {
         {/* Action CTAs */}
         <div className="hero-ctas flex flex-col items-center gap-4 sm:flex-row">
           <Link href="/start" passHref legacyBehavior>
-            <Button variant="primary" size="lg" className="w-full font-semibold sm:w-auto">
+            <Button variant="primary-blue" size="lg" className="w-full font-semibold sm:w-auto">
               Iniciar proyecto
             </Button>
           </Link>

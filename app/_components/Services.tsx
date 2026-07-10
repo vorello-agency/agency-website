@@ -1,498 +1,65 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
-import { Globe, Cpu, ShoppingBag, ArrowUpRight, RefreshCw, Workflow } from "lucide-react";
-import { gsap } from "@/lib/gsap/register";
+import React, { useRef } from "react";
+import { gsap, useGSAP } from "@/lib/gsap/register";
+import { MOTION } from "@/lib/gsap/tokens";
 import Container from "@/components/layout/Container";
 import SectionHeading from "@/components/layout/SectionHeading";
-import Eyebrow from "@/components/ui/Eyebrow";
-import Link from "next/link";
-
-const SERVICES = [
-  {
-    num: "01",
-    title: "Experiencias web de alto rendimiento",
-    description:
-      "Sitios corporativos y landing pages con estándares altos de performance, accesibilidad y SEO técnico.",
-    icon: Globe,
-    features: [
-      "Sitios corporativos premium",
-      "Landing pages de alto rendimiento",
-      "Optimización de Core Web Vitals",
-      "SEO técnico estructurado",
-      "Accesibilidad (WCAG AA)",
-    ],
-  },
-  {
-    num: "02",
-    title: "Productos digitales a medida",
-    description:
-      "Web apps, portales, sistemas internos y flujos automatizados diseñados para operar, escalar e integrarse con tu stack existente.",
-    icon: Cpu,
-    features: [
-      "Web apps y dashboards avanzados",
-      "Sistemas internos y portales privados",
-      "Automatización de procesos operativos",
-      "Integraciones entre plataformas y APIs",
-      "Arquitecturas escalables",
-    ],
-  },
-  {
-    num: "03",
-    title: "Ecommerce de alto nivel",
-    description:
-      "Comercio electrónico con arquitectura headless, UX optimizada y rendimiento técnico cuidado.",
-    icon: ShoppingBag,
-    features: [
-      "Ecommerce custom",
-      "Arquitecturas headless",
-      "Experiencia UX optimizada",
-      "Integraciones con pasarelas",
-      "Performance y SEO técnico",
-    ],
-  },
-];
-
-function ServiceCard({ service }: { service: (typeof SERVICES)[0] }) {
-  const Icon = service.icon;
-  const cardRef = useRef<HTMLDivElement>(null);
-  const accentLineRef = useRef<HTMLDivElement>(null);
-  const iconRef = useRef<HTMLDivElement>(null);
-
-  const handleTouchStart = () => {
-    if (cardRef.current && accentLineRef.current && iconRef.current) {
-      gsap.to(accentLineRef.current, {
-        scaleX: 1,
-        opacity: 1,
-        duration: 0.25,
-        ease: "power2.out",
-        overwrite: "auto",
-      });
-      gsap.to(iconRef.current, {
-        borderColor: "rgba(123, 76, 255, 0.4)",
-        color: "var(--electric-violet)",
-        backgroundColor: "rgba(123, 76, 255, 0.05)",
-        duration: 0.25,
-        ease: "power2.out",
-        overwrite: "auto",
-      });
-      gsap.to(cardRef.current, {
-        borderColor: "rgba(123, 76, 255, 0.35)",
-        scale: 1.008,
-        duration: 0.25,
-        ease: "power2.out",
-        overwrite: "auto",
-      });
-    }
-  };
-
-  const handleTouchEnd = () => {
-    if (cardRef.current && accentLineRef.current && iconRef.current) {
-      gsap.to(accentLineRef.current, {
-        scaleX: 0,
-        opacity: 0,
-        duration: 0.5,
-        ease: "power2.inOut",
-        overwrite: "auto",
-      });
-      gsap.to(iconRef.current, {
-        borderColor: "rgba(42, 46, 51, 0.3)",
-        color: "var(--chrome-highlight)",
-        backgroundColor: "rgba(42, 46, 51, 0.25)",
-        duration: 0.5,
-        ease: "power2.inOut",
-        overwrite: "auto",
-      });
-      gsap.to(cardRef.current, {
-        borderColor: "rgba(42, 46, 51, 0.2)",
-        scale: 1,
-        duration: 0.5,
-        ease: "power2.inOut",
-        overwrite: "auto",
-      });
-    }
-  };
-
-  const handleMouseEnter = () => {
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (prefersReducedMotion) return;
-
-    const card = cardRef.current;
-    if (!card) return;
-
-    const svg = card.querySelector(`.services-svg-${service.num}`);
-    if (!svg) return;
-
-    if (service.num === "01") {
-      const circle = svg.querySelector("circle");
-      const paths = svg.querySelectorAll("path");
-      if (circle) {
-        gsap.to(circle, {
-          scale: 1.12,
-          transformOrigin: "center center",
-          duration: 0.4,
-          ease: "back.out(1.5)",
-          overwrite: "auto",
-        });
-      }
-      if (paths && paths.length > 0) {
-        gsap.to(paths, {
-          stroke: "currentColor",
-          scaleX: 1.15,
-          transformOrigin: "center center",
-          stagger: 0.05,
-          duration: 0.4,
-          ease: "power2.out",
-          overwrite: "auto",
-        });
-      }
-    } else if (service.num === "02") {
-      const rect = svg.querySelector("rect");
-      const paths = svg.querySelectorAll("path, line");
-      if (rect) {
-        gsap.to(rect, {
-          scale: 1.25,
-          transformOrigin: "center center",
-          duration: 0.3,
-          ease: "back.out(2)",
-          overwrite: "auto",
-        });
-      }
-      if (paths && paths.length > 0) {
-        gsap.to(paths, {
-          stroke: "var(--electric-violet)",
-          stagger: 0.02,
-          duration: 0.25,
-          ease: "power1.out",
-          overwrite: "auto",
-        });
-      }
-    } else if (service.num === "03") {
-      const tl = gsap.timeline();
-      tl.to(svg, {
-        rotation: 15,
-        transformOrigin: "top center",
-        duration: 0.12,
-        ease: "power1.out",
-      })
-        .to(svg, { rotation: -12, duration: 0.12, ease: "power1.inOut" })
-        .to(svg, { rotation: 8, duration: 0.12, ease: "power1.inOut" })
-        .to(svg, { rotation: -4, duration: 0.12, ease: "power1.inOut" })
-        .to(svg, { rotation: 0, duration: 0.18, ease: "power1.inOut" });
-    }
-  };
-
-  const handleMouseLeave = () => {
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (prefersReducedMotion) return;
-
-    const card = cardRef.current;
-    if (!card) return;
-
-    const svg = card.querySelector(`.services-svg-${service.num}`);
-    if (!svg) return;
-
-    if (service.num === "01") {
-      const circle = svg.querySelector("circle");
-      const paths = svg.querySelectorAll("path");
-      if (circle) {
-        gsap.to(circle, {
-          scale: 1,
-          transformOrigin: "center center",
-          duration: 0.4,
-          ease: "power2.out",
-          overwrite: "auto",
-        });
-      }
-      if (paths && paths.length > 0) {
-        gsap.to(paths, {
-          stroke: "currentColor",
-          scaleX: 1,
-          transformOrigin: "center center",
-          duration: 0.4,
-          ease: "power2.out",
-          overwrite: "auto",
-        });
-      }
-    } else if (service.num === "02") {
-      const rect = svg.querySelector("rect");
-      const paths = svg.querySelectorAll("path, line");
-      if (rect) {
-        gsap.to(rect, {
-          scale: 1,
-          transformOrigin: "center center",
-          duration: 0.4,
-          ease: "power2.out",
-          overwrite: "auto",
-        });
-      }
-      if (paths && paths.length > 0) {
-        gsap.to(paths, {
-          stroke: "currentColor",
-          stagger: 0.01,
-          duration: 0.4,
-          ease: "power2.out",
-          overwrite: "auto",
-        });
-      }
-    } else if (service.num === "03") {
-      gsap.to(svg, {
-        rotation: 0,
-        transformOrigin: "top center",
-        duration: 0.4,
-        ease: "power2.out",
-        overwrite: "auto",
-      });
-    }
-  };
-
-  return (
-    <div
-      ref={cardRef}
-      onTouchStart={handleTouchStart}
-      onTouchEnd={handleTouchEnd}
-      onTouchCancel={handleTouchEnd}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      className="group border-steel-grey/30 bg-graphite-metal md:hover:border-electric-violet/40 relative flex h-full flex-col rounded-xl border p-5 transition-all duration-300 select-none md:min-h-[480px] md:p-8 2xl:min-h-[520px] 2xl:p-10"
-    >
-      {/* Accent line animation hover */}
-      <div
-        ref={accentLineRef}
-        className="services-accent-line via-electric-violet/40 absolute inset-x-0 -top-px h-[2px] scale-x-0 rounded-full bg-gradient-to-r from-transparent to-transparent md:transition-transform md:duration-500 md:group-hover:scale-x-100"
-      />
-
-      {/* Main content wrapper (takes all available height) */}
-      <div className="flex flex-1 flex-col">
-        {/* Header: Icon & Num */}
-        <div className="mb-5 flex items-center justify-between md:mb-8">
-          <div
-            ref={iconRef}
-            className="services-icon bg-steel-grey/25 border-steel-grey/30 text-chrome-highlight md:group-hover:text-electric-violet md:group-hover:border-electric-violet/20 flex h-12 w-12 items-center justify-center rounded-lg border transition-all duration-300"
-          >
-            <Icon className={`h-6 w-6 services-svg-${service.num}`} />
-          </div>
-          <Eyebrow
-            variant="custom"
-            className="services-num text-steel-grey md:group-hover:text-chrome-deep text-sm transition-colors"
-          >
-            {service.num}
-          </Eyebrow>
-        </div>
-
-        {/* Title */}
-        <h3 className="services-title text-chrome-highlight mb-3 text-xl leading-snug font-bold tracking-tight transition-colors md:group-hover:text-white 2xl:text-2xl">
-          {service.title}
-        </h3>
-
-        {/* Description */}
-        <p className="services-desc text-copy-muted md:group-hover:text-chrome-highlight/90 mb-4 text-sm leading-relaxed md:mb-6 2xl:text-base">
-          {service.description}
-        </p>
-
-        {/* Features / Bullets (Separated with border-top) */}
-        <ul className="border-steel-grey/20 mt-auto mb-5 flex flex-col gap-2 border-t pt-4 md:mb-8 md:gap-2.5 md:pt-6 2xl:gap-3.5">
-          {service.features.map((feature, fIdx) => (
-            <li
-              key={fIdx}
-              className="services-list-item text-copy-muted flex items-center gap-2 text-xs 2xl:text-sm"
-            >
-              <span className="bg-electric-violet/70 h-1 w-1 rounded-full" />
-              {feature}
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      {/* CTA - Pushed strictly to the bottom of the card */}
-      <div className="services-cta mt-auto">
-        <Link
-          href="/start"
-          className="text-chrome-highlight md:group-hover:text-electric-violet inline-flex items-center gap-2 font-mono text-xs font-semibold transition-colors focus-visible:outline-none 2xl:text-sm"
-        >
-          Iniciar proyecto{" "}
-          <ArrowUpRight className="h-3.5 w-3.5 transition-transform md:group-hover:translate-x-0.5 md:group-hover:-translate-y-0.5" />
-        </Link>
-      </div>
-    </div>
-  );
-}
-
-function PostLaunchStrip() {
-  const stripRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    const ctx = gsap.context(() => {
-      if (!stripRef.current) return;
-
-      const items = stripRef.current.querySelectorAll(".strip-item");
-      const divider = stripRef.current.querySelector(".strip-divider");
-
-      if (prefersReducedMotion) {
-        gsap.set([stripRef.current, items, divider], {
-          opacity: 1,
-          y: 0,
-          scaleY: 1,
-        });
-        return;
-      }
-
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: stripRef.current,
-          start: "top 80%",
-          toggleActions: "play none none none",
-        },
-      });
-
-      tl.fromTo(
-        stripRef.current,
-        { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }
-      );
-
-      if (divider) {
-        tl.fromTo(
-          divider,
-          { scaleY: 0, opacity: 0 },
-          { scaleY: 1, opacity: 1, duration: 0.4, ease: "power2.out" },
-          "-=0.3"
-        );
-      }
-
-      tl.fromTo(
-        items,
-        { opacity: 0, y: 12 },
-        { opacity: 1, y: 0, duration: 0.5, stagger: 0.1, ease: "power2.out" },
-        "-=0.3"
-      );
-    }, stripRef);
-
-    return () => ctx.revert();
-  }, []);
-
-  return (
-    <div
-      ref={stripRef}
-      className="border-steel-grey/20 bg-graphite-metal mt-10 rounded-xl border p-6 md:mt-14 md:p-8 2xl:mt-16 2xl:p-10"
-    >
-      <div className="relative grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-0">
-        {/* Vertical divider (desktop only) */}
-        <div className="strip-divider bg-steel-grey/20 absolute top-0 bottom-0 left-1/2 hidden w-px origin-center md:block" />
-
-        {/* Soporte continuo */}
-        <div className="strip-item flex gap-4 md:pr-8 2xl:pr-12">
-          <div className="bg-neon-blue/10 border-neon-blue/20 flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border 2xl:h-12 2xl:w-12">
-            <RefreshCw className="text-neon-blue h-5 w-5 2xl:h-6 2xl:w-6" />
-          </div>
-          <div>
-            <h4 className="text-chrome-highlight mb-1.5 text-sm font-bold tracking-tight 2xl:text-base">
-              Evolución y mantenimiento
-            </h4>
-            <p className="text-copy-muted text-xs leading-relaxed 2xl:text-sm">
-              Acompañamos cada proyecto después del lanzamiento con mejoras continuas, soporte
-              técnico y optimización de rendimiento.
-            </p>
-          </div>
-        </div>
-
-        {/* Automatización y evolución */}
-        <div className="strip-item flex gap-4 md:pl-8 2xl:pl-12">
-          <div className="bg-electric-violet/10 border-electric-violet/20 flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border 2xl:h-12 2xl:w-12">
-            <Workflow className="text-electric-violet h-5 w-5 2xl:h-6 2xl:w-6" />
-          </div>
-          <div>
-            <h4 className="text-chrome-highlight mb-1.5 text-sm font-bold tracking-tight 2xl:text-base">
-              Automatizaciones e integraciones
-            </h4>
-            <p className="text-copy-muted text-xs leading-relaxed 2xl:text-sm">
-              Conectamos herramientas, sistemas y procesos para reducir tareas manuales, ordenar
-              operaciones y mejorar la eficiencia del negocio.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
+import ServiceCard from "./services/ServiceCard";
+import PostLaunchStrip from "./services/PostLaunchStrip";
+import ServicesGlobalCTA from "./services/ServicesGlobalCTA";
+import { servicesCategories } from "@/data/services";
 
 export default function Services() {
   const sectionRef = useRef<HTMLElement>(null);
   const cardsRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    const ctx = gsap.context(() => {
+  useGSAP(
+    () => {
       if (!cardsRef.current) return;
 
-      const cards = Array.from(cardsRef.current.children) as HTMLElement[];
+      const prefersReducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches;
+
+      const cards = Array.from(
+        cardsRef.current.children
+      ) as HTMLElement[];
 
       if (prefersReducedMotion) {
-        // Fallback: show everything instantly
         gsap.set(".services-heading > *", { opacity: 1, y: 0 });
-        gsap.set(cards, { opacity: 1, y: 0, scale: 1, rotationX: 0 });
+        gsap.set(".services-global-cta", { opacity: 1, y: 0 });
         cards.forEach((card) => {
+          gsap.set(card, { opacity: 1, y: 0, scale: 1 });
           gsap.set(
             card.querySelectorAll(
               ".services-icon, .services-num, .services-title, .services-desc, .services-list-item, .services-cta"
             ),
-            {
-              opacity: 1,
-              scale: 1,
-              x: 0,
-              y: 0,
-            }
+            { opacity: 1, scale: 1, x: 0, y: 0 }
           );
         });
         return;
       }
 
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 60%",
-          toggleActions: "play none none none",
-        },
-      });
-
-      // 1. Heading cascade entrance (Standardized to 0.6s duration)
-      tl.fromTo(
+      // ─── Heading cascade ───
+      gsap.fromTo(
         ".services-heading > *",
-        { opacity: 0, y: 30 },
+        { opacity: 0, y: MOTION.scroll.y },
         {
           opacity: 1,
           y: 0,
-          duration: 0.6,
-          stagger: 0.08,
-          ease: "power2.out",
+          duration: MOTION.duration.entrance,
+          stagger: MOTION.stagger.cascade,
+          ease: MOTION.ease.enter,
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 60%",
+            toggleActions: "play none none none",
+          },
         }
       );
 
-      // 2. 3D Card rotation and scale entrance (Standardized to 0.6s duration)
-      tl.fromTo(
-        cards,
-        {
-          opacity: 0,
-          y: 50,
-          rotationX: 12,
-          scale: 0.96,
-        },
-        {
-          opacity: 1,
-          y: 0,
-          rotationX: 0,
-          scale: 1,
-          duration: 0.6,
-          stagger: 0.1,
-          ease: "power2.out",
-        },
-        "-=0.4"
-      );
-
-      // 3. Staggered inner card content reveals
+      // ─── Cards: unified single timeline per card ───
       cards.forEach((card) => {
         const icon = card.querySelector(".services-icon");
         const num = card.querySelector(".services-num");
@@ -500,159 +67,154 @@ export default function Services() {
         const desc = card.querySelector(".services-desc");
         const listItems = card.querySelectorAll(".services-list-item");
         const cta = card.querySelector(".services-cta");
-        const accentLine = card.querySelector(".services-accent-line");
 
-        const cardTl = gsap.timeline({
+        // Initial hidden state
+        gsap.set(card, { opacity: 0, y: MOTION.scroll.y, scale: MOTION.scroll.scale });
+        gsap.set([icon, num, title, desc, listItems, cta], { opacity: 0 });
+
+        const tl = gsap.timeline({
           scrollTrigger: {
             trigger: card,
-            start: "top 52%",
+            start: "top 78%",
             toggleActions: "play none none none",
           },
         });
 
-        // Set initial states to avoid flashing
-        gsap.set([icon, num, title, desc, listItems, cta], { opacity: 0 });
+        // 1. Card container entrance
+        tl.to(card, {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: MOTION.duration.entrance,
+          ease: MOTION.ease.enter,
+        });
 
-        cardTl.fromTo(
+        // 2. Icon + Num pop
+        tl.fromTo(
           [icon, num],
-          { opacity: 0, scale: 0.75 },
+          { opacity: 0, scale: MOTION.scroll.iconScale },
           {
             opacity: 1,
             scale: 1,
-            duration: 0.4,
+            duration: MOTION.duration.base,
             stagger: 0.05,
-            ease: "back.out(1.2)",
-          }
+            ease: MOTION.ease.spring,
+          },
+          "-=0.35"
         );
 
-        cardTl.fromTo(
+        // 3. Title + Description
+        tl.fromTo(
           [title, desc],
           { opacity: 0, y: 15 },
           {
             opacity: 1,
             y: 0,
-            duration: 0.4,
-            stagger: 0.06,
-            ease: "power2.out",
+            duration: MOTION.duration.base,
+            stagger: MOTION.stagger.base,
+            ease: MOTION.ease.enter,
           },
-          "-=0.3"
+          "-=0.25"
         );
 
-        cardTl.fromTo(
+        // 4. List items cascade
+        tl.fromTo(
           listItems,
           { opacity: 0, x: -12 },
           {
             opacity: 1,
             x: 0,
-            duration: 0.4,
-            stagger: 0.04,
-            ease: "power2.out",
+            duration: MOTION.duration.base,
+            stagger: 0.06,
+            ease: MOTION.ease.enter,
           },
-          "-=0.3"
+          "-=0.25"
         );
 
-        cardTl.fromTo(
+        // 5. CTA — last element, enters after list finishes
+        tl.fromTo(
           cta,
           { opacity: 0, y: 10 },
           {
             opacity: 1,
             y: 0,
-            duration: 0.4,
-            ease: "power2.out",
+            duration: 0.35,
+            ease: MOTION.ease.enter,
           },
-          "-=0.3"
+          "-=0.1"
         );
-
-        // Mobile touch-triggered sweep effect via ScrollTrigger
-        const isTouch = window.matchMedia("(pointer: coarse)").matches;
-        if (isTouch && accentLine && icon) {
-          cardTl
-            .fromTo(
-              accentLine,
-              { scaleX: 0, opacity: 0 },
-              {
-                scaleX: 1,
-                opacity: 1,
-                duration: 0.8,
-                ease: "power2.inOut",
-              },
-              "-=0.4"
-            )
-            .to(
-              accentLine,
-              {
-                scaleX: 0,
-                opacity: 0,
-                duration: 0.8,
-                ease: "power2.inOut",
-              },
-              "+=0.2"
-            );
-
-          cardTl
-            .fromTo(
-              icon,
-              {
-                borderColor: "rgba(42, 46, 51, 0.3)",
-                color: "var(--chrome-highlight)",
-              },
-              {
-                borderColor: "rgba(123, 76, 255, 0.4)",
-                color: "var(--electric-violet)",
-                backgroundColor: "rgba(123, 76, 255, 0.05)",
-                duration: 0.6,
-                ease: "power2.out",
-              },
-              "-=1.6"
-            )
-            .to(
-              icon,
-              {
-                borderColor: "rgba(42, 46, 51, 0.3)",
-                color: "var(--chrome-highlight)",
-                backgroundColor: "rgba(42, 46, 51, 0.25)",
-                duration: 0.8,
-                ease: "power2.inOut",
-              },
-              "+=0.2"
-            );
-        }
       });
-    }, sectionRef);
 
-    return () => ctx.revert();
-  }, []);
+      // ─── Global CTA entrance ───
+      gsap.fromTo(
+        ".services-global-cta",
+        { opacity: 0, y: 15 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: MOTION.duration.base,
+          ease: MOTION.ease.enter,
+          scrollTrigger: {
+            trigger: ".services-global-cta",
+            start: "top 85%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
+    },
+    { scope: sectionRef }
+  );
 
   return (
     <section
       ref={sectionRef}
-      id="servicios"
-      className="relative z-20 overflow-hidden py-20 md:py-32 2xl:py-40"
+      id="services"
+      className="relative z-20 overflow-hidden pt-20 pb-10 md:pt-32 md:pb-16 2xl:pt-40 2xl:pb-24"
       style={{
         background:
-          "radial-gradient(circle at 85% 30%, rgba(45, 143, 255, 0.12), transparent 28%), radial-gradient(circle at 15% 70%, rgba(123, 76, 255, 0.1), transparent 25%), var(--carbon-black)",
+          "radial-gradient(circle at 85% 30%, rgba(123, 76, 255, 0.09), transparent 28%), radial-gradient(circle at 15% 70%, rgba(45, 143, 255, 0.08), transparent 25%), var(--carbon-black)",
       }}
     >
+      {/* Dot pattern overlay masked to match the violet glow area at the top right */}
+      <div
+        className="pointer-events-none absolute inset-0 z-0 opacity-[0.18]"
+        style={{
+          backgroundImage: "radial-gradient(rgba(123, 76, 255, 0.4) 1px, transparent 1px)",
+          backgroundSize: "20px 20px",
+          WebkitMaskImage: "radial-gradient(circle at 85% 30%, white, transparent 32%)",
+          maskImage: "radial-gradient(circle at 85% 30%, white, transparent 32%)",
+        }}
+      />
+      {/* Dot pattern overlay masked to match the blue glow area at the bottom left */}
+      <div
+        className="pointer-events-none absolute inset-0 z-0 opacity-[0.18]"
+        style={{
+          backgroundImage: "radial-gradient(rgba(45, 143, 255, 0.4) 1px, transparent 1px)",
+          backgroundSize: "20px 20px",
+          WebkitMaskImage: "radial-gradient(circle at 15% 70%, white, transparent 32%)",
+          maskImage: "radial-gradient(circle at 15% 70%, white, transparent 32%)",
+        }}
+      />
       <Container>
         <SectionHeading
           eyebrow="SERVICIOS"
-          title="Productos digitales con criterio y ejecución técnica"
-          description="Combinamos estrategia, diseño UX/UI y desarrollo moderno para crear soluciones digitales con base sólida y capacidad de evolución."
+          title="Tres áreas de enfoque, un mismo estándar"
+          description="Trabajamos tres líneas principales de servicio, con el mismo estándar de diseño, tecnología y criterio de producto."
           className="services-heading"
         />
 
         <div
           ref={cardsRef}
-          className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-8 2xl:mt-16 2xl:gap-12"
-          style={{ perspective: "1000px" }}
+          className="mt-12 grid grid-cols-1 gap-6 md:gap-8 xlg:grid-cols-3 2xl:mt-16 2xl:gap-10"
         >
-          {SERVICES.map((service, idx) => (
-            <ServiceCard service={service} key={idx} />
+          {servicesCategories.map((service) => (
+            <ServiceCard service={service} key={service.num} />
           ))}
         </div>
 
-        {/* Post-launch support strip */}
         <PostLaunchStrip />
+
+        <ServicesGlobalCTA />
       </Container>
     </section>
   );

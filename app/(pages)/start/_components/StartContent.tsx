@@ -16,12 +16,12 @@ interface StartContentProps extends StartFormProps {
 export default function StartContent({ setFormElement, ...startFormProps }: StartContentProps) {
   return (
     <div className="mt-4" ref={setFormElement}>
-      <Container className="relative z-10 mb-10 px-4 sm:px-6 md:mb-14 lg:px-8">
+      <Container className="relative z-10 mb-10 md:mb-14">
         <StartIntro />
       </Container>
 
       <div className="to-carbon-black/80 relative z-10 w-full bg-linear-to-b from-transparent py-10 md:py-14">
-        <Container className="px-4 sm:px-6 lg:px-8">
+        <Container>
           <div className="grid grid-cols-1 gap-6 md:gap-10 lg:grid-cols-12 lg:gap-14">
             <StartForm {...startFormProps} />
             <StartSidebar />
@@ -32,7 +32,7 @@ export default function StartContent({ setFormElement, ...startFormProps }: Star
       <div className="to-carbon-black relative z-10 w-full bg-linear-to-t from-transparent pb-8 md:pb-12">
         <TechScaleDivider index={1} />
 
-        <Container className="mt-10 px-4 sm:px-6 md:mt-14 lg:px-8">
+        <Container className="mt-10 md:mt-14">
           <div className="grid max-w-2xl grid-cols-1 gap-8 pb-8 md:gap-10 md:pb-12 lg:max-w-none lg:grid-cols-2 lg:gap-14">
             {/* Texto de dudas generales */}
             <div className="text-copy-muted flex flex-col justify-center space-y-4 text-sm leading-relaxed lg:pr-12">

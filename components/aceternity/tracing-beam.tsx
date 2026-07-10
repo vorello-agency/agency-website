@@ -73,7 +73,7 @@ export const TracingBeam = ({
   return (
     <motion.div ref={ref} className={cn("relative w-full", className)}>
       {/* Absolute container for the SVG Tracing Beam line */}
-      <div className="pointer-events-none absolute inset-x-0 top-0 bottom-0 z-30 hidden md:block ">
+      <div className="pointer-events-none absolute inset-x-0 top-0 bottom-0 z-30 hidden md:block">
         <div className="relative h-full w-full">
           {/* Shifted to the left margin out of the Container text alignment for perfect breathing space */}
           <div className="absolute top-0 flex flex-col items-center left-4 sm:left-6 lg:left-8 2xl:left-12 translate-x-[-9.5px]">

@@ -9,6 +9,15 @@ interface SectionHeadingProps extends React.HTMLAttributes<HTMLDivElement> {
   align?: "left" | "center";
 }
 
+const renderTextWithBreaks = (text: string) => {
+  return text.split(/\\n|\n/).map((line, i) => (
+    <React.Fragment key={i}>
+      {i > 0 && <br />}
+      {line}
+    </React.Fragment>
+  ));
+};
+
 export default function SectionHeading({
   eyebrow,
   title,
@@ -28,11 +37,11 @@ export default function SectionHeading({
     >
       {eyebrow && <Eyebrow className="mb-3 block">{eyebrow}</Eyebrow>}
       <h2 className="text-chrome-highlight mb-4 text-3xl leading-tight font-bold tracking-tight text-balance sm:text-4xl md:text-5xl 2xl:text-6xl">
-        {title}
+        {renderTextWithBreaks(title)}
       </h2>
       {description && (
         <p className="text-chrome-deep text-base leading-relaxed text-balance sm:text-lg">
-          {description}
+          {renderTextWithBreaks(description)}
         </p>
       )}
     </div>

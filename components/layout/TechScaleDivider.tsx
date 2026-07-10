@@ -43,8 +43,8 @@ export default function TechScaleDivider({
         />
       </div>
 
-      {/* Margins Indicators & Register Crosses aligned with Container */}
-      <Container className="relative flex h-full items-center justify-between">
+      {/* Margins Indicators & Register Crosses with full-width scaling */}
+      <div className="w-full relative flex h-full items-center justify-between">
         {/* Left Register */}
         <div
           className={cn(
@@ -70,7 +70,7 @@ export default function TechScaleDivider({
             {rightContent || `+ SCALE_X_${scaleValue} // SEC_DIV`}
           </span>
         </div>
-      </Container>
+      </div>
     </div>
   );
 }

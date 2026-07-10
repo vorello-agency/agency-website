@@ -21,216 +21,8 @@ const AVOID_FITS = [
   "Buscas desplegar plantillas prefabricadas rápidas que carecen de identidad propia y criterio de ingeniería.",
 ];
 
-function FitCard({
-  variant,
-  items,
-  title,
-  icon: Icon,
-}: {
-  variant: "ideal" | "avoid";
-  items: string[];
-  title: string;
-  icon: typeof Check;
-}) {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const accentLineRef = useRef<HTMLDivElement>(null);
-  const iconContainerRef = useRef<HTMLDivElement>(null);
+import FitCard from "./fit/FitCard";
 
-  const isIdeal = variant === "ideal";
-
-  // GSAP-driven hover for desktop (following ServiceCard pattern from Services.tsx)
-  const handleMouseEnter = () => {
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (prefersReducedMotion) return;
-
-    if (cardRef.current) {
-      gsap.to(cardRef.current, {
-        borderColor: isIdeal ? "rgba(123, 76, 255, 0.4)" : "rgba(90, 98, 112, 0.5)",
-        scale: 1.008,
-        duration: 0.3,
-        ease: "power2.out",
-        overwrite: "auto",
-      });
-    }
-    if (accentLineRef.current) {
-      gsap.to(accentLineRef.current, {
-        scaleX: 1,
-        opacity: 1,
-        duration: 0.4,
-        ease: "power2.out",
-        overwrite: "auto",
-      });
-    }
-    if (iconContainerRef.current) {
-      gsap.to(iconContainerRef.current, {
-        scale: 1.1,
-        borderColor: isIdeal ? "rgba(123, 76, 255, 0.5)" : "rgba(90, 98, 112, 0.5)",
-        duration: 0.3,
-        ease: "back.out(1.5)",
-        overwrite: "auto",
-      });
-    }
-  };
-
-  const handleMouseLeave = () => {
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (prefersReducedMotion) return;
-
-    if (cardRef.current) {
-      gsap.to(cardRef.current, {
-        borderColor: isIdeal ? "rgba(123, 76, 255, 0.2)" : "rgba(42, 46, 51, 0.3)",
-        scale: 1,
-        duration: 0.4,
-        ease: "power2.inOut",
-        overwrite: "auto",
-      });
-    }
-    if (accentLineRef.current) {
-      gsap.to(accentLineRef.current, {
-        scaleX: 0,
-        opacity: 0,
-        duration: 0.5,
-        ease: "power2.inOut",
-        overwrite: "auto",
-      });
-    }
-    if (iconContainerRef.current) {
-      gsap.to(iconContainerRef.current, {
-        scale: 1,
-        borderColor: isIdeal ? "rgba(123, 76, 255, 0.3)" : "rgba(42, 46, 51, 0.3)",
-        duration: 0.4,
-        ease: "power2.inOut",
-        overwrite: "auto",
-      });
-    }
-  };
-
-  // Touch interaction for mobile (following ServiceCard pattern)
-  const handleTouchStart = () => {
-    if (cardRef.current) {
-      gsap.to(cardRef.current, {
-        borderColor: isIdeal ? "rgba(123, 76, 255, 0.4)" : "rgba(90, 98, 112, 0.5)",
-        scale: 1.005,
-        duration: 0.25,
-        ease: "power2.out",
-        overwrite: "auto",
-      });
-    }
-    if (accentLineRef.current) {
-      gsap.to(accentLineRef.current, {
-        scaleX: 1,
-        opacity: 1,
-        duration: 0.3,
-        ease: "power2.out",
-        overwrite: "auto",
-      });
-    }
-  };
-
-  const handleTouchEnd = () => {
-    if (cardRef.current) {
-      gsap.to(cardRef.current, {
-        borderColor: isIdeal ? "rgba(123, 76, 255, 0.2)" : "rgba(42, 46, 51, 0.3)",
-        scale: 1,
-        duration: 0.5,
-        ease: "power2.inOut",
-        overwrite: "auto",
-      });
-    }
-    if (accentLineRef.current) {
-      gsap.to(accentLineRef.current, {
-        scaleX: 0,
-        opacity: 0,
-        duration: 0.6,
-        ease: "power2.inOut",
-        overwrite: "auto",
-      });
-    }
-  };
-
-  const itemClass = isIdeal ? "fit-ideal-item" : "fit-avoid-item";
-
-  return (
-    <div
-      ref={cardRef}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      onTouchStart={handleTouchStart}
-      onTouchEnd={handleTouchEnd}
-      onTouchCancel={handleTouchEnd}
-      className={`relative h-full rounded-xl border p-5 transition-colors duration-300 select-none md:p-8 2xl:p-10 ${
-        isIdeal
-          ? "border-electric-violet/20 bg-graphite-metal"
-          : "border-steel-grey/30 bg-graphite-metal"
-      }`}
-    >
-      {/* Accent line sweep on hover */}
-      <div
-        ref={accentLineRef}
-        className={`pointer-events-none absolute inset-x-0 -top-px h-[2px] origin-center scale-x-0 rounded-full ${
-          isIdeal
-            ? "via-electric-violet/50 bg-gradient-to-r from-transparent to-transparent"
-            : "via-steel-grey/40 bg-gradient-to-r from-transparent to-transparent"
-        }`}
-      />
-
-      {/* Card ambient glow */}
-      {isIdeal && (
-        <AmbientGlow className="bg-electric-violet/[0.06] -top-8 left-1/2 h-24 w-48 -translate-x-1/2 blur-[50px]" />
-      )}
-
-      {/* Dot grid texture */}
-      <div
-        className="pointer-events-none absolute inset-0 rounded-xl opacity-[0.04]"
-        style={{
-          backgroundImage: "radial-gradient(rgba(255, 255, 255, 0.5) 1px, transparent 1px)",
-          backgroundSize: "20px 20px",
-          backgroundPosition: "center",
-          WebkitMaskImage: "radial-gradient(ellipse at center, white 30%, transparent 80%)",
-          maskImage: "radial-gradient(ellipse at center, white 30%, transparent 80%)",
-        }}
-      />
-
-      {/* Header */}
-      <div className="relative mb-4 flex items-center gap-3 md:mb-6 2xl:mb-8 2xl:gap-4">
-        <div
-          ref={iconContainerRef}
-          className={`fit-icon flex h-8 w-8 shrink-0 items-center justify-center rounded-full transition-colors duration-300 2xl:h-10 2xl:w-10 ${
-            isIdeal
-              ? "bg-electric-violet/10 border-electric-violet/30 text-electric-violet border"
-              : "bg-steel-grey/20 border-steel-grey/30 text-chrome-highlight/75 border"
-          }`}
-        >
-          <Icon className="h-4 w-4 2xl:h-5 2xl:w-5" />
-        </div>
-        <h3 className="text-chrome-highlight text-lg font-semibold tracking-tight 2xl:text-2xl">
-          {title}
-        </h3>
-      </div>
-
-      {/* List items */}
-      <ul className="relative flex flex-col gap-3 md:gap-4 2xl:gap-5">
-        {items.map((item, idx) => (
-          <li
-            key={idx}
-            className={`${itemClass} flex gap-2 text-sm md:gap-3 2xl:gap-4 2xl:text-base ${
-              isIdeal ? "text-chrome-highlight" : "text-chrome-highlight/75"
-            }`}
-          >
-            <div className="mt-0.5 flex w-8 shrink-0 justify-center 2xl:w-10">
-              <Icon
-                className={`h-5 w-5 2xl:h-6 2xl:w-6 ${
-                  isIdeal ? "text-electric-violet" : "text-chrome-highlight/40"
-                }`}
-              />
-            </div>
-            <span>{item}</span>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
 
 export default function Fit() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -490,15 +282,15 @@ export default function Fit() {
 
       <Container>
         <SectionHeading
-          eyebrow="CLIENTE IDEAL"
-          title="Criterios de colaboración estratégica"
-          description="Trabajamos mejor con empresas que valoran el diseño, la tecnología y un proceso claro para construir productos digitales de calidad."
+          eyebrow="AFINIDAD"
+          title="Alineación de visión y ejecución"
+          description="El éxito de un producto depende de compartir los mismos estándares.\nEstos son los principios sobre los que construimos nuestras alianzas."
           className="fit-heading"
         />
 
         <div
           ref={cardsContainerRef}
-          className="scrollbar-hide -mx-4 mx-auto mt-12 flex max-w-5xl snap-x snap-mandatory gap-6 overflow-x-auto px-4 py-2 pb-4 md:mx-0 md:grid md:grid-cols-2 md:gap-8 md:overflow-x-visible md:px-0 md:py-0 md:pb-0 2xl:mt-16 2xl:max-w-7xl 2xl:gap-12"
+          className="scrollbar-hide -mx-4 mx-auto mt-12 flex max-w-5xl snap-x snap-mandatory gap-6 overflow-x-auto px-4 py-2 pb-4 md:mx-auto md:grid md:grid-cols-2 md:gap-8 md:overflow-x-visible md:px-0 md:py-0 md:pb-0 2xl:mt-16 2xl:max-w-7xl 2xl:gap-12"
           style={{ perspective: "1000px" }}
         >
           {/* Ideal Fit Card */}
@@ -537,11 +329,10 @@ export default function Fit() {
                 role="tab"
                 aria-selected={activeSlide === idx}
                 aria-label={`Ir a tarjeta ${idx + 1}`}
-                className={`focus-visible:ring-electric-violet relative rounded-full transition-all duration-300 after:absolute after:inset-[-8px] after:content-[''] focus-visible:ring-1 focus-visible:outline-none ${
-                  activeSlide === idx
-                    ? "bg-electric-violet h-2 w-5"
-                    : "bg-steel-grey/40 hover:bg-steel-grey/70 h-2 w-2"
-                }`}
+                className={`focus-visible:ring-electric-violet relative rounded-full transition-all duration-300 after:absolute after:inset-[-8px] after:content-[''] focus-visible:ring-1 focus-visible:outline-none ${activeSlide === idx
+                  ? "bg-electric-violet h-2 w-5"
+                  : "bg-steel-grey/40 hover:bg-steel-grey/70 h-2 w-2"
+                  }`}
               />
             ))}
           </div>

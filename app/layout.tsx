@@ -25,7 +25,7 @@ const bebasNeue = Bebas_Neue({
 export const metadata: Metadata = {
   title: "Vorello Agency | Diseño, Tecnología y Producto",
   description:
-    "Diseñamos y desarrollamos productos digitales bien pensados, visualmente cuidados y técnicamente sólidos. Sitios web corporativos, web apps y ecommerce de alto nivel.",
+    "Diseñamos y desarrollamos productos digitales bien pensados, visualmente cuidados y técnicamente sólidos. Sitios web corporativos, web apps y Ecommerce premium.",
   keywords: [
     "Vorello",
     "Agencia Digital",

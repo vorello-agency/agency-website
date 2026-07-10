@@ -10,6 +10,7 @@
   --graphite-metal: #121416;
   --steel-grey: #2a2e33;
   --neon-blue: #2d8fff;
+  --dark-blue: #005ae6;
   --electric-violet: #7b4cff;
   --chrome-highlight: #e3e7ee;
   --chrome-deep: #8a99ad;
@@ -59,11 +60,17 @@
 }
 
 @theme {
+  --breakpoint-xxs: 23.4375rem;
+  --breakpoint-xs: 30rem;
+  --breakpoint-xmd: 56.25rem;
+  --breakpoint-xlg: 71.875rem;
+
   /* Brand colors */
   --color-carbon-black: var(--carbon-black);
   --color-graphite-metal: var(--graphite-metal);
   --color-steel-grey: var(--steel-grey);
   --color-neon-blue: var(--neon-blue);
+  --color-dark-blue: var(--dark-blue);
   --color-electric-violet: var(--electric-violet);
   --color-chrome-highlight: var(--chrome-highlight);
   --color-chrome-deep: var(--chrome-deep);
@@ -211,6 +218,10 @@ button,
 }
 
 @theme inline {
+  --breakpoint-xxs: 23.4375rem;
+  --breakpoint-xs: 30rem;
+  --breakpoint-xmd: 56.25rem;
+  --breakpoint-xlg: 71.875rem;
   --font-heading: var(--font-sans);
   --font-sans: var(--font-sans);
   --color-sidebar-ring: var(--sidebar-ring);

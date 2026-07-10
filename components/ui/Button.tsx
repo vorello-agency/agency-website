@@ -34,7 +34,7 @@ export default function Button({
         {
           "bg-electric-violet hover:bg-electric-violet/90 shadow-electric-violet/10 border-electric-violet/20 focus-visible:ring-electric-violet/50 border text-white shadow-lg focus-visible:ring-2":
             variant === "primary",
-          "bg-neon-blue hover:bg-neon-blue/90 shadow-neon-blue/15 border-neon-blue/20 focus-visible:ring-neon-blue/50 border text-white shadow-lg focus-visible:ring-2":
+          "bg-dark-blue hover:bg-dark-blue/90 shadow-dark-blue/15 border-dark-blue/20 focus-visible:ring-dark-blue/50 border text-white shadow-lg focus-visible:ring-2":
             variant === "primary-blue",
           "bg-graphite-metal hover:bg-steel-grey/80 border-steel-grey/60 text-chrome-highlight focus-visible:ring-steel-grey/50 border focus-visible:ring-2":
             variant === "secondary",
@@ -47,7 +47,7 @@ export default function Button({
         {
           "px-3 py-1.5 text-xs": size === "sm",
           "px-5 py-2.5 text-sm": size === "md",
-          "px-6 py-3.5 text-base hover:scale-[1.02]": size === "lg",
+          "px-5 py-2.5 text-sm md:px-6 md:py-3.5 md:text-base 2xl:px-8 2xl:py-4 2xl:text-lg hover:scale-[1.02]": size === "lg",
         },
         className
       )}

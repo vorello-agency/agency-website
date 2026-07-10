@@ -2,7 +2,7 @@
 
 ## 1. Qué es Vorello
 
-Vorello Agency es una agencia digital especializada en crear experiencias web, productos digitales y ecommerce de alto nivel.
+Vorello Agency es una agencia digital especializada en crear experiencias web, productos digitales y Ecommerce premium.
 
 La marca busca transmitir:
 
@@ -62,7 +62,7 @@ Evitar frases genéricas como:
 
 ## 5. Qué hace Vorello
 
-### Experiencias web de alto rendimiento
+### Experiencias web premium
 
 Sitios web modernos orientados a conversión, performance, SEO técnico, accesibilidad y calidad visual.
 
@@ -88,7 +88,7 @@ Incluye:
 - automatizaciones
 - integraciones entre sistemas
 
-### Ecommerce de alto nivel
+### Ecommerce premium
 
 Experiencias ecommerce modernas, escalables y orientadas a conversión.
 

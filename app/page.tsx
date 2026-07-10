@@ -1,16 +1,20 @@
 import React from "react";
+import dynamic from "next/dynamic";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Hero from "./_components/Hero";
-import Statement from "./_components/Statement";
-import Services from "./_components/Services";
-import Process from "./_components/Process";
-import Technologies from "./_components/Technologies";
-import MidCTA from "./_components/MidCTA";
-import Fit from "./_components/Fit";
-import CTA from "./_components/CTA";
 import { TracingBeam } from "@/components/aceternity/tracing-beam";
 import TechScaleDivider from "@/components/layout/TechScaleDivider";
+
+// Secciones cargadas dinámicamente para optimizar el bundle JS inicial (Code Splitting)
+const Statement = dynamic(() => import("./_components/Statement"));
+const Services = dynamic(() => import("./_components/Services"));
+const Differential = dynamic(() => import("./_components/Differential"));
+const Process = dynamic(() => import("./_components/Process"));
+const Technologies = dynamic(() => import("./_components/Technologies"));
+const MidCTA = dynamic(() => import("./_components/MidCTA"));
+const Fit = dynamic(() => import("./_components/Fit"));
+const CTA = dynamic(() => import("./_components/CTA"));
 
 export default function Home() {
   return (
@@ -23,15 +27,17 @@ export default function Home() {
             <TechScaleDivider leftContent="VORELLO AGENCY" rightContent="DESIGN // PRODUCT // TECHNOLOGY" />
           </div>
           <Statement />
-          <TechScaleDivider index={2} />
+          <TechScaleDivider leftContent="// WHAT WE DO?" rightContent="✦  WE BUILD PRODUCTS TO SCALE YOUR BUSINESS  ✦" />
           <Services />
-          <TechScaleDivider compact index={3} className="translate-y-4" />
+          <TechScaleDivider compact leftContent="// WHY VORELLO?" rightContent="✦  CRITERIA OVER PASSIVE EXECUTION  ✦" />
+          <Differential />
+          <TechScaleDivider compact leftContent="// HOW WE EXECUTE?" rightContent="✦  A ROADMAP FROM DISCOVERY TO EVOLUTION  ✦" className="translate-y-4" />
           <Process />
-          <TechScaleDivider compact index={4} />
+          <TechScaleDivider compact leftContent="// HOW WE BUILD?" rightContent="✦  WITH MODERN TECH BUILT FOR SCALE  ✦" className="-translate-y-4" />
           <Technologies />
           <MidCTA />
           <Fit />
-          <TechScaleDivider index={5} />
+          <TechScaleDivider leftContent="// READY TO START?" rightContent="✦  REQUEST YOUR TECHNICAL PROPOSAL  ✦" />
           <CTA />
         </main>
       </TracingBeam>

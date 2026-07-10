@@ -66,13 +66,13 @@ export default function ServicesCTA() {
 
             <div className="flex w-full flex-col items-center justify-center gap-4 sm:w-auto sm:flex-row">
               <Link href="/start" passHref legacyBehavior>
-                <Button variant="primary" size="lg" className="w-full font-semibold sm:w-auto">
-                  Iniciar proyecto
+                <Button variant="primary-blue" size="lg" className="w-full font-semibold sm:w-auto">
+                  Solicitar propuesta técnica
                 </Button>
               </Link>
               <Link href="/contact" passHref legacyBehavior>
                 <Button variant="outline" size="lg" className="w-full font-semibold sm:w-auto">
-                  Hablar con un experto
+                  Enviar mensaje directo
                 </Button>
               </Link>
             </div>

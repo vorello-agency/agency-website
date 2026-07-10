@@ -17,8 +17,8 @@ export default function Container({
   const hasCustomPadding = className && /(^|\s)(px-|p-)/.test(className);
 
   const spacingMap = {
-    default: "px-6 sm:px-10 md:px-12 lg:px-20 xl:px-28 2xl:px-8",
-    compact: "px-6 sm:px-8 md:px-10 lg:px-16 xl:px-20 2xl:px-8",
+    default: "px-5 xs:px-10 md:px-12 lg:px-20 xl:px-28 2xl:px-8",
+    compact: "px-5 xs:px-8 md:px-10 lg:px-16 xl:px-20 2xl:px-8",
     none: "px-0",
   };
 
