@@ -21,12 +21,12 @@ import {
 /* ------------------------------------------------------------------ */
 
 const SERVICE_LINKS = [
-  { label: "Sitios web", href: "/services#sitios-web" },
-  { label: "Landing pages", href: "/services#landing-pages" },
-  { label: "Plataformas web", href: "/services#plataformas-web" },
-  { label: "E‑commerce", href: "/services#ecommerce" },
-  { label: "Automatizaciones", href: "/services#automatizaciones" },
-  { label: "Integraciones", href: "/services#integraciones" },
+  { label: "Sitios Web", href: "/services#sitios-web" },
+  { label: "Landing Pages", href: "/services#landing-pages" },
+  { label: "Ecommerce", href: "/services#ecommerce" },
+  { label: "Plataformas", href: "/services#plataformas-web" },
+  { label: "Integraciones", href: "/services#automatizaciones-integraciones" },
+  { label: "Evolución", href: "/services#soporte-evolucion" },
 ];
 
 const AGENCY_LINKS = [
@@ -211,7 +211,7 @@ export default function Footer() {
       className="border-steel-grey/20 bg-carbon-black text-chrome-deep relative mt-auto overflow-hidden border-t pt-16 pb-16 sm:pb-24 md:pt-20 md:pb-32 xlg:pb-48"
     >
       {/* ── Main content grid ── */}
-      <Container className="relative z-10 flex flex-col items-start justify-between gap-10 px-5 xs:px-10 pb-8 md:flex-row md:pb-20 xlg:px-16 xl:px-16! 2xl:max-w-[1500px]">
+      <Container className="relative z-10 flex flex-col items-start justify-between gap-10 px-5 xs:px-10 pb-8 xmd:flex-row xmd:pb-20 xlg:px-16 xl:px-16! 2xl:max-w-[1500px]">
         {/* — Brand column — */}
         <div className="footer-col flex w-full max-w-md flex-col gap-5">
           <div className="flex flex-col gap-5 pl-1 xxs:pl-0">
@@ -240,7 +240,7 @@ export default function Footer() {
         </div>
 
         {/* — Links & Contact Wrapper — */}
-        <div className="flex flex-col items-start gap-y-6 pl-2 xxs:pl-0 xxs:grid xxs:grid-cols-2 xxs:gap-x-12 xxs:gap-y-8 xxs:w-full sm:flex sm:flex-row sm:w-full sm:justify-between md:w-auto sm:items-stretch xlg:gap-x-16">
+        <div className="flex flex-col items-start gap-y-6 pl-2 xxs:pl-0 xxs:grid xxs:grid-cols-2 xxs:gap-x-12 xxs:gap-y-8 xxs:w-full sm:flex sm:flex-row sm:w-full sm:justify-between xmd:w-auto sm:items-stretch xlg:gap-x-16">
           <FooterNavCol
             title="Navegación"
             links={AGENCY_LINKS}

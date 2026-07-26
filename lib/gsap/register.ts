@@ -4,7 +4,7 @@ import { useGSAP } from "@gsap/react";
 
 // Ensure registration runs only on client-side
 if (typeof window !== "undefined") {
-  gsap.registerPlugin(useGSAP, ScrollTrigger);
+  gsap.registerPlugin(ScrollTrigger, useGSAP);
 
   // Set default configurations (e.g. suppress warnings for dynamic React routes/states)
   gsap.config({
@@ -13,4 +13,3 @@ if (typeof window !== "undefined") {
 }
 
 export { gsap, ScrollTrigger, useGSAP };
-

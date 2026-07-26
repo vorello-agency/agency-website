@@ -5,6 +5,8 @@ import { usePathname } from "next/navigation";
 import Lenis from "lenis";
 import { gsap, ScrollTrigger } from "@/lib/gsap/register";
 
+const useIsomorphicLayoutEffect = typeof window !== "undefined" ? React.useLayoutEffect : React.useEffect;
+
 export default function SmoothScroll({ children }: { children: React.ReactNode }) {
   const lenisRef = useRef<Lenis | null>(null);
   const pathname = usePathname();
@@ -45,9 +47,13 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
     };
   }, []);
 
-  // Reset scroll to top instantly on route change
-  useEffect(() => {
+  // Synchronously reset scroll position on route change before browser paints
+  // to avoid rendering the new page at the old page's scroll height.
+  useIsomorphicLayoutEffect(() => {
+    window.scrollTo(0, 0);
     lenisRef.current?.scrollTo(0, { immediate: true });
+    ScrollTrigger.clearScrollMemory();
+    ScrollTrigger.refresh();
   }, [pathname]);
 
   return <>{children}</>;

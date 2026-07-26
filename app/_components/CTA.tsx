@@ -8,6 +8,7 @@ import AmbientGlow from "@/components/ui/AmbientGlow";
 import Link from "next/link";
 import Container from "@/components/layout/Container";
 import Eyebrow from "@/components/ui/Eyebrow";
+import Scales from "@/components/aceternity/scales";
 
 export default function CTA() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -126,8 +127,14 @@ export default function CTA() {
           {/* Internal ambient glowing bulb */}
           <AmbientGlow className="cta-glow bg-electric-violet/5 top-0 left-1/2 h-[300px] w-[300px] -translate-x-1/2 blur-[80px]" />
 
-          {/* Grid lines mimic */}
-          <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.01)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:24px_24px]" />
+          {/* Scales background accent inside the card */}
+          <div className="absolute inset-0 z-0 opacity-20 pointer-events-none">
+            <Scales
+              orientation="horizontal"
+              size={8}
+              color="var(--steel-grey)"
+            />
+          </div>
 
           <h2 className="cta-title text-chrome-highlight relative z-10 mx-auto flex max-w-4xl flex-col gap-1 font-sans text-3xl leading-[1.05] font-bold tracking-tight select-none sm:gap-2 sm:text-4xl md:text-6xl lg:text-[clamp(2rem,3.4vw,5.5rem)] 2xl:gap-2 2xl:text-6xl">
             <span className="md:whitespace-nowrap">¿Tu proyecto merece ser</span>
@@ -154,7 +161,7 @@ export default function CTA() {
           </div>
 
           <div className="cta-footer text-chrome-highlight/45 relative z-10 mt-12 font-mono text-[10px] tracking-wider uppercase md:mt-16 select-none">
-            <span aria-hidden="true">// </span>RESPUESTA EN &lt; 24HS HÁBILES
+            <span aria-hidden="true">{"// "}</span>RESPUESTA EN &lt; 24HS HÁBILES
           </div>
         </div>
       </Container>

@@ -20,8 +20,8 @@ const ICON_MAP: Record<ServiceCategory["iconName"], LucideIcon> = {
 
 /** Map service num to anchor on /services page */
 const SERVICE_LINKS: Record<string, string> = {
-  "01": "/services#sitios-web",
-  "02": "/services#plataformas-web",
+  "01": "/services#websites",
+  "02": "/services#platforms",
   "03": "/services#ecommerce",
 };
 
@@ -131,7 +131,7 @@ export default function ServiceCard({ service }: ServiceCardProps) {
       {/* Title & Description Wrapper */}
       <div className="services-grid-info flex flex-col min-h-0 xlg:min-h-[140px] xl:min-h-[120px] 2xl:min-h-[140px]">
         {/* Title */}
-        <h3 className="services-grid-title services-title text-chrome-highlight mb-3 text-xl leading-snug font-bold tracking-tight transition-colors whitespace-nowrap 2xl:text-[22px]">
+        <h3 className="services-grid-title services-title text-chrome-highlight mb-3 text-xl leading-snug font-bold tracking-tight transition-colors text-pretty 2xl:text-[22px]">
           {service.title}
         </h3>
 
@@ -148,8 +148,8 @@ export default function ServiceCard({ service }: ServiceCardProps) {
             key={fIdx}
             className="services-list-item text-copy-muted flex items-center gap-2 text-xs 2xl:text-sm"
           >
-            <span className="bg-electric-violet/70 h-1 w-1 rounded-full" />
-            {feature}
+            <span className="bg-electric-violet/70 h-1 w-1 rounded-full shrink-0" />
+            <span className="text-pretty">{feature}</span>
           </li>
         ))}
       </ul>

@@ -104,7 +104,7 @@ export default function PostLaunchStrip() {
               técnico y optimización de rendimiento.
             </p>
             <Link
-              href="/contact"
+              href="/services#support"
               className="text-chrome-highlight hover:text-neon-blue group/cta mt-3 inline-flex items-center gap-1 font-mono text-xs font-semibold transition-colors focus-visible:outline-none"
             >
               Consultar soporte{" "}
@@ -126,22 +126,13 @@ export default function PostLaunchStrip() {
               Conectamos herramientas, sistemas y procesos para reducir tareas manuales, ordenar
               operaciones y mejorar la eficiencia del negocio.
             </p>
-            <div className="mt-3 flex items-center gap-4">
-              <Link
-                href="/services#automatizaciones"
-                className="text-chrome-highlight hover:text-electric-violet group/cta inline-flex items-center gap-1 font-mono text-xs font-semibold transition-colors focus-visible:outline-none"
-              >
-                Automatizaciones{" "}
-                <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover/cta:translate-x-0.5 group-hover/cta:-translate-y-0.5" />
-              </Link>
-              <Link
-                href="/services#integraciones"
-                className="text-chrome-highlight hover:text-electric-violet group/cta inline-flex items-center gap-1 font-mono text-xs font-semibold transition-colors focus-visible:outline-none"
-              >
-                Integraciones{" "}
-                <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover/cta:translate-x-0.5 group-hover/cta:-translate-y-0.5" />
-              </Link>
-            </div>
+            <Link
+              href="/services#automation"
+              className="text-chrome-highlight hover:text-electric-violet group/cta mt-3 inline-flex items-center gap-1 font-mono text-xs font-semibold transition-colors focus-visible:outline-none"
+            >
+              Conectar sistemas{" "}
+              <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover/cta:translate-x-0.5 group-hover/cta:-translate-y-0.5" />
+            </Link>
           </div>
         </div>
       </div>

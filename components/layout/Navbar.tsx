@@ -55,7 +55,7 @@ export default function Navbar() {
   const mobileBackdropRef = useRef<HTMLDivElement>(null);
   const isFirstRender = useRef(true);
  
-  const [activeLink, setActiveLink] = useState<string | null>(null);
+  const activeLink = pathname === "/services" ? "/services" : pathname === "/contact" ? "/contact" : null;
   const [isMouseOverNav, setIsMouseOverNav] = useState(false);
  
   const positionPillToActive = () => {
@@ -86,15 +86,7 @@ export default function Navbar() {
     }
   };
  
-  useEffect(() => {
-    if (pathname === "/services") {
-      setActiveLink("/services");
-    } else if (pathname === "/contact") {
-      setActiveLink("/contact");
-    } else {
-      setActiveLink(null);
-    }
-  }, [pathname]);
+
  
   useEffect(() => {
     if (!isMouseOverNav) {
@@ -215,7 +207,7 @@ export default function Navbar() {
 
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (prefersReducedMotion) {
-      setShouldAnimate(true);
+      setTimeout(() => setShouldAnimate(true), 0);
     } else if (headerRef.current) {
       // Hide header and slide it down smoothly matching Hero timeline stagger
       gsap.set(headerRef.current, { y: -80, opacity: 0 });

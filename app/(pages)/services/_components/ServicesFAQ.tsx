@@ -33,6 +33,16 @@ const FAQS: FAQItem[] = [
       "Somos CMS-agnósticos y elegimos la herramienta según el caso de uso. Para proyectos corporativos de alto nivel, preferimos arquitecturas Headless / Jamstack con Next.js o Astro conectadas a CMS de contenido estructurado (como Sanity, Decap o Strapi). Para tiendas comerciales robustas, integramos Shopify Headless o implementaciones integrales a medida.",
   },
   {
+    question: "¿Cómo preparan los sitios web para la búsqueda generativa y los asistentes de IA?",
+    answer:
+      "Diseñamos la arquitectura de información con marcado semántico HTML5 estructurado (JSON-LD), datos organizacionales claros y rendimiento extremo. Esto permite que tanto los motores de búsqueda tradicionales como los agentes de IA comprendan, citen y procesen el contenido de tu marca sin ambigüedades.",
+  },
+  {
+    question: "¿Cómo evalúan si necesito desarrollo a medida o si alcanza con soluciones no-code / IA?",
+    answer:
+      "No vendemos software a medida por venderlo. Durante la fase de descubrimiento analizamos la complejidad del proyecto: si un prototipo o integración no-code resuelve tu problema operativo de forma segura y económica, te lo aconsejamos abiertamente. Si tu operación requiere seguridad de datos avanzada, reglas de negocio complejas o escalabilidad a largo plazo, diseñamos la plataforma custom ideal.",
+  },
+  {
     question: "¿Cómo garantizan la seguridad y estabilidad de las integraciones?",
     answer:
       "Construimos integraciones y plataformas con un enfoque robusto: autenticación cifrada, control de acceso basado en roles (RBAC), logs de auditoría para rastrear errores de API y mecanismos de fallback automático (reintentos con retraso exponencial) para que tu operación no se detenga si un proveedor externo sufre una caída temporal.",
@@ -59,7 +69,7 @@ function FAQCard({ faq, idx }: { faq: FAQItem; idx: number }) {
           onClick={() => setIsOpen(!isOpen)}
           className="text-chrome-highlight hover:text-electric-violet focus-visible:ring-electric-violet/50 flex w-full items-center justify-between rounded py-3 text-left font-sans text-sm font-bold transition-colors focus-visible:ring-1 focus-visible:outline-none sm:text-base"
         >
-          <span>{faq.question}</span>
+          <span className="text-pretty">{faq.question}</span>
           <span className="bg-steel-grey/15 border-steel-grey/30 text-chrome-deep ml-4 flex h-8 w-8 shrink-0 items-center justify-center rounded-full border transition-all duration-200">
             {isOpen ? (
               <Minus className="text-electric-violet h-3.5 w-3.5" />
@@ -81,7 +91,7 @@ function FAQCard({ faq, idx }: { faq: FAQItem; idx: number }) {
         )}
       >
         <div className="overflow-hidden">
-          <p className="text-chrome-deep max-w-3xl pb-4 text-xs leading-relaxed sm:text-sm">
+          <p className="text-chrome-deep max-w-3xl pb-4 text-xs leading-relaxed text-pretty sm:text-sm">
             {faq.answer}
           </p>
         </div>

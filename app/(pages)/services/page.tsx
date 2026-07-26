@@ -40,7 +40,7 @@ export default function ServicesPage() {
         "@type": "Service",
         "@id": `https://vorelloagency.com/services#${service.id}`,
         name: service.title,
-        serviceType: service.category,
+        serviceType: "Servicio de Agencia Digital",
         description: service.description,
         provider: { "@id": "https://vorelloagency.com/#org" },
       })),
@@ -55,13 +55,17 @@ export default function ServicesPage() {
       />
       <Navbar />
       <TracingBeam>
-        <main className="bg-carbon-black flex flex-1 flex-col overflow-hidden">
+        <main className="bg-carbon-black flex flex-1 flex-col">
           <ServicesHero />
           <StickyServiceNav />
 
           <div className="flex flex-col">
             {servicesDetail.map((service, idx) => (
-              <ServiceSection key={service.id} service={service} index={idx} />
+              <ServiceSection
+                key={service.id}
+                service={service}
+                index={idx}
+              />
             ))}
           </div>
 
