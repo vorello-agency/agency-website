@@ -398,13 +398,12 @@ function StepFourProjectIdea({
         error={errors.message}
         hint={
           <p
-            className={`text-xs transition-colors ${
-              messageLength === 0
-                ? "text-chrome-deep"
-                : messageLength < minChars
-                  ? "text-amber-400"
-                  : "text-signal-emerald"
-            }`}
+            className={`text-xs transition-colors ${messageLength === 0
+              ? "text-chrome-deep"
+              : messageLength < minChars
+                ? "text-amber-400"
+                : "text-signal-emerald"
+              }`}
           >
             {messageLength} / {minChars} caracteres mínimos
             {messageLength >= minChars ? <span className="ml-2">✓</span> : null}
@@ -493,8 +492,19 @@ export default function StartForm({
           {submitStatus === "error" ? (
             <div className="space-y-3 rounded-xl border border-red-500/20 bg-red-500/5 p-5 text-xs text-red-400">
               <p className="leading-relaxed">
-                No pudimos enviar tu consulta en este momento. Podés intentarlo nuevamente o
-                comunicarte con nosotros por WhatsApp o correo electrónico.
+                <span className="font-medium text-white">
+                  No pudimos enviar tu consulta en este momento.
+                </span>
+                <br />
+                <span className="text-white/80">
+                  Podés intentarlo nuevamente o comunicarte con nosotros por WhatsApp o correo
+                  electrónico.
+                </span>
+                <br />
+                <span className="text-white/80">
+                  Los datos completados en el formulario serán recordados. Al reintentar encontrarás
+                  todo como lo dejaste.
+                </span>
               </p>
               <div className="flex flex-wrap gap-4 pt-1 font-medium">
                 <a
