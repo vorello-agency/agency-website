@@ -11,7 +11,7 @@ export default function EcommerceVisual() {
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (prefersReducedMotion) {
-      setRevenue(148920);
+      setTimeout(() => setRevenue(148920), 0);
       return;
     }
 

@@ -30,6 +30,12 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
       ScrollTrigger.update();
     });
 
+    // Sincronizar recalculo de dimensiones cuando ScrollTrigger se actualiza
+    const handleScrollTriggerRefresh = () => {
+      lenis.resize();
+    };
+    ScrollTrigger.addEventListener("refresh", handleScrollTriggerRefresh);
+
     // Synchronize Lenis requestAnimationFrame with GSAP's global ticker
     const updateLenis = (time: number) => {
       lenis.raf(time * 1000); // Sincroniza a milisegundos
@@ -40,7 +46,18 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
     // Disable lag smoothing to prevent ScrollTrigger frame desyncs on scrub
     gsap.ticker.lagSmoothing(0);
 
+    // Observar cambios dinámicos en la altura del DOM para recalcular el límite de scroll de Lenis en tiempo real
+    const resizeObserver = new ResizeObserver(() => {
+      lenis.resize();
+    });
+
+    if (document.body) {
+      resizeObserver.observe(document.body);
+    }
+
     return () => {
+      resizeObserver.disconnect();
+      ScrollTrigger.removeEventListener("refresh", handleScrollTriggerRefresh);
       gsap.ticker.remove(updateLenis);
       lenis.destroy();
       lenisRef.current = null;
@@ -52,8 +69,17 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
   useIsomorphicLayoutEffect(() => {
     window.scrollTo(0, 0);
     lenisRef.current?.scrollTo(0, { immediate: true });
+    lenisRef.current?.resize();
     ScrollTrigger.clearScrollMemory();
     ScrollTrigger.refresh();
+
+    // Recalculo diferido para dar tiempo a la hidratación completa de componentes dinámicos (SVGs, fuentes, etc.)
+    const timer = setTimeout(() => {
+      lenisRef.current?.resize();
+      ScrollTrigger.refresh();
+    }, 150);
+
+    return () => clearTimeout(timer);
   }, [pathname]);
 
   return <>{children}</>;
