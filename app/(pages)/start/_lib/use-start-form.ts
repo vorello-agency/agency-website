@@ -355,13 +355,7 @@ export function useStartForm() {
       x: direction === "next" ? -40 : 40,
       duration: 0.25,
       ease: "power2.in",
-      onComplete: () => {
-        callback();
-        formRef.current?.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
-      },
+      onComplete: callback,
     });
   }, []);
 

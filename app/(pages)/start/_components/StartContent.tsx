@@ -30,7 +30,7 @@ export default function StartContent({ setFormElement, ...startFormProps }: Star
       </div>
 
       <div className="to-carbon-black relative z-10 w-full bg-linear-to-t from-transparent pb-8 md:pb-12">
-        <TechScaleDivider index={1} />
+        <TechScaleDivider leftContent="// NEED HELP?" rightContent="✦  ALTERNATIVE CHANNELS & CONFIDENTIALITY  ✦" />
 
         <Container className="mt-10 md:mt-14">
           <div className="grid max-w-2xl grid-cols-1 gap-8 pb-8 md:gap-10 md:pb-12 lg:max-w-none lg:grid-cols-2 lg:gap-14">
