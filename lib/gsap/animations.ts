@@ -60,7 +60,7 @@ export const animateNavbarIconEnter = (label: string, svg: SVGElement) => {
         .to(circles, { scale: 1, duration: 0.15, ease: "power1.out" })
         .to(svg, { rotation: 0, duration: 0.3, ease: "back.out(1.5)" }, "-=0.2");
     }
-  } else if (label === "Manifiesto") {
+  } else if (label === "Diferencial" || label === "Manifiesto") {
     const paths = svg.querySelectorAll("path");
     if (paths.length > 0) {
       const tl = gsap.timeline({ overwrite: "auto" });
