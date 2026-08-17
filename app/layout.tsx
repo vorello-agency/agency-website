@@ -26,6 +26,7 @@ export const metadata: Metadata = {
   title: "Vorello Agency | Diseño, Tecnología y Producto",
   description:
     "Diseñamos y desarrollamos productos digitales bien pensados, visualmente cuidados y técnicamente sólidos. Sitios web corporativos, web apps y Ecommerce premium.",
+  metadataBase: new URL("https://vorelloagency.com"),
   keywords: [
     "Vorello",
     "Agencia Digital",
@@ -37,6 +38,30 @@ export const metadata: Metadata = {
     "GSAP React",
   ],
   authors: [{ name: "Vorello Team" }],
+  openGraph: {
+    title: "Vorello Agency | Diseño, Tecnología y Producto",
+    description:
+      "Diseñamos y desarrollamos productos digitales bien pensados, visualmente cuidados y técnicamente sólidos.",
+    url: "https://vorelloagency.com",
+    siteName: "Vorello Agency",
+    images: [
+      {
+        url: "/og/og-home.png",
+        width: 1200,
+        height: 630,
+        alt: "Vorello Agency — Diseño, Tecnología y Producto",
+      },
+    ],
+    locale: "es_AR",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Vorello Agency | Diseño, Tecnología y Producto",
+    description:
+      "Diseñamos y desarrollamos productos digitales bien pensados, visualmente cuidados y técnicamente sólidos.",
+    images: ["/og/og-home.png"],
+  },
 };
 
 export default function RootLayout({
