@@ -11,21 +11,23 @@ interface FooterAvailabilityBadgeProps {
 
 export default function FooterAvailabilityBadge({ quarter, year }: FooterAvailabilityBadgeProps) {
   return (
-    <div className="bg-graphite-metal/30 border-steel-grey/30 inline-flex w-full flex-col gap-2 rounded-lg border p-3 select-none xs:flex-row xs:items-center xs:justify-between sm:gap-3 sm:p-1 sm:pl-4">
+    <div className="bg-graphite-metal/30 min-w-52 border-steel-grey/30 inline-flex w-full flex-col gap-2 rounded-lg border p-3 select-none xs:flex-row xs:items-center xs:justify-between sm:gap-3 sm:p-1 sm:pl-4">
       <div className="flex items-center gap-3">
         <span className="relative flex h-2 w-2 shrink-0">
           <span className="bg-signal-emerald absolute inline-flex h-full w-full animate-ping rounded-full opacity-75" />
           <span className="bg-signal-emerald relative inline-flex h-2 w-2 rounded-full" />
         </span>
-        <span className="xs:hidden sm:block text-chrome-highlight font-mono text-[11px] font-medium tracking-tight whitespace-nowrap">
-          Disponible para proyectos • {quarter} {year}
+        <span className="xs:hidden sm:block text-chrome-highlight font-mono text-[11px] font-medium tracking-tight">
+          Disponible para proyectos <span className="whitespace-nowrap">• {quarter} {year}</span>
         </span>
-        <span className="hidden xs:block sm:hidden text-chrome-highlight font-mono text-[11px] font-medium tracking-tight whitespace-nowrap">
-          Disponible para proyectos
-          <span className="text-copy-muted/60 mt-1 block font-mono tracking-tight whitespace-nowrap">
+        <div className="hidden xs:flex sm:hidden flex-wrap font-mono text-[11px] font-medium tracking-tight">
+          <span className="text-chrome-highlight">
+            Disponible para proyectos &nbsp;
+          </span>
+          <span className="text-copy-muted whitespace-nowrap">
             {quarter} {year}
           </span>
-        </span>
+        </div>
       </div>
 
       {/* Desktop Button: hidden on mobile */}
@@ -46,7 +48,7 @@ export default function FooterAvailabilityBadge({ quarter, year }: FooterAvailab
       {/* Mobile Button: subtle outline style aligned to the left (indented pl-5) */}
       <Link
         href="/start"
-        className="mt-1 flex shrink-0 pl-5 focus-visible:outline-none sm:hidden"
+        className="mt-1 flex shrink-0 pl-2 sm:pl-5 focus-visible:outline-none sm:hidden"
       >
         <Button
           variant="outline"

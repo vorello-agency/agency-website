@@ -58,40 +58,6 @@ export default function FooterContact() {
             </svg>
             <span>{WHATSAPP_HUMAN_NUMBER}</span>
           </a>
-        </div>
-      </div>
-
-      <hr className="border-steel-grey/20 xxs:hidden sm:block" />
-
-      {/* Group B: Conversions (Solicitar propuesta & Mensaje directo) */}
-      <div className="flex flex-col gap-4">
-        <h3 className="text-chrome-highlight font-mono text-[11px] font-semibold tracking-[0.15em] uppercase opacity-0 hidden xs:block sm:hidden" aria-hidden="true">
-          Placeholder
-        </h3>
-        <div className="flex flex-col gap-3 text-sm">
-          {/* Solicitar propuesta */}
-          <Link
-            href="/start"
-            className="group/link text-copy-muted hover:text-chrome-highlight focus-visible:ring-electric-violet relative inline-flex w-fit items-center gap-2 rounded transition-colors focus-visible:ring-1 focus-visible:outline-none"
-          >
-            <svg
-              className="text-chrome-deep/60 group-hover/link:text-chrome-highlight h-4 w-4 shrink-0 transition-colors"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth="2"
-              aria-hidden="true"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-              />
-            </svg>
-            <span>Solicitar propuesta</span>
-          </Link>
-
-          {/* Mensaje directo */}
           <Link
             href="/contact"
             className="group/link text-copy-muted hover:text-chrome-highlight focus-visible:ring-electric-violet relative inline-flex w-fit items-center gap-2 rounded transition-colors focus-visible:ring-1 focus-visible:outline-none"

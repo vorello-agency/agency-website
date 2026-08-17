@@ -18,10 +18,10 @@ export default function FooterBottom() {
     <div className="footer-bottom relative z-10 py-8">
       <Container className="flex flex-col items-center gap-6 text-xs md:flex-row md:justify-between md:gap-4 2xl:max-w-[1500px]">
         <p className="text-copy-muted text-center md:text-left">
-          &copy; {currentYear} Vorello Agency
+          &copy; {currentYear} VORELLO SAS
           <br className="xs:hidden" />
           <span className="hidden xs:inline px-2"> • </span>
-          Todos los derechos reservados.
+          Todos los derechos reservados
         </p>
 
         <div className="flex items-center gap-3">
