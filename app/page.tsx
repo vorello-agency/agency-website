@@ -17,8 +17,51 @@ const Fit = dynamic(() => import("./_components/Fit"));
 const CTA = dynamic(() => import("./_components/CTA"));
 
 export default function Home() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://vorelloagency.com/#website",
+        url: "https://vorelloagency.com",
+        name: "Vorello Agency",
+        description:
+          "Diseñamos y desarrollamos productos digitales bien pensados, visualmente cuidados y técnicamente sólidos.",
+        publisher: {
+          "@id": "https://vorelloagency.com/#org",
+        },
+        inLanguage: "es",
+      },
+      {
+        "@type": ["Organization", "ProfessionalService"],
+        "@id": "https://vorelloagency.com/#org",
+        name: "Vorello Agency",
+        legalName: "VORELLO SAS",
+        url: "https://vorelloagency.com",
+        logo: "https://vorelloagency.com/assets/isotipo.svg",
+        image: "https://vorelloagency.com/og/og-home.png",
+        description:
+          "Agencia digital especializada en diseño, tecnología y desarrollo de productos digitales premium.",
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: "Paysandú",
+          addressCountry: "UY",
+        },
+        sameAs: [
+          "https://instagram.com/vorelloagency",
+          "https://linkedin.com/company/vorelloagency",
+          "https://github.com/vorelloagency",
+        ],
+      },
+    ],
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <Navbar />
       <TracingBeam>
         <main className="bg-carbon-black flex flex-1 flex-col">

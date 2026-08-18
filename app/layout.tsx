@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Space_Grotesk, Geist_Mono, Geist, Bebas_Neue } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
@@ -22,11 +22,40 @@ const bebasNeue = Bebas_Neue({
   subsets: ["latin", "latin-ext"],
 });
 
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : undefined) ||
+  (process.env.URL ? (process.env.URL.startsWith("http") ? process.env.URL : `https://${process.env.URL}`) : "https://vorelloagency.com");
+
+export const viewport: Viewport = {
+  themeColor: "#0D0F11",
+  colorScheme: "dark",
+  width: "device-width",
+  initialScale: 1,
+};
+
 export const metadata: Metadata = {
-  title: "Vorello Agency | Diseño, Tecnología y Producto",
+  title: {
+    default: "Vorello Agency | Diseño, Tecnología y Producto",
+    template: "%s | Vorello Agency",
+  },
   description:
     "Diseñamos y desarrollamos productos digitales bien pensados, visualmente cuidados y técnicamente sólidos. Sitios web corporativos, web apps y Ecommerce premium.",
-  metadataBase: new URL("https://vorelloagency.com"),
+  metadataBase: new URL(siteUrl),
+  alternates: {
+    canonical: "/",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   keywords: [
     "Vorello",
     "Agencia Digital",
@@ -37,12 +66,22 @@ export const metadata: Metadata = {
     "Estudio de Diseño",
     "GSAP React",
   ],
-  authors: [{ name: "Vorello Team" }],
+  authors: [{ name: "Vorello Agency" }],
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/assets/isotipo.svg", type: "image/svg+xml" },
+      { url: "/apple-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+    apple: [
+      { url: "/apple-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+  },
   openGraph: {
     title: "Vorello Agency | Diseño, Tecnología y Producto",
     description:
       "Diseñamos y desarrollamos productos digitales bien pensados, visualmente cuidados y técnicamente sólidos.",
-    url: "https://vorelloagency.com",
+    url: siteUrl,
     siteName: "Vorello Agency",
     images: [
       {

@@ -1,8 +1,18 @@
 import React from "react";
+import type { Metadata } from "next";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Container from "@/components/layout/Container";
 import { BRAND_FULL_NAME } from "@/data/brand";
+
+export const metadata: Metadata = {
+  title: "Política de Privacidad | Vorello Agency",
+  description:
+    "Información sobre cómo recopilamos, usamos y protegemos los datos personales en Vorello Agency.",
+  alternates: {
+    canonical: "/privacy-policy",
+  },
+};
 
 const PRIVACY_EMAIL = "data@vorelloagency.com";
 

@@ -5,11 +5,11 @@ import Footer from "@/components/layout/Footer";
 import StartPageClient from "./_components/StartPageClient";
 
 export const metadata: Metadata = {
-  title: "Solicitar Propuesta Técnica | Vorello Agency",
+  title: "Solicitar Propuesta Técnica",
   description:
     "Inicia tu proyecto digital con Vorello. Completa nuestro formulario para recibir una propuesta técnica estructurada, con diseño, arquitectura de software y presupuesto cerrado.",
   alternates: {
-    canonical: "https://vorelloagency.com/start",
+    canonical: "/start",
   },
 };
 

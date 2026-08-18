@@ -1,8 +1,18 @@
 import React from "react";
+import type { Metadata } from "next";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Container from "@/components/layout/Container";
 import { BRAND_FULL_NAME, CONTACT_EMAIL, BRAND_DOMAIN } from "@/data/brand";
+
+export const metadata: Metadata = {
+  title: "Términos y Condiciones | Vorello Agency",
+  description:
+    "Términos y condiciones de uso del sitio web y servicios de Vorello Agency.",
+  alternates: {
+    canonical: "/terms-of-service",
+  },
+};
 
 export default function TerminosPage() {
   return (
