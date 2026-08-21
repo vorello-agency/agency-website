@@ -1,22 +1,25 @@
 import type { Metadata, Viewport } from "next";
-import { Onest, Red_Hat_Display, Space_Grotesk } from "next/font/google";
+import { Space_Grotesk, Geist_Mono, Geist, Bebas_Neue } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import SmoothScroll from "@/components/layout/SmoothScroll";
 
-const bodyFont = Onest({
-  variable: "--font-onest",
-  subsets: ["latin"],
-});
+const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
 
-const headingFont = Red_Hat_Display({
-  variable: "--font-red-hat-display",
-  subsets: ["latin"],
-});
-
-const secondaryFont = Space_Grotesk({
+const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
   subsets: ["latin"],
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
+const bebasNeue = Bebas_Neue({
+  weight: "400",
+  variable: "--font-bebas-neue",
+  subsets: ["latin", "latin-ext"],
 });
 
 const siteUrl =
@@ -109,10 +112,11 @@ export default function RootLayout({
         "h-full",
         "dark",
         "antialiased",
-        bodyFont.variable,
-        headingFont.variable,
-        secondaryFont.variable,
-        "font-sans"
+        spaceGrotesk.variable,
+        geistMono.variable,
+        bebasNeue.variable,
+        "font-sans",
+        geist.variable
       )}
     >
       <body className="bg-carbon-black text-chrome-highlight selection:bg-electric-violet/20 selection:text-electric-violet flex min-h-full flex-col">
