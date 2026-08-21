@@ -310,4 +310,23 @@ button,
   html {
     @apply font-sans;
   }
+
+  /* Disable drag and text-selection on all buttons, links, and CTAs */
+  a,
+  button,
+  [role="button"],
+  input[type="button"],
+  input[type="submit"],
+  input[type="reset"] {
+    -webkit-user-drag: none;
+    user-drag: none;
+    user-select: none;
+  }
+
+  a *,
+  button *,
+  [role="button"] * {
+    -webkit-user-drag: none;
+    user-drag: none;
+  }
 }
