@@ -12,13 +12,13 @@
   --neon-blue: #2d8fff;
   --dark-blue: #005ae6;
   --electric-violet: #7b4cff;
+  --dark-violet: #3b1f8c;
   --chrome-highlight: #e3e7ee;
   --chrome-deep: #8a99ad;
   --copy-muted: #8f9ba8;
   --signal-orange: #ff6b00;
   --signal-emerald: #10b981;
   --whatsapp-green: #25d366;
-  --selection-violet: #3b1f8c;
 
   /* Semantic UI variables */
 
@@ -70,8 +70,9 @@
   --color-graphite-metal: var(--graphite-metal);
   --color-steel-grey: var(--steel-grey);
   --color-neon-blue: var(--neon-blue);
-  --color-dark-blue: var(--dark-blue);
   --color-electric-violet: var(--electric-violet);
+  --color-dark-blue: var(--dark-blue);
+  --color-dark-violet: var(--dark-violet);
   --color-chrome-highlight: var(--chrome-highlight);
   --color-chrome-deep: var(--chrome-deep);
   --color-copy-muted: var(--copy-muted);
@@ -155,13 +156,13 @@ button,
 
 /* Premium Vorello text selection colors */
 ::selection {
-  background-color: var(--selection-violet);
+  background-color: var(--dark-violet);
   /* Solid deep brand violet - forces iOS Safari override */
   color: var(--color-white);
 }
 
 ::-moz-selection {
-  background-color: var(--selection-violet);
+  background-color: var(--dark-violet);
   color: var(--color-white);
 }
 
@@ -212,6 +213,7 @@ button,
 @utility scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;
+
   &::-webkit-scrollbar {
     display: none;
   }
