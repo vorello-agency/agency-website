@@ -22,9 +22,6 @@
 
   /* Semantic UI variables */
 
-  /* Fonts placeholder - will be mapped dynamically in layout.tsx */
-  --font-sans: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
   --background: var(--carbon-black);
   --foreground: var(--chrome-highlight);
   --card: var(--graphite-metal);
@@ -83,11 +80,6 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
 
-  /* Fonts */
-  --font-sans: var(--font-sans);
-  --font-display: var(--font-display);
-  --font-bebas: var(--font-bebas-neue), sans-serif;
-
   /* Radius overrides */
   --radius-xs: 4px;
   --radius-sm: 8px;
@@ -119,7 +111,7 @@ html,
 body {
   background-color: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans);
+  font-family: var(--font-onest), ui-sans-serif, system-ui, sans-serif;
   overflow-x: clip;
 }
 
@@ -222,8 +214,10 @@ button,
   --breakpoint-xs: 30rem;
   --breakpoint-xmd: 56.25rem;
   --breakpoint-xlg: 71.875rem;
-  --font-heading: var(--font-sans);
-  --font-sans: var(--font-sans);
+  --font-heading: var(--font-red-hat-display), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-red-hat-display), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-onest), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -309,5 +303,14 @@ button,
 
   html {
     @apply font-sans;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-red-hat-display), ui-sans-serif, system-ui, sans-serif;
   }
 }
