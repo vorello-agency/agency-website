@@ -38,7 +38,7 @@ export default function Home() {
         name: "Vorello Agency",
         legalName: "VORELLO SAS",
         url: "https://vorelloagency.com",
-        logo: "https://vorelloagency.com/assets/isotipo.svg",
+        logo: "https://vorelloagency.com/assets/logo.webp",
         image: "https://vorelloagency.com/og/og-home.png",
         description:
           "Agencia digital especializada en diseño, tecnología y desarrollo de productos digitales premium.",

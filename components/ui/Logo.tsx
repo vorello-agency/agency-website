@@ -1,9 +1,9 @@
 import React from "react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-import isotipoImg from "@/public/assets/isotipo.png";
+import isotipoImg from "@/public/assets/isotipo.webp";
 
-type LogoVariant = "isotipo" | "logotipo" | "both";
+type LogoVariant = "isotipo" | "logotipo" | "both" | "logo";
 type LogoSize = "sm" | "md" | "lg" | "xl";
 
 type LogoProps = {
@@ -15,11 +15,11 @@ type LogoProps = {
   alt?: string;
 };
 
-const sizeMap: Record<LogoSize, { isotipoPx: number; logotipoPx: number; gap: string }> = {
-  sm: { isotipoPx: 28, logotipoPx: 24, gap: "gap-2" },
-  md: { isotipoPx: 36, logotipoPx: 32, gap: "gap-2.5" },
-  lg: { isotipoPx: 44, logotipoPx: 40, gap: "gap-3" },
-  xl: { isotipoPx: 52, logotipoPx: 48, gap: "gap-3.5" },
+const sizeMap: Record<LogoSize, { heightPx: number; isotipoPx: number; logotipoPx: number }> = {
+  sm: { heightPx: 52, isotipoPx: 32, logotipoPx: 28 },
+  md: { heightPx: 68, isotipoPx: 42, logotipoPx: 38 },
+  lg: { heightPx: 84, isotipoPx: 52, logotipoPx: 48 },
+  xl: { heightPx: 104, isotipoPx: 64, logotipoPx: 60 },
 };
 
 export default function Logo({
@@ -31,34 +31,55 @@ export default function Logo({
   alt = "Vorello Agency",
 }: LogoProps) {
   const sizes = sizeMap[size];
-  const showIsotipo = variant === "isotipo" || variant === "both";
-  const showLogotipo = variant === "logotipo" || variant === "both";
 
-  return (
-    <span className={cn("inline-flex items-center", sizes.gap, className)}>
-      {showIsotipo && (
+  if (variant === "both" || variant === "logo") {
+    return (
+      <span className={cn("inline-flex items-center select-none", className)}>
+        <Image
+          src="/assets/logo.webp"
+          alt={alt}
+          width={1500}
+          height={613}
+          priority
+          draggable={false}
+          className="h-full w-auto select-none"
+          style={{ height: `${sizes.heightPx}px` }}
+        />
+      </span>
+    );
+  }
+
+  if (variant === "isotipo") {
+    return (
+      <span className={cn("inline-flex items-center select-none", className)}>
         <Image
           src={isotipoImg}
-          alt={variant === "isotipo" ? alt : ""}
-          aria-hidden={variant !== "isotipo"}
+          alt={alt}
           priority
-          className={cn("w-auto", isotipoClassName)}
+          draggable={false}
+          className={cn("w-auto select-none", isotipoClassName)}
           style={{ height: `${sizes.isotipoPx}px` }}
         />
-      )}
+      </span>
+    );
+  }
 
-      {showLogotipo && (
+  if (variant === "logotipo") {
+    return (
+      <span className={cn("inline-flex items-center select-none", className)}>
         <Image
-          src="/assets/logotipo.svg"
+          src="/assets/logotipo.webp"
           priority
-          alt={showIsotipo ? "" : alt}
-          aria-hidden={showIsotipo}
+          draggable={false}
+          alt={alt}
           width={776}
           height={400}
-          className={cn("w-auto", logotipoClassName)}
+          className={cn("w-auto select-none", logotipoClassName)}
           style={{ height: `${sizes.logotipoPx}px` }}
         />
-      )}
-    </span>
-  );
+      </span>
+    );
+  }
+
+  return null;
 }
