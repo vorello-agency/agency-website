@@ -47,7 +47,7 @@ export default function Button({
         {
           "px-3 py-1.5 text-xs": size === "sm",
           "px-5 py-2.5 text-sm": size === "md",
-          "px-5 py-2.5 text-sm md:px-6 md:py-3.5 md:text-base 2xl:px-8 2xl:py-4 2xl:text-lg hover:scale-[1.02]": size === "lg",
+          "px-5 py-2.5 text-sm md:px-6 md:py-3.5 md:text-base 2xl:text-lg hover:scale-[1.02]": size === "lg",
         },
         className
       )}

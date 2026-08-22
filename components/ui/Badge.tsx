@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 
 interface BadgeProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
-  variant?: "violet" | "grey" | "blue" | "orange" | "green";
+  variant?: "violet" | "grey" | "blue" | "orange" | "green" | "red";
   withDot?: boolean;
 }
 
@@ -23,7 +23,7 @@ const Badge = forwardRef<HTMLDivElement, BadgeProps>(
         ref={ref}
         className={cn(
           // Base structure
-          "group inline-flex cursor-default items-center gap-2 rounded-full border px-3 py-1 font-mono text-xs backdrop-blur-sm transition-all duration-500 ease-out select-none",
+          "group inline-flex cursor-default items-center gap-2 rounded-full border px-3 py-1 font-mono text-xs lg:text-sm backdrop-blur-sm transition-all duration-500 ease-out select-none",
           // Color variants
           {
             // Violet theme (Vorello's active badge theme)
@@ -41,6 +41,9 @@ const Badge = forwardRef<HTMLDivElement, BadgeProps>(
             // Orange theme
             "border-steel-grey/30 bg-graphite-metal/50 text-chrome-deep hover:border-signal-orange/40 hover:text-chrome-highlight hover:bg-white/[0.02]":
               variant === "orange",
+            // Red theme
+            "border-steel-grey/30 bg-graphite-metal/50 text-chrome-deep hover:border-red-500/40 hover:text-chrome-highlight hover:bg-white/[0.02]":
+              variant === "red",
           },
           className
         )}
@@ -56,6 +59,7 @@ const Badge = forwardRef<HTMLDivElement, BadgeProps>(
                 "bg-chrome-deep/70 group-hover:bg-chrome-deep": variant === "grey",
                 "bg-neon-blue/70 group-hover:bg-neon-blue": variant === "blue",
                 "bg-signal-orange/70 group-hover:bg-signal-orange": variant === "orange",
+                "bg-red-500/70 group-hover:bg-red-500": variant === "red",
               }
             )}
           />
