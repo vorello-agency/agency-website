@@ -300,7 +300,7 @@ export default function Process() {
         <SectionHeading
           eyebrow="PROCESO"
           title="La metodología detrás de cada producto sólido"
-          description="Cada proyecto pasa por etapas definidas de descubrimiento, diseño, desarrollo y validación antes de salir a producción."
+          description="Cada proyecto pasa por etapas definidas de descubrimiento,\n diseño, desarrollo y validación antes de salir a producción."
           className="process-heading"
         />
 
@@ -342,8 +342,8 @@ export default function Process() {
                   aria-selected={activeSlide === idx}
                   aria-label={`Ir a fase ${idx + 1}`}
                   className={`focus-visible:ring-electric-violet relative rounded-full transition-all duration-300 after:absolute after:inset-[-8px] after:content-[''] focus-visible:ring-1 focus-visible:outline-none ${activeSlide === idx
-                      ? "bg-electric-violet h-2 w-5"
-                      : "bg-steel-grey/40 hover:bg-steel-grey/70 h-2 w-2"
+                    ? "bg-electric-violet h-2 w-5"
+                    : "bg-steel-grey/40 hover:bg-steel-grey/70 h-2 w-2"
                     }`}
                 />
               ))}

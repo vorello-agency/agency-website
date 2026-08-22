@@ -136,7 +136,7 @@ export default function CTA() {
             />
           </div>
 
-          <h2 className="cta-title text-chrome-highlight relative z-10 mx-auto flex max-w-4xl flex-col gap-1 font-sans text-3xl leading-[1.05] font-bold tracking-tight select-none sm:gap-2 sm:text-4xl md:text-6xl lg:text-[clamp(2rem,3.4vw,5.5rem)] 2xl:gap-2 2xl:text-6xl">
+          <h2 className="cta-title text-chrome-highlight relative z-10 mx-auto flex max-w-4xl flex-col gap-1 font-sans text-3xl leading-[1.05] font-bold tracking-tight select-none sm:gap-2 sm:text-4xl md:text-[clamp(2.25rem,4.2vw,3.75rem)] 2xl:gap-2">
             <span className="md:whitespace-nowrap">¿Tu proyecto merece ser</span>
             <span className="md:whitespace-nowrap">construido con este estándar?</span>
           </h2>
