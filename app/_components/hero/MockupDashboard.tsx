@@ -1,7 +1,7 @@
 import React from "react";
 import { BarChart3, LayoutGrid, Code2, Zap, Settings, Users } from "lucide-react";
 import Image from "next/image";
-import isotipoImg from "@/public/assets/isotipo.png";
+import isotipoImg from "@/public/assets/isotipo.webp";
 import MockupShell from "./MockupShell";
 
 /**
