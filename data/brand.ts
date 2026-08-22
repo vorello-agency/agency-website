@@ -10,7 +10,7 @@ export const BRAND_DOMAIN = "vorelloagency.com";
 export const BRAND_URL = `https://${BRAND_DOMAIN}`;
 
 export const CONTACT_EMAIL = "hello@vorelloagency.com";
-export const CALENDAR_URL = "https://cal.com/vorello/intro";
+export const CALENDAR_URL = "https://calendar.app.google/Bx6eCbQLoKiT3Lsq8";
 
 // WhatsApp Configuration
 // Raw number for wa.me links (without "+" or spaces, e.g. "59899000000")
