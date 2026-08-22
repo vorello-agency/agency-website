@@ -72,7 +72,7 @@ export default function ServicesPage() {
         name: "Vorello Agency",
         legalName: "VORELLO SAS",
         url: "https://vorelloagency.com/",
-        logo: "https://vorelloagency.com/assets/isotipo.svg",
+        logo: "https://vorelloagency.com/assets/logo.webp",
         address: {
           "@type": "PostalAddress",
           addressLocality: "Paysandú",

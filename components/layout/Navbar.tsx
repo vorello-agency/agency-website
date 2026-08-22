@@ -54,10 +54,10 @@ export default function Navbar() {
   const mobileLinksRef = useRef<HTMLDivElement>(null);
   const mobileBackdropRef = useRef<HTMLDivElement>(null);
   const isFirstRender = useRef(true);
- 
+
   const activeLink = pathname === "/services" ? "/services" : pathname === "/contact" ? "/contact" : null;
   const [isMouseOverNav, setIsMouseOverNav] = useState(false);
- 
+
   const positionPillToActive = () => {
     if (!pillRef.current || !navContainerRef.current) return;
     const activeLinkEl = navContainerRef.current.querySelector('[data-active="true"]') as HTMLElement | null;
@@ -85,9 +85,9 @@ export default function Navbar() {
       });
     }
   };
- 
 
- 
+
+
   useEffect(() => {
     if (!isMouseOverNav) {
       const timer = setTimeout(() => {
@@ -374,7 +374,7 @@ export default function Navbar() {
       <Container
         spacing="compact"
         className={cn(
-          "relative z-50 flex items-center justify-between 2xl:max-w-[1500px]",
+          "relative z-50 flex items-center justify-between xmd:px-10! xl:px-12! 2xl:max-w-[1500px]",
           shouldAnimate && "transition-all duration-300",
           isScrolled ? "h-20" : "h-24"
         )}
@@ -394,7 +394,7 @@ export default function Navbar() {
           className={cn(
             "group relative flex items-center gap-2 focus-visible:outline-none",
             shouldAnimate && "transition-all duration-300",
-            isScrolled && "lg:ml-8"
+            isScrolled && "ml-0 xl:ml-8"
           )}
         >
           {/* Animated large, soft atmospheric white glow behind the logo when menu is open */}
@@ -425,7 +425,7 @@ export default function Navbar() {
         {!isOnboardingPage && (
           <nav
             ref={navContainerRef}
-            className="border-steel-grey/30 bg-graphite-metal relative hidden items-center gap-1 rounded-full border px-2 py-1.5 lg:flex"
+            className="border-steel-grey/30 bg-graphite-metal relative hidden items-center xl:gap-1 rounded-full border px-1.5 xl:px-2 py-1.5 xmd:flex"
             onMouseEnter={() => setIsMouseOverNav(true)}
             onMouseLeave={() => {
               setIsMouseOverNav(false);
@@ -449,7 +449,7 @@ export default function Navbar() {
                   href={item.href}
                   data-active={isActive}
                   className={cn(
-                    "text-copy-muted hover:text-chrome-highlight focus-visible:ring-electric-violet group/nav relative z-10 flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-sm font-medium transition-colors duration-200 focus-visible:ring-1 focus-visible:outline-none",
+                    "text-copy-muted hover:text-chrome-highlight focus-visible:ring-electric-violet group/nav relative z-10 flex items-center gap-1.5 xl:gap-2 rounded-full px-3 py-1 text-sm xl:text-base font-medium transition-colors duration-200 focus-visible:ring-1 focus-visible:outline-none",
                     isActive && "text-white hover:text-white"
                   )}
                   onClick={(e) => handleNavLinkClick(e, item.href)}
@@ -458,7 +458,7 @@ export default function Navbar() {
                   onMouseLeave={(e) => handleItemMouseLeave(item.label, e)}
                   onBlur={(e) => handleItemMouseLeave(item.label, e)}
                 >
-                  <Icon className="text-copy-muted/60 nav-icon-svg h-3.5 w-3.5 overflow-visible" />
+                  <Icon className="text-copy-muted/60 nav-icon-svg h-3.5 xl:h-4 w-3.5 xl:w-4 overflow-visible" />
                   <span>{item.label}</span>
                 </Link>
               );
@@ -468,10 +468,10 @@ export default function Navbar() {
 
         {/* CTA Action / Volver al inicio */}
         {isOnboardingPage ? (
-          <div className="hidden items-center lg:flex">
+          <div className="hidden items-center xmd:flex">
             <Link
               href="/"
-              className="group border-steel-grey/30 bg-graphite-metal/30 hover:border-steel-grey/60 text-chrome-highlight focus-visible:ring-electric-violet flex items-center gap-2 rounded-lg border px-4 py-2 text-sm font-medium transition-all focus-visible:ring-1 focus-visible:outline-none"
+              className="group border-steel-grey/30 bg-graphite-metal/30 hover:border-steel-grey/60 text-chrome-highlight focus-visible:ring-electric-violet flex items-center gap-2 rounded-lg border px-4 py-2 text-sm xl:text-base font-medium transition-all focus-visible:ring-1 focus-visible:outline-none"
             >
               <ArrowRight className="h-4 w-4 rotate-180 opacity-60 transition-transform group-hover:-translate-x-1" />
               <span>Volver al inicio</span>
@@ -480,37 +480,37 @@ export default function Navbar() {
         ) : (
           <div
             className={cn(
-              "hidden items-center lg:flex",
+              "hidden items-center xmd:flex",
               shouldAnimate && "transition-all duration-300",
-              isScrolled && "lg:mr-8"
+              isScrolled && "mr-0 xl:mr-8"
             )}
           >
             <Link
               href="/start"
-              className="group border-steel-grey/30 bg-graphite-metal text-copy-muted hover:text-chrome-highlight hover:border-steel-grey/50 focus-visible:ring-electric-violet relative flex items-center justify-center gap-1.5 rounded-full border px-4 py-1.5 text-sm font-medium transition-all duration-300 focus-visible:ring-1 focus-visible:outline-none"
+              className="group border-steel-grey/30 bg-graphite-metal text-copy-muted hover:text-chrome-highlight hover:border-steel-grey/50 focus-visible:ring-electric-violet relative flex items-center justify-center gap-1.5 rounded-full border px-3 xl:px-4 py-2 text-sm xl:text-base font-medium transition-all duration-300 focus-visible:ring-1 focus-visible:outline-none"
               onMouseEnter={handleCtaMouseEnter}
               onMouseLeave={handleCtaMouseLeave}
               onFocus={handleCtaMouseEnter}
               onBlur={handleCtaMouseLeave}
             >
               <span>Solicitar propuesta</span>
-              <ArrowRight className="nav-cta-arrow group-hover:text-dark-blue ml-1.5 h-3.5 w-3.5 overflow-visible opacity-60 transition-colors duration-300" />
+              <ArrowRight className="hidden lg:block nav-cta-arrow group-hover:text-dark-blue ml-1.5 h-3.5 w-3.5 overflow-visible opacity-60 transition-colors duration-300" />
             </Link>
           </div>
         )}
- 
+
         {/* Mobile Menu Toggle Button */}
         {isOnboardingPage ? (
           <Link
             href="/"
-            className="border-steel-grey/30 bg-graphite-metal/30 text-chrome-highlight flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-medium focus-visible:outline-none lg:hidden"
+            className="border-steel-grey/30 bg-graphite-metal/30 text-chrome-highlight flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-medium focus-visible:outline-none xmd:hidden"
           >
             <X className="h-3.5 w-3.5" />
             <span>Salir</span>
           </Link>
         ) : (
           <button
-            className="text-chrome-deep hover:text-chrome-highlight cursor-pointer p-2 focus-visible:outline-none lg:hidden"
+            className="text-chrome-deep hover:text-chrome-highlight cursor-pointer p-2 focus-visible:outline-none xmd:hidden"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label={mobileMenuOpen ? "Cerrar menú" : "Abrir menú"}
           >
@@ -518,23 +518,23 @@ export default function Navbar() {
           </button>
         )}
       </Container>
- 
+
       {/* Mobile menu backdrop overlay */}
       <div
         ref={mobileBackdropRef}
         className={cn(
-          "bg-carbon-black/60 fixed inset-0 z-30 backdrop-blur-[4px] transition-[opacity] duration-300 lg:hidden",
+          "bg-carbon-black/60 fixed inset-0 z-30 backdrop-blur-[4px] transition-[opacity] duration-300 xmd:hidden",
           mobileMenuOpen ? "pointer-events-auto" : "pointer-events-none"
         )}
         onClick={() => setMobileMenuOpen(false)}
         style={{ opacity: 0, visibility: "hidden" }}
       />
- 
+
       {/* Mobile menu navigation drawer */}
       <div
         ref={mobileMenuRef}
         className={cn(
-          "bg-carbon-black border-steel-grey/30 absolute left-0 z-40 flex w-full flex-col gap-6 border-b px-6 py-8 shadow-2xl transition-[top] duration-300 lg:hidden",
+          "bg-carbon-black border-steel-grey/30 absolute left-0 z-40 flex w-full flex-col gap-6 border-b px-6 py-8 shadow-2xl transition-[top] duration-300 xmd:hidden",
           mobileMenuOpen ? "pointer-events-auto" : "pointer-events-none",
           isScrolled ? "top-20" : "top-24"
         )}

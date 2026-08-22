@@ -26,7 +26,7 @@ export default function Button({
     <button
       className={cn(
         // Base styles
-        "hover:bg-opacity-90 inline-flex cursor-pointer items-center justify-center rounded-lg font-medium transition-all duration-200 hover:scale-105 focus-visible:outline-none active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50",
+        "hover:bg-opacity-90 inline-flex cursor-pointer select-none items-center justify-center rounded-lg font-medium transition-all duration-200 hover:scale-105 focus-visible:outline-none active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50",
         {
           "group gap-2": withArrow,
         },
@@ -47,10 +47,12 @@ export default function Button({
         {
           "px-3 py-1.5 text-xs": size === "sm",
           "px-5 py-2.5 text-sm": size === "md",
-          "px-5 py-2.5 text-sm md:px-6 md:py-3.5 md:text-base 2xl:px-8 2xl:py-4 2xl:text-lg hover:scale-[1.02]": size === "lg",
+          "px-5 py-2.5 text-sm md:px-6 md:py-3.5 md:text-base 2xl:text-lg hover:scale-[1.02]": size === "lg",
         },
         className
       )}
+      draggable={false}
+      onDragStart={(e) => e.preventDefault()}
       onContextMenu={(e) => e.preventDefault()}
       onMouseEnter={(e) => {
         onMouseEnter?.(e);

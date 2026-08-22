@@ -6,10 +6,12 @@ export const TextHoverEffect = ({
   text,
   duration,
   forceActive = false,
+  colorScheme = "default"
 }: {
   text: string;
   duration?: number;
   forceActive?: boolean;
+  colorScheme?: "default" | string[];
 }) => {
   const svgRef = useRef<SVGSVGElement>(null);
   const [cursor, setCursor] = useState({ x: 0, y: 0 });
@@ -50,11 +52,21 @@ export const TextHoverEffect = ({
           x2="100%"
           y2="0%"
         >
-          <stop offset="0%" stopColor="var(--signal-orange)" />
-          <stop offset="12%" stopColor="var(--neon-blue)" />
-          <stop offset="50%" stopColor="var(--neon-blue)" />
-          <stop offset="80%" stopColor="var(--electric-violet)" />
-          <stop offset="100%" stopColor="var(--signal-emerald)" />
+          {
+            colorScheme === "default" ? (
+              <>
+                <stop offset="0%" stopColor="var(--signal-orange)" />
+                <stop offset="12%" stopColor="var(--neon-blue)" />
+                <stop offset="50%" stopColor="var(--neon-blue)" />
+                <stop offset="80%" stopColor="var(--electric-violet)" />
+                <stop offset="100%" stopColor="var(--signal-emerald)" />
+              </>
+            ) : (
+              colorScheme.map((color, index) => (
+                <stop key={index} offset={index * (100 / colorScheme.length)} stopColor={color} />
+              ))
+            )
+          }
         </linearGradient>
 
         <motion.radialGradient
@@ -67,13 +79,13 @@ export const TextHoverEffect = ({
           }}
           transition={{ duration: duration ?? 0.8, ease: "easeOut" }}
 
-          // example for a smoother animation below
+        // example for a smoother animation below
 
-          //   transition={{
-          //     type: "spring",
-          //     stiffness: 300,
-          //     damping: 50,
-          //   }}
+        //   transition={{
+        //     type: "spring",
+        //     stiffness: 300,
+        //     damping: 50,
+        //   }}
         >
           <stop offset="0%" stopColor="white" />
           <stop offset="100%" stopColor="black" />

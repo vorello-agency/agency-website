@@ -40,7 +40,7 @@ export default function SectionHeading({
         {renderTextWithBreaks(title)}
       </h2>
       {description && (
-        <p className="text-chrome-deep text-base leading-relaxed text-balance sm:text-lg">
+        <p className="text-chrome-deep text-base leading-relaxed text-pretty sm:text-lg">
           {renderTextWithBreaks(description)}
         </p>
       )}

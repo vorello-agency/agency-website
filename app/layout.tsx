@@ -3,6 +3,7 @@ import { Onest, Red_Hat_Display, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import SmoothScroll from "@/components/layout/SmoothScroll";
+import ClientInit from "@/components/layout/ClientInit";
 
 const bodyFont = Onest({
   variable: "--font-onest",
@@ -22,7 +23,11 @@ const secondaryFont = Space_Grotesk({
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL ||
   (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : undefined) ||
-  (process.env.URL ? (process.env.URL.startsWith("http") ? process.env.URL : `https://${process.env.URL}`) : "https://vorelloagency.com");
+  (process.env.URL
+    ? process.env.URL.startsWith("http")
+      ? process.env.URL
+      : `https://${process.env.URL}`
+    : "https://vorelloagency.com");
 
 export const viewport: Viewport = {
   themeColor: "#0D0F11",
@@ -116,6 +121,7 @@ export default function RootLayout({
       )}
     >
       <body className="bg-carbon-black text-chrome-highlight selection:bg-electric-violet/20 selection:text-electric-violet flex min-h-full flex-col">
+        <ClientInit />
         <SmoothScroll>{children}</SmoothScroll>
       </body>
     </html>
